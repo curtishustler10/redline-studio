@@ -18,27 +18,26 @@ export function CTASection() {
             className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-12 text-center mb-16 relative overflow-hidden"
           >
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(196,0,0,0.08),transparent_70%)]" />
 
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Ready to{" "}
-                <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
-                  Transform
-                </span>{" "}
-                Your Business?
+                Let's build something{" "}
+                <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
+                  that works
+                </span>
               </h2>
               <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-                Join 50+ successful businesses that have transformed their digital presence with Fidelis Agency
+                50+ businesses trust Redline Studio to deliver results. Yours could be next.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 px-8 py-4 text-lg group"
+                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 px-8 py-4 text-lg group"
                 >
                   <Calendar className="mr-2 w-5 h-5" />
-                  Book Your Discovery Call
+                  Start a conversation
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
@@ -47,7 +46,7 @@ export function CTASection() {
                   className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-4 text-lg bg-transparent"
                 >
                   <Mail className="mr-2 w-5 h-5" />
-                  Get Free Proposal
+                  Get a free proposal
                 </Button>
               </div>
             </div>
@@ -64,25 +63,25 @@ export function CTASection() {
             <p className="text-slate-300 mb-4">
               Have a project in mind? Email us at{" "}
               <a
-                href="mailto:contact@fidelisagency.be"
-                className="text-emerald-400 hover:text-emerald-300 transition-colors"
+                href="mailto:hello@redlinestudio.co"
+                className="text-red-500 hover:text-red-300 transition-colors"
               >
-                contact@fidelisagency.be
+                hello@redlinestudio.co
               </a>
             </p>
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center items-center gap-8 mt-8 text-slate-400">
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                <div className="w-2 h-2 bg-red-500 rounded-full" />
                 <span>Free Consultation</span>
               </div>
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                <div className="w-2 h-2 bg-red-500 rounded-full" />
                 <span>No Long-term Contracts</span>
               </div>
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                <div className="w-2 h-2 bg-red-500 rounded-full" />
                 <span>100% Satisfaction Guarantee</span>
               </div>
             </div>

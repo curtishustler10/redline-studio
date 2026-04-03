@@ -22,16 +22,15 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50" : "bg-transparent"
+        isScrolled ? "bg-ink/95 backdrop-blur-md border-b border-slate-800/50" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
-              <span className="text-slate-900 font-bold text-lg">F</span>
-            </div>
-            <span className="text-white font-bold text-xl">Fidelis Agency</span>
+          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
+            <span className="font-mono font-light text-lg text-neutral-400 lowercase tracking-tight">red</span>
+            <span className="font-sans font-semibold text-lg text-white uppercase tracking-tight">LINE</span>
+            <span className="text-red-500 font-semibold text-lg">.</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -41,7 +40,7 @@ export function Header() {
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 whileHover={{ y: -2 }}
-                className="text-slate-300 hover:text-emerald-400 transition-colors duration-200"
+                className="text-slate-300 hover:text-red-400 transition-colors duration-200"
               >
                 {item}
               </motion.a>
@@ -52,8 +51,8 @@ export function Header() {
             <Button variant="ghost" className="text-slate-300 hover:text-white hover:bg-slate-800">
               Contact
             </Button>
-            <Button className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0">
-              Book Discovery Call
+            <Button className="bg-gradient-to-r from-redline to-redline-deep hover:from-red-700 hover:to-red-800 text-white border-0">
+              Start a conversation
             </Button>
           </div>
 
@@ -82,7 +81,7 @@ export function Header() {
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
-                    className="text-slate-300 hover:text-emerald-400 transition-colors duration-200"
+                    className="text-slate-300 hover:text-red-400 transition-colors duration-200"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item}
@@ -92,8 +91,8 @@ export function Header() {
                   <Button variant="ghost" className="text-slate-300 justify-start">
                     Contact
                   </Button>
-                  <Button className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white">
-                    Book Discovery Call
+                  <Button className="bg-gradient-to-r from-redline to-redline-deep text-white">
+                    Start a conversation
                   </Button>
                 </div>
               </nav>

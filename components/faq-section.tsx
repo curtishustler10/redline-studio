@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "How much does a website cost?",
     answer:
-      "Prices range from €1,000 for a single-page showcase site to €10,000 for a multi-language site with dynamic features and custom integrations. We provide a detailed quote tailored to your exact needs.",
+      "Prices range from $2,000 for a single-page site to $15,000 for a multi-language site with dynamic features and custom integrations. We provide a detailed quote tailored to your exact needs.",
   },
   {
     question: "What is the typical turnaround time?",
@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Do I really need a website?",
     answer:
-      "Absolutely. Over 50% of customers won't trust a business without a modern, mobile-friendly website. It's your 24/7 storefront.",
+      "Over 50% of customers won't engage with a business that doesn't have a modern, mobile-friendly website. It's your 24/7 storefront.",
   },
   {
     question: "When should I redesign my site?",
@@ -25,9 +25,9 @@ const faqs = [
       "If it's not responsive, outdated (5+ years old), or failing to attract customers, it's time for a fresh look.",
   },
   {
-    question: "Why choose Fidelis Agency?",
+    question: "Why Redline Studio?",
     answer:
-      "We focus on results, combining powerful marketing strategies with stunning design to turn visitors into customers. We're committed until you're 100% satisfied.",
+      "We build what your business actually needs — no templates, no filler. Every solution is custom, every decision is goal-driven.",
   },
   {
     question: "What happens during the discovery call?",
@@ -50,7 +50,7 @@ export function FAQSection() {
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
@@ -69,7 +69,7 @@ export function FAQSection() {
               viewport={{ once: true }}
               className="mb-4"
             >
-              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300">
+              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden hover:border-red-600/50 transition-all duration-300">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-slate-700/20 transition-colors duration-200"
@@ -81,9 +81,9 @@ export function FAQSection() {
                     className="flex-shrink-0"
                   >
                     {openIndex === index ? (
-                      <Minus className="w-6 h-6 text-emerald-400" />
+                      <Minus className="w-6 h-6 text-red-500" />
                     ) : (
-                      <Plus className="w-6 h-6 text-emerald-400" />
+                      <Plus className="w-6 h-6 text-red-500" />
                     )}
                   </motion.div>
                 </button>

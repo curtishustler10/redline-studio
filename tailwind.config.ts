@@ -12,7 +12,18 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+  			mono: ['var(--font-jetbrains-mono)', 'monospace'],
+  		},
   		colors: {
+  			redline: {
+  				DEFAULT: '#C40000',
+  				light: '#E53935',
+  				deep: '#8A0000',
+  			},
+  			ink: '#0C0C0C',
+  			surface: '#161616',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

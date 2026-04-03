@@ -9,8 +9,8 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0C] via-[#161616] to-[#0C0C0C]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(196,0,0,0.08),transparent_50%)]" />
 
         {/* Decorative noise overlay (CSS-only, no JS) */}
         <div className="pointer-events-none absolute inset-0 bg-[url('/placeholder.svg?height=4&width=4')] opacity-10 mix-blend-overlay" />
@@ -25,8 +25,8 @@ export function HeroSection() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 mb-8"
           >
-            <Sparkles className="w-4 h-4 text-emerald-400" />
-            <span className="text-slate-300 text-sm">Premium Web Agency</span>
+            <Sparkles className="w-4 h-4 text-red-500" />
+            <span className="text-slate-300 text-sm">Digital Studio</span>
           </motion.div>
 
           {/* Main Headline */}
@@ -36,11 +36,10 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
           >
-            We Guarantee{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
-              Qualified Leads
-            </span>{" "}
-            With Every Website We Build
+            Digital solutions{" "}
+            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
+              built around your goals
+            </span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -50,8 +49,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            Maximize your digital impact with conversion-optimized websites and growth-driven marketing strategies (SEO,
-            Paid Ads, Social Media).
+            Websites, automation, and custom systems — designed to deliver real results for your business.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -63,9 +61,9 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white border-0 px-8 py-4 text-lg group"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 px-8 py-4 text-lg group"
             >
-              Book Your Free Discovery Call
+              Start a conversation
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
@@ -73,7 +71,7 @@ export function HeroSection() {
               variant="outline"
               className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-4 text-lg bg-transparent"
             >
-              Get Your Free Proposal
+              See our work
             </Button>
           </motion.div>
 
@@ -85,16 +83,16 @@ export function HeroSection() {
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
           >
             {[
-              { icon: TrendingUp, label: "Average ROI Increase", value: "300%" },
-              { icon: Users, label: "Happy Clients", value: "50+" },
-              { icon: Sparkles, label: "Projects Delivered", value: "100+" },
+              { icon: TrendingUp, label: "Average ROI Increase", value: "360%" },
+              { icon: Users, label: "Businesses Scaled", value: "50+" },
+              { icon: Sparkles, label: "Projects Delivered", value: "200+" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
                 whileHover={{ scale: 1.05 }}
                 className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6"
               >
-                <stat.icon className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
+                <stat.icon className="w-8 h-8 text-red-500 mx-auto mb-3" />
                 <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
                 <div className="text-slate-400 text-sm">{stat.label}</div>
               </motion.div>
@@ -118,7 +116,7 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            className="w-1 h-3 bg-emerald-400 rounded-full mt-2"
+            className="w-1 h-3 bg-red-500 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

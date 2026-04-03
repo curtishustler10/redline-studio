@@ -41,12 +41,12 @@ export function ProjectsSection() {
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Our Latest{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Discover how we've helped businesses transform their digital presence and drive real results
+            A look at what we've built and the results behind it.
           </p>
         </motion.div>
 
@@ -61,7 +61,7 @@ export function ProjectsSection() {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300">
+              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden hover:border-red-600/50 transition-all duration-300">
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image || "/placeholder.svg"}
@@ -75,7 +75,7 @@ export function ProjectsSection() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="absolute top-4 right-4 w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    className="absolute top-4 right-4 w-10 h-10 bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
                   >
                     <ExternalLink className="w-5 h-5 text-white" />
                   </motion.a>
@@ -97,7 +97,7 @@ export function ProjectsSection() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors group/link"
+                    className="inline-flex items-center text-red-500 hover:text-red-300 transition-colors group/link"
                   >
                     View Project
                     <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
@@ -118,7 +118,7 @@ export function ProjectsSection() {
           <Button
             size="lg"
             variant="outline"
-            className="border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-white bg-transparent"
+            className="border-red-600 text-red-500 hover:bg-red-600 hover:text-white bg-transparent"
           >
             View All Projects
             <ArrowRight className="ml-2 w-5 h-5" />

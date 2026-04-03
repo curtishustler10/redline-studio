@@ -1,14 +1,13 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Linkedin, Instagram, Facebook, MessageCircle } from "lucide-react"
+import { Linkedin, Instagram, MessageCircle } from "lucide-react"
 
 export function Footer() {
   const socialLinks = [
-    { icon: Linkedin, href: "https://www.linkedin.com/in/kornel-gromadka/", label: "LinkedIn" },
-    { icon: Instagram, href: "https://www.instagram.com/fidelis_agency/", label: "Instagram" },
-    { icon: Facebook, href: "https://www.facebook.com/profile.php?id=100088596349361", label: "Facebook" },
-    { icon: MessageCircle, href: "https://wa.me/32495771767", label: "WhatsApp" },
+    { icon: Linkedin, href: "https://linkedin.com/company/redlinestudio", label: "LinkedIn" },
+    { icon: Instagram, href: "https://instagram.com/redlinestudio", label: "Instagram" },
+    { icon: MessageCircle, href: "#", label: "WhatsApp" },
   ]
 
   return (
@@ -23,14 +22,13 @@ export function Footer() {
             viewport={{ once: true }}
             className="mb-8"
           >
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center">
-                <span className="text-slate-900 font-bold text-xl">F</span>
-              </div>
-              <span className="text-white font-bold text-2xl">Fidelis Agency</span>
+            <div className="flex items-center justify-center mb-4">
+              <span className="font-mono font-light text-2xl text-neutral-400 lowercase tracking-tight">red</span>
+              <span className="font-sans font-semibold text-2xl text-white uppercase tracking-tight">LINE</span>
+              <span className="text-red-500 font-semibold text-2xl">.</span>
             </div>
             <p className="text-slate-400 max-w-md mx-auto">
-              Transforming businesses through premium web design and growth-driven marketing strategies.
+              Custom digital solutions. Real results, measured and delivered.
             </p>
           </motion.div>
 
@@ -50,9 +48,9 @@ export function Footer() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 bg-slate-800/50 hover:bg-emerald-500/20 border border-slate-700/50 hover:border-emerald-500/50 rounded-xl flex items-center justify-center transition-all duration-300 group"
+                className="w-12 h-12 bg-slate-800/50 hover:bg-red-500/20 border border-slate-700/50 hover:border-red-500/50 rounded-xl flex items-center justify-center transition-all duration-300 group"
               >
-                <social.icon className="w-5 h-5 text-slate-400 group-hover:text-emerald-400 transition-colors" />
+                <social.icon className="w-5 h-5 text-slate-400 group-hover:text-red-500 transition-colors" />
               </motion.a>
             ))}
           </motion.div>
@@ -65,7 +63,7 @@ export function Footer() {
             viewport={{ once: true }}
             className="pt-8 border-t border-slate-800/50"
           >
-            <p className="text-slate-400">© 2025 Fidelis Agency. All rights reserved.</p>
+            <p className="text-slate-400">© 2025 Redline Studio. All rights reserved.</p>
           </motion.div>
         </div>
       </div>
