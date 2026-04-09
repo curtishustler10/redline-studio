@@ -1,129 +1,107 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ExternalLink, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowUpRight } from "lucide-react"
 
 const projects = [
   {
     title: "Dakytech",
-    description: "Modern tech company website with advanced animations and conversion optimization",
+    description: "Full website build for a technology company — custom design, fast load times, and a structure built to grow with the business.",
     image: "/placeholder.svg?height=400&width=600",
     url: "https://www.dakytech.com/",
-    tags: ["Web Development", "UI/UX", "Conversion Optimization"],
+    tags: ["Web Development", "Custom Design"],
   },
   {
     title: "Kamanda2Nis",
-    description: "E-commerce platform with seamless user experience and payment integration",
+    description: "E-commerce platform built from the ground up — product catalogue, payment integration, and a mobile-first experience.",
     image: "/placeholder.svg?height=400&width=600",
     url: "https://kamanda2nis.com/",
-    tags: ["E-commerce", "Payment Integration", "Mobile-First"],
+    tags: ["E-commerce", "Mobile First"],
   },
   {
     title: "Vladie's Beauty",
-    description: "Luxury beauty brand website with elegant design and booking system",
+    description: "Brand website and booking system for a beauty business — designed to reflect the brand and convert visitors into appointments.",
     image: "/placeholder.svg?height=400&width=600",
     url: "https://vladie.com/",
-    tags: ["Beauty & Wellness", "Booking System", "Luxury Design"],
+    tags: ["Booking System", "Brand Design"],
   },
 ]
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="py-24 md:py-32 border-t border-[#D4C9B0]">
+      <div className="container mx-auto px-6 md:px-12">
+
+        {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="flex items-center gap-6 mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Our Latest{" "}
-            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-              Projects
-            </span>
-          </h2>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            A look at what we've built and the results behind it.
-          </p>
+          <span className="font-syne text-[15px] tracking-[0.2em] uppercase text-[#9A8F7A]">
+            Work we&apos;ve done
+          </span>
+          <div className="flex-1 h-px bg-[#D4C9B0]" />
+          <span className="font-syne text-[15px] tracking-[0.2em] uppercase text-[#C0B8A8]">
+            Real businesses, real briefs, built properly
+          </span>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        {/* Project rows */}
+        <div>
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
               key={project.title}
-              initial={{ opacity: 0, y: 50 }}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="group"
+              className="group border-t border-[#D4C9B0] py-10 md:py-12 last:border-b grid grid-cols-12 gap-4 md:gap-8 items-center hover:border-[#C41F1F]/30 transition-colors duration-500 cursor-pointer"
             >
-              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden hover:border-red-600/50 transition-all duration-300">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <motion.a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="absolute top-4 right-4 w-10 h-10 bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  >
-                    <ExternalLink className="w-5 h-5 text-white" />
-                  </motion.a>
-                </div>
+              {/* Number */}
+              <div className="col-span-1">
+                <span className="font-syne text-[10px] tracking-widest text-[#C0B8A8]">
+                  0{index + 1}
+                </span>
+              </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-                  <p className="text-slate-300 mb-4 leading-relaxed">{project.description}</p>
+              {/* Title */}
+              <div className="col-span-11 md:col-span-3">
+                <h3 className="font-cormorant font-light text-3xl md:text-4xl text-[#1C1714] leading-tight group-hover:text-[#C41F1F] transition-colors duration-300">
+                  {project.title}
+                </h3>
+              </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 bg-slate-700/50 text-slate-300 text-sm rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-red-500 hover:text-red-300 transition-colors group/link"
-                  >
-                    View Project
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+              {/* Description + tags */}
+              <div className="col-span-11 md:col-span-6 md:col-start-5">
+                <p className="font-syne text-[#8A7F6A] text-sm leading-relaxed mb-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-syne text-[9px] tracking-[0.2em] uppercase text-[#9A8F7A] border border-[#D4C9B0] px-3 py-1.5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </motion.div>
+
+              {/* Arrow */}
+              <div className="hidden md:flex col-span-2 justify-end">
+                <ArrowUpRight className="w-4 h-4 text-[#D4C9B0] group-hover:text-[#C41F1F] transition-colors duration-300" />
+              </div>
+            </motion.a>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-red-600 text-red-500 hover:bg-red-600 hover:text-white bg-transparent"
-          >
-            View All Projects
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-        </motion.div>
       </div>
     </section>
   )

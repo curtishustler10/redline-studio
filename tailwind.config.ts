@@ -13,8 +13,11 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
-  			mono: ['var(--font-jetbrains-mono)', 'monospace'],
+  			sans: ['var(--font-syne)', 'system-ui', 'sans-serif'],
+  			syne: ['var(--font-syne)', 'system-ui', 'sans-serif'],
+  			serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
+  			cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
+  			mono: ['monospace'],
   		},
   		colors: {
   			redline: {

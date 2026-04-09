@@ -1,124 +1,81 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { ArrowRight, Sparkles, TrendingUp, Users } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
+
+const stats = [
+  { value: "50+", label: "Local Clients" },
+  { value: "0", label: "Templates Used" },
+  { value: "100%", label: "Custom Builds" },
+]
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0C0C0C] via-[#161616] to-[#0C0C0C]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(196,0,0,0.08),transparent_50%)]" />
+    <section className="min-h-screen flex flex-col">
+      {/* Main headline block */}
+      <div className="flex-1 flex flex-col justify-center container mx-auto px-6 md:px-12 py-16 md:py-24">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="font-cormorant font-light text-[64px] md:text-[100px] lg:text-[130px] leading-[0.92] tracking-tight text-[#1C1714] mb-12 md:mb-16"
+        >
+          We build<br />
+          what your<br />
+          business actually<br />
+          <em className="text-[#C41F1F] not-italic font-light">needs.</em>
+        </motion.h1>
 
-        {/* Decorative noise overlay (CSS-only, no JS) */}
-        <div className="pointer-events-none absolute inset-0 bg-[url('/placeholder.svg?height=4&width=4')] opacity-10 mix-blend-overlay" />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-2 mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-red-500" />
-            <span className="text-slate-300 text-sm">Digital Studio</span>
-          </motion.div>
-
-          {/* Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-          >
-            Digital solutions{" "}
-            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-              built around your goals
-            </span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed"
-          >
-            Websites, automation, and custom systems — designed to deliver real results for your business.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-          >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 px-8 py-4 text-lg group"
+        {/* Subtitle + CTA row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16"
+        >
+          <p className="font-syne text-[#8A7F6A] text-sm md:text-base leading-relaxed max-w-sm">
+            Websites, automation, and digital tools —<br />
+            crafted around how your business actually operates.
+          </p>
+          <div className="flex items-center gap-8 md:gap-10">
+            <a
+              href="mailto:hello@redlinestudio.co"
+              className="group flex items-center gap-2 font-syne text-[11px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-1 hover:text-[#C41F1F] transition-colors duration-300"
             >
               Start a conversation
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-4 text-lg bg-transparent"
+              <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <a
+              href="#projects"
+              className="font-syne text-[11px] tracking-[0.25em] uppercase text-[#9A8F7A] hover:text-[#1C1714] transition-colors duration-300"
             >
-              See our work
-            </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
-          >
-            {[
-              { icon: TrendingUp, label: "Average ROI Increase", value: "360%" },
-              { icon: Users, label: "Businesses Scaled", value: "50+" },
-              { icon: Sparkles, label: "Projects Delivered", value: "200+" },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ scale: 1.05 }}
-                className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6"
-              >
-                <stat.icon className="w-8 h-8 text-red-500 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-slate-400 text-sm">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+              View our work
+            </a>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Stats bar */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        transition={{ duration: 0.8, delay: 0.8 }}
+        className="border-t border-[#D4C9B0]"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          className="w-6 h-10 border-2 border-slate-600 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            className="w-1 h-3 bg-red-500 rounded-full mt-2"
-          />
-        </motion.div>
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-3 divide-x divide-[#D4C9B0]">
+            {stats.map((stat) => (
+              <div key={stat.label} className="py-8 md:py-10 px-6 md:px-10 first:pl-0 last:pr-0">
+                <div className="font-cormorant font-light text-4xl md:text-5xl text-[#1C1714] mb-1 leading-none">
+                  {stat.value}
+                </div>
+                <div className="font-syne text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#9A8F7A] mt-2">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </motion.div>
     </section>
   )

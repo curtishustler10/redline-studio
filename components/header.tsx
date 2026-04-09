@@ -1,100 +1,102 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+
+const navItems = ["Services", "Projects", "Process", "FAQ", "Contact"]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 60)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const scrollTo = (id: string) => {
+    const el = document.querySelector(`#${id.toLowerCase()}`)
+    el?.scrollIntoView({ behavior: "smooth" })
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-ink/95 backdrop-blur-md border-b border-slate-800/50" : "bg-transparent"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-[#F2EAD3]/95 border-b border-[#D4C9B0] backdrop-blur-sm"
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-6 md:px-12 py-5">
         <div className="flex items-center justify-between">
-          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center">
-            <span className="font-mono font-light text-lg text-neutral-400 lowercase tracking-tight">red</span>
-            <span className="font-sans font-semibold text-lg text-white uppercase tracking-tight">LINE</span>
-            <span className="text-red-500 font-semibold text-lg">.</span>
-          </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {["Services", "Projects", "Process", "About"].map((item) => (
-              <motion.a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                whileHover={{ y: -2 }}
-                className="text-slate-300 hover:text-red-400 transition-colors duration-200"
-              >
-                {item}
-              </motion.a>
-            ))}
-          </nav>
-
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="text-slate-300 hover:text-white hover:bg-slate-800">
-              Contact
-            </Button>
-            <Button className="bg-gradient-to-r from-redline to-redline-deep hover:from-red-700 hover:to-red-800 text-white border-0">
-              Start a conversation
-            </Button>
+          {/* Logo + location */}
+          <div className="flex items-center gap-6 md:gap-10">
+            <a href="/" className="flex items-baseline gap-0.5 group">
+              <span className="font-cormorant text-xl italic font-light text-[#9A8F7A] group-hover:text-[#7A6F5A] transition-colors">Red</span>
+              <span className="font-syne text-sm font-bold text-[#1C1714] tracking-[0.15em] uppercase">LINE</span>
+              <span className="font-cormorant text-xl text-[#C41F1F]">.</span>
+            </a>
+            <span className="hidden md:block font-syne text-[9px] tracking-[0.3em] uppercase text-[#9A8F7A]">
+              Paris · Gold Coast Digital Studio
+            </span>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-white"
+          {/* Est + CTA */}
+          <div className="hidden md:flex items-center gap-8">
+            <span className="font-syne text-[9px] tracking-[0.3em] uppercase text-[#9A8F7A]">
+              Est 2022
+            </span>
+            <a
+              href="mailto:hello@redlinestudio.co"
+              className="font-syne text-[10px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-0.5 hover:text-[#C41F1F] transition-colors duration-300"
+            >
+              Get in touch
+            </a>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden text-[#9A8F7A] hover:text-[#1C1714] transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 pb-4 border-t border-slate-800"
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
             >
-              <nav className="flex flex-col space-y-4 mt-4">
-                {["Services", "Projects", "Process", "About"].map((item) => (
-                  <a
+              <nav className="flex flex-col gap-5 py-8 border-t border-[#D4C9B0] mt-4">
+                {navItems.map((item) => (
+                  <button
                     key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-slate-300 hover:text-red-400 transition-colors duration-200"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => scrollTo(item)}
+                    className="font-syne text-[11px] tracking-[0.25em] uppercase text-[#8A7F6A] hover:text-[#1C1714] transition-colors text-left"
                   >
                     {item}
-                  </a>
+                  </button>
                 ))}
-                <div className="flex flex-col space-y-2 pt-4">
-                  <Button variant="ghost" className="text-slate-300 justify-start">
-                    Contact
-                  </Button>
-                  <Button className="bg-gradient-to-r from-redline to-redline-deep text-white">
-                    Start a conversation
-                  </Button>
-                </div>
+                <a
+                  href="mailto:hello@redlinestudio.co"
+                  className="font-syne text-[11px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-1 w-fit mt-2"
+                >
+                  Get in touch
+                </a>
               </nav>
             </motion.div>
           )}

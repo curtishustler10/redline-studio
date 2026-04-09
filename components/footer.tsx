@@ -11,60 +11,44 @@ export function Footer() {
   ]
 
   return (
-    <footer className="py-16 border-t border-slate-800/50">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
-            <div className="flex items-center justify-center mb-4">
-              <span className="font-mono font-light text-2xl text-neutral-400 lowercase tracking-tight">red</span>
-              <span className="font-sans font-semibold text-2xl text-white uppercase tracking-tight">LINE</span>
-              <span className="text-red-500 font-semibold text-2xl">.</span>
-            </div>
-            <p className="text-slate-400 max-w-md mx-auto">
-              Custom digital solutions. Real results, measured and delivered.
-            </p>
-          </motion.div>
+    <footer className="border-t border-[#D4C9B0] py-12">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
 
-          {/* Social Links */}
+          {/* Logo */}
+          <a href="/" className="flex items-baseline gap-0.5">
+            <span className="font-cormorant text-xl italic font-light text-[#9A8F7A]">Red</span>
+            <span className="font-syne text-sm font-bold text-[#1C1714] tracking-[0.15em] uppercase">LINE</span>
+            <span className="font-cormorant text-xl text-[#C41F1F]">.</span>
+          </a>
+
+          {/* Social links */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex justify-center space-x-6 mb-8"
+            className="flex items-center gap-6"
           >
             {socialLinks.map((social) => (
-              <motion.a
+              <a
                 key={social.label}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 bg-slate-800/50 hover:bg-red-500/20 border border-slate-700/50 hover:border-red-500/50 rounded-xl flex items-center justify-center transition-all duration-300 group"
+                aria-label={social.label}
+                className="text-[#C0B8A8] hover:text-[#C41F1F] transition-colors duration-300"
               >
-                <social.icon className="w-5 h-5 text-slate-400 group-hover:text-red-500 transition-colors" />
-              </motion.a>
+                <social.icon className="w-4 h-4" />
+              </a>
             ))}
           </motion.div>
 
           {/* Copyright */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="pt-8 border-t border-slate-800/50"
-          >
-            <p className="text-slate-400">© 2025 Redline Studio. All rights reserved.</p>
-          </motion.div>
+          <p className="font-syne text-[10px] tracking-[0.2em] uppercase text-[#C0B8A8]">
+            © 2025 Redline Studio
+          </p>
+
         </div>
       </div>
     </footer>

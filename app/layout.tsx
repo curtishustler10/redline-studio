@@ -1,22 +1,23 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Cormorant_Garamond, Syne } from 'next/font/google'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-cormorant',
   weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const syne = Syne({
   subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  weight: ['300', '400', '500'],
+  variable: '--font-syne',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
-  title: 'Redline Studio — Conversion-First Web Design & Growth',
-  description: 'Websites that work as hard as you do. Conversion-first design, data-driven growth, and real results you can measure.',
+  title: 'Redline Studio — Digital Systems for Local Business',
+  description: 'We don\'t do templates. We build what your business needs — websites, automation, and digital tools crafted around how you actually operate.',
 }
 
 export default function RootLayout({
@@ -25,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-sans">{children}</body>
+    <html lang="en" className={`${cormorant.variable} ${syne.variable}`}>
+      <body className="font-syne">{children}</body>
     </html>
   )
 }

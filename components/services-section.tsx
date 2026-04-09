@@ -1,112 +1,101 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Globe, TrendingUp, Users, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowUpRight } from "lucide-react"
 
 const services = [
   {
-    icon: Globe,
-    title: "Websites & Digital Platforms",
+    number: "01",
+    title: "Websites &\nDigital Presence",
     description:
-      "Conversion-first sites built around your goals. Every detail considered, every page purposeful.",
-    features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Conversion Focused"],
+      "Built from scratch to represent your business properly — not a theme, not a drag-and-drop. Fast, clean, and designed to convert.",
+    features: ["Custom Design", "Mobile First", "SEO Ready", "Built to Last"],
   },
   {
-    icon: TrendingUp,
-    title: "Automation & Systems",
+    number: "02",
+    title: "Automation &\nSystems",
     description:
-      "We build the systems that save you time — workflows, integrations, and tools that run while you focus on your business.",
-    features: ["Workflow Automation", "Custom Integrations", "Business Tools", "Ongoing Support"],
+      "The back-end tools that save you hours every week — booking flows, CRM integrations, automated follow-ups, and custom business logic.",
+    features: ["Workflow Automation", "Custom Integrations", "Booking & CRM", "Ongoing Support"],
   },
   {
-    icon: Users,
-    title: "Growth & Strategy",
-    description: "SEO, paid media, and data-driven strategy — structured around what actually moves the needle.",
-    features: ["SEO Optimization", "Paid Advertising", "Social Media", "Analytics & Reporting"],
+    number: "03",
+    title: "Online\nGrowth",
+    description:
+      "We help you show up where your customers are looking — local SEO, Google Business, and targeted strategy built around your actual goals.",
+    features: ["Local SEO", "Google Business", "Content Strategy", "Monthly Reporting"],
   },
 ]
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-24 relative">
-      <div className="container mx-auto px-4">
+    <section id="services" className="py-24 md:py-32 border-t border-[#D4C9B0]">
+      <div className="container mx-auto px-6 md:px-12">
+
+        {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="flex items-center gap-6 mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            What we{" "}
-            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-              build
-            </span>
-          </h2>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Every solution is tailored to where you are and where you need to be.
-          </p>
+          <span className="font-syne text-[15px] tracking-[0.2em] uppercase text-[#9A8F7A]">
+            What we build
+          </span>
+          <div className="flex-1 h-px bg-[#D4C9B0]" />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        {/* Service rows */}
+        <div>
           {services.map((service, index) => (
             <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 50 }}
+              key={service.number}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="group"
+              className="group border-t border-[#D4C9B0] py-10 md:py-12 last:border-b grid grid-cols-12 gap-4 md:gap-8 items-start hover:border-[#C41F1F]/30 transition-colors duration-500 cursor-default"
             >
-              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-red-500/50 transition-all duration-300 h-full">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
+              {/* Number */}
+              <div className="col-span-1">
+                <span className="font-syne text-[10px] tracking-widest text-[#C0B8A8] mt-2 block">
+                  {service.number}
+                </span>
+              </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-slate-300 mb-6 leading-relaxed">{service.description}</p>
+              {/* Title */}
+              <div className="col-span-11 md:col-span-3">
+                <h3 className="font-cormorant font-light text-3xl md:text-4xl text-[#1C1714] leading-tight whitespace-pre-line">
+                  {service.title}
+                </h3>
+              </div>
 
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center text-slate-300">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3" />
-                      {feature}
-                    </li>
+              {/* Description */}
+              <div className="col-span-11 md:col-span-6 md:col-start-5">
+                <p className="font-syne text-[#8A7F6A] text-sm leading-relaxed mb-6">
+                  {service.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {service.features.map((f) => (
+                    <span
+                      key={f}
+                      className="font-syne text-[9px] tracking-[0.2em] uppercase text-[#9A8F7A] border border-[#D4C9B0] px-3 py-1.5"
+                    >
+                      {f}
+                    </span>
                   ))}
-                </ul>
-
-                <div className="mt-auto">
-                  <Button
-                    variant="ghost"
-                    className="text-red-500 hover:text-red-300 hover:bg-red-500/10 p-0 h-auto group/btn"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
                 </div>
+              </div>
+
+              {/* Arrow */}
+              <div className="hidden md:flex col-span-2 justify-end pt-1">
+                <ArrowUpRight className="w-4 h-4 text-[#D4C9B0] group-hover:text-[#C41F1F] transition-colors duration-300" />
               </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-red-600 text-red-500 hover:bg-red-600 hover:text-white px-8 py-4 text-lg bg-transparent"
-          >
-            Talk to us about your project
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-        </motion.div>
       </div>
     </section>
   )

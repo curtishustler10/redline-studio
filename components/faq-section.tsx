@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Plus, Minus } from "lucide-react"
 import { useState } from "react"
+import { Plus, Minus } from "lucide-react"
 
 const faqs = [
   {
@@ -27,7 +27,7 @@ const faqs = [
   {
     question: "Why Redline Studio?",
     answer:
-      "We build what your business actually needs — no templates, no filler. Every solution is custom, every decision is goal-driven.",
+      "Because we actually study your business before we build anything. No templates, no recycled designs. You get someone who understands what you do and builds something that fits — not something that just looks like it fits.",
   },
   {
     question: "What happens during the discovery call?",
@@ -39,72 +39,65 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 relative">
-      <div className="container mx-auto px-4">
+    <section id="faq" className="py-24 md:py-32 border-t border-[#D4C9B0]">
+      <div className="container mx-auto px-6 md:px-12">
+
+        {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="flex items-center gap-6 mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-              Questions
-            </span>
-          </h2>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Get answers to the most common questions about our services and process
-          </p>
+          <span className="font-syne text-[15px] tracking-[0.2em] uppercase text-[#9A8F7A]">
+            Common questions
+          </span>
+          <div className="flex-1 h-px bg-[#D4C9B0]" />
+          <span className="font-syne text-[15px] tracking-[0.2em] uppercase text-[#C0B8A8]">
+            If something isn&apos;t answered here, just ask
+          </span>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="mb-4"
+              className="border-t border-[#D4C9B0] last:border-b"
             >
-              <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden hover:border-red-600/50 transition-all duration-300">
-                <button
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-slate-700/20 transition-colors duration-200"
-                >
-                  <span className="text-lg font-semibold text-white pr-4">{faq.question}</span>
-                  <motion.div
-                    animate={{ rotate: openIndex === index ? 45 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex-shrink-0"
-                  >
-                    {openIndex === index ? (
-                      <Minus className="w-6 h-6 text-red-500" />
-                    ) : (
-                      <Plus className="w-6 h-6 text-red-500" />
-                    )}
-                  </motion.div>
-                </button>
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full py-6 text-left flex items-center justify-between gap-8 group"
+              >
+                <span className="font-cormorant font-light text-xl md:text-2xl text-[#1C1714] group-hover:text-[#C41F1F] transition-colors duration-300 leading-tight">
+                  {faq.question}
+                </span>
+                <span className="flex-shrink-0 text-[#C0B8A8] group-hover:text-[#C41F1F] transition-colors">
+                  {openIndex === index
+                    ? <Minus className="w-4 h-4" />
+                    : <Plus className="w-4 h-4" />
+                  }
+                </span>
+              </button>
 
-                <motion.div
-                  initial={false}
-                  animate={{
-                    height: openIndex === index ? "auto" : 0,
-                    opacity: openIndex === index ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="px-8 pb-6">
-                    <p className="text-slate-300 leading-relaxed">{faq.answer}</p>
-                  </div>
-                </motion.div>
-              </div>
+              <motion.div
+                initial={false}
+                animate={{ height: openIndex === index ? "auto" : 0, opacity: openIndex === index ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <p className="font-syne text-[#8A7F6A] text-sm leading-relaxed pb-6 max-w-xl">
+                  {faq.answer}
+                </p>
+              </motion.div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )

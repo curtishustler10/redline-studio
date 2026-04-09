@@ -39,13 +39,10 @@ export function TestimonialsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            What Our{" "}
-            <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-              Clients Say
-            </span>
+            What clients say
           </h2>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            What our clients have to say about working with us.
+            From people we've actually worked with.
           </p>
         </motion.div>
 
