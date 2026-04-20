@@ -27,14 +27,17 @@ export function CTASection() {
             No pitch. No proposal deck. Just a straight conversation about your business and what it needs.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-8 items-start">
+          <div className="flex flex-col sm:flex-row gap-6 sm:items-center items-start">
             <a
               href="mailto:hello@redlinestudio.co"
-              className="group flex items-center gap-2 font-syne text-[11px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-1 hover:text-[#C41F1F] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 font-syne text-[12px] md:text-[13px] tracking-[0.2em] uppercase font-medium text-[#F2EAD3] bg-[#C41F1F] hover:bg-[#A01818] px-6 py-3.5 transition-colors duration-300"
             >
-              hello@redlinestudio.co
-              <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              Email us
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
+            <span className="font-syne text-[12px] tracking-[0.2em] uppercase text-[#8A7F6A]">
+              hello@redlinestudio.co
+            </span>
           </div>
         </motion.div>
 

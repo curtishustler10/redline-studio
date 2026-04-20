@@ -54,8 +54,8 @@ export function Header() {
               Est 2022
             </span>
             <a
-              href="mailto:hello@redlinestudio.co"
-              className="font-syne text-[10px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-0.5 hover:text-[#C41F1F] transition-colors duration-300"
+              href="#contact"
+              className="font-syne text-[11px] tracking-[0.2em] uppercase font-medium text-[#F2EAD3] bg-[#C41F1F] hover:bg-[#A01818] px-4 py-2 transition-colors duration-300"
             >
               Get in touch
             </a>

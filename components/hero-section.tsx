@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 
 const stats = [
   { value: "50+", label: "Local Clients" },
-  { value: "0", label: "Templates Used" },
+  { value: "Zero", label: "Templates Used" },
   { value: "100%", label: "Custom Builds" },
 ]
 
@@ -37,17 +37,17 @@ export function HeroSection() {
             Websites, automation, and digital tools —<br />
             crafted around how your business actually operates.
           </p>
-          <div className="flex items-center gap-8 md:gap-10">
+          <div className="flex items-center gap-6 md:gap-8">
             <a
-              href="mailto:hello@redlinestudio.co"
-              className="group flex items-center gap-2 font-syne text-[11px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-1 hover:text-[#C41F1F] transition-colors duration-300"
+              href="#contact"
+              className="group inline-flex items-center gap-2 font-syne text-[12px] md:text-[13px] tracking-[0.2em] uppercase font-medium text-[#F2EAD3] bg-[#C41F1F] hover:bg-[#A01818] px-6 py-3.5 transition-colors duration-300"
             >
-              Start a conversation
-              <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              Start a project
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <a
               href="#projects"
-              className="font-syne text-[11px] tracking-[0.25em] uppercase text-[#9A8F7A] hover:text-[#1C1714] transition-colors duration-300"
+              className="font-syne text-[12px] tracking-[0.25em] uppercase text-[#8A7F6A] hover:text-[#1C1714] transition-colors duration-300"
             >
               View our work
             </a>
@@ -66,7 +66,7 @@ export function HeroSection() {
           <div className="grid grid-cols-3 divide-x divide-[#D4C9B0]">
             {stats.map((stat) => (
               <div key={stat.label} className="py-8 md:py-10 px-6 md:px-10 first:pl-0 last:pr-0">
-                <div className="font-cormorant font-light text-4xl md:text-5xl text-[#1C1714] mb-1 leading-none">
+                <div className="font-syne font-medium text-3xl md:text-4xl text-[#1C1714] mb-1 leading-none tracking-tight">
                   {stat.value}
                 </div>
                 <div className="font-syne text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#9A8F7A] mt-2">

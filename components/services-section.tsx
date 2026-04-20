@@ -66,7 +66,7 @@ export function ServicesSection() {
 
               {/* Title */}
               <div className="col-span-11 md:col-span-3">
-                <h3 className="font-cormorant font-light text-3xl md:text-4xl text-[#1C1714] leading-tight whitespace-pre-line">
+                <h3 className="font-syne font-semibold text-xl md:text-2xl text-[#1C1714] leading-snug whitespace-pre-line tracking-tight">
                   {service.title}
                 </h3>
               </div>

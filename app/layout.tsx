@@ -16,8 +16,23 @@ const syne = Syne({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://redlinestudio.co'),
   title: 'Redline Studio — Digital Systems for Local Business',
   description: 'We don\'t do templates. We build what your business needs — websites, automation, and digital tools crafted around how you actually operate.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    title: 'Redline Studio — Digital Systems for Local Business',
+    description: 'We don\'t do templates. We build what your business needs — websites, automation, and digital tools crafted around how you actually operate.',
+    siteName: 'Redline Studio',
+    locale: 'en_AU',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Redline Studio — Digital Systems for Local Business',
+    description: 'Websites, automation, and digital tools crafted around how your business actually operates.',
+  },
 }
 
 export default function RootLayout({

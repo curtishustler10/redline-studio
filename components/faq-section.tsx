@@ -73,7 +73,7 @@ export function FAQSection() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full py-6 text-left flex items-center justify-between gap-8 group"
               >
-                <span className="font-cormorant font-light text-xl md:text-2xl text-[#1C1714] group-hover:text-[#C41F1F] transition-colors duration-300 leading-tight">
+                <span className="font-syne font-medium text-base md:text-[17px] text-[#1C1714] group-hover:text-[#C41F1F] transition-colors duration-300 leading-snug">
                   {faq.question}
                 </span>
                 <span className="flex-shrink-0 text-[#C0B8A8] group-hover:text-[#C41F1F] transition-colors">

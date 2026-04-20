@@ -72,7 +72,7 @@ export function ProjectsSection() {
 
               {/* Title */}
               <div className="col-span-11 md:col-span-3">
-                <h3 className="font-cormorant font-light text-3xl md:text-4xl text-[#1C1714] leading-tight group-hover:text-[#C41F1F] transition-colors duration-300">
+                <h3 className="font-syne font-semibold text-xl md:text-2xl text-[#1C1714] leading-snug group-hover:text-[#C41F1F] transition-colors duration-300 tracking-tight">
                   {project.title}
                 </h3>
               </div>

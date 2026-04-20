@@ -89,7 +89,7 @@ export function ChatWidget() {
             <div className="px-5 py-5 min-h-[180px]">
               {step === "select" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                  <p className="font-cormorant text-xl text-[#1C1714] leading-snug mb-1">
+                  <p className="font-syne font-semibold text-[15px] text-[#1C1714] leading-snug mb-1">
                     Hey there.
                   </p>
                   <p className="font-syne text-[12px] text-[#8A7F6A] leading-relaxed mb-6">
@@ -116,7 +116,7 @@ export function ChatWidget() {
 
               {step === "form" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                  <p className="font-cormorant text-xl text-[#1C1714] mb-1">Get a quote</p>
+                  <p className="font-syne font-semibold text-[15px] text-[#1C1714] mb-1">Get a quote</p>
                   <p className="font-syne text-[12px] text-[#8A7F6A] mb-5">A few quick details:</p>
                   <div className="flex flex-col gap-3">
                     <input
@@ -163,7 +163,7 @@ export function ChatWidget() {
 
               {step === "work" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                  <p className="font-cormorant text-xl text-[#1C1714] mb-1">Our work</p>
+                  <p className="font-syne font-semibold text-[15px] text-[#1C1714] mb-1">Our work</p>
                   <p className="font-syne text-[12px] text-[#8A7F6A] mb-5">Recent projects:</p>
                   <div className="flex flex-col gap-2 mb-5">
                     {PROJECTS.map(({ name, url, desc }) => (
@@ -193,11 +193,11 @@ export function ChatWidget() {
 
               {step === "question" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                  <p className="font-cormorant text-xl text-[#1C1714] mb-1">Ask a question</p>
+                  <p className="font-syne font-semibold text-[15px] text-[#1C1714] mb-1">Ask a question</p>
                   <p className="font-syne text-[12px] text-[#8A7F6A] mb-5">We'll reply by email:</p>
                   <div className="flex flex-col gap-3">
                     <textarea
-                      ref={inputRef as React.RefObject<HTMLTextAreaElement>}
+                      ref={inputRef as unknown as React.RefObject<HTMLTextAreaElement>}
                       placeholder="Your question"
                       value={form.message}
                       onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
@@ -232,7 +232,7 @@ export function ChatWidget() {
                   <div className="w-10 h-10 bg-[#C41F1F] flex items-center justify-center mb-4">
                     <span className="text-[#F2EAD3] text-lg">✦</span>
                   </div>
-                  <p className="font-cormorant text-2xl text-[#1C1714] mb-2">Got it.</p>
+                  <p className="font-cormorant font-light italic text-2xl text-[#1C1714] mb-2">Got it.</p>
                   <p className="font-syne text-[12px] text-[#8A7F6A] leading-relaxed max-w-[220px]">
                     Curtis will be in touch within 24 hours.
                   </p>

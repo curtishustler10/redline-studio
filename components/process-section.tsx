@@ -58,14 +58,14 @@ export function ProcessSection() {
             >
               {/* Big faded number */}
               <div className="col-span-2 md:col-span-2">
-                <span className="font-cormorant font-light text-[60px] md:text-[90px] leading-none text-[#DCCFB8] select-none">
+                <span className="font-syne font-light text-[44px] md:text-[64px] leading-none text-[#DCCFB8] select-none tracking-tight">
                   {step.number}
                 </span>
               </div>
 
               {/* Content */}
               <div className="col-span-10 md:col-span-7 pt-2 md:pt-4">
-                <h3 className="font-cormorant font-light text-3xl md:text-4xl text-[#1C1714] mb-4 leading-tight">
+                <h3 className="font-syne font-semibold text-xl md:text-2xl text-[#1C1714] mb-4 leading-snug tracking-tight">
                   {step.title}
                 </h3>
                 <p className="font-syne text-[#8A7F6A] text-sm leading-relaxed max-w-lg">
