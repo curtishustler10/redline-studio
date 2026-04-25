@@ -5,25 +5,32 @@ import { ArrowUpRight } from "lucide-react"
 
 const projects = [
   {
-    title: "Dakytech",
-    description: "Full website build for a technology company — custom design, fast load times, and a structure built to grow with the business.",
+    title: "Omnilux",
+    description: "E-commerce experience for a medical-grade LED skincare brand — tiered product ecosystem, conversion-focused layout, and social-proof-led storytelling built to scale.",
     image: "/placeholder.svg?height=400&width=600",
-    url: "https://www.dakytech.com/",
-    tags: ["Web Development", "Custom Design"],
+    url: "https://omniluxled.com/",
+    tags: ["E-commerce", "DTC Brand"],
   },
   {
-    title: "Kamanda2Nis",
-    description: "E-commerce platform built from the ground up — product catalogue, payment integration, and a mobile-first experience.",
+    title: "Maya Hair Products",
+    description: "Shopify storefront for an organic hair-care brand — handmade product range, salon-style merchandising, and a launch-ready landing page.",
     image: "/placeholder.svg?height=400&width=600",
-    url: "https://kamanda2nis.com/",
-    tags: ["E-commerce", "Mobile First"],
+    url: "https://mayahairproducts.com/",
+    tags: ["Shopify", "DTC Brand"],
   },
   {
-    title: "Vladie's Beauty",
-    description: "Brand website and booking system for a beauty business — designed to reflect the brand and convert visitors into appointments.",
+    title: "Tangéroise",
+    description: "Brand site for a Moroccan caftan rental house — minimalist editorial layout, refined French copy, and an appointment-led customer flow.",
     image: "/placeholder.svg?height=400&width=600",
-    url: "https://vladie.com/",
-    tags: ["Booking System", "Brand Design"],
+    url: "https://tangeroise-site.vercel.app/",
+    tags: ["Brand Site", "Editorial"],
+  },
+  {
+    title: "Baroude et Recettes",
+    description: "E-commerce and content hub for an artisanal cold-process soap brand — shop, blog, workshops, and a values-led visual story under one roof.",
+    image: "/placeholder.svg?height=400&width=600",
+    url: "https://baroudeetrecettes.fr/",
+    tags: ["E-commerce", "Content Hub"],
   },
 ]
 

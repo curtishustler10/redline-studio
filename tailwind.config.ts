@@ -17,7 +17,8 @@ const config: Config = {
   			syne: ['var(--font-syne)', 'system-ui', 'sans-serif'],
   			serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
   			cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
-  			mono: ['monospace'],
+  			mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+  			jetbrains: ['var(--font-mono)', 'ui-monospace', 'monospace'],
   		},
   		colors: {
   			redline: {

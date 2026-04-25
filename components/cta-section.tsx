@@ -29,14 +29,14 @@ export function CTASection() {
 
           <div className="flex flex-col sm:flex-row gap-6 sm:items-center items-start">
             <a
-              href="mailto:hello@redlinestudio.co"
+              href="mailto:hello@redlinestudio.agency"
               className="group inline-flex items-center gap-2 font-syne text-[12px] md:text-[13px] tracking-[0.2em] uppercase font-medium text-[#F2EAD3] bg-[#C41F1F] hover:bg-[#A01818] px-6 py-3.5 transition-colors duration-300"
             >
               Email us
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <span className="font-syne text-[12px] tracking-[0.2em] uppercase text-[#8A7F6A]">
-              hello@redlinestudio.co
+              hello@redlinestudio.agency
             </span>
           </div>
         </motion.div>

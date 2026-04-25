@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Logo } from "./logo"
 
 const navItems = ["Services", "Projects", "Process", "FAQ", "Contact"]
 
@@ -38,10 +39,8 @@ export function Header() {
 
           {/* Logo + location */}
           <div className="flex items-center gap-6 md:gap-10">
-            <a href="/" className="flex items-baseline gap-0.5 group">
-              <span className="font-cormorant text-xl italic font-light text-[#9A8F7A] group-hover:text-[#7A6F5A] transition-colors">Red</span>
-              <span className="font-syne text-sm font-bold text-[#1C1714] tracking-[0.15em] uppercase">LINE</span>
-              <span className="font-cormorant text-xl text-[#C41F1F]">.</span>
+            <a href="/" className="group">
+              <Logo className="text-[15px] md:text-[16px] text-[#1C1714] group-hover:opacity-80 transition-opacity" />
             </a>
             <span className="hidden md:block font-syne text-[9px] tracking-[0.3em] uppercase text-[#9A8F7A]">
               Paris · Gold Coast Digital Studio
@@ -92,7 +91,7 @@ export function Header() {
                   </button>
                 ))}
                 <a
-                  href="mailto:hello@redlinestudio.co"
+                  href="mailto:hello@redlinestudio.agency"
                   className="font-syne text-[11px] tracking-[0.25em] uppercase text-[#1C1714] border-b border-[#C41F1F] pb-1 w-fit mt-2"
                 >
                   Get in touch

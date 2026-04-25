@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Syne } from 'next/font/google'
+import { Cormorant_Garamond, Syne, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -15,8 +15,14 @@ const syne = Syne({
   weight: ['400', '500', '600', '700', '800'],
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: ['400', '500', '600'],
+})
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://redlinestudio.co'),
+  metadataBase: new URL('https://redlinestudio.agency'),
   title: 'Redline Studio — Digital Systems for Local Business',
   description: 'We don\'t do templates. We build what your business needs — websites, automation, and digital tools crafted around how you actually operate.',
   alternates: { canonical: '/' },
@@ -41,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${syne.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${syne.variable} ${jetbrainsMono.variable}`}>
       <body className="font-syne">{children}</body>
     </html>
   )

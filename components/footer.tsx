@@ -1,13 +1,13 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Linkedin, Instagram, MessageCircle } from "lucide-react"
+import { Instagram, MessageCircle } from "lucide-react"
+import { Logo } from "./logo"
 
 export function Footer() {
   const socialLinks = [
-    { icon: Linkedin, href: "https://linkedin.com/company/redlinestudio", label: "LinkedIn" },
-    { icon: Instagram, href: "https://instagram.com/redlinestudio", label: "Instagram" },
-    { icon: MessageCircle, href: "#", label: "WhatsApp" },
+    { icon: Instagram, href: "https://www.instagram.com/redlinestudio.agency", label: "Instagram" },
+    { icon: MessageCircle, href: "https://wa.me/61421915283", label: "WhatsApp" },
   ]
 
   return (
@@ -16,10 +16,8 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
 
           {/* Logo */}
-          <a href="/" className="flex items-baseline gap-0.5">
-            <span className="font-cormorant text-xl italic font-light text-[#9A8F7A]">Red</span>
-            <span className="font-syne text-sm font-bold text-[#1C1714] tracking-[0.15em] uppercase">LINE</span>
-            <span className="font-cormorant text-xl text-[#C41F1F]">.</span>
+          <a href="/">
+            <Logo className="text-[14px] text-[#1C1714] hover:opacity-80 transition-opacity" />
           </a>
 
           {/* Social links */}
