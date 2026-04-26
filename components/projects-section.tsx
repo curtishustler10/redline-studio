@@ -5,11 +5,11 @@ import { ArrowUpRight } from "lucide-react"
 
 const projects = [
   {
-    title: "Omnilux",
-    description: "E-commerce experience for a medical-grade LED skincare brand — tiered product ecosystem, conversion-focused layout, and social-proof-led storytelling built to scale.",
+    title: "Coollooks Barberz",
+    description: "Booking site for a barbershop — custom multi-service modal, real-time slot availability, branded email automations, and a full admin panel for the team.",
     image: "/placeholder.svg?height=400&width=600",
-    url: "https://omniluxled.com/",
-    tags: ["E-commerce", "DTC Brand"],
+    url: "https://coollooksbarberz.com/",
+    tags: ["Booking System", "Web App"],
   },
   {
     title: "Maya Hair Products",
