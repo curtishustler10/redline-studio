@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, MessageSquare, ArrowRight, Send } from "lucide-react"
+import { Logo } from "@/components/logo"
 
 type Step = "select" | "form" | "work" | "question" | "success"
 
@@ -76,11 +77,7 @@ export function ChatWidget() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[#D4C9B0]">
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-cormorant italic font-light text-lg text-[#9A8F7A]">Red</span>
-                <span className="font-syne text-xs font-bold text-[#1C1714] tracking-[0.15em] uppercase">LINE</span>
-                <span className="font-cormorant text-lg text-[#C41F1F]">.</span>
-              </div>
+              <Logo className="text-[13px] text-[#1C1714]" />
               <button onClick={handleClose} className="text-[#9A8F7A] hover:text-[#1C1714] transition-colors">
                 <X className="w-4 h-4" />
               </button>
