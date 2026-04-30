@@ -16,9 +16,10 @@ type FormData = {
 const SERVICES = ["Website", "Automation", "Growth / SEO", "Other"]
 
 const PROJECTS = [
-  { name: "Dakytech", url: "https://www.dakytech.com/", desc: "Tech company website" },
-  { name: "Kamanda2Nis", url: "https://kamanda2nis.com/", desc: "E-commerce platform" },
-  { name: "Vladie's Beauty", url: "https://vladie.com/", desc: "Brand + booking system" },
+  { name: "Coollooks Barberz", url: "https://coollooksbarberz.com/", desc: "Barbershop booking system" },
+  { name: "Maya Hair Products", url: "https://mayahairproducts.com/", desc: "Shopify storefront" },
+  { name: "Tangéroise", url: "https://tangeroise-site.vercel.app/", desc: "Caftan rental brand site" },
+  { name: "Baroude et Recettes", url: "https://baroudeetrecettes.fr/", desc: "Artisan soap e-commerce" },
 ]
 
 export function ChatWidget() {
