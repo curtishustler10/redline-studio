@@ -1,29 +1,29 @@
-import { HeroSection } from "@/components/hero-section"
-import { ProjectsSection } from "@/components/projects-section"
-import { ProcessSection } from "@/components/process-section"
-import { ServicesSection } from "@/components/services-section"
-import { FAQSection } from "@/components/faq-section"
-import { CTASection } from "@/components/cta-section"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { SideNav } from "@/components/side-nav"
-import { ChatWidget } from "@/components/chat-widget"
+import { FunnelNav } from "@/components/funnel/nav";
+import { FunnelHero } from "@/components/funnel/hero";
+import { FunnelDiagnostic } from "@/components/funnel/diagnostic";
+import { FunnelBriques } from "@/components/funnel/briques";
+import { FunnelSimulator } from "@/components/funnel/simulator";
+import { FunnelCases } from "@/components/funnel/cases";
+import { FunnelDeliverables } from "@/components/funnel/deliverables";
+import { FunnelMethod } from "@/components/funnel/method";
+import { FunnelOffers } from "@/components/funnel/offers";
+import { FunnelFooter } from "@/components/funnel/footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <Header />
-      <SideNav />
+      <FunnelNav />
       <main>
-        <HeroSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <ProcessSection />
-        <FAQSection />
-        <CTASection />
+        <FunnelHero />
+        <FunnelDiagnostic />
+        <FunnelBriques />
+        <FunnelSimulator />
+        <FunnelCases />
+        <FunnelDeliverables />
+        <FunnelMethod />
+        <FunnelOffers />
       </main>
-      <Footer />
-      <ChatWidget />
+      <FunnelFooter />
     </div>
-  )
+  );
 }

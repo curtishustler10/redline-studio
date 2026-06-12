@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Syne, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import { LangProvider } from '@/components/lang-provider'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -48,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${cormorant.variable} ${syne.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-syne">{children}</body>
+      <body className="font-syne"><LangProvider>{children}</LangProvider></body>
     </html>
   )
 }
