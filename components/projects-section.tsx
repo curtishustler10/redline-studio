@@ -5,6 +5,13 @@ import { ArrowUpRight } from "lucide-react"
 
 const projects = [
   {
+    title: "Movaé Flow",
+    description: "Full-stack booking platform for a Paris hair salon — multi-service cart, fidelity ledger, OTP + Google auth, admin CMS, GCal sync, and a PWA with iOS shortcut support.",
+    image: "/placeholder.svg?height=400&width=600",
+    url: "https://movaeflow.com/",
+    tags: ["Booking System", "Full-Stack", "PWA"],
+  },
+  {
     title: "Coollooks Barberz",
     description: "Booking site for a barbershop — custom multi-service modal, real-time slot availability, branded email automations, and a full admin panel for the team.",
     image: "/placeholder.svg?height=400&width=600",
@@ -17,13 +24,6 @@ const projects = [
     image: "/placeholder.svg?height=400&width=600",
     url: "https://mayahairproducts.com/",
     tags: ["Shopify", "DTC Brand"],
-  },
-  {
-    title: "Tangéroise",
-    description: "Brand site for a Moroccan caftan rental house — minimalist editorial layout, refined French copy, and an appointment-led customer flow.",
-    image: "/placeholder.svg?height=400&width=600",
-    url: "https://tangeroise-site.vercel.app/",
-    tags: ["Brand Site", "Editorial"],
   },
   {
     title: "Baroude et Recettes",

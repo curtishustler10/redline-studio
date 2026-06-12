@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
 import { useLang } from "@/components/lang-provider";
+import { DIAGNOSTIC_MAIL } from "@/lib/constants";
 
 const IDS = ["bienvenue", "diagnostic", "briques", "simulateur", "cas", "livrables", "methode", "offres"];
-const MAIL = "mailto:contact@redlinestudio.agency?subject=Diagnostic%20Redline";
 
 export function FunnelNav() {
   const { t, lang, setLang } = useLang();
@@ -13,9 +13,10 @@ export function FunnelNav() {
 
   useEffect(() => {
     const onScroll = () => {
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      setProgress(max > 0 ? (h.scrollTop / max) * 100 : 0);
+      // window.scrollY is reliable cross-browser; documentElement.scrollTop reads 0
+      // on iOS Safari when body is the scroll root.
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -40,6 +41,9 @@ export function FunnelNav() {
               {(["fr", "en"] as const).map((l) => (
                 <button
                   key={l}
+                  type="button"
+                  aria-label={l === "fr" ? "Français" : "English"}
+                  aria-pressed={lang === l}
                   onClick={() => setLang(l)}
                   className={`px-2.5 py-1 uppercase transition-colors ${lang === l ? "bg-[var(--rl-red)] text-[#fff]" : "text-[var(--rl-muted)] hover:text-[var(--rl-ink)]"}`}
                 >
@@ -47,7 +51,7 @@ export function FunnelNav() {
                 </button>
               ))}
             </div>
-            <a href={MAIL} className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[#161210] font-medium hover:bg-white transition-colors">
+            <a href={DIAGNOSTIC_MAIL} className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[#161210] font-medium hover:bg-white transition-colors">
               {t.nav.cta}
             </a>
           </div>

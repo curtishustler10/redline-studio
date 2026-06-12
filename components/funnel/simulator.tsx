@@ -3,7 +3,13 @@
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { useLang } from "@/components/lang-provider";
+import type { Lang } from "@/lib/i18n";
 import { computeComparison, type SimInputs } from "@/lib/simulator";
+
+const locale = (lang: Lang) => (lang === "en" ? "en-GB" : "fr-FR");
+const num = (n: number, lang: Lang) => n.toLocaleString(locale(lang));
+const euro = (n: number, lang: Lang) =>
+  new Intl.NumberFormat(locale(lang), { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
 
 const FIELDS: { key: keyof SimInputs; min: number; max: number; step: number; suffix: string }[] = [
   { key: "visitors", min: 100, max: 50000, step: 100, suffix: "" },
@@ -19,12 +25,8 @@ const LABEL_KEY: Record<keyof SimInputs, "visitors" | "capture" | "conversion" |
   basket: "basket", frequency: "frequency", retentionPct: "retention",
 };
 
-function euro(n: number): string {
-  return n.toLocaleString("fr-FR") + " €";
-}
-
 export function FunnelSimulator() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [inputs, setInputs] = useState<SimInputs>({
     visitors: 10000, capturePct: 10, conversionPct: 5, basket: 80, frequency: 2, retentionPct: 30,
   });
@@ -46,7 +48,7 @@ export function FunnelSimulator() {
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-[var(--rl-muted)]">{t.simulator.inputs[LABEL_KEY[f.key]]}</span>
                   <span className="font-medium tabular-nums">
-                    {inputs[f.key].toLocaleString("fr-FR")}{f.suffix}
+                    {num(inputs[f.key], lang)}{f.suffix}
                   </span>
                 </div>
                 <Slider value={[inputs[f.key]]} min={f.min} max={f.max} step={f.step}
@@ -58,13 +60,13 @@ export function FunnelSimulator() {
           {/* outputs + comparison */}
           <div className="space-y-5">
             <div className="grid grid-cols-2 gap-4">
-              <Stat label={t.simulator.outputs.leads} value={ecosystem.leads.toLocaleString("fr-FR")} />
-              <Stat label={t.simulator.outputs.clients} value={ecosystem.clients.toLocaleString("fr-FR")} />
+              <Stat label={t.simulator.outputs.leads} value={num(ecosystem.leads, lang)} />
+              <Stat label={t.simulator.outputs.clients} value={num(ecosystem.clients, lang)} />
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              <Compare title={t.simulator.compareSite} monthly={euro(siteOnly.monthly)} yearly={euro(siteOnly.yearly)}
+              <Compare title={t.simulator.compareSite} monthly={euro(siteOnly.monthly, lang)} yearly={euro(siteOnly.yearly, lang)}
                 monthlyLabel={t.simulator.outputs.monthly} yearlyLabel={t.simulator.outputs.yearly} dim />
-              <Compare title={t.simulator.compareEco} monthly={euro(ecosystem.monthly)} yearly={euro(ecosystem.yearly)}
+              <Compare title={t.simulator.compareEco} monthly={euro(ecosystem.monthly, lang)} yearly={euro(ecosystem.yearly, lang)}
                 monthlyLabel={t.simulator.outputs.monthly} yearlyLabel={t.simulator.outputs.yearly} />
             </div>
             <p className="text-[11px] text-[var(--rl-muted)]">{t.simulator.note}</p>

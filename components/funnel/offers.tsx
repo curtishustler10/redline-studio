@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLang } from "@/components/lang-provider";
-
-const MAIL = "mailto:contact@redlinestudio.agency?subject=Diagnostic%20Redline";
+import { DIAGNOSTIC_MAIL } from "@/lib/constants";
 
 export function FunnelOffers() {
   const { t } = useLang();
@@ -34,7 +33,7 @@ export function FunnelOffers() {
                   </li>
                 ))}
               </ul>
-              <a href={MAIL} className={`mt-7 block text-center py-3 rounded-full font-medium transition-colors ${tier.recommended ? "bg-[var(--rl-red)] text-white hover:bg-[var(--rl-red-hover)]" : "bg-[var(--rl-ink)] text-[#161210] hover:bg-white"}`}>
+              <a href={DIAGNOSTIC_MAIL} className={`mt-7 block text-center py-3 rounded-full font-medium transition-colors ${tier.recommended ? "bg-[var(--rl-red)] text-white hover:bg-[var(--rl-red-hover)]" : "bg-[var(--rl-ink)] text-[#161210] hover:bg-white"}`}>
                 {tier.cta}
               </a>
             </motion.div>
@@ -44,11 +43,11 @@ export function FunnelOffers() {
 
         {/* closing */}
         <div className="mt-20 text-center rounded-3xl bg-[var(--rl-surface)] border border-[var(--rl-line)] p-10 md:p-14">
-          <h2 className="font-syne text-2xl md:text-4xl font-bold tracking-tight max-w-2xl mx-auto">{t.closing.title}</h2>
+          <h3 className="font-syne text-2xl md:text-4xl font-bold tracking-tight max-w-2xl mx-auto">{t.closing.title}</h3>
           <p className="mt-4 text-[var(--rl-muted)] max-w-xl mx-auto">{t.closing.sub}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#simulateur" className="px-6 py-3 rounded-full bg-[var(--rl-red)] text-white font-medium hover:bg-[var(--rl-red-hover)] transition-colors">{t.closing.primary} →</a>
-            <a href={MAIL} className="px-6 py-3 rounded-full border border-[var(--rl-line)] hover:border-[var(--rl-ink)] transition-colors">{t.closing.secondary}</a>
+            <a href="#diagnostic" className="px-6 py-3 rounded-full bg-[var(--rl-red)] text-white font-medium hover:bg-[var(--rl-red-hover)] transition-colors">{t.closing.primary} →</a>
+            <a href={DIAGNOSTIC_MAIL} className="px-6 py-3 rounded-full border border-[var(--rl-line)] hover:border-[var(--rl-ink)] transition-colors">{t.closing.secondary}</a>
           </div>
         </div>
       </div>

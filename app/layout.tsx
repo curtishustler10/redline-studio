@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${syne.variable} ${jetbrainsMono.variable}`}>
+    <html lang="fr" className={`${cormorant.variable} ${syne.variable} ${jetbrainsMono.variable}`}>
       <body className="font-syne"><LangProvider>{children}</LangProvider></body>
     </html>
   )

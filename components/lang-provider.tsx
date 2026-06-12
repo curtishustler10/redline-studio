@@ -13,7 +13,10 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("redline-lang");
-    if (saved === "fr" || saved === "en") setLangState(saved);
+    if (saved === "fr" || saved === "en") {
+      setLangState(saved);
+      document.documentElement.lang = saved;
+    }
   }, []);
 
   const setLang = (l: Lang) => {

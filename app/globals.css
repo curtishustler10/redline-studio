@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-  background-color: #161210;
-  color: #ECE3D7;
+  /* Colours come from --background / --foreground (set to the warm Redline
+     palette below) via the @apply in the base layer; keep only positioning here. */
   position: relative;
 }
 
@@ -35,10 +35,10 @@ body::before {
     --rl-red: #C41F1F;
     --rl-red-hover: #E03030;
     --rl-line: rgba(236,227,215,0.14);
-    --background: 0 0% 5%;
-    --foreground: 30 6% 93%;
-    --card: 0 0% 9%;
-    --card-foreground: 30 6% 93%;
+    --background: 20 16% 7%;
+    --foreground: 34 33% 88%;
+    --card: 24 11% 10%;
+    --card-foreground: 34 33% 88%;
     --popover: 0 0% 9%;
     --popover-foreground: 30 6% 93%;
     --primary: 0 100% 38%;

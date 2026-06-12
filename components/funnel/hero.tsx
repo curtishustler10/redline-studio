@@ -23,7 +23,7 @@ export function FunnelHero() {
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
           className="mt-9 flex flex-col items-center gap-5">
-          <a href="#simulateur" className="px-7 py-3.5 rounded-full bg-[var(--rl-red)] text-white font-medium hover:bg-[var(--rl-red-hover)] transition-colors">
+          <a href="#diagnostic" className="px-7 py-3.5 rounded-full bg-[var(--rl-red)] text-white font-medium hover:bg-[var(--rl-red-hover)] transition-colors">
             {t.hero.cta} →
           </a>
           <div className="flex flex-wrap justify-center gap-2.5">
