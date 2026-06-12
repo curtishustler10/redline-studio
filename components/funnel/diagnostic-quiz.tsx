@@ -25,11 +25,11 @@ const ZONE_TEXT: Record<Zone, string> = {
   ok: "text-emerald-400",
 };
 
-export function FunnelDiagnosticQuiz() {
+export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolean }) {
   const { t, lang } = useLang();
   const q = t.quiz;
 
-  const [phase, setPhase] = useState<Phase>("intro");
+  const [phase, setPhase] = useState<Phase>(autoStart ? "quiz" : "intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [result, setResult] = useState<DiagnosticResult | null>(null);
@@ -48,14 +48,14 @@ export function FunnelDiagnosticQuiz() {
 
   function back() {
     if (step > 0) setStep(step - 1);
-    else setPhase("intro");
+    else if (!autoStart) setPhase("intro");
   }
 
   function restart() {
     setAnswers([]);
     setStep(0);
     setResult(null);
-    setPhase("intro");
+    setPhase(autoStart ? "quiz" : "intro");
   }
 
   return (

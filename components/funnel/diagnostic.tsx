@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useLang } from "@/components/lang-provider";
-import { FunnelDiagnosticQuiz } from "@/components/funnel/diagnostic-quiz";
 
 export function FunnelDiagnostic() {
   const { t } = useLang();
@@ -23,8 +22,6 @@ export function FunnelDiagnostic() {
             </motion.div>
           ))}
         </div>
-
-        <FunnelDiagnosticQuiz />
       </div>
     </section>
   );
