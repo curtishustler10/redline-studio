@@ -255,4 +255,4 @@ const en = {
 } as const;
 
 export const dictionaries = { fr, en };
-export type Dict = typeof fr;
+export type Dict = typeof fr | typeof en;
