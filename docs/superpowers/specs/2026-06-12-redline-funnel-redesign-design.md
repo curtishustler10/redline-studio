@@ -142,8 +142,9 @@ derived maths).
 
 ## Out of Scope (YAGNI)
 
-- No CMS / backend / form submission wiring (CTAs link to existing contact/booking or
-  `mailto`/Calendly placeholder — confirm target at build time).
+- No CMS / backend / form submission wiring. All CTAs are `mailto:contact@redlinestudio.agency`
+  with a prefilled subject (FR/EN), e.g. `?subject=Diagnostic%20Redline`. Easily swapped
+  for Calendly/contact form later.
 - No URL-based i18n routing.
 - No A/B testing, analytics events beyond what already exists.
 - No changes to `/dashboard` or `/api`.
