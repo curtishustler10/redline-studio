@@ -31,28 +31,82 @@ const fr = {
     progress: "Question",
     of: "sur",
     back: "Retour",
-    questions: [
-      {
-        q: "Votre site transforme-t-il les visiteurs en demandes (formulaire, appel, devis) ?",
-        options: ["Oui, un parcours clair mène à l'action", "Un peu, mais ce n'est pas optimisé", "Non, c'est surtout une vitrine"],
+    bizType: {
+      question: "Quel est votre type d'activité ?",
+      options: {
+        ecommerce: { label: "E-commerce", hint: "Vente en ligne" },
+        b2b: { label: "B2B", hint: "Vente à d'autres entreprises" },
+        services: { label: "Prestations de services", hint: "RDV, devis, clients locaux" },
       },
-      {
-        q: "Quand un visiteur intéressé arrive, que se passe-t-il ?",
-        options: ["Il réserve ou laisse ses coordonnées en 1 clic", "Il doit m'écrire ou m'appeler", "Il repart sans laisser de trace"],
-      },
-      {
-        q: "Avez-vous un suivi automatique (email/WhatsApp : confirmations, rappels, relances) ?",
-        options: ["Oui, c'est automatisé", "Je le fais à la main, quand j'y pense", "Aucun suivi"],
-      },
-      {
-        q: "Vous trouve-t-on sur Google quand on cherche votre service près de chez vous ?",
-        options: ["Oui, je ressors dans les premiers résultats / la carte", "Parfois, sur mon nom seulement", "Non, je suis invisible"],
-      },
-      {
-        q: "Comment attirez-vous de nouveaux visiteurs aujourd'hui ?",
-        options: ["Un canal d'acquisition tourne (pub, contenu)", "Surtout du bouche-à-oreille, par à-coups", "Je n'attire quasiment personne"],
-      },
-    ],
+    },
+    questionsByType: {
+      ecommerce: [
+        {
+          q: "Vos fiches produits et votre tunnel d'achat poussent-ils à l'achat ?",
+          options: ["Oui, un parcours d'achat clair et optimisé", "Correct, mais des frictions subsistent", "Non, peu de ventes viennent du site"],
+        },
+        {
+          q: "Récupérez-vous les emails et relancez-vous les paniers abandonnés ?",
+          options: ["Oui, capture d'emails + relance panier automatique", "Je capture des emails, sans relance", "Non, ni capture ni relance"],
+        },
+        {
+          q: "Avez-vous des séquences email automatiques (bienvenue, panier, post-achat) ?",
+          options: ["Oui, plusieurs séquences tournent", "Une ou deux, faites à la main", "Aucune séquence"],
+        },
+        {
+          q: "Êtes-vous visible sur Google (Shopping, recherches produits) ?",
+          options: ["Oui, je ressors sur mes produits clés", "Un peu, sur ma marque seulement", "Non, invisible sans pub"],
+        },
+        {
+          q: "Comment attirez-vous du trafic vers votre boutique ?",
+          options: ["Un canal payant rentable tourne (ads, social)", "Des essais irréguliers", "Presque pas de trafic"],
+        },
+      ],
+      b2b: [
+        {
+          q: "Votre site inspire-t-il confiance et pousse-t-il à la prise de contact ?",
+          options: ["Oui, positionnement clair et appels à l'action", "Correct, mais peu convaincant", "Non, c'est surtout une plaquette"],
+        },
+        {
+          q: "Un visiteur intéressé peut-il facilement demander une démo ou un devis ?",
+          options: ["Oui, prise de RDV / formulaire en 1 clic", "Il doit m'écrire ou m'appeler", "Rien n'est prévu, il repart"],
+        },
+        {
+          q: "Relancez-vous automatiquement vos prospects (nurturing, CRM) ?",
+          options: ["Oui, séquences et CRM en place", "Relances manuelles, quand j'y pense", "Aucune relance"],
+        },
+        {
+          q: "Vous trouve-t-on sur Google / LinkedIn pour votre expertise ?",
+          options: ["Oui, je ressors sur mes sujets clés", "Un peu, sur mon nom d'entreprise", "Non, on ne me trouve pas"],
+        },
+        {
+          q: "Comment générez-vous de nouveaux prospects aujourd'hui ?",
+          options: ["Prospection ou ads qui tournent", "Surtout réseau et bouche-à-oreille", "Très peu de nouveaux prospects"],
+        },
+      ],
+      services: [
+        {
+          q: "Votre site transforme-t-il les visiteurs en demandes (formulaire, appel, devis) ?",
+          options: ["Oui, un parcours clair mène à l'action", "Un peu, mais ce n'est pas optimisé", "Non, c'est surtout une vitrine"],
+        },
+        {
+          q: "Quand un visiteur intéressé arrive, que se passe-t-il ?",
+          options: ["Il réserve ou laisse ses coordonnées en 1 clic", "Il doit m'écrire ou m'appeler", "Il repart sans laisser de trace"],
+        },
+        {
+          q: "Avez-vous un suivi automatique (email/WhatsApp : confirmations, rappels, relances) ?",
+          options: ["Oui, c'est automatisé", "Je le fais à la main, quand j'y pense", "Aucun suivi"],
+        },
+        {
+          q: "Vous trouve-t-on sur Google quand on cherche votre service près de chez vous ?",
+          options: ["Oui, je ressors dans les premiers résultats / la carte", "Parfois, sur mon nom seulement", "Non, je suis invisible"],
+        },
+        {
+          q: "Comment attirez-vous de nouveaux visiteurs aujourd'hui ?",
+          options: ["Un canal d'acquisition tourne (pub, contenu)", "Surtout du bouche-à-oreille, par à-coups", "Je n'attire quasiment personne"],
+        },
+      ],
+    },
     bricks: {
       site: "Site qui convertit",
       capture: "Capture & réservation",
@@ -228,28 +282,82 @@ const en = {
     progress: "Question",
     of: "of",
     back: "Back",
-    questions: [
-      {
-        q: "Does your site turn visitors into enquiries (form, call, quote)?",
-        options: ["Yes, a clear path leads to action", "Somewhat, but it's not optimised", "No, it's mostly a brochure"],
+    bizType: {
+      question: "What kind of business do you run?",
+      options: {
+        ecommerce: { label: "E-commerce", hint: "Selling online" },
+        b2b: { label: "B2B", hint: "Selling to other businesses" },
+        services: { label: "Services", hint: "Bookings, quotes, local clients" },
       },
-      {
-        q: "When an interested visitor lands, what happens?",
-        options: ["They book or leave details in one click", "They have to email or call me", "They leave without a trace"],
-      },
-      {
-        q: "Do you have automated follow-up (email/WhatsApp: confirmations, reminders, win-backs)?",
-        options: ["Yes, it's automated", "I do it by hand, when I remember", "No follow-up"],
-      },
-      {
-        q: "Are you found on Google when someone searches your service nearby?",
-        options: ["Yes, I show up in top results / the map", "Sometimes, only on my name", "No, I'm invisible"],
-      },
-      {
-        q: "How do you attract new visitors today?",
-        options: ["A working acquisition channel (ads, content)", "Mostly word-of-mouth, in bursts", "I attract almost no one"],
-      },
-    ],
+    },
+    questionsByType: {
+      ecommerce: [
+        {
+          q: "Do your product pages and checkout drive purchases?",
+          options: ["Yes, a clear optimised buying journey", "Okay, but there's friction", "No, few sales come from the site"],
+        },
+        {
+          q: "Do you capture emails and recover abandoned carts?",
+          options: ["Yes, email capture + automatic cart recovery", "I capture emails, but no recovery", "No capture or recovery"],
+        },
+        {
+          q: "Do you have automated email flows (welcome, cart, post-purchase)?",
+          options: ["Yes, several flows running", "One or two, done manually", "No flows"],
+        },
+        {
+          q: "Are you visible on Google (Shopping, product searches)?",
+          options: ["Yes, I rank for my key products", "A little, on my brand only", "No, invisible without ads"],
+        },
+        {
+          q: "How do you drive traffic to your store?",
+          options: ["A profitable paid channel is running (ads, social)", "Irregular experiments", "Almost no traffic"],
+        },
+      ],
+      b2b: [
+        {
+          q: "Does your site build trust and prompt contact?",
+          options: ["Yes, clear positioning and calls to action", "Okay, but not convincing", "No, it's mostly a brochure"],
+        },
+        {
+          q: "Can an interested visitor easily request a demo or quote?",
+          options: ["Yes, booking / form in one click", "They have to email or call me", "Nothing set up, they leave"],
+        },
+        {
+          q: "Do you follow up with prospects automatically (nurturing, CRM)?",
+          options: ["Yes, sequences and CRM in place", "Manual follow-ups, when I remember", "No follow-up"],
+        },
+        {
+          q: "Are you found on Google / LinkedIn for your expertise?",
+          options: ["Yes, I rank for my key topics", "A little, on my company name", "No, I'm not found"],
+        },
+        {
+          q: "How do you generate new prospects today?",
+          options: ["Outbound or ads running", "Mostly network and word of mouth", "Very few new prospects"],
+        },
+      ],
+      services: [
+        {
+          q: "Does your site turn visitors into enquiries (form, call, quote)?",
+          options: ["Yes, a clear path leads to action", "Somewhat, but it's not optimised", "No, it's mostly a brochure"],
+        },
+        {
+          q: "When an interested visitor lands, what happens?",
+          options: ["They book or leave details in one click", "They have to email or call me", "They leave without a trace"],
+        },
+        {
+          q: "Do you have automated follow-up (email/WhatsApp: confirmations, reminders, win-backs)?",
+          options: ["Yes, it's automated", "I do it by hand, when I remember", "No follow-up"],
+        },
+        {
+          q: "Are you found on Google when someone searches your service nearby?",
+          options: ["Yes, I show up in top results / the map", "Sometimes, only on my name", "No, I'm invisible"],
+        },
+        {
+          q: "How do you attract new visitors today?",
+          options: ["A working acquisition channel (ads, content)", "Mostly word-of-mouth, in bursts", "I attract almost no one"],
+        },
+      ],
+    },
     bricks: {
       site: "A converting site",
       capture: "Capture & booking",

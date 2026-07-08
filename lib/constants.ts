@@ -9,3 +9,7 @@ export const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIC
 
 // Window event dispatched by the mobile sticky CTA to open the hero diagnostic.
 export const START_DIAGNOSTIC_EVENT = "redline:start-diagnostic";
+
+// CustomEvent<"ecommerce" | "b2b"> dispatched when the diagnostic's business-type
+// question is answered, so the revenue simulator pre-selects the matching mode.
+export const SIM_MODE_EVENT = "redline:sim-mode";

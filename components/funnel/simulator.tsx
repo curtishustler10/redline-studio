@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import { Slider } from "@/components/ui/slider";
 import { useLang } from "@/components/lang-provider";
 import type { Lang } from "@/lib/i18n";
 import { computeComparison, type SimInputs } from "@/lib/simulator";
+import { SIM_MODE_EVENT } from "@/lib/constants";
 
 const locale = (lang: Lang) => (lang === "en" ? "en-GB" : "fr-FR");
 const num = (n: number, lang: Lang) => n.toLocaleString(locale(lang));
@@ -41,6 +42,16 @@ export function FunnelSimulator() {
   const { t, lang } = useLang();
   const [mode, setMode] = useState<SimMode>("ecommerce");
   const [showRetention, setShowRetention] = useState(false);
+
+  // The diagnostic's business-type answer pre-selects the matching mode.
+  useEffect(() => {
+    const onMode = (e: Event) => {
+      const detail = (e as CustomEvent<SimMode>).detail;
+      if (detail === "ecommerce" || detail === "b2b") setMode(detail);
+    };
+    window.addEventListener(SIM_MODE_EVENT, onMode);
+    return () => window.removeEventListener(SIM_MODE_EVENT, onMode);
+  }, []);
   const [inputs, setInputs] = useState<SimInputs>({
     visitors: 10000, capturePct: 10, conversionPct: 5, basket: 80, frequency: 2, retentionPct: 30,
   });

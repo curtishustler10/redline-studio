@@ -12,8 +12,10 @@ import {
   type DiagnosticResult,
   type Zone,
 } from "@/lib/diagnostic";
+import { SIM_MODE_EVENT } from "@/lib/constants";
 
-type Phase = "intro" | "quiz" | "result";
+type Phase = "intro" | "type" | "quiz" | "result";
+type BizType = "ecommerce" | "b2b" | "services";
 
 const ZONE_BAR: Record<Zone, string> = {
   red: "bg-[var(--rl-red)]",
@@ -30,10 +32,22 @@ export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolea
   const { t, lang } = useLang();
   const q = t.quiz;
 
-  const [phase, setPhase] = useState<Phase>(autoStart ? "quiz" : "intro");
+  const [phase, setPhase] = useState<Phase>(autoStart ? "type" : "intro");
+  const [bizType, setBizType] = useState<BizType>("services");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [result, setResult] = useState<DiagnosticResult | null>(null);
+
+  const questions = q.questionsByType[bizType];
+
+  function selectType(type: BizType) {
+    setBizType(type);
+    // Pre-select the matching revenue-simulator mode (services maps to B2B).
+    window.dispatchEvent(new CustomEvent(SIM_MODE_EVENT, { detail: type === "ecommerce" ? "ecommerce" : "b2b" }));
+    setAnswers([]);
+    setStep(0);
+    setPhase("quiz");
+  }
 
   function choose(optionIndex: number) {
     const next = [...answers];
@@ -49,14 +63,14 @@ export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolea
 
   function back() {
     if (step > 0) setStep(step - 1);
-    else if (!autoStart) setPhase("intro");
+    else setPhase("type");
   }
 
   function restart() {
     setAnswers([]);
     setStep(0);
     setResult(null);
-    setPhase(autoStart ? "quiz" : "intro");
+    setPhase(autoStart ? "type" : "intro");
   }
 
   return (
@@ -68,11 +82,38 @@ export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolea
             <h3 className="mt-3 font-syne text-2xl md:text-3xl font-bold tracking-tight">{q.title}</h3>
             <p className="mt-2 text-[var(--rl-muted)] max-w-xl">{q.sub}</p>
             <button
-              onClick={() => setPhase("quiz")}
+              onClick={() => setPhase("type")}
               className="mt-6 rounded-full bg-[var(--rl-red)] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
             >
               {q.start}
             </button>
+          </Fade>
+        )}
+
+        {phase === "type" && (
+          <Fade key="type">
+            <span className="inline-block text-[11px] tracking-widest uppercase text-[var(--rl-red)]">{q.badge}</span>
+            <h3 className="mt-3 font-syne text-xl md:text-2xl font-semibold leading-snug">{q.bizType.question}</h3>
+            <div className="mt-6 space-y-3">
+              {(["ecommerce", "b2b", "services"] as const).map((key) => {
+                const opt = q.bizType.options[key];
+                return (
+                  <button
+                    key={key}
+                    onClick={() => selectType(key)}
+                    className="flex w-full flex-wrap items-baseline gap-x-2 rounded-xl border border-[var(--rl-line)] px-4 py-3.5 text-left transition-colors hover:border-[var(--rl-red)]/50"
+                  >
+                    <span className="text-sm font-medium">{opt.label}</span>
+                    <span className="text-xs text-[var(--rl-muted)]">— {opt.hint}</span>
+                  </button>
+                );
+              })}
+            </div>
+            {!autoStart && (
+              <button onClick={() => setPhase("intro")} className="mt-6 text-sm text-[var(--rl-muted)] hover:text-[var(--rl-fg)] transition-colors">
+                ← {q.back}
+              </button>
+            )}
           </Fade>
         )}
 
@@ -93,10 +134,10 @@ export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolea
               />
             </div>
 
-            <h3 className="mt-6 font-syne text-xl md:text-2xl font-semibold leading-snug">{q.questions[step].q}</h3>
+            <h3 className="mt-6 font-syne text-xl md:text-2xl font-semibold leading-snug">{questions[step].q}</h3>
 
             <div className="mt-6 space-y-3">
-              {q.questions[step].options.map((opt, i) => {
+              {questions[step].options.map((opt, i) => {
                 const selected = answers[step] === i;
                 return (
                   <button
