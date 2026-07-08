@@ -32,7 +32,7 @@ const fr = {
     of: "sur",
     back: "Retour",
     bizType: {
-      question: "Quel est votre type d'activité ?",
+      question: "Votre type d'activité",
       options: {
         ecommerce: { label: "E-commerce", hint: "Vente en ligne" },
         b2b: { label: "B2B", hint: "Vente à d'autres entreprises" },
@@ -283,7 +283,7 @@ const en = {
     of: "of",
     back: "Back",
     bizType: {
-      question: "What kind of business do you run?",
+      question: "Your business type",
       options: {
         ecommerce: { label: "E-commerce", hint: "Selling online" },
         b2b: { label: "B2B", hint: "Selling to other businesses" },
