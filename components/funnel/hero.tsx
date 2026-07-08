@@ -1,14 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { track } from "@vercel/analytics";
 import { useLang } from "@/components/lang-provider";
 import { FunnelDiagnosticQuiz } from "@/components/funnel/diagnostic-quiz";
+import { START_DIAGNOSTIC_EVENT } from "@/lib/constants";
 
 export function FunnelHero() {
   const { t } = useLang();
   const [open, setOpen] = useState(false);
+
+  // Let the mobile sticky CTA (rendered outside the hero) launch the quiz.
+  useEffect(() => {
+    const start = () => {
+      setOpen(true);
+      document.getElementById("bienvenue")?.scrollIntoView({ behavior: "smooth" });
+    };
+    window.addEventListener(START_DIAGNOSTIC_EVENT, start);
+    return () => window.removeEventListener(START_DIAGNOSTIC_EVENT, start);
+  }, []);
+
   return (
     <section id="bienvenue" className="pt-32 pb-24 md:pt-40 md:pb-32">
       <div className="mx-auto max-w-4xl px-5 text-center">

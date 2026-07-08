@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
 import { useLang } from "@/components/lang-provider";
-import { DIAGNOSTIC_MAIL } from "@/lib/constants";
+import { WHATSAPP_HREF } from "@/lib/constants";
 
 // Login portal is not built yet — stub target, wired up later.
 const PORTAL_HREF = "/portal";
@@ -51,7 +51,7 @@ export function FunnelNav() {
                 </button>
               ))}
             </div>
-            <a href={DIAGNOSTIC_MAIL} className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[#161210] font-medium hover:bg-white transition-colors">
+            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[#161210] font-medium hover:bg-white transition-colors">
               {t.nav.cta}
             </a>
           </div>

@@ -8,6 +8,7 @@ import { FunnelDeliverables } from "@/components/funnel/deliverables";
 import { FunnelMethod } from "@/components/funnel/method";
 import { FunnelOffers } from "@/components/funnel/offers";
 import { FunnelFooter } from "@/components/funnel/footer";
+import { StickyDiagnostic } from "@/components/funnel/sticky-diagnostic";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <FunnelOffers />
       </main>
       <FunnelFooter />
+      <StickyDiagnostic />
     </div>
   );
 }
