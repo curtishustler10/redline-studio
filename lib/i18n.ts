@@ -12,7 +12,7 @@ const fr = {
     titleB: "Un écosystème, oui.",
     sub: "La plupart des sites sont de jolies brochures qui ne rapportent rien. Nous construisons l'écosystème complet — site qui convertit, réservation, suivi, SEO local, acquisition — pour transformer vos visiteurs en clients.",
     cta: "Commencer le diagnostic",
-    chips: ["5 axes analysés", "12 min", "100% personnalisé"],
+    chips: ["5 axes analysés", "2 min", "100% personnalisé"],
   },
   diagnostic: {
     title: "Le diagnostic",
@@ -263,7 +263,7 @@ const en = {
     titleB: "An ecosystem does.",
     sub: "Most websites are pretty brochures that earn nothing. We build the full ecosystem — a converting site, booking, follow-up, local SEO, acquisition — to turn your visitors into customers.",
     cta: "Start the diagnostic",
-    chips: ["5 pillars analysed", "12 min", "100% tailored"],
+    chips: ["5 pillars analysed", "2 min", "100% tailored"],
   },
   diagnostic: {
     title: "The diagnostic",
