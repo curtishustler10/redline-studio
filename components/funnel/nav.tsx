@@ -5,7 +5,8 @@ import { Logo } from "@/components/logo";
 import { useLang } from "@/components/lang-provider";
 import { DIAGNOSTIC_MAIL } from "@/lib/constants";
 
-const IDS = ["bienvenue", "diagnostic", "briques", "simulateur", "cas", "livrables", "methode", "offres"];
+// Login portal is not built yet — stub target, wired up later.
+const PORTAL_HREF = "/portal";
 
 export function FunnelNav() {
   const { t, lang, setLang } = useLang();
@@ -29,14 +30,13 @@ export function FunnelNav() {
       <div className="backdrop-blur bg-[#161210]/85 border-b border-[var(--rl-line)]">
         <div className="mx-auto max-w-6xl px-5 h-14 flex items-center justify-between gap-4">
           <Logo className="text-sm" />
-          <nav className="hidden lg:flex items-center gap-5 text-[11px] tracking-wide text-[var(--rl-muted)]">
-            {IDS.map((id, i) => (
-              <a key={id} href={`#${id}`} className="hover:text-[var(--rl-ink)] transition-colors">
-                <span className="text-[var(--rl-red)]">0{i + 1}</span> {t.nav.items[i]}
-              </a>
-            ))}
-          </nav>
           <div className="flex items-center gap-3">
+            <a
+              href={PORTAL_HREF}
+              className="text-[12px] px-3.5 py-1.5 rounded-full border border-[var(--rl-line)] text-[var(--rl-muted)] hover:text-[var(--rl-ink)] hover:border-[var(--rl-ink)] transition-colors"
+            >
+              {t.nav.portal}
+            </a>
             <div className="flex items-center rounded-full border border-[var(--rl-line)] overflow-hidden text-[11px]">
               {(["fr", "en"] as const).map((l) => (
                 <button

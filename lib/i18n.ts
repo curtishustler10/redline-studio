@@ -4,6 +4,7 @@ const fr = {
   nav: {
     items: ["Bienvenue", "Diagnostic", "Les 5 briques", "Simulateur", "Cas clients", "Ce que vous recevez", "La méthode", "Offres"],
     cta: "Réserver un appel",
+    portal: "Mon projet",
   },
   hero: {
     kicker: "Studio web · conversion & écosystèmes",
@@ -187,6 +188,7 @@ const en = {
   nav: {
     items: ["Welcome", "Diagnostic", "The 5 bricks", "Simulator", "Case studies", "What you get", "The method", "Offers"],
     cta: "Book a call",
+    portal: "My project",
   },
   hero: {
     kicker: "Web studio · conversion & ecosystems",
