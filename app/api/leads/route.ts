@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { getLeads, saveLead } from "@/lib/leads"
+import { notifyLead } from "@/lib/notify"
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -25,5 +26,9 @@ export async function POST(request: Request) {
     message: String(message ?? "").trim(),
   })
 
-  return NextResponse.json(lead, { status: 201 })
+  // Durable delivery (email + structured log). Awaited so it runs before the
+  // serverless function is frozen, but never allowed to fail the submission.
+  await notifyLead(lead)
+
+  return NextResponse.json({ ok: true, id: lead.id }, { status: 201 })
 }

@@ -21,6 +21,19 @@ function ensureFile() {
   if (!fs.existsSync(LEADS_FILE)) fs.writeFileSync(LEADS_FILE, "[]", "utf-8")
 }
 
+// On Vercel's serverless runtime the deployment filesystem is read-only, so
+// persisting to disk throws (EROFS). Never let that break a submission — the
+// durable record is the email/log in notify.ts; this file store is best-effort
+// (works locally + on the dashboard, no-ops in prod).
+function safeWrite(leads: Lead[]) {
+  try {
+    ensureFile()
+    fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), "utf-8")
+  } catch (e) {
+    console.warn("[leads] persist skipped (read-only FS?)", (e as Error).message)
+  }
+}
+
 export function getLeads(): Lead[] {
   ensureFile()
   try {
@@ -39,7 +52,7 @@ export function saveLead(data: Omit<Lead, "id" | "createdAt" | "status">): Lead 
     status: "new",
   }
   leads.unshift(lead)
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), "utf-8")
+  safeWrite(leads)
   return lead
 }
 
@@ -48,6 +61,6 @@ export function updateLeadStatus(id: string, status: LeadStatus): Lead | null {
   const idx = leads.findIndex((l) => l.id === id)
   if (idx === -1) return null
   leads[idx].status = status
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), "utf-8")
+  safeWrite(leads)
   return leads[idx]
 }
