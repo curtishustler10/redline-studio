@@ -2,7 +2,7 @@ export type Lang = "fr" | "en";
 
 const fr = {
   nav: {
-    items: ["Bienvenue", "Diagnostic", "Les 5 briques", "Simulateur", "Cas clients", "Ce que vous recevez", "La méthode", "Offres"],
+    items: ["Bienvenue", "Diagnostic", "Les 5 axes", "Simulateur", "Cas clients", "Ce que vous recevez", "La méthode", "Offres"],
     cta: "Réserver un appel",
     portal: "Mon projet",
   },
@@ -12,21 +12,21 @@ const fr = {
     titleB: "Un écosystème, oui.",
     sub: "La plupart des sites sont de jolies brochures qui ne rapportent rien. Nous construisons l'écosystème complet — site qui convertit, réservation, suivi, SEO local, acquisition — pour transformer vos visiteurs en clients.",
     cta: "Commencer le diagnostic",
-    chips: ["5 briques analysées", "12 min", "100% personnalisé"],
+    chips: ["5 axes analysés", "12 min", "100% personnalisé"],
   },
   diagnostic: {
     title: "Le diagnostic",
     sub: "Trois étapes pour comprendre ce qui freine vos ventes en ligne.",
     steps: [
-      { icon: "🎯", title: "On audite votre présence", body: "Site, réservation, avis, référencement local : on mesure chaque brique et on repère les fuites." },
+      { icon: "🎯", title: "On audite votre présence", body: "Site, réservation, avis, référencement local : on mesure chaque axe et on repère les fuites." },
       { icon: "💰", title: "On chiffre le manque à gagner", body: "Avec vos chiffres réels, on estime le chiffre d'affaires que vous laissez sur la table chaque mois." },
       { icon: "⚡", title: "On vous remet un plan clair", body: "Priorités, gains attendus, délais. Vous repartez avec une feuille de route actionnable, sans jargon." },
     ],
   },
   quiz: {
     badge: "Diagnostic interactif · 2 min",
-    title: "Quelle brique vous fait perdre des ventes ?",
-    sub: "5 questions. On note vos 5 briques et on révèle celle qui est en zone rouge.",
+    title: "Quel axe vous fait perdre des ventes ?",
+    sub: "5 questions. On note vos 5 axes et on révèle celui qui est en zone rouge.",
     start: "Démarrer le diagnostic",
     progress: "Question",
     of: "sur",
@@ -65,7 +65,7 @@ const fr = {
       heading: "Votre diagnostic",
       scoreLabel: "Score écosystème",
       weakestLabel: "Votre plus grosse fuite",
-      weakestHint: "C'est la brique à corriger en priorité pour débloquer des ventes.",
+      weakestHint: "C'est l'axe à corriger en priorité pour débloquer des ventes.",
       formTitle: "Recevez votre plan d'action personnalisé",
       formSub: "On vous envoie les priorités et le manque à gagner estimé pour votre cas.",
       name: "Prénom",
@@ -80,8 +80,8 @@ const fr = {
     },
   },
   briques: {
-    title: "Les 5 briques d'un écosystème qui vend",
-    sub: "Un site n'est qu'une brique. Il en faut cinq pour transformer l'attention en revenus.",
+    title: "Les 5 axes d'un écosystème qui vend",
+    sub: "Un site n'est qu'un axe. Il en faut cinq pour transformer l'attention en revenus.",
     items: [
       { n: "01", title: "Site qui convertit", body: "Rapide, clair, orienté action. Chaque page a un objectif et le guide vers le clic." },
       { n: "02", title: "Capture & réservation", body: "Formulaire, prise de rendez-vous, devis en ligne : on ne laisse jamais repartir un visiteur intéressé." },
@@ -93,6 +93,7 @@ const fr = {
   simulator: {
     title: "Simulateur de chiffre d'affaires",
     sub: "Réglez vos chiffres. Voyez l'écart entre un site seul et un écosystème complet.",
+    modes: { ecommerce: "E-commerce", b2b: "B2B" },
     inputs: {
       visitors: "Visiteurs / mois",
       capture: "Taux de capture",
@@ -113,7 +114,7 @@ const fr = {
   },
   cases: {
     title: "Cas clients",
-    sub: "Des entreprises réelles, des briques manquantes comblées, des résultats.",
+    sub: "Des entreprises réelles, des axes manquants comblés, des résultats.",
     items: [
       { sector: "Institut de beauté · Paris", quote: "Réservation en ligne, suivi fidélité, paiement sur place.", problem: "Tout passait par téléphone et Instagram : créneaux perdus, no-shows, aucune base client.", missing: "Capture & réservation + suivi", fix: "Plateforme de réservation multi-prestations, comptes clients, rappels automatiques.", metric: "+40%", metricLabel: "de réservations en ligne" },
       { sector: "Resort · Bali", quote: "Site de réservation bilingue, calendrier en temps réel.", problem: "Aucun moyen de réserver en ligne, demandes éparpillées sur WhatsApp.", missing: "Site qui convertit + réservation", fix: "Site bilingue EN/RU, calendrier, formulaire qualifié, automatisations.", metric: "8+", metricLabel: "demandes qualifiées dès le lancement" },
@@ -163,7 +164,7 @@ const fr = {
       {
         name: "Écosystème complet",
         price: "2 890 €",
-        tagline: "Les 5 briques réunies pour vendre en continu.",
+        tagline: "Les 5 axes réunis pour vendre en continu.",
         features: ["Tout le Site Conversion", "★ Moteur de réservation", "★ Suivi email / WhatsApp", "★ SEO local complet", "★ Acquisition & analytics"],
         cta: "Réserver un appel",
         recommended: true,
@@ -173,10 +174,21 @@ const fr = {
     badge: "Recommandé",
   },
   closing: {
-    title: "Votre site travaille pour vous, ou contre vous.",
+    title: "Votre site travaille pour vous, ou contre vous ?",
     sub: "Faites le diagnostic, voyez le manque à gagner, et décidez en connaissance de cause.",
     primary: "Commencer le diagnostic",
     secondary: "Réserver un appel",
+  },
+  portal: {
+    title: "Espace client",
+    subtitle: "Connectez-vous pour suivre votre projet.",
+    email: "Email",
+    password: "Mot de passe",
+    submit: "Se connecter",
+    forgot: "Mot de passe oublié ?",
+    noAccountQ: "Pas encore de compte ?",
+    noAccountA: "Merci de vous rapprocher de votre chef de projet.",
+    back: "← Retour au site",
   },
   footer: {
     rights: "Tous droits réservés.",
@@ -186,7 +198,7 @@ const fr = {
 
 const en = {
   nav: {
-    items: ["Welcome", "Diagnostic", "The 5 bricks", "Simulator", "Case studies", "What you get", "The method", "Offers"],
+    items: ["Welcome", "Diagnostic", "The 5 pillars", "Simulator", "Case studies", "What you get", "The method", "Offers"],
     cta: "Book a call",
     portal: "My project",
   },
@@ -196,21 +208,21 @@ const en = {
     titleB: "An ecosystem does.",
     sub: "Most websites are pretty brochures that earn nothing. We build the full ecosystem — a converting site, booking, follow-up, local SEO, acquisition — to turn your visitors into customers.",
     cta: "Start the diagnostic",
-    chips: ["5 bricks analysed", "12 min", "100% tailored"],
+    chips: ["5 pillars analysed", "12 min", "100% tailored"],
   },
   diagnostic: {
     title: "The diagnostic",
     sub: "Three steps to understand what's holding back your online sales.",
     steps: [
-      { icon: "🎯", title: "We audit your presence", body: "Site, booking, reviews, local search: we measure every brick and find the leaks." },
+      { icon: "🎯", title: "We audit your presence", body: "Site, booking, reviews, local search: we measure every pillar and find the leaks." },
       { icon: "💰", title: "We quantify the lost revenue", body: "Using your real numbers, we estimate the revenue you leave on the table every month." },
       { icon: "⚡", title: "We hand you a clear plan", body: "Priorities, expected gains, timelines. You leave with an actionable roadmap, no jargon." },
     ],
   },
   quiz: {
     badge: "Interactive diagnostic · 2 min",
-    title: "Which brick is costing you sales?",
-    sub: "5 questions. We score your 5 bricks and reveal the one in the red zone.",
+    title: "Which pillar is costing you sales?",
+    sub: "5 questions. We score your 5 pillars and reveal the one in the red zone.",
     start: "Start the diagnostic",
     progress: "Question",
     of: "of",
@@ -249,7 +261,7 @@ const en = {
       heading: "Your diagnostic",
       scoreLabel: "Ecosystem score",
       weakestLabel: "Your biggest leak",
-      weakestHint: "This is the brick to fix first to unlock sales.",
+      weakestHint: "This is the pillar to fix first to unlock sales.",
       formTitle: "Get your personalised action plan",
       formSub: "We'll send the priorities and the estimated lost revenue for your case.",
       name: "First name",
@@ -264,8 +276,8 @@ const en = {
     },
   },
   briques: {
-    title: "The 5 bricks of an ecosystem that sells",
-    sub: "A website is just one brick. It takes five to turn attention into revenue.",
+    title: "The 5 pillars of an ecosystem that sells",
+    sub: "A website is just one pillar. It takes five to turn attention into revenue.",
     items: [
       { n: "01", title: "A converting site", body: "Fast, clear, action-driven. Every page has a goal and guides toward the click." },
       { n: "02", title: "Capture & booking", body: "Forms, appointments, online quotes: we never let an interested visitor walk away." },
@@ -277,6 +289,7 @@ const en = {
   simulator: {
     title: "Revenue simulator",
     sub: "Set your numbers. See the gap between a website alone and a full ecosystem.",
+    modes: { ecommerce: "E-commerce", b2b: "B2B" },
     inputs: {
       visitors: "Visitors / month",
       capture: "Capture rate",
@@ -297,7 +310,7 @@ const en = {
   },
   cases: {
     title: "Case studies",
-    sub: "Real businesses, missing bricks filled, results.",
+    sub: "Real businesses, missing pillars filled, results.",
     items: [
       { sector: "Beauty salon · Paris", quote: "Online booking, loyalty tracking, pay on site.", problem: "Everything ran through phone and Instagram: lost slots, no-shows, no customer base.", missing: "Capture & booking + follow-up", fix: "Multi-service booking platform, customer accounts, automated reminders.", metric: "+40%", metricLabel: "online bookings" },
       { sector: "Resort · Bali", quote: "Bilingual booking site, real-time calendar.", problem: "No way to book online, requests scattered across WhatsApp.", missing: "Converting site + booking", fix: "EN/RU bilingual site, calendar, qualified form, automations.", metric: "8+", metricLabel: "qualified requests at launch" },
@@ -347,7 +360,7 @@ const en = {
       {
         name: "Full Ecosystem",
         price: "€2,890",
-        tagline: "All 5 bricks together to sell continuously.",
+        tagline: "All 5 pillars together to sell continuously.",
         features: ["Everything in Conversion Site", "★ Booking engine", "★ Email / WhatsApp follow-up", "★ Full local SEO", "★ Acquisition & analytics"],
         cta: "Book a call",
         recommended: true,
@@ -357,10 +370,21 @@ const en = {
     badge: "Recommended",
   },
   closing: {
-    title: "Your website works for you, or against you.",
+    title: "Your website works for you, or against you?",
     sub: "Run the diagnostic, see the lost revenue, and decide with eyes open.",
     primary: "Start the diagnostic",
     secondary: "Book a call",
+  },
+  portal: {
+    title: "Client portal",
+    subtitle: "Log in to track your project.",
+    email: "Email",
+    password: "Password",
+    submit: "Log in",
+    forgot: "Forgot password?",
+    noAccountQ: "Not yet an account?",
+    noAccountA: "Please get in touch with your project manager.",
+    back: "← Back to site",
   },
   footer: {
     rights: "All rights reserved.",

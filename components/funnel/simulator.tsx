@@ -26,12 +26,30 @@ const LABEL_KEY: Record<keyof SimInputs, "visitors" | "capture" | "conversion" |
   basket: "basket", frequency: "frequency", retentionPct: "retention",
 };
 
+type SimMode = "ecommerce" | "b2b";
+
+// E-commerce sells directly to visitors — no lead-capture step, and repeat
+// purchase (frequency/retention) is out of scope here — so those fields are
+// hidden and held at neutral values. B2B keeps the full lead funnel.
+const MODE_FIELDS: Record<SimMode, (keyof SimInputs)[]> = {
+  ecommerce: ["visitors", "conversionPct", "basket"],
+  b2b: ["visitors", "capturePct", "conversionPct", "basket", "frequency", "retentionPct"],
+};
+
 export function FunnelSimulator() {
   const { t, lang } = useLang();
+  const [mode, setMode] = useState<SimMode>("ecommerce");
   const [inputs, setInputs] = useState<SimInputs>({
     visitors: 10000, capturePct: 10, conversionPct: 5, basket: 80, frequency: 2, retentionPct: 30,
   });
-  const { siteOnly, ecosystem } = computeComparison(inputs);
+
+  const visibleFields = FIELDS.filter((f) => MODE_FIELDS[mode].includes(f.key));
+  const effInputs: SimInputs =
+    mode === "ecommerce" ? { ...inputs, capturePct: 100, frequency: 1, retentionPct: 0 } : inputs;
+  const { siteOnly, ecosystem } =
+    mode === "ecommerce"
+      ? computeComparison(effInputs, { capture: 1, retention: 1 })
+      : computeComparison(inputs);
 
   const tracked = useRef(false);
   const set = (key: keyof SimInputs, v: number) => {
@@ -48,10 +66,27 @@ export function FunnelSimulator() {
         <h2 className="font-syne text-3xl md:text-4xl font-bold tracking-tight">{t.simulator.title}</h2>
         <p className="mt-3 text-[var(--rl-muted)] max-w-2xl">{t.simulator.sub}</p>
 
+        {/* mode toggle */}
+        <div className="mt-6 inline-flex items-center rounded-full border border-[var(--rl-line)] p-1 text-sm">
+          {(["ecommerce", "b2b"] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              aria-pressed={mode === m}
+              onClick={() => setMode(m)}
+              className={`px-4 py-1.5 rounded-full transition-colors ${
+                mode === m ? "bg-[var(--rl-red)] text-white" : "text-[var(--rl-muted)] hover:text-[var(--rl-ink)]"
+              }`}
+            >
+              {t.simulator.modes[m]}
+            </button>
+          ))}
+        </div>
+
         <div className="mt-12 grid lg:grid-cols-2 gap-10">
           {/* sliders */}
           <div className="space-y-7">
-            {FIELDS.map((f) => (
+            {visibleFields.map((f) => (
               <div key={f.key}>
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-[var(--rl-muted)]">{t.simulator.inputs[LABEL_KEY[f.key]]}</span>
@@ -67,8 +102,8 @@ export function FunnelSimulator() {
 
           {/* outputs + comparison */}
           <div className="space-y-5">
-            <div className="grid grid-cols-2 gap-4">
-              <Stat label={t.simulator.outputs.leads} value={num(ecosystem.leads, lang)} />
+            <div className={`grid gap-4 ${mode === "b2b" ? "grid-cols-2" : "grid-cols-1"}`}>
+              {mode === "b2b" && <Stat label={t.simulator.outputs.leads} value={num(ecosystem.leads, lang)} />}
               <Stat label={t.simulator.outputs.clients} value={num(ecosystem.clients, lang)} />
             </div>
             <div className="grid sm:grid-cols-2 gap-4">

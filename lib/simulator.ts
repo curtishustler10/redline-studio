@@ -33,16 +33,21 @@ export function computeRevenue(i: SimInputs): SimResult {
 
 // Site-only: weak capture/conversion/retention (a brochure site).
 // Ecosystem: the inputs as configured (the full Redline stack).
-export function computeComparison(i: SimInputs): {
-  siteOnly: SimResult;
-  ecosystem: SimResult;
-} {
+// Factors let a mode opt out of degrading a dimension it doesn't use — e.g.
+// e-commerce has no lead-capture step, so capture stays fixed (factor 1).
+export type SiteOnlyFactors = { capture?: number; conversion?: number; retention?: number };
+
+export function computeComparison(
+  i: SimInputs,
+  factors?: SiteOnlyFactors,
+): { siteOnly: SimResult; ecosystem: SimResult } {
+  const f = { capture: 0.3, conversion: 0.5, retention: 0.25, ...factors };
   const ecosystem = computeRevenue(i);
   const siteOnly = computeRevenue({
     ...i,
-    capturePct: i.capturePct * 0.3,
-    conversionPct: i.conversionPct * 0.5,
-    retentionPct: i.retentionPct * 0.25,
+    capturePct: i.capturePct * f.capture,
+    conversionPct: i.conversionPct * f.conversion,
+    retentionPct: i.retentionPct * f.retention,
   });
   return { siteOnly, ecosystem };
 }

@@ -15,7 +15,14 @@ export function StickyDiagnostic() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.8);
+    const onScroll = () => {
+      const pastHero = window.scrollY > window.innerHeight * 0.8;
+      // Hide again once the final "Votre site travaille…" CTA is on screen —
+      // no point offering the diagnostic on top of the closing CTA.
+      const closing = document.getElementById("closing");
+      const closingInView = closing ? closing.getBoundingClientRect().top < window.innerHeight : false;
+      setShow(pastHero && !closingInView);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
