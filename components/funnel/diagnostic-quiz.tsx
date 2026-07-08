@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { useLang } from "@/components/lang-provider";
 import {
   BRICK_KEYS,
@@ -223,6 +224,7 @@ function LeadForm({
         body: JSON.stringify({ name, email, service: `Diagnostic — ${weakestName}`, message }),
       });
       if (!res.ok) throw new Error("bad status");
+      track("lead_submit", { service: `Diagnostic — ${weakestName}`, score: result.totalPct });
       setState("done");
     } catch {
       setState("error");

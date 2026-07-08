@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Syne, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
 import { LangProvider } from '@/components/lang-provider'
 
 const cormorant = Cormorant_Garamond({
@@ -49,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${cormorant.variable} ${syne.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-syne"><LangProvider>{children}</LangProvider></body>
+      <body className="font-syne"><LangProvider>{children}</LangProvider><Analytics /></body>
     </html>
   )
 }

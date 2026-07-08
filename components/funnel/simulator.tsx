@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import { Slider } from "@/components/ui/slider";
 import { useLang } from "@/components/lang-provider";
 import type { Lang } from "@/lib/i18n";
@@ -32,7 +33,14 @@ export function FunnelSimulator() {
   });
   const { siteOnly, ecosystem } = computeComparison(inputs);
 
-  const set = (key: keyof SimInputs, v: number) => setInputs((p) => ({ ...p, [key]: v }));
+  const tracked = useRef(false);
+  const set = (key: keyof SimInputs, v: number) => {
+    if (!tracked.current) {
+      tracked.current = true;
+      track("simulator_used");
+    }
+    setInputs((p) => ({ ...p, [key]: v }));
+  };
 
   return (
     <section id="simulateur" className="py-20 border-t border-[var(--rl-line)]">

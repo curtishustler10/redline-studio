@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { useLang } from "@/components/lang-provider";
 import { FunnelDiagnosticQuiz } from "@/components/funnel/diagnostic-quiz";
 
@@ -28,7 +29,7 @@ export function FunnelHero() {
           {!open ? (
             <motion.div key="cta" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
               transition={{ delay: 0.25 }} className="mt-9 flex flex-col items-center gap-5">
-              <button onClick={() => setOpen(true)}
+              <button onClick={() => { track("quiz_start"); setOpen(true); }}
                 className="px-7 py-3.5 rounded-full bg-[var(--rl-red)] text-white font-medium hover:bg-[var(--rl-red-hover)] transition-colors">
                 {t.hero.cta} →
               </button>
