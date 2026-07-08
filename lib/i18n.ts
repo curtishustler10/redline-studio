@@ -94,6 +94,7 @@ const fr = {
     title: "Simulateur de chiffre d'affaires",
     sub: "Réglez vos chiffres. Voyez l'écart entre un site seul et un écosystème complet.",
     modes: { ecommerce: "E-commerce", b2b: "B2B" },
+    repeatToggle: "Rétention & fréquence",
     inputs: {
       visitors: "Visiteurs / mois",
       capture: "Taux de capture",
@@ -110,7 +111,7 @@ const fr = {
     },
     compareSite: "Site seul",
     compareEco: "Écosystème Redline",
-    note: "Estimation indicative basée sur vos réglages. Les résultats réels dépendent de votre marché.",
+    note: "Estimation indicative basée sur vos réglages. Les résultats réels dépendent de votre marché et de votre budget marketing.",
   },
   cases: {
     title: "Cas clients",
@@ -290,6 +291,7 @@ const en = {
     title: "Revenue simulator",
     sub: "Set your numbers. See the gap between a website alone and a full ecosystem.",
     modes: { ecommerce: "E-commerce", b2b: "B2B" },
+    repeatToggle: "Retention & frequency",
     inputs: {
       visitors: "Visitors / month",
       capture: "Capture rate",
@@ -306,7 +308,7 @@ const en = {
     },
     compareSite: "Website alone",
     compareEco: "Redline ecosystem",
-    note: "Indicative estimate based on your settings. Real results depend on your market.",
+    note: "Indicative estimate based on your settings. Real results depend on your market and marketing budget.",
   },
   cases: {
     title: "Case studies",
