@@ -53,7 +53,7 @@ export function ChatWidget() {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, source: "chat", timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }),
       })
       if (!res.ok) throw new Error("Failed")
       setStep("success")

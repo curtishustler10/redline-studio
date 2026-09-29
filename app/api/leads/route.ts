@@ -1,34 +1,62 @@
-import { NextResponse } from "next/server"
-import { getLeads, saveLead } from "@/lib/leads"
-import { notifyLead } from "@/lib/notify"
+import { NextResponse } from "next/server";
+import { createLead, type LeadSource } from "@/lib/crm";
+import { notifyContact } from "@/lib/notifications";
+import { isValidZone } from "@/lib/rdv-time";
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const pwd = searchParams.get("pwd")
-  if (pwd !== (process.env.DASHBOARD_PASSWORD ?? "redline")) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
-  return NextResponse.json(getLeads())
+// Public entry point for every site form (chat widget, diagnostic quiz).
+// Write-only: leads are read through /admin, never through this route.
+// Persist first, then notify — a mail failure must not lose the lead or fail
+// the visitor's submission (it shows up on the lead file instead).
+
+const SOURCES: LeadSource[] = ["form", "chat", "diagnostic"];
+const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+function text(v: unknown, max: number): string {
+  return typeof v === "string" ? v.trim().slice(0, max) : "";
 }
 
 export async function POST(request: Request) {
-  const body = await request.json()
-  const { name, email, service, message } = body
-
-  if (!name || !email) {
-    return NextResponse.json({ error: "Name and email required" }, { status: 400 })
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "JSON invalide" }, { status: 400 });
   }
 
-  const lead = saveLead({
-    name: String(name).trim(),
-    email: String(email).trim().toLowerCase(),
-    service: String(service ?? "").trim(),
-    message: String(message ?? "").trim(),
-  })
+  // Honeypot: real visitors never see this field; bots fill everything. Pretend success.
+  if (text(body.website, 200)) return NextResponse.json({ ok: true }, { status: 201 });
 
-  // Durable delivery (email + structured log). Awaited so it runs before the
-  // serverless function is frozen, but never allowed to fail the submission.
-  await notifyLead(lead)
+  const name = text(body.name, 200);
+  const email = text(body.email, 320).toLowerCase();
+  if (!name || !EMAIL.test(email)) {
+    return NextResponse.json({ error: "Nom et email valides requis" }, { status: 400 });
+  }
 
-  return NextResponse.json({ ok: true, id: lead.id }, { status: 201 })
+  const source = SOURCES.includes(body.source as LeadSource) ? (body.source as LeadSource) : "form";
+  const langHint = text(body.lang, 5) || request.headers.get("accept-language") || "";
+  const tz = text(body.timeZone, 64);
+  const service = text(body.service, 200);
+  const message = text(body.message, 5000);
+
+  let lead;
+  try {
+    lead = await createLead({
+      name,
+      email,
+      phone: text(body.phone, 40) || undefined,
+      lang: langHint.toLowerCase().startsWith("en") ? "en" : "fr",
+      timeZone: isValidZone(tz) ? tz : undefined,
+      source,
+      service: service || undefined,
+      message: message || undefined,
+    });
+  } catch (e) {
+    // Last-resort trace so a lead is recoverable from Vercel logs if the database is down.
+    console.error("[LEAD] not saved", JSON.stringify({ name, email, source, service, message }), (e as Error).message);
+    return NextResponse.json({ error: "Enregistrement impossible, réessayez" }, { status: 500 });
+  }
+
+  await notifyContact(lead, { service: service || undefined, message: message || undefined });
+
+  return NextResponse.json({ ok: true }, { status: 201 });
 }

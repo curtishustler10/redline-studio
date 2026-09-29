@@ -262,7 +262,16 @@ function LeadForm({
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service: `Diagnostic — ${weakestName}`, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          service: `Diagnostic — ${weakestName}`,
+          message,
+          source: "diagnostic",
+          lang,
+          // So RDV times are shown to this lead in their own zone.
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }),
       });
       if (!res.ok) throw new Error("bad status");
       track("lead_submit", { service: `Diagnostic — ${weakestName}`, score: result.totalPct });
