@@ -14,7 +14,7 @@ export default function PortalPage() {
   const onSubmit = (e: React.FormEvent) => e.preventDefault();
 
   return (
-    <main className="min-h-screen bg-[#161210] text-[var(--rl-ink)] flex flex-col items-center justify-center px-5 py-16">
+    <main className="min-h-screen bg-[var(--rl-bg)] text-[var(--rl-ink)] flex flex-col items-center justify-center px-5 py-16">
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-8">
           <Logo className="text-base" />
@@ -35,7 +35,7 @@ export default function PortalPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-lg bg-[#161210] border border-[var(--rl-line)] px-3.5 py-2.5 text-sm outline-none focus:border-[var(--rl-red)] transition-colors"
+                className="w-full rounded-lg bg-white border border-[var(--rl-line)] px-3.5 py-2.5 text-sm outline-none focus:border-[var(--rl-red)] transition-colors"
               />
             </div>
             <div>
@@ -53,7 +53,7 @@ export default function PortalPage() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg bg-[#161210] border border-[var(--rl-line)] px-3.5 py-2.5 text-sm outline-none focus:border-[var(--rl-red)] transition-colors"
+                className="w-full rounded-lg bg-white border border-[var(--rl-line)] px-3.5 py-2.5 text-sm outline-none focus:border-[var(--rl-red)] transition-colors"
               />
             </div>
             <button

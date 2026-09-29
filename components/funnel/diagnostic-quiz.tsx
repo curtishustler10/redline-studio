@@ -19,13 +19,13 @@ type BizType = "ecommerce" | "b2b" | "services";
 
 const ZONE_BAR: Record<Zone, string> = {
   red: "bg-[var(--rl-red)]",
-  warn: "bg-amber-400",
-  ok: "bg-emerald-400",
+  warn: "bg-[#F5B83D]",
+  ok: "bg-[var(--rl-lagoon)]",
 };
 const ZONE_TEXT: Record<Zone, string> = {
   red: "text-[var(--rl-red)]",
-  warn: "text-amber-400",
-  ok: "text-emerald-400",
+  warn: "text-amber-700",
+  ok: "text-[#176B66]",
 };
 
 export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolean }) {
@@ -101,7 +101,7 @@ export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolea
                   <button
                     key={key}
                     onClick={() => selectType(key)}
-                    className="flex w-full flex-wrap items-baseline gap-x-2 rounded-xl border border-[var(--rl-line)] px-4 py-3.5 text-left transition-colors hover:border-[var(--rl-red)]/50"
+                    className="flex w-full flex-wrap items-baseline gap-x-2 rounded-xl border border-[var(--rl-line)] px-4 py-3.5 text-left transition-colors hover:border-[#C8321F]/50"
                   >
                     <span className="text-sm font-medium">{opt.label}</span>
                     <span className="text-xs text-[var(--rl-muted)]">— {opt.hint}</span>
@@ -145,8 +145,8 @@ export function FunnelDiagnosticQuiz({ autoStart = false }: { autoStart?: boolea
                     onClick={() => choose(i)}
                     className={`group flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm transition-colors ${
                       selected
-                        ? "border-[var(--rl-red)] bg-[var(--rl-red)]/10"
-                        : "border-[var(--rl-line)] hover:border-[var(--rl-red)]/50"
+                        ? "border-[var(--rl-red)] bg-[#C8321F]/10"
+                        : "border-[var(--rl-line)] hover:border-[#C8321F]/50"
                     }`}
                   >
                     <span
@@ -202,7 +202,7 @@ function Result({
       </div>
 
       {/* weakest brick highlight */}
-      <div className="mt-5 rounded-xl border border-[var(--rl-red)] bg-[var(--rl-red)]/10 p-5">
+      <div className="mt-5 rounded-xl border border-[var(--rl-red)] bg-[#C8321F]/10 p-5">
         <div className="text-[11px] uppercase tracking-widest text-[var(--rl-red)]">{q.result.weakestLabel}</div>
         <div className="mt-1 font-syne text-xl font-semibold">{weakestName}</div>
         <p className="mt-1 text-sm text-[var(--rl-muted)]">{q.result.weakestHint}</p>
@@ -283,7 +283,7 @@ function LeadForm({
 
   if (state === "done") {
     return (
-      <div className="mt-6 rounded-xl border border-emerald-400/40 bg-emerald-400/10 p-5">
+      <div className="mt-6 rounded-xl border border-[#1F8A84]/40 bg-[#1F8A84]/10 p-5">
         <div className="font-syne text-lg font-semibold">{q.result.successTitle}</div>
         <p className="mt-1 text-sm text-[var(--rl-muted)]">{q.result.successBody}</p>
       </div>

@@ -27,7 +27,7 @@ export function FunnelNav() {
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="h-[3px] bg-[var(--rl-red)]" style={{ width: `${progress}%` }} />
-      <div className="backdrop-blur bg-[#161210]/85 border-b border-[var(--rl-line)]">
+      <div className="backdrop-blur bg-[#FBF6EE]/85 border-b border-[var(--rl-line)]">
         <div className="mx-auto max-w-6xl px-5 h-14 flex items-center justify-between gap-4">
           <Logo className="text-sm" />
           <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export function FunnelNav() {
                 </button>
               ))}
             </div>
-            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[#161210] font-medium hover:bg-white transition-colors">
+            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[var(--rl-bg)] font-medium hover:bg-[var(--rl-red)] transition-colors">
               {t.nav.cta}
             </a>
           </div>

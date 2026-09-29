@@ -1,16 +1,19 @@
 import { cn } from "@/lib/utils"
 
-export function Logo({ className }: { className?: string }) {
+// Brand v2 logo: a red thread drawn in one stroke with a loop in the middle,
+// then "redline" (600) + "studio" (400, muted). Always lowercase. The thread
+// inherits currentColor from `threadClassName` so it can go white on red.
+export const FIL_PATH = "M4 22 C 14 22, 18 8, 26 10 C 34 12, 30 26, 24 22 C 18 18, 30 6, 40 12 C 48 17, 54 20, 60 14"
+
+export function Logo({ className, threadClassName }: { className?: string; threadClassName?: string }) {
   return (
-    <span className={cn("font-mono inline-flex items-baseline tracking-tight whitespace-nowrap", className)}>
-      <span className="text-[#C41F1F]">&gt;</span>
-      <span className="text-[#C41F1F]">red</span>
-      <span>line_studio</span>
-      <span
-        aria-hidden
-        className="ml-[0.15em] inline-block bg-[#C41F1F]"
-        style={{ width: "0.5em", height: "1em", transform: "translateY(0.12em)" }}
-      />
+    <span className={cn("inline-flex items-center gap-[0.35em] whitespace-nowrap leading-none tracking-tight", className)}>
+      <svg viewBox="0 0 64 32" aria-hidden className={cn("h-[1.15em] w-[2.3em] shrink-0 text-[var(--rl-thread)]", threadClassName)}>
+        <path d={FIL_PATH} fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span>
+        <span className="font-semibold">redline</span> <span className="font-normal text-[var(--rl-muted)]">studio</span>
+      </span>
     </span>
   )
 }

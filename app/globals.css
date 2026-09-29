@@ -15,7 +15,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.05;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
 }
 
@@ -27,47 +27,50 @@ body::before {
 
 @layer base {
   :root {
-    --rl-bg: #161210;
-    --rl-surface: #1E1813;
-    --rl-surface-2: #262019;
-    --rl-ink: #ECE3D7;
-    --rl-muted: #A89A86;
-    --rl-red: #C41F1F;
-    --rl-red-hover: #E03030;
-    --rl-line: rgba(236,227,215,0.14);
-    --background: 20 16% 7%;
-    --foreground: 34 33% 88%;
-    --card: 24 11% 10%;
-    --card-foreground: 34 33% 88%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 30 6% 93%;
-    --primary: 0 100% 38%;
-    --primary-foreground: 30 6% 93%;
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 30 6% 93%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 100% 38%;
-    --accent-foreground: 30 6% 93%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14%;
-    --input: 0 0% 14%;
-    --ring: 0 100% 38%;
-    --chart-1: 0 100% 38%;
-    --chart-2: 0 100% 27%;
-    --chart-3: 0 0% 33%;
-    --chart-4: 30 6% 93%;
-    --chart-5: 0 84% 60%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 5%;
-    --sidebar-foreground: 30 6% 93%;
-    --sidebar-primary: 0 100% 38%;
-    --sidebar-primary-foreground: 30 6% 93%;
-    --sidebar-accent: 0 0% 9%;
-    --sidebar-accent-foreground: 30 6% 93%;
-    --sidebar-border: 0 0% 14%;
-    --sidebar-ring: 0 100% 38%;
+    /* Brand v2 "Fil rouge" — source: redline-studio/brand/identity.html */
+    --rl-bg: #FBF6EE;          /* papier */
+    --rl-surface: #FFFFFF;     /* cartes */
+    --rl-surface-2: #F3E9DA;   /* crème, encadrés */
+    --rl-ink: #1E1A17;         /* encre */
+    --rl-muted: #6F655C;       /* texte secondaire, AA sur papier */
+    --rl-red: #C8321F;         /* boutons & petit texte rouge, AA sur blanc */
+    --rl-red-hover: #B32A1F;
+    --rl-thread: #E03C2D;      /* le fil : trait, logo, grands titres */
+    --rl-lagoon: #1F8A84;
+    --rl-line: rgba(30, 26, 23, 0.12);
+    --background: 37 62% 96%;
+    --foreground: 26 13% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 26 13% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 26 13% 10%;
+    --primary: 7 73% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 36 51% 90%;
+    --secondary-foreground: 26 13% 10%;
+    --muted: 36 51% 90%;
+    --muted-foreground: 28 9% 40%;
+    --accent: 36 51% 90%;
+    --accent-foreground: 26 13% 10%;
+    --destructive: 7 73% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 36 36% 84%;
+    --input: 36 36% 84%;
+    --ring: 7 73% 45%;
+    --chart-1: 7 73% 45%;
+    --chart-2: 177 63% 33%;
+    --chart-3: 28 9% 40%;
+    --chart-4: 36 51% 90%;
+    --chart-5: 5 75% 53%;
+    --radius: 1rem;
+    --sidebar-background: 37 62% 96%;
+    --sidebar-foreground: 26 13% 10%;
+    --sidebar-primary: 7 73% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 36 51% 90%;
+    --sidebar-accent-foreground: 26 13% 10%;
+    --sidebar-border: 36 36% 84%;
+    --sidebar-ring: 7 73% 45%;
   }
 }
 

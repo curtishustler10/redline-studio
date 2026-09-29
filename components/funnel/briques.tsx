@@ -14,7 +14,7 @@ export function FunnelBriques() {
           {t.briques.items.map((b, i) => (
             <motion.div key={b.n} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              className="rounded-2xl bg-[var(--rl-surface)] border border-[var(--rl-line)] p-6 hover:border-[var(--rl-red)]/40 transition-colors">
+              className="rounded-2xl bg-[var(--rl-surface)] border border-[var(--rl-line)] p-6 hover:border-[#C8321F]/40 transition-colors">
               <div className="font-syne text-3xl font-bold text-[var(--rl-red)]">{b.n}</div>
               <h3 className="mt-3 font-syne text-lg font-semibold">{b.title}</h3>
               <p className="mt-2 text-sm text-[var(--rl-muted)] leading-relaxed">{b.body}</p>

@@ -13,21 +13,27 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ['var(--font-syne)', 'system-ui', 'sans-serif'],
-  			syne: ['var(--font-syne)', 'system-ui', 'sans-serif'],
-  			serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
-  			cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
-  			mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
-  			jetbrains: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+  			sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
+  			display: ['var(--font-display)', 'Georgia', 'serif'],
+  			hand: ['var(--font-hand)', 'cursive'],
+  			serif: ['var(--font-display)', 'Georgia', 'serif'],
+  			// Legacy aliases kept while components migrate to sans/display: `font-syne`
+  			// (bold section headings) now renders Space Grotesk, `font-cormorant` DM Serif.
+  			syne: ['var(--font-body)', 'system-ui', 'sans-serif'],
+  			cormorant: ['var(--font-display)', 'Georgia', 'serif'],
+  			mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
+  			jetbrains: ['ui-monospace', 'SFMono-Regular', 'monospace'],
   		},
   		colors: {
   			redline: {
-  				DEFAULT: '#C40000',
-  				light: '#E53935',
-  				deep: '#8A0000',
+  				DEFAULT: '#C8321F',
+  				thread: '#E03C2D',
+  				deep: '#B32A1F',
   			},
-  			ink: '#0C0C0C',
-  			surface: '#161616',
+  			ink: '#1E1A17',
+  			paper: '#FBF6EE',
+  			cream: '#F3E9DA',
+  			lagoon: '#1F8A84',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

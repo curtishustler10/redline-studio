@@ -163,7 +163,7 @@ function Compare({ title, monthly, yearly, monthlyLabel, yearlyLabel, dim }: {
   title: string; monthly: string; yearly: string; monthlyLabel: string; yearlyLabel: string; dim?: boolean;
 }) {
   return (
-    <div className={`rounded-xl p-5 border ${dim ? "border-[var(--rl-line)] bg-transparent" : "border-[var(--rl-red)] bg-[var(--rl-red)]/10"}`}>
+    <div className={`rounded-xl p-5 border ${dim ? "border-[var(--rl-line)] bg-transparent" : "border-[var(--rl-red)] bg-[#C8321F]/10"}`}>
       <div className="flex items-center gap-2 text-sm font-medium">
         <span>{dim ? "❌" : "✅"}</span>{title}
       </div>

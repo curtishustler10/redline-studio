@@ -30,7 +30,7 @@ export function StickyDiagnostic() {
 
   return (
     <div
-      className={`md:hidden fixed inset-x-0 bottom-0 z-40 px-4 pb-4 pt-8 bg-gradient-to-t from-[#161210] via-[#161210]/90 to-transparent transition-transform duration-300 ${
+      className={`md:hidden fixed inset-x-0 bottom-0 z-40 px-4 pb-4 pt-8 bg-gradient-to-t from-[#FBF6EE] via-[#FBF6EE]/90 to-transparent transition-transform duration-300 ${
         show ? "translate-y-0" : "translate-y-full pointer-events-none"
       }`}
     >
@@ -40,7 +40,7 @@ export function StickyDiagnostic() {
           track("quiz_start", { source: "sticky" });
           window.dispatchEvent(new Event(START_DIAGNOSTIC_EVENT));
         }}
-        className="w-full py-3.5 rounded-full bg-[var(--rl-red)] text-white font-medium shadow-lg shadow-black/30 hover:bg-[var(--rl-red-hover)] transition-colors"
+        className="w-full py-3.5 rounded-full bg-[var(--rl-red)] text-white font-medium shadow-lg shadow-[#1E1A17]/20 hover:bg-[var(--rl-red-hover)] transition-colors"
       >
         {t.hero.cta} →
       </button>
