@@ -1,0 +1,30 @@
+{
+ "title": "Redline Studio · Le fil rouge entre vous et vos clients",
+ "h": 5170,
+ "h1": {
+  "font": "__DM_Serif_Display_d501d1, __DM_Serif_Display_Fallback_d501d1, Georgia, serif",
+  "size": "72px",
+  "color": "rgb(29, 25, 22)",
+  "bg": "rgba(0, 0, 0, 0)",
+  "text": "Plus de clients,\nmoins de prise de tête."
+ },
+ "h2": {
+  "font": "__Space_Grotesk_49a339, __Space_Grotesk_Fallback_49a339, system-ui, sans-serif",
+  "size": "36px",
+  "color": "rgb(29, 25, 22)",
+  "bg": "rgba(0, 0, 0, 0)",
+  "text": "Le diagnostic"
+ },
+ "body": {
+  "font": "__Space_Grotesk_49a339, __Space_Grotesk_Fallback_49a339, system-ui, sans-serif",
+  "size": "16px",
+  "color": "rgb(29, 25, 22)",
+  "bg": "rgb(251, 246, 238)",
+  "text": "redline studio\nMon projet\nFR\nEN\nRéserver un appel\n\nCurtis · studio web indépendant\n\nPlus de clients,\nmoins de prise de tête.\n\ntirez le fil ↓\n\nSite, réservation, avis Google, pubs : je relie tout ce qu"
+ },
+ "btn": null,
+ "nav": [
+  "Mon projet",
+  "Réserver un appel"
+ ]
+}
