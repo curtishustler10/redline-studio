@@ -11,6 +11,7 @@ import { revalidatePath } from "next/cache";
 import { ADMIN_COOKIE, SESSION_MS, checkPassword, isLockedOut, signAdmin, verifyAdmin } from "@/lib/admin-auth";
 import {
   CrmError,
+  DEFAULT_LEAD_ZONE,
   clearLoginFailures,
   closeAppointment,
   createLead,
@@ -110,7 +111,7 @@ export async function createLeadAction(formData: FormData): Promise<void> {
   await requireAdmin();
   const name = str(formData, "name");
   const email = str(formData, "email");
-  const zone = str(formData, "timeZone") || "Pacific/Tahiti";
+  const zone = str(formData, "timeZone") || DEFAULT_LEAD_ZONE;
   if (!name || !email || !isValidZone(zone)) redirect("/admin/leads?err=invalid");
   let leadId: number;
   try {

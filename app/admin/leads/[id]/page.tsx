@@ -124,7 +124,7 @@ function NewRdvForm({ lead }: { lead: LeadRow }) {
         </label>
         <label className="text-sm">
           Numéro à appeler
-          <input name="phone" defaultValue={lead.phone ?? ""} placeholder="+689 …" className={input} />
+          <input name="phone" defaultValue={lead.phone ?? ""} placeholder="+33 …" className={input} />
         </label>
       </div>
       <label className="block text-sm">

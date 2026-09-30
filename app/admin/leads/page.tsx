@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { listLeads, listScheduledAppointments, type LeadStatus } from "@/lib/crm";
+import { DEFAULT_LEAD_ZONE, listLeads, listScheduledAppointments, type LeadStatus } from "@/lib/crm";
 import { ZONES } from "@/lib/rdv-time";
 import { adminLogout, createLeadAction, requireAdmin } from "../actions";
 import { ERR_MESSAGES, OWNER_ZONE, STATUS_LABEL, STATUS_STYLE, shortDate, when } from "../_lib/ui";
@@ -117,7 +117,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: { stat
           <label className="text-sm">Besoin<input name="service" className={input} /></label>
           <label className="text-sm">
             Fuseau du lead
-            <select name="timeZone" defaultValue={OWNER_ZONE} className={input}>
+            <select name="timeZone" defaultValue={DEFAULT_LEAD_ZONE} className={input}>
               {ZONES.map((z) => <option key={z.id} value={z.id}>{z.label}</option>)}
             </select>
           </label>

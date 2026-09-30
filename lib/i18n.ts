@@ -7,7 +7,7 @@ const fr = {
     portal: "Mon projet",
   },
   hero: {
-    kicker: "Curtis · studio web à Moorea",
+    kicker: "Curtis · studio web indépendant",
     titleA: "Plus de clients,",
     titleB: "moins de prise\u00A0de\u00A0tête.",
     sub: "Site, réservation, avis Google, pubs : je relie tout ce qui fait venir vos clients, et je vous explique chaque étape en français normal.",
@@ -259,7 +259,7 @@ const en = {
     portal: "My project",
   },
   hero: {
-    kicker: "Curtis · web studio in Moorea",
+    kicker: "Curtis · independent web studio",
     titleA: "More customers,",
     titleB: "less hassle.",
     sub: "Website, bookings, Google reviews, ads: I connect everything that brings customers to your door, and explain every step in plain English.",

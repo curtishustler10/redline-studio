@@ -85,6 +85,9 @@ export class CrmError extends Error {
   }
 }
 
+/** Redline sells to mainland France: a lead with no known zone is assumed to be in Paris. */
+export const DEFAULT_LEAD_ZONE = "Europe/Paris";
+
 const UNIQUE_VIOLATION = "23505";
 /** appointments_no_overlap: Curtis already has a RDV in that time range. */
 const EXCLUSION_VIOLATION = "23P01";
@@ -143,7 +146,7 @@ export async function createLead(input: NewLead): Promise<LeadRow> {
       phone: input.phone?.trim() || null,
       company: input.company?.trim() || null,
       lang: input.lang ?? "fr",
-      time_zone: input.timeZone ?? "Pacific/Tahiti",
+      time_zone: input.timeZone ?? DEFAULT_LEAD_ZONE,
       source: input.source,
       service: input.service?.trim() || null,
       message: input.message?.trim() || null,

@@ -3,12 +3,12 @@
 
 export type ZoneOption = { id: string; label: string };
 
-/** Zones Redline's leads actually live in. Curtis's own zone first. */
+/** Zones Redline's leads live in: mainland France first, then the DOM-TOM and Curtis's own. */
 export const ZONES: ZoneOption[] = [
+  { id: "Europe/Paris", label: "Paris" },
   { id: "Pacific/Tahiti", label: "Tahiti" },
   { id: "Pacific/Marquesas", label: "Marquises" },
   { id: "Pacific/Noumea", label: "Nouméa" },
-  { id: "Europe/Paris", label: "Paris" },
   { id: "Indian/Reunion", label: "La Réunion" },
   { id: "America/Martinique", label: "Martinique" },
   { id: "America/Toronto", label: "Montréal / Toronto" },
