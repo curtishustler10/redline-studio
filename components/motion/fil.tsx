@@ -9,7 +9,7 @@
 // motion gets the static thread only.
 
 import { useEffect, useRef } from "react";
-import { FIL_PATH } from "@/components/logo";
+import { placeFil } from "@/components/logo";
 
 const HEIGHT = 150;
 const POINTS = 140;
@@ -24,19 +24,12 @@ type Pt = { x: number; y: number };
 
 /** Rest shape for a given width: gentle wave → the logo loop at 62% → wave out. */
 function restPath(w: number): string {
-  const s = LOOP_SCALE;
-  const ox = w * 0.62 - 32 * s;
-  const oy = HEIGHT / 2 - 16 * s;
-  const tx = (x: number) => (x * s + ox).toFixed(1);
-  const ty = (y: number) => (y * s + oy).toFixed(1);
-  // Re-express the logo path's coordinates in screen space.
-  const loop = FIL_PATH.replace(/^M[^C]+/, "").replace(/(-?\d+(?:\.\d+)?)\s*(-?\d+(?:\.\d+)?)/g, (_, x, y) => `${tx(+x)} ${ty(+y)}`);
-  const startX = +tx(4), startY = +ty(22), endX = +tx(60), endY = +ty(14);
+  const { curves, start, end } = placeFil(LOOP_SCALE, w * 0.62 - 32 * LOOP_SCALE, HEIGHT / 2 - 16 * LOOP_SCALE);
   return [
-    `M -12 ${startY + 10}`,
-    `C ${(startX * 0.3).toFixed(1)} ${startY - 22}, ${(startX * 0.7).toFixed(1)} ${startY + 20}, ${startX} ${startY}`,
-    loop,
-    `C ${(endX + (w - endX) * 0.35).toFixed(1)} ${endY - 26}, ${(endX + (w - endX) * 0.7).toFixed(1)} ${endY + 24}, ${w + 12} ${endY + 6}`,
+    `M -12 ${start.y + 10}`,
+    `C ${(start.x * 0.3).toFixed(1)} ${start.y - 22}, ${(start.x * 0.7).toFixed(1)} ${start.y + 20}, ${start.x} ${start.y}`,
+    curves,
+    `C ${(end.x + (w - end.x) * 0.35).toFixed(1)} ${end.y - 26}, ${(end.x + (w - end.x) * 0.7).toFixed(1)} ${end.y + 24}, ${w + 12} ${end.y + 6}`,
   ].join(" ");
 }
 

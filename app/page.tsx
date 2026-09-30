@@ -9,12 +9,15 @@ import { FunnelMethod } from "@/components/funnel/method";
 import { FunnelOffers } from "@/components/funnel/offers";
 import { FunnelFooter } from "@/components/funnel/footer";
 import { StickyDiagnostic } from "@/components/funnel/sticky-diagnostic";
+import { ScrollThread } from "@/components/motion/scroll-thread";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       <FunnelNav />
-      <main>
+      {/* isolate: the scroll thread sits at z -10, above the page background, under the content. */}
+      <main className="relative isolate">
+        <ScrollThread />
         <FunnelHero />
         <FunnelDiagnostic />
         <FunnelBriques />
