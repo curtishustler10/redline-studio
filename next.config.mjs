@@ -1,3 +1,9 @@
+// Les maquettes des leads du marché français vivent dans le dépôt branto-dashboard et sont
+// servies ici, sous redlinestudio.agency/bespoke/<slug>, par réécriture côté serveur : le
+// lien envoyé au prospect reste signé Redline Studio. Même montage que fenua-studio-site.
+// Surchargeable en local pour viser un branto-dashboard sur un autre port.
+const MAQUETTES = process.env.MAQUETTES_ORIGIN ?? "https://branto-dashboard.vercel.app";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -9,6 +15,23 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+  },
+  async rewrites() {
+    return {
+      // `beforeFiles` : avant le routage de ce site, sinon les préchargements du routeur
+      // (`?_rsc=…`) d'une maquette repartent en 404 ici. Ce site n'a rien sous /bespoke.
+      beforeFiles: [{ source: "/bespoke/:path*", destination: `${MAQUETTES}/bespoke/:path*` }],
+      // `afterFiles` : après les pages et fichiers de ce site, qui gardent la priorité.
+      afterFiles: [
+        // Visuels des maquettes, référencés en chemins absolus.
+        { source: "/sites/:path*", destination: `${MAQUETTES}/sites/:path*` },
+        { source: "/og/:path*", destination: `${MAQUETTES}/og/:path*` },
+        // Beacon de suivi de consultation (jeton `?k=`).
+        { source: "/t", destination: `${MAQUETTES}/t` },
+        // Pas de règle /_next : Vercel répond 404 sur /_next/static avant la réécriture.
+        // Les bundles des maquettes arrivent en absolu via l'assetPrefix de branto-dashboard.
+      ],
+    };
   },
   async redirects() {
     // The old JSON-file dashboard (password in the query string) is gone.
