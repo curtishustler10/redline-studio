@@ -75,7 +75,36 @@ export default async function VeillePage({ searchParams }: { searchParams: { f?:
         ))}
       </nav>
 
-      <div className="mt-4 overflow-x-auto rounded-2xl border border-[#E4D8C6] bg-white">
+      {/* Mobile : une carte par lead ; à partir de sm, le tableau. */}
+      <ul className="mt-4 space-y-3 sm:hidden">
+        {leads.length === 0 && <li className={`${card} text-center text-sm text-[#6F655C]`}>Aucun lead dans cette vue.</li>}
+        {leads.map((l) => {
+          const j = jourJ(l.j0);
+          return (
+            <li key={l.slug}>
+              <Link href={`/admin/veille/${l.slug}`} className={`${card} block`}>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-medium">{l.marque}</p>
+                    <p className="text-xs text-[#6F655C]">
+                      {l.domaine}
+                      {j !== null ? ` · J${j}` : ""} · {STATUT_LABEL[l.statut] ?? l.statut}
+                    </p>
+                  </div>
+                  {l.classe && <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${CLASSE_STYLE[l.classe]}`}>{l.classe} · {l.score}</span>}
+                </div>
+                <div className="mt-3"><Parcours etapes={l.etapes} compact /></div>
+                <p className="mt-2 text-xs text-[#6F655C]">
+                  {l.nbEmails} email{l.nbEmails > 1 ? "s" : ""} · {l.boutique_physique ? BOUTIQUE_LABEL[l.boutique_physique] : "boutique physique à vérifier"}
+                  {l.offre ? ` · ${l.offre.code}${l.offre.provisoire ? " (provisoire)" : ""}` : ""}
+                </p>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div className="mt-4 hidden overflow-x-auto rounded-2xl border border-[#E4D8C6] bg-white sm:block">
         <table className="w-full text-sm">
           <thead className="bg-[#F3E9DA] text-left">
             <tr>

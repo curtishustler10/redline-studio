@@ -61,7 +61,7 @@ export function Parcours({ etapes, compact = false }: { etapes: Etapes; compact?
           <li
             key={e.cle}
             title={etapes[e.cle]?.detail ?? undefined}
-            className={`rounded-full px-2.5 py-0.5 text-xs ${fait ? "bg-[#1E1A17] text-[#FBF6EE]" : "border border-dashed border-[#E4D8C6] text-[#6F655C]"}`}
+            className={`whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs ${fait ? "bg-[#1E1A17] text-[#FBF6EE]" : "border border-dashed border-[#E4D8C6] text-[#6F655C]"}`}
           >
             {fait ? "✓ " : ""}
             {e.label}
