@@ -21,7 +21,10 @@ export default async function LeadsPage({ searchParams }: { searchParams: { stat
     <main className="mx-auto max-w-6xl px-5 py-10">
       <header className="flex items-center justify-between gap-4">
         <div>
-          <p className="text-sm text-[#6F655C]">redline studio · admin</p>
+          <p className="text-sm text-[#6F655C]">
+            redline studio · admin ·{" "}
+            <Link href="/admin/veille" className="underline decoration-[#E03C2D] underline-offset-4 hover:text-[#1E1A17]">Veille e-commerce</Link>
+          </p>
           <h1 className="text-3xl font-semibold">Leads</h1>
         </div>
         <form action={adminLogout}>
