@@ -19,12 +19,37 @@ function Ligne({ label, children }: { label: string; children: React.ReactNode }
 
 const nonObserve = <span className="text-[#6F655C]">non observé</span>;
 
+const REF_CAPTURE = /captures\/[A-Za-z0-9._-]+\.(?:jpg|png)/g;
+
+/** Les constats citent leurs preuves (« → captures/1410-1027-checkout.jpg ») : on en fait des liens. */
+function AvecPreuves({ texte, slug, urls }: { texte: string; slug: string; urls: Map<string, string> }) {
+  const morceaux: React.ReactNode[] = [];
+  let dernier = 0;
+  for (const m of texte.matchAll(REF_CAPTURE)) {
+    const i = m.index ?? 0;
+    morceaux.push(texte.slice(dernier, i));
+    const u = urls.get(`${slug}/${m[0]}`);
+    morceaux.push(
+      u ? (
+        <a key={i} href={u} target="_blank" rel="noreferrer" className="underline decoration-[#C8321F] underline-offset-2">capture</a>
+      ) : (
+        <span key={i} className="text-[#6F655C]">{m[0]}</span>
+      ),
+    );
+    dernier = i + m[0].length;
+  }
+  morceaux.push(texte.slice(dernier));
+  return <>{morceaux}</>;
+}
+
 export default async function VeilleLeadPage({ params }: { params: { slug: string } }) {
   await requireAdmin();
   const res = await getVeilleLead(params.slug);
   if (!res) notFound();
   const { lead, emails } = res;
+  const preuves = [...lead.fiche.constats, ...lead.fiche.site.notes].flatMap((t) => [...t.matchAll(REF_CAPTURE)].map((m) => `${lead.slug}/${m[0]}`));
   const urls = await urlsSignees([
+    ...preuves,
     ...lead.journal.flatMap((j) => j.captures),
     ...emails.flatMap((e) => [e.mobile_path, e.desktop_path].filter((x): x is string => !!x)),
   ]);
@@ -72,7 +97,7 @@ export default async function VeilleLeadPage({ params }: { params: { slug: strin
             <dl className="mt-3">
               <Ligne label="Site">
                 {fiche.site.url ? <a href={fiche.site.url} target="_blank" rel="noreferrer" className="underline underline-offset-4">{fiche.site.url}</a> : lead.domaine}
-                {fiche.site.notes.length > 0 && <ul className="mt-1 ml-4 list-disc text-[#3A332D]">{fiche.site.notes.map((n, i) => <li key={i}>{n}</li>)}</ul>}
+                {fiche.site.notes.length > 0 && <ul className="mt-1 ml-4 list-disc text-[#3A332D]">{fiche.site.notes.map((n, i) => <li key={i}><AvecPreuves texte={n} slug={lead.slug} urls={urls} /></li>)}</ul>}
               </Ligne>
               <Ligne label="Boutique physique">
                 {lead.boutique_physique ? BOUTIQUE_LABEL[lead.boutique_physique] : <span className="text-[#6F655C]">à vérifier</span>}
@@ -90,7 +115,7 @@ export default async function VeilleLeadPage({ params }: { params: { slug: strin
                     {reseaux.map(([nom, r]) => (
                       <li key={nom}>
                         <span className="font-medium">{RESEAU_LABEL[nom] ?? nom}</span>
-                        {r.abonnes ? ` · ${r.abonnes} abonnés` : ""}
+                        {r.abonnes ? ` · ${r.abonnes}${/[a-z]/i.test(r.abonnes) ? "" : " abonnés"}` : ""}
                         {r.dernierPost ? ` · dernier post ${r.dernierPost}` : ""}
                         {r.url && <> · <a href={r.url} target="_blank" rel="noreferrer" className="underline underline-offset-2">voir</a></>}
                         {r.note && <p className="text-[#6F655C]">{r.note}</p>}
@@ -104,7 +129,7 @@ export default async function VeilleLeadPage({ params }: { params: { slug: strin
             {fiche.constats.length > 0 && (
               <>
                 <h3 className="mt-4 font-semibold">Constats</h3>
-                <ul className="mt-2 ml-5 list-disc space-y-1 text-sm">{fiche.constats.map((c, i) => <li key={i}>{c}</li>)}</ul>
+                <ul className="mt-2 ml-5 list-disc space-y-1 text-sm">{fiche.constats.map((c, i) => <li key={i}><AvecPreuves texte={c} slug={lead.slug} urls={urls} /></li>)}</ul>
               </>
             )}
           </section>

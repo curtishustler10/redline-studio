@@ -41,7 +41,7 @@ export const SEQUENCE_LABEL: Record<string, string> = {
 export const BOUTIQUE_LABEL: Record<NonNullable<VeilleLead["boutique_physique"]>, string> = {
   oui: "Magasin physique",
   showroom: "Showroom",
-  non: "100 % en ligne",
+  non: "Pas de magasin",
 };
 
 const ETAPES: { cle: keyof Etapes; label: string }[] = [
