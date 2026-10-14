@@ -127,7 +127,10 @@ export function Fil({ className, onFirstPull }: { className?: string; onFirstPul
       let best = 0, dist = Infinity;
       rest.forEach((q, i) => {
         const d = Math.hypot(q.x + off[i].x - p.x, q.y + off[i].y - p.y);
-        if (d < dist) (dist = d), (best = i);
+        if (d < dist) {
+          dist = d;
+          best = i;
+        }
       });
       return { i: best, dist };
     };
@@ -158,7 +161,10 @@ export function Fil({ className, onFirstPull }: { className?: string; onFirstPul
       if (grab) {
         let dx = p.x - grab.from.x, dy = p.y - grab.from.y;
         const m = Math.hypot(dx, dy);
-        if (m > MAX_PULL) (dx *= MAX_PULL / m), (dy *= MAX_PULL / m);
+        if (m > MAX_PULL) {
+          dx *= MAX_PULL / m;
+          dy *= MAX_PULL / m;
+        }
         grab.pull = { x: dx, y: dy };
       } else if (last && e.pointerType !== "touch") {
         // Brushing across the thread plucks it, proportional to the pointer's speed.

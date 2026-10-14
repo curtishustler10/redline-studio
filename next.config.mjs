@@ -6,8 +6,10 @@ const MAQUETTES = process.env.MAQUETTES_ORIGIN ?? "https://branto-dashboard.verc
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Lint propre (`pnpm lint`) : il bloque désormais le build, comme les types.
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
+    dirs: ["app", "components", "hooks", "lib", "scripts"],
   },
   // Type errors now fail the build: `tsc --noEmit` is clean, keep it that way.
   typescript: {

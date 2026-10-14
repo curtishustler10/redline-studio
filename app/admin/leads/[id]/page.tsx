@@ -70,14 +70,14 @@ function ScheduledRdv({ lead, apt }: { lead: LeadRow; apt: AppointmentRow }) {
         <form action={closeRdvAction}>
           {hidden}
           <input type="hidden" name="outcome" value="done" />
-          <button className="rounded-full bg-[#FBF6EE] px-4 py-2 text-sm font-semibold text-[#1E1A17] hover:bg-white">C'est fait</button>
+          <button className="rounded-full bg-[#FBF6EE] px-4 py-2 text-sm font-semibold text-[#1E1A17] hover:bg-white">C’est fait</button>
         </form>
         <details className="group">
           <summary className="cursor-pointer list-none rounded-full border border-[#FBF6EE]/40 px-4 py-2 text-sm hover:border-[#FBF6EE]">Absent…</summary>
           <form action={closeRdvAction} className="mt-2">
             {hidden}
             <input type="hidden" name="outcome" value="no_show" />
-            <button className="rounded-full bg-[#E03C2D] px-4 py-2 text-sm font-semibold text-white">Confirmer : envoyer « On s'est manqués »</button>
+            <button className="rounded-full bg-[#E03C2D] px-4 py-2 text-sm font-semibold text-white">Confirmer : envoyer « On s’est manqués »</button>
           </form>
         </details>
         <details>
@@ -85,7 +85,7 @@ function ScheduledRdv({ lead, apt }: { lead: LeadRow; apt: AppointmentRow }) {
           <form action={closeRdvAction} className="mt-2">
             {hidden}
             <input type="hidden" name="outcome" value="cancelled" />
-            <button className="rounded-full bg-[#E03C2D] px-4 py-2 text-sm font-semibold text-white">Confirmer l'annulation (email au lead)</button>
+            <button className="rounded-full bg-[#E03C2D] px-4 py-2 text-sm font-semibold text-white">Confirmer l’annulation (email au lead)</button>
           </form>
         </details>
       </div>
@@ -117,7 +117,7 @@ function NewRdvForm({ lead }: { lead: LeadRow }) {
         <label className="text-sm">
           Format
           <select name="mode" defaultValue="phone" className={input}>
-            <option value="phone">Téléphone (je l'appelle)</option>
+            <option value="phone">Téléphone (je l’appelle)</option>
             <option value="visio">Visio</option>
             <option value="in-person">Sur place</option>
           </select>
@@ -145,7 +145,7 @@ function FollowUpForm({ lead, apt }: { lead: LeadRow; apt: AppointmentRow }) {
       <input type="hidden" name="leadId" value={lead.id} />
       <input type="hidden" name="appointmentId" value={apt.id} />
       <label className="block text-sm">
-        Ce qu'on s'est dit (un point par ligne)
+        Ce qu’on s’est dit (un point par ligne)
         <textarea name="recap" required rows={4} className={input} />
       </label>
       <label className="block text-sm">Prochaine étape<input name="nextStep" required placeholder="Je vous envoie une proposition vendredi" className={input} /></label>
@@ -303,7 +303,7 @@ export default async function LeadPage({ params, searchParams }: { params: { id:
           <div className={card}>
             <h2 className="text-lg font-semibold">Emails envoyés</h2>
             {emails.length === 0 ? (
-              <p className="mt-2 text-sm text-[#6F655C]">Aucun email pour l'instant.</p>
+              <p className="mt-2 text-sm text-[#6F655C]">Aucun email pour l’instant.</p>
             ) : (
               <ul className="mt-3 space-y-3 text-sm">
                 {emails.map((e) => (

@@ -192,7 +192,7 @@ export function ChatWidget() {
               {step === "question" && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   <p className="font-syne font-semibold text-[15px] text-[#1C1714] mb-1">Ask a question</p>
-                  <p className="font-syne text-[12px] text-[#8A7F6A] mb-5">We'll reply by email:</p>
+                  <p className="font-syne text-[12px] text-[#8A7F6A] mb-5">We’ll reply by email:</p>
                   <div className="flex flex-col gap-3">
                     <textarea
                       ref={inputRef as unknown as React.RefObject<HTMLTextAreaElement>}

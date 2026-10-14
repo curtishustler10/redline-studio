@@ -8,7 +8,6 @@ import {
   BRICK_KEYS,
   QUESTION_COUNT,
   scoreDiagnostic,
-  type BrickKey,
   type DiagnosticResult,
   type Zone,
 } from "@/lib/diagnostic";
