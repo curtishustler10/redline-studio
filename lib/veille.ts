@@ -46,7 +46,7 @@ export const workflowSchema = z.object({
 });
 
 export const offreSchema = z.object({
-  code: z.string().regex(/^[ED]\d$/),
+  code: z.string().regex(/^(?:[ED]\d|PF)$/),
   titre: court(200),
   pourquoi: court(2000),
   option: optionnel(300),
