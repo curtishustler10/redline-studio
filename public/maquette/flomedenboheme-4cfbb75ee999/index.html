@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Grands Bols profonds en noyer · Flom &amp; Eden Bohème (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur flom-edenboheme.com (styles calculés, 22/10/2026) */
+:root{
+  --flom-entete-noir:#000000;      /* fond de l'en-tête */
+  --flom-creme-page:#F1EBDD;       /* fond de page mobile */
+  --flom-creme-carte:#F7F5EE;      /* fond du bloc produit (ordinateur) */
+  --flom-sable-bouton:#E4DBC6;     /* fond du bouton « Ajouter au panier » */
+  --flom-or-titre:#A48743;         /* titre produit et prix */
+  --flom-or-logo:#CFBB8B;          /* lotus, icônes compte et panier */
+  --flom-brun:#524322;             /* textes bruns du site */
+  --flom-encre:#202020;            /* texte courant */
+  /* dérivée : l'or du titre assombri pour tenir le contraste AA sur le crème */
+  --flom-or-texte:#7A6230;
+  --trait:rgba(82,67,34,.18);
+  --f-texte:"Jost","Avenir Next","Avenir",system-ui,sans-serif; /* remplace Avenir LT 35 Light */
+  --f-marque:"Cormorant Garamond",Georgia,serif;                 /* police du nom en pied de page */
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--flom-creme-page);color:var(--flom-encre);font:300 16px/1.6 var(--f-texte);overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--flom-brun);outline-offset:3px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.bandeau-maquette{background:#EAE2CF;color:var(--flom-brun);font-size:11.5px;letter-spacing:.02em;text-align:center;padding:4px 12px;line-height:1.4}
+
+/* En-tête */
+.entete{background:var(--flom-entete-noir);color:var(--flom-or-logo);position:sticky;top:0;z-index:20}
+.entete-int{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:8px 18px;min-height:58px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--flom-or-logo)}
+.logo svg{width:52px;height:31px;fill:var(--flom-or-logo)}
+.logo span{font:500 19px/1 var(--f-marque);letter-spacing:.06em;color:#E9DDBE}
+.nav{display:none;margin-left:auto;gap:0}
+.nav a{color:#F1EBDD;text-decoration:none;font-size:14px;padding:6px 15px;border-left:1px solid rgba(241,235,221,.55)}
+.nav a:first-child{border-left:0}
+.nav a:hover{color:var(--flom-or-logo)}
+.panier-btn{margin-left:auto;background:none;border:0;padding:6px;display:flex;align-items:center;position:relative;color:var(--flom-or-logo)}
+.panier-btn svg{width:24px;height:28px;fill:var(--flom-or-logo)}
+.panier-btn .compte{position:absolute;left:0;right:0;top:15px;text-align:center;font-size:11px;font-weight:500;color:#000}
+@media (min-width:1000px){.nav{display:flex}.panier-btn{margin-left:18px}}
+
+/* Fil d'Ariane */
+.ariane{max-width:1240px;margin:0 auto;padding:14px 18px 0;font-size:13px;color:var(--flom-brun)}
+.ariane a{text-decoration:none}.ariane a:hover{text-decoration:underline}
+.ariane span[aria-current]{opacity:.8}
+
+/* Produit */
+.produit{max-width:1240px;margin:0 auto;padding:10px 0 24px;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.galerie,.infos{min-width:0}
+.galerie{padding:0 18px}
+.photo-principale{position:relative;margin:0;background:#E9E1CF;border-radius:4px;overflow:hidden;aspect-ratio:5/4}
+.photo-principale img{width:100%;height:100%;object-fit:cover}
+.photo-principale figcaption{position:absolute;left:10px;bottom:10px;background:rgba(247,245,238,.92);color:var(--flom-brun);font-size:12.5px;font-weight:400;padding:3px 10px;border-radius:20px}
+.vignettes{display:flex;gap:8px;margin:8px 0 0;padding:0;list-style:none;overflow-x:auto;scrollbar-width:none}
+.vignettes::-webkit-scrollbar{display:none}
+.vignettes button{flex:0 0 auto;width:52px;height:44px;padding:0;border:1px solid transparent;border-radius:3px;overflow:hidden;background:none;opacity:.75}
+.vignettes button[aria-current="true"]{border-color:var(--flom-brun);opacity:1}
+.vignettes img{width:100%;height:100%;object-fit:cover}
+.vignettes .etiquette-vue{font-size:11px;align-self:center;color:var(--flom-brun);white-space:nowrap;padding-right:4px}
+
+.infos{padding:14px 18px 0}
+h1{font-weight:300;color:var(--flom-or-texte);font-size:27px;line-height:1.15;margin:0;letter-spacing:.005em}
+.ligne-prix{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:4px;flex-wrap:wrap}
+.prix{font-size:22px;color:var(--flom-or-texte);font-weight:400}
+.dims{font-size:13px;color:var(--flom-brun)}
+
+.choix{border:0;margin:14px 0 0;padding:0;min-width:0}
+.choix legend{padding:0;font-size:14.5px;font-weight:400;display:flex;justify-content:space-between;width:100%;gap:8px}
+.choix legend b{font-weight:500;color:var(--flom-brun)}
+.choix .aide{font-size:12.5px;color:var(--flom-brun);margin:1px 0 8px}
+.tuiles{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.tuile{position:relative}
+.tuile input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.tuile label{display:block;cursor:pointer;border-radius:4px;overflow:hidden;border:1.5px solid transparent;position:relative;aspect-ratio:1;background:#E9E1CF}
+.tuile img{width:100%;height:100%;object-fit:cover}
+.tuile .num{position:absolute;right:3px;bottom:3px;min-width:18px;height:18px;border-radius:9px;background:rgba(247,245,238,.94);font-size:11px;font-weight:500;line-height:18px;text-align:center;color:var(--flom-encre);padding:0 4px}
+.tuile input:checked + label{border-color:var(--flom-entete-noir);box-shadow:0 0 0 2px var(--flom-or-logo)}
+.tuile input:focus-visible + label{outline:2px solid var(--flom-brun);outline-offset:3px}
+.tuile.au-panier label::after{content:"Au panier";position:absolute;inset:auto 0 0 0;background:rgba(32,32,32,.82);color:#F7F5EE;font-size:10px;text-align:center;line-height:17px;font-weight:400}
+.tuile.au-panier .num{display:none}
+.tuile input:disabled + label{cursor:not-allowed}
+.tuile input:disabled + label img{opacity:.5}
+
+.ajout{margin-top:14px;display:none}
+.btn-ajout{width:100%;border:1px solid var(--flom-entete-noir);background:var(--flom-entete-noir);color:#F1EBDD;font-size:16px;font-weight:400;padding:14px 18px;border-radius:3px;letter-spacing:.01em;display:flex;justify-content:center;gap:10px}
+.btn-ajout:hover{background:#2a241a}
+.btn-ajout[disabled]{background:var(--flom-sable-bouton);border-color:var(--flom-sable-bouton);color:var(--flom-brun);cursor:not-allowed}
+.btn-ajout .sep{opacity:.5}
+
+.reassurance{list-style:none;margin:16px 0 0;padding:12px 0 0;border-top:1px solid var(--trait);display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;font-size:13px;line-height:1.35;color:var(--flom-brun)}
+.reassurance li{display:flex;gap:8px;align-items:flex-start}
+.reassurance svg{flex:0 0 20px;width:20px;height:20px;stroke:var(--flom-or-texte);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-top:-1px}
+
+.accroche{margin:16px 0 0;font-size:15.5px;line-height:1.65}
+
+.accordeons{margin:14px 0 0;border-top:1px solid var(--trait)}
+.acc h2{margin:0;font:inherit}
+.acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;border-bottom:1px solid var(--trait);padding:14px 2px;font-size:16px;font-weight:400;color:var(--flom-or-texte);text-align:left}
+.acc-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.4;transition:transform .2s}
+.acc-btn[aria-expanded="true"] svg{transform:rotate(45deg)}
+.acc-panneau{padding:4px 2px 16px;border-bottom:1px solid var(--trait);font-size:15px}
+.acc-panneau p{margin:0 0 10px}
+.acc-panneau ol{margin:0;padding-left:20px}
+.acc-panneau li{margin-bottom:8px}
+.acc-panneau dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0}
+.acc-panneau dt{color:var(--flom-brun)}
+.acc-panneau dd{margin:0}
+.acc-panneau .source{font-size:12.5px;color:var(--flom-brun)}
+
+/* Histoire */
+.histoire{background:var(--flom-creme-carte);margin-top:28px}
+.histoire-int{max-width:1240px;margin:0 auto;display:grid;gap:22px;padding:30px 18px}
+.histoire img{border-radius:4px;width:100%;aspect-ratio:4/5;object-fit:cover}
+.histoire .surtitre{font:italic 400 19px/1.2 var(--f-marque);color:var(--flom-or-texte);margin:0}
+.histoire h2{font-weight:300;font-size:25px;line-height:1.2;color:var(--flom-encre);margin:6px 0 12px}
+.histoire p{margin:0 0 12px;font-size:15.5px}
+.histoire .experience{display:flex;align-items:baseline;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--trait)}
+.histoire .experience strong{font:500 34px/1 var(--f-marque);white-space:nowrap;color:var(--flom-or-texte)}
+.histoire .experience span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--flom-brun)}
+
+/* Pied de page */
+.pied{background:var(--flom-creme-page);text-align:center;padding:26px 18px 120px;font-size:13px;color:var(--flom-brun);border-top:1px solid var(--trait)}
+.pied img{margin:0 auto 14px;width:190px;border-radius:3px}
+.pied nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin-bottom:14px}
+.pied nav a{text-decoration:none}.pied nav a:hover{text-decoration:underline}
+.pied .marque{font:400 19px/1.3 var(--f-marque);letter-spacing:.12em;color:var(--flom-or-texte);margin:6px 0 2px}
+
+/* Barre d'achat collante (mobile) */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(247,245,238,.97);border-top:1px solid var(--trait);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:12px;align-items:center;box-shadow:0 -6px 18px rgba(32,32,32,.08)}
+.barre .mini{display:flex;align-items:center;gap:9px;min-width:0;flex:0 1 auto}
+.barre .mini img{width:42px;height:42px;border-radius:3px;object-fit:cover}
+.barre .mini div{font-size:12.5px;line-height:1.25;white-space:nowrap}
+.barre .mini b{display:block;font-weight:500;font-size:15px;color:var(--flom-encre)}
+.barre .btn-ajout{flex:1;padding:12px 12px;font-size:15px}
+
+/* Mini-panier */
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.panier{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--flom-creme-carte);z-index:50;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease;visibility:hidden}
+.panier.ouvert{transform:none;visibility:visible}
+.panier-tete{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--flom-entete-noir);color:#F1EBDD}
+.panier-tete h2{margin:0;font-weight:300;font-size:19px}
+.fermer{background:none;border:1px solid rgba(241,235,221,.4);color:#F1EBDD;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;padding:0}
+.fermer svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.6}
+.panier-corps{flex:1;overflow:auto;padding:6px 18px}
+.ligne{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--trait)}
+.ligne img{width:64px;height:64px;border-radius:3px;object-fit:cover}
+.ligne .nom{font-size:14.5px;line-height:1.3}
+.ligne .modele{font-size:13px;color:var(--flom-brun)}
+.ligne .droite{text-align:right;font-size:14.5px}
+.retirer{background:none;border:0;padding:4px 0;font-size:12.5px;text-decoration:underline;color:var(--flom-brun)}
+.vide{padding:30px 0;text-align:center;color:var(--flom-brun)}
+.panier-pied{padding:14px 18px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--trait);background:var(--flom-creme-carte)}
+.seuil{font-size:13px;color:var(--flom-brun);margin:0 0 6px}
+.jauge{height:4px;background:var(--flom-sable-bouton);border-radius:2px;overflow:hidden;margin-bottom:12px}
+.jauge i{display:block;height:100%;background:var(--flom-or-titre);width:0;transition:width .3s}
+.total{display:flex;justify-content:space-between;font-size:17px;font-weight:400;margin-bottom:2px}
+.port{font-size:12.5px;color:var(--flom-brun);margin:0 0 12px}
+.btn-paiement{width:100%;border:1px dashed var(--flom-brun);background:var(--flom-sable-bouton);color:var(--flom-encre);padding:13px 14px;border-radius:3px;font-size:14.5px;line-height:1.35}
+.continuer{width:100%;background:none;border:0;margin-top:8px;padding:8px;text-decoration:underline;font-size:14px;color:var(--flom-brun)}
+
+/* Tablette et ordinateur */
+@media (min-width:700px){
+  .tuiles{grid-template-columns:repeat(6,64px)}
+  .reassurance{grid-template-columns:repeat(4,1fr)}
+  .histoire-int{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;gap:40px;padding:44px 28px}
+  .histoire img{aspect-ratio:1}
+}
+@media (min-width:900px){
+  .ariane{padding:22px 28px 0}
+  .produit{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:44px;padding:16px 28px 40px;align-items:start}
+  .galerie{padding:0;position:sticky;top:76px}
+  .photo-principale{aspect-ratio:1}
+  .vignettes button{width:76px;height:62px}
+  .infos{padding:8px 0 0}
+  h1{font-size:36px}
+  .prix{font-size:25px}
+  .ajout{display:block}
+  .barre{display:none}
+  .reassurance{grid-template-columns:1fr 1fr}
+  .pied{padding-bottom:30px}
+  .tuiles{grid-template-columns:repeat(6,1fr)}
+}
+@media (min-width:1200px){
+  .produit{gap:64px}
+  .histoire-int{padding:56px 28px}
+  .histoire h2{font-size:30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bandeau-maquette">Maquette proposée par Redline Studio · page non publiée</div>
+
+<header class="entete">
+  <div class="entete-int">
+    <a class="logo" href="https://www.flom-edenboheme.com/" aria-label="Flom &amp; Eden Bohème, accueil">
+      <svg viewBox="20 52.591 160 95.818" aria-hidden="true"><path d="M82.177 97.543c0 14.984 5.994 29.968 17.981 44.952 11.987-14.984 17.981-29.968 17.981-44.952s-5.994-29.968-17.981-44.952C88.17 67.575 82.177 82.559 82.177 97.543zm17.98 39.038c-9.549-13.054-14.385-26.17-14.385-39.039 0-12.867 4.836-25.982 14.385-39.038 9.549 13.054 14.385 26.167 14.385 39.038-.001 12.873-4.836 25.986-14.385 39.039z"/><path d="M105.863 96.12c-7.492 12.976-9.793 28.949-6.904 47.92 17.873-6.983 30.556-16.963 38.048-29.939 7.492-12.976 9.793-28.95 6.904-47.92-17.873 6.983-30.556 16.963-38.048 29.939zm35.091-24.817c1.742 16.075-.625 29.851-7.062 41.001-6.434 11.143-17.176 20.084-31.975 26.616-1.744-16.077.625-29.854 7.062-41.003 6.433-11.146 17.178-20.083 31.975-26.614z"/><path d="M99.547 143.036c2.889-18.97.588-34.943-6.904-47.92C85.15 82.14 72.468 72.160 54.595 65.178c-2.889 18.970-.588 34.943 6.904 47.920 7.492 12.975 20.174 22.955 38.048 29.938zM57.551 70.299c14.795 6.53 25.542 15.47 31.975 26.616 6.437 11.147 8.806 24.924 7.062 41.001-14.794-6.529-25.54-15.47-31.975-26.616-6.435-11.147-8.804-24.924-7.062-41.001z"/><path d="M143.909 144.912c14.08-5.125 26.111-15.882 36.091-32.271-18.18-6.139-34.31-6.647-48.39-1.522-14.08 5.125-26.111 15.882-36.091 32.271 18.18 6.139 34.31 6.646 48.39 1.522zm-11.071-30.413c12.098-4.404 26.072-4.344 41.605.165-9.001 13.44-19.67 22.469-31.765 26.869-12.098 4.4-26.075 4.344-41.601-.165 8.997-13.436 19.666-22.465 31.761-26.869z"/><path d="M104.481 143.39c-9.98-16.389-22.011-27.146-36.091-32.271-14.08-5.125-30.21-4.617-48.39 1.522 9.98 16.389 22.011 27.146 36.091 32.271 14.08 5.124 30.21 4.617 48.39-1.522zm-47.162-1.857c-12.095-4.404-22.764-13.433-31.761-26.869 15.533-4.506 29.512-4.569 41.603-.165 12.093 4.4 22.764 13.433 31.763 26.869-15.533 4.506-29.506 4.569-41.605.165z"/></svg>
+      <span>Flom &amp; Eden Bohème</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="https://www.flom-edenboheme.com/">Accueil</a>
+      <a href="https://www.flom-edenboheme.com/art-de-la-table">La boutique</a>
+      <a href="https://www.flom-edenboheme.com/qui-sommes-nous">Notre histoire</a>
+      <a href="https://www.flom-edenboheme.com/about-2">Les coulisses</a>
+      <a href="https://www.flom-edenboheme.com/">Où nous trouver</a>
+      <a href="https://www.flom-edenboheme.com/">Nous contacter</a>
+    </nav>
+    <button class="panier-btn" type="button" id="ouvrir-panier" aria-label="Ouvrir le panier (0 article)">
+      <svg viewBox="0 0 105.5 126.1" aria-hidden="true"><path d="M102.143 118.16L93.812 48.2067C93.386 44.66 90.3566 42 86.7591 42H79.1382V56H74.4047V42H31.8032V56H27.0697V42H19.4488C15.8513 42 12.8219 44.66 12.3959 48.16L4.06489 118.16C3.78088 120.167 4.44357 122.173 5.76895 123.667C7.14167 125.16 9.0824 126 11.0705 126H95.1374C97.1255 126 99.0662 125.16 100.439 123.667C101.764 122.173 102.427 120.167 102.143 118.16Z"/><path d="M32.0594 25.6667C32.0594 14.0933 41.506 4.66667 53.1039 4.66667C64.7018 4.66667 74.1485 14.0933 74.1485 25.6667V42H78.825V25.6667C78.825 11.5267 67.2739 0 53.1039 0C38.9339 0 27.3828 11.5267 27.3828 25.6667V42H32.0594V25.6667Z"/></svg>
+      <span class="compte" id="compte-panier" aria-hidden="true">0</span>
+    </button>
+  </div>
+</header>
+
+<nav class="ariane" aria-label="Fil d’Ariane">
+  <a href="https://www.flom-edenboheme.com/">Accueil</a> / <a href="https://www.flom-edenboheme.com/art-de-la-table">Art de la table</a> / <span aria-current="page">Grands Bols profonds en noyer</span>
+</nav>
+
+<main class="produit">
+  <section class="galerie" aria-label="Photos du produit">
+    <figure class="photo-principale">
+      <img id="photo" src="img/bol-1.jpg" width="690" height="690" alt="Grand bol profond en noyer, modèle n° 1">
+      <figcaption id="legende-photo">Bol n°&nbsp;1, vu de près</figcaption>
+    </figure>
+    <ul class="vignettes" id="vignettes" aria-label="Changer de photo">
+      <li><button type="button" data-vue="modele" aria-current="true" aria-label="Voir le bol choisi"><img id="vignette-modele" src="img/bol-1-mini.jpg" width="240" height="240" alt=""></button></li>
+      <li class="etiquette-vue" aria-hidden="true">Vues d’ensemble&nbsp;:</li>
+      <li><button type="button" data-vue="1" aria-label="Vue d’ensemble 1 sur 5"><img src="img/ensemble-1.jpg" width="1200" height="900" alt="" loading="lazy"></button></li>
+      <li><button type="button" data-vue="2" aria-label="Vue d’ensemble 2 sur 5"><img src="img/ensemble-2.jpg" width="1200" height="900" alt="" loading="lazy"></button></li>
+      <li><button type="button" data-vue="3" aria-label="Vue d’ensemble 3 sur 5, bol en main"><img src="img/ensemble-3.jpg" width="900" height="1200" alt="" loading="lazy"></button></li>
+      <li><button type="button" data-vue="4" aria-label="Vue d’ensemble 4 sur 5"><img src="img/ensemble-4.jpg" width="1200" height="900" alt="" loading="lazy"></button></li>
+      <li><button type="button" data-vue="5" aria-label="Vue d’ensemble 5 sur 5"><img src="img/ensemble-5.jpg" width="900" height="1200" alt="" loading="lazy"></button></li>
+    </ul>
+  </section>
+
+  <section class="infos" aria-labelledby="titre-produit">
+    <h1 id="titre-produit">Grands Bols profonds en noyer</h1>
+    <div class="ligne-prix">
+      <p class="prix" style="margin:0"><span class="sr">Prix&nbsp;: </span><span id="prix">48,00&nbsp;€</span> <span class="sr">l’unité</span></p>
+      <p class="dims" style="margin:0">Ø&nbsp;18&nbsp;cm · H&nbsp;8&nbsp;cm · 1,2&nbsp;L</p>
+    </div>
+
+    <fieldset class="choix" id="choix">
+      <legend><span>Choisissez votre bol</span><span>Modèle choisi&nbsp;: <b id="modele-choisi">n°&nbsp;1</b></span></legend>
+      <p class="aide">Vendu à l’unité. Chaque pièce est singulière&nbsp;: c’est ce bol-là qui vous sera envoyé.</p>
+      <div class="tuiles" id="tuiles"></div>
+    </fieldset>
+
+    <div class="ajout">
+      <button type="button" class="btn-ajout" data-ajouter><span class="txt">Ajouter le bol n°&nbsp;1 au panier</span><span class="sep" aria-hidden="true">·</span><span class="mt">48,00&nbsp;€</span></button>
+    </div>
+
+    <ul class="reassurance">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V11M12 11c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5z"/></svg>Bois local, massif et durable</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>Livraison offerte dès 100&nbsp;€ d’achat</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8"/></svg>Expédition généralement sous 2 à 5&nbsp;jours ouvrés</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11V8a6 6 0 0 1 12 0v3M5 11h14v10H5zM12 15v2"/></svg>Paiement sécurisé&nbsp;: CB, PayPal</li>
+    </ul>
+
+    <p class="accroche">Un grand format aussi usuel pour les enfants que les adultes. Il pourra accompagner votre petit déjeuner, mais également accueillir potage, salade composée ou dessert.</p>
+
+    <div class="accordeons">
+      <div class="acc">
+        <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-desc" id="b-desc">Description<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button></h2>
+        <div class="acc-panneau" id="p-desc" role="region" aria-labelledby="b-desc" hidden>
+          <p>Un grand format aussi usuel pour les enfants que les adultes. Il pourra accompagner votre petit déjeuner, mais également accueillir potage, salade composée ou dessert. Il est également utile pour les gourmandises ou à l’apéritif.</p>
+          <p>Sa forme demi-ronde facilite sa prise en main et permet de les empiler afin d’optimiser le rangement dans vos placards. C’est un format complémentaire avec les assiettes plates.</p>
+          <p>La vaisselle en bois peut vous accompagner tout au long de votre vie si celle-ci est bien entretenue, je vous invite à lire les conseils d’entretien.</p>
+          <p>Vendu à l’unité.</p>
+        </div>
+      </div>
+      <div class="acc">
+        <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-taille" id="b-taille">Taille<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button></h2>
+        <div class="acc-panneau" id="p-taille" role="region" aria-labelledby="b-taille" hidden>
+          <dl><dt>Diamètre</dt><dd>18&nbsp;cm</dd><dt>Hauteur</dt><dd>8&nbsp;cm</dd><dt>Contenance</dt><dd>1,2&nbsp;L</dd><dt>Bois</dt><dd>Noyer</dd></dl>
+        </div>
+      </div>
+      <div class="acc">
+        <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-entretien" id="b-entretien">Matière et entretien<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button></h2>
+        <div class="acc-panneau" id="p-entretien" role="region" aria-labelledby="b-entretien" hidden>
+          <p>La vaisselle en bois a l’avantage d’être solide, durable, écologique et hygiénique. Si vous suivez ces quelques conseils d’utilisation et d’entretien, elle pourra accompagner vos repas tout au long de votre vie.</p>
+          <ol>
+            <li>Laver à la main avec de l’eau (chaude ou froide), utiliser si nécessaire du produit vaisselle et une éponge.</li>
+            <li>Faire sécher en position verticale sur un égouttoir, ou à plat sur un torchon à l’air libre. Le bois sèche rapidement.</li>
+            <li>Les trois éléments à éviter qui pourraient abîmer votre vaisselle sont l’eau stagnante, le lave-vaisselle et le micro-ondes.</li>
+            <li>Pour une utilisation quotidienne, appliquer une à deux fois par an une couche d’huile alimentaire (colza ou pépin de raisin) à l’aide d’un chiffon. Laisser sécher 24&nbsp;heures.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="acc">
+        <h2><button type="button" class="acc-btn" aria-expanded="false" aria-controls="p-livraison" id="b-livraison">Livraison et retours<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button></h2>
+        <div class="acc-panneau" id="p-livraison" role="region" aria-labelledby="b-livraison" hidden>
+          <p><strong>Expédition</strong> généralement sous 2 à 5&nbsp;jours ouvrés après réception du paiement (délai indicatif), par La Poste ou Mondial Relay.</p>
+          <p><strong>Frais de port</strong> calculés d’après le poids des pièces et de l’emballage, indiqués avant l’achat. Ils sont offerts à partir de 100&nbsp;€ d’achat.</p>
+          <p><strong>Retours</strong> possibles dans les 15&nbsp;jours suivant la commande, avec notre accord préalable&nbsp;; les frais de retour restent à votre charge. Le remboursement est effectué après réception et vérification que le produit n’a pas été utilisé ni endommagé.</p>
+          <p class="source">Une question&nbsp;? <a href="mailto:contact@flom-edenboheme.com">contact@flom-edenboheme.com</a> · <a href="https://www.flom-edenboheme.com/about-1-1">Conditions générales de vente</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="histoire" aria-labelledby="titre-histoire">
+  <div class="histoire-int">
+    <img src="img/ensemble-3.jpg" width="900" height="1200" alt="Un grand bol en noyer tenu dans la main, devant les autres bols de la série" loading="lazy">
+    <div>
+      <p class="surtitre">De l’arbre à l’objet</p>
+      <h2 id="titre-histoire">Notre vaisselle est fabriquée à partir de bois local, massif et durable.</h2>
+      <p>Les bois utilisés, principalement le noyer et le merisier, offrent une multitude de couleurs et de contrastes allant du clair au foncé sur une même pièce.</p>
+      <p>Si l’utilisation du bois dans votre cuisine est une nouvelle expérience, vous allez découvrir son contact doux et chaleureux, ainsi que son silence qui pourrait vous surprendre.</p>
+      <div class="experience"><strong>8 ans</strong><span>d’expérience · un savoir-faire unique</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="pied">
+  <img src="img/paiement-securise.jpg" width="320" height="139" alt="Paiement sécurisé : PayPal, Stripe, Visa, Mastercard, CB, American Express" loading="lazy">
+  <nav aria-label="Liens utiles">
+    <a href="https://www.flom-edenboheme.com/about-1-1">Conditions générales de vente</a>
+    <a href="https://www.flom-edenboheme.com/general-8">Entretien des bijoux</a>
+    <a href="https://www.flom-edenboheme.com/copie-de-entretien-des-bijoux">Entretien de la vaisselle en bois</a>
+    <a href="https://www.flom-edenboheme.com/art-de-la-table">La boutique</a>
+  </nav>
+  <p class="marque">Flom &amp; Eden Bohème</p>
+  <p style="margin:0 0 6px"><a href="mailto:contact@flom-edenboheme.com">contact@flom-edenboheme.com</a></p>
+  <p style="margin:0">© 2022 Flom &amp; Eden Bohème | Tous droits réservés</p>
+</footer>
+
+<div class="barre" id="barre">
+  <div class="mini" aria-hidden="true"><img id="barre-img" src="img/bol-1-mini.jpg" width="240" height="240" alt=""><div>Bol <span id="barre-num">n°&nbsp;1</span><b>48,00&nbsp;€</b></div></div>
+  <button type="button" class="btn-ajout" data-ajouter><span class="txt">Ajouter au panier</span></button>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="panier" id="panier" role="dialog" aria-modal="true" aria-labelledby="titre-panier" aria-hidden="true">
+  <div class="panier-tete">
+    <h2 id="titre-panier">Votre panier</h2>
+    <button type="button" class="fermer" id="fermer-panier" aria-label="Fermer le panier"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+  </div>
+  <div class="panier-corps" id="lignes" aria-live="polite"></div>
+  <div class="panier-pied">
+    <p class="seuil" id="seuil"></p>
+    <div class="jauge" aria-hidden="true"><i id="jauge"></i></div>
+    <div class="total"><span>Sous-total</span><span id="total">0,00&nbsp;€</span></div>
+    <p class="port" id="port">Frais de port calculés selon le poids, indiqués avant le paiement.</p>
+    <button type="button" class="btn-paiement" id="payer">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+    <button type="button" class="continuer" id="continuer">Continuer mes achats</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const PRIX = 48, SEUIL = 100;
+  const MODELES = [1,2,3,4,5,6];
+  const eur = n => n.toFixed(2).replace('.', ',') + ' €';
+  const $ = s => document.querySelector(s);
+  let choisi = 1, vue = 'modele';
+  const panier = [];
+
+  // Tuiles de choix
+  const tuiles = $('#tuiles');
+  MODELES.forEach(n => {
+    const d = document.createElement('div');
+    d.className = 'tuile'; d.dataset.n = n;
+    d.innerHTML = `<input type="radio" name="modele" id="m${n}" value="${n}"${n===1?' checked':''}>
+      <label for="m${n}"><img src="img/bol-${n}-mini.jpg" width="240" height="240" alt=""><span class="num" aria-hidden="true">${n}</span><span class="sr">Bol n° ${n}</span></label>`;
+    tuiles.appendChild(d);
+  });
+  tuiles.addEventListener('change', e => { if (e.target.name === 'modele') choisir(+e.target.value); });
+
+  function choisir(n){
+    choisi = n; vue = 'modele';
+    majPhoto(); majBoutons();
+    $('#modele-choisi').textContent = 'n° ' + n;
+    $('#vignette-modele').src = `img/bol-${n}-mini.jpg`;
+    $('#barre-img').src = `img/bol-${n}-mini.jpg`;
+    $('#barre-num').textContent = 'n° ' + n;
+  }
+
+  function majPhoto(){
+    const img = $('#photo'), leg = $('#legende-photo');
+    if (vue === 'modele'){
+      img.src = `img/bol-${choisi}.jpg`; img.alt = `Grand bol profond en noyer, modèle n° ${choisi}`;
+      leg.textContent = `Bol n° ${choisi}, vu de près`;
+    } else {
+      img.src = `img/ensemble-${vue}.jpg`; img.alt = `Les grands bols en noyer, vue d’ensemble ${vue} sur 5`;
+      leg.textContent = `Vue d’ensemble ${vue}/5`;
+    }
+    document.querySelectorAll('#vignettes button').forEach(b => b.setAttribute('aria-current', b.dataset.vue === String(vue) ? 'true' : 'false'));
+  }
+  $('#vignettes').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    vue = b.dataset.vue === 'modele' ? 'modele' : +b.dataset.vue; majPhoto();
+  });
+
+  const dansPanier = n => panier.includes(n);
+  function majBoutons(){
+    const dispo = !dansPanier(choisi);
+    document.querySelectorAll('[data-ajouter]').forEach(b => {
+      b.disabled = !dispo;
+      const t = b.querySelector('.txt');
+      const large = !!b.querySelector('.mt');
+      if (dispo) t.textContent = large ? `Ajouter le bol n° ${choisi} au panier` : `Ajouter le bol n° ${choisi}`;
+      else t.textContent = 'Déjà dans votre panier';
+    });
+    document.querySelectorAll('.tuile').forEach(d => d.classList.toggle('au-panier', dansPanier(+d.dataset.n)));
+  }
+
+  function ajouter(){
+    if (dansPanier(choisi)) return;
+    panier.push(choisi);
+    rendrePanier();
+    const suivant = MODELES.find(n => !dansPanier(n));
+    ouvrir();
+    if (suivant){ $('#m'+suivant).checked = true; choisir(suivant); } else majBoutons();
+  }
+  document.querySelectorAll('[data-ajouter]').forEach(b => b.addEventListener('click', ajouter));
+
+  function rendrePanier(){
+    const L = $('#lignes');
+    if (!panier.length){ L.innerHTML = '<p class="vide">Votre panier est vide.</p>'; }
+    else L.innerHTML = panier.map(n => `<div class="ligne">
+        <img src="img/bol-${n}-mini.jpg" width="240" height="240" alt="">
+        <div><div class="nom">Grands Bols profonds en noyer</div><div class="modele">Modèle&nbsp;: bol n° ${n} · quantité 1</div></div>
+        <div class="droite">${eur(PRIX)}<br><button type="button" class="retirer" data-retirer="${n}" aria-label="Retirer le bol n° ${n}">Retirer</button></div>
+      </div>`).join('');
+    const total = panier.length * PRIX;
+    $('#total').textContent = eur(total);
+    const reste = SEUIL - total;
+    $('#seuil').textContent = total === 0 ? 'Livraison offerte dès 100 € d’achat.'
+      : reste > 0 ? `Plus que ${eur(reste)} pour profiter de la livraison offerte.` : 'Livraison offerte sur cette commande.';
+    $('#port').textContent = reste > 0 ? 'Frais de port calculés selon le poids, indiqués avant le paiement.' : 'Frais de port offerts à partir de 100 € d’achat.';
+    $('#jauge').style.width = Math.min(100, total / SEUIL * 100) + '%';
+    const c = panier.length;
+    $('#compte-panier').textContent = c;
+    $('#ouvrir-panier').setAttribute('aria-label', `Ouvrir le panier (${c} article${c>1?'s':''})`);
+    majBoutons();
+  }
+  $('#lignes').addEventListener('click', e => {
+    const b = e.target.closest('[data-retirer]'); if (!b) return;
+    panier.splice(panier.indexOf(+b.dataset.retirer), 1); rendrePanier(); $('#fermer-panier').focus();
+  });
+
+  // Ouverture et fermeture du mini-panier
+  const P = $('#panier'), V = $('#voile'); let dernierFocus = null;
+  function ouvrir(){
+    dernierFocus = document.activeElement;
+    P.classList.add('ouvert'); V.classList.add('ouvert'); P.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => $('#fermer-panier').focus(), 30);
+  }
+  function fermer(){
+    if (!P.classList.contains('ouvert')) return;
+    P.classList.remove('ouvert'); V.classList.remove('ouvert'); P.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if (dernierFocus && document.contains(dernierFocus)) dernierFocus.focus();
+  }
+  $('#ouvrir-panier').addEventListener('click', ouvrir);
+  $('#fermer-panier').addEventListener('click', fermer);
+  $('#continuer').addEventListener('click', fermer);
+  V.addEventListener('click', fermer);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') fermer();
+    if (e.key === 'Tab' && P.classList.contains('ouvert')){
+      const f = [...P.querySelectorAll('button')]; const a = f[0], z = f[f.length-1];
+      if (e.shiftKey && document.activeElement === a){ e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z){ e.preventDefault(); a.focus(); }
+    }
+  });
+
+  // Accordéons
+  document.querySelectorAll('.acc-btn').forEach(b => b.addEventListener('click', () => {
+    const ouvert = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!ouvert));
+    document.getElementById(b.getAttribute('aria-controls')).hidden = ouvert;
+  }));
+
+  rendrePanier();
+})();
+</script>
+</body>
+</html>

@@ -37,7 +37,12 @@ const nextConfig = {
   },
   async redirects() {
     // The old JSON-file dashboard (password in the query string) is gone.
-    return [{ source: "/dashboard", destination: "/admin/leads", permanent: true }];
+    return [
+      { source: "/dashboard", destination: "/admin/leads", permanent: true },
+      // Maquettes statiques du segment 2 (public/maquette/<slug>-<jeton>/index.html) : le lien envoyé
+      // reste court ; la redirection garde l'URL du dossier, donc les chemins relatifs (img/, #ancres).
+      { source: "/maquette/:chemin", destination: "/maquette/:chemin/index.html", permanent: false },
+    ];
   },
 }
 

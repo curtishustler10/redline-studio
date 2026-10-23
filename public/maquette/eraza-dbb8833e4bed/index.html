@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,">
+<title>Naïa · Eraza (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur eraza.fr (styles calculés, 22/10/2026) */
+:root{
+  --eraza-fond-creme:#F8F6F2;      /* body background */
+  --eraza-taupe-texte:#9F9387;     /* couleur du texte et des titres du thème */
+  --eraza-taupe-bouton:#B6ACA0;    /* fond du bouton « Ajouter au panier » */
+  --eraza-encre-logo:#231F1C;      /* lettrage du logo */
+  /* Dérivés plus foncés des taupes ci-dessus, pour atteindre le contraste AA */
+  --eraza-taupe-titre:#857A6E;     /* 3,9:1 sur crème, titres ≥ 24 px */
+  --eraza-taupe-fonce:#6E6358;     /* 5,9:1 avec texte blanc : boutons */
+  --eraza-taupe-lecture:#5E544A;   /* 6,8:1 sur crème : texte courant */
+  --blanc:#fff;
+  --trait:#E4DED6;
+  --erreur:#A3322B;
+  --f-titre:"Fraunces", Georgia, serif;
+  --f-texte:"Work Sans", system-ui, sans-serif;
+  --bar-h:76px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-bottom:calc(var(--bar-h) + 12px);scroll-padding-top:12px}
+body{margin:0;background:var(--eraza-fond-creme);color:var(--eraza-taupe-lecture);font:400 15px/1.55 var(--f-texte)}
+img{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--eraza-encre-logo);outline-offset:2px}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Bandeaux */
+.maquette{background:var(--eraza-encre-logo);color:#EDE8E1;font-size:11.5px;letter-spacing:.02em;text-align:center;padding:5px 12px}
+.annonce{border-bottom:1px solid var(--trait);text-align:center;font-size:12px;padding:6px 8px;color:var(--eraza-taupe-lecture)}
+
+/* En-tête */
+header.site{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:2px 12px;max-width:1280px;margin:0 auto}
+header.site .logo{justify-self:center}
+header.site .logo img{height:44px;width:auto}
+.icon-btn{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;border-radius:50%;cursor:pointer;position:relative;color:var(--eraza-taupe-fonce)}
+.icon-btn:hover{background:#EFEAE3}
+.icon-btn .count{position:absolute;top:5px;right:3px;min-width:18px;height:18px;border-radius:9px;background:var(--eraza-taupe-fonce);color:#fff;font-size:11px;line-height:18px;text-align:center;padding:0 4px}
+.icon-btn .count:empty{display:none}
+
+/* Mise en page */
+main{max-width:1280px;margin:0 auto}
+.produit{display:block}
+
+/* Galerie */
+.galerie{position:relative}
+.rail-photos{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 12px;scrollbar-width:none}
+.rail-photos::-webkit-scrollbar{display:none}
+.rail-photos figure{margin:0;flex:0 0 84%;scroll-snap-align:center;height:270px;border-radius:6px;overflow:hidden;background:#EAE4DC}
+.rail-photos img{width:100%;height:100%;object-fit:cover}
+.rail-photos figure:first-child img{object-position:50% 62%}
+.compteur{position:absolute;right:20px;bottom:10px;background:rgba(35,31,28,.72);color:#fff;font-size:12px;padding:2px 9px;border-radius:20px}
+
+/* Colonne d'achat */
+.achat{padding:12px 16px 0}
+.titre-ligne{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+h1{font:700 32px/1.1 var(--f-titre);color:var(--eraza-taupe-titre);margin:0}
+.prix{font:600 21px/1 var(--f-texte);color:var(--eraza-encre-logo);white-space:nowrap}
+.prix small{display:block;font-size:11.5px;font-weight:400;color:var(--eraza-taupe-lecture);text-align:right;margin-top:4px}
+.delai{margin:8px 0 0;font-size:13px;line-height:1.45}
+.delai strong{font-weight:600;color:var(--eraza-encre-logo)}
+
+/* Taille (variante Shopify) */
+.taille{border:0;margin:10px 0 0;padding:0}
+.taille legend{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;color:var(--eraza-taupe-fonce)}
+.segments{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.segments input{position:absolute;opacity:0;pointer-events:none}
+.segments label{display:block;border:1.5px solid var(--trait);background:var(--blanc);border-radius:8px;padding:8px 10px;cursor:pointer;line-height:1.3}
+.segments label b{display:flex;justify-content:space-between;font-weight:600;color:var(--eraza-encre-logo);font-size:14px}
+.segments label span{font-size:12px}
+.segments input:checked+label{border-color:var(--eraza-encre-logo);box-shadow:inset 0 0 0 1px var(--eraza-encre-logo)}
+.segments input:focus-visible+label{outline:2px solid var(--eraza-encre-logo);outline-offset:2px}
+
+/* Étapes */
+.etapes{margin:12px 0 0;border-top:1px solid var(--trait)}
+.etape{border-bottom:1px solid var(--trait)}
+.etape h2{margin:0;font-size:inherit}
+.etape-tete{width:100%;display:grid;grid-template-columns:28px 1fr auto 18px;align-items:center;gap:10px;background:none;border:0;padding:11px 0;text-align:left;cursor:pointer}
+.num{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--eraza-taupe-fonce);display:grid;place-items:center;font-size:13px;font-weight:600;color:var(--eraza-taupe-fonce)}
+.etape.fait .num{background:var(--eraza-taupe-fonce);color:#fff}
+.etape-nom{display:block;font-weight:600;color:var(--eraza-encre-logo);font-size:15px}
+.etape-resume{display:block;font-size:12.5px;color:var(--eraza-taupe-lecture);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.etape-tete>span:nth-child(2){min-width:0}
+.etape-supp{font-size:13px;font-weight:600;color:var(--eraza-taupe-fonce);white-space:nowrap}
+.chevron{transition:transform .2s;color:var(--eraza-taupe-fonce)}
+.etape-tete[aria-expanded="true"] .chevron{transform:rotate(180deg)}
+.etape-tete[aria-expanded="true"] .etape-resume{display:none}
+.etape-corps{padding:0 0 14px}
+.etape-corps[hidden]{display:none}
+
+/* Champs */
+.champ{border:0;margin:0 0 14px;padding:0;min-width:0}
+.champ legend{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;font-weight:600;color:var(--eraza-encre-logo);margin-bottom:7px;padding:0}
+.champ legend .etat{font-weight:400;font-size:12px;color:var(--eraza-taupe-lecture)}
+.champ legend .choix{font-weight:500;color:var(--eraza-taupe-fonce)}
+.oblig{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--eraza-taupe-fonce)}
+.facult{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--eraza-taupe-lecture);border:1px solid var(--trait);border-radius:10px;padding:0 6px}
+
+/* Rangée de couleurs */
+.nuancier{display:flex;gap:6px;overflow-x:auto;padding:3px 2px 8px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--eraza-taupe-bouton) transparent}
+.nuancier input{position:absolute;opacity:0;pointer-events:none}
+.nuancier label{flex:0 0 auto;scroll-snap-align:start;width:40px;height:40px;border-radius:6px;border:2px solid var(--blanc);box-shadow:0 0 0 1px #D9D2C8;cursor:pointer;position:relative}
+.nuancier label.aucune{width:auto;padding:0 10px;display:grid;place-items:center;font-size:12.5px;background:var(--blanc);color:var(--eraza-taupe-lecture)}
+.nuancier input:checked+label{box-shadow:0 0 0 2px var(--eraza-encre-logo)}
+.nuancier input:checked+label:not(.aucune)::after{content:"";position:absolute;inset:0;margin:auto;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.35)}
+.nuancier input:focus-visible+label{outline:2px solid var(--eraza-encre-logo);outline-offset:3px}
+.nuancier input:disabled+label{opacity:.35;cursor:not-allowed}
+.aide{font-size:12px;margin:2px 0 0}
+.aide a{color:var(--eraza-taupe-fonce)}
+
+/* Puces */
+.puces{display:flex;flex-wrap:wrap;gap:7px}
+.puces input{position:absolute;opacity:0;pointer-events:none}
+.puces label{border:1.5px solid var(--trait);background:var(--blanc);border-radius:20px;padding:7px 13px;font-size:13.5px;cursor:pointer;color:var(--eraza-encre-logo);line-height:1.2}
+.puces label em{font-style:normal;color:var(--eraza-taupe-lecture);font-size:12.5px;margin-left:4px}
+.puces input:checked+label{border-color:var(--eraza-encre-logo);background:var(--eraza-encre-logo);color:#fff}
+.puces input:checked+label em{color:#E6DFD6}
+.puces input:focus-visible+label{outline:2px solid var(--eraza-encre-logo);outline-offset:2px}
+
+/* Interrupteur */
+.interrupteur{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--blanc);border:1px solid var(--trait);border-radius:8px;padding:9px 12px;cursor:pointer;margin:0 0 10px;font-size:13.5px;color:var(--eraza-encre-logo)}
+.interrupteur small{display:block;color:var(--eraza-taupe-lecture);font-size:12px}
+.interrupteur input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:42px;height:24px;border-radius:12px;background:#D9D2C8;position:relative;cursor:pointer;margin:0;transition:background .2s}
+.interrupteur input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+.interrupteur input:checked{background:var(--eraza-taupe-fonce)}
+.interrupteur input:checked::after{transform:translateX(18px)}
+
+.suivant{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--eraza-taupe-fonce);color:var(--eraza-taupe-fonce);border-radius:22px;padding:8px 16px;font-weight:600;font-size:13.5px;cursor:pointer}
+.suivant:hover{background:var(--eraza-taupe-fonce);color:#fff}
+.charms-visuel{display:flex;gap:12px;align-items:center;margin:0 0 10px}
+.charms-visuel img{width:84px;height:84px;object-fit:cover;object-position:50% 72%;border-radius:8px}
+.charms-visuel p{margin:0;font-size:12.5px}
+.erreur{color:var(--erreur);font-size:13px;font-weight:500;margin:0 0 8px}
+.erreur:empty{display:none}
+
+/* Récapitulatif */
+.recap{margin:18px 0 0;background:var(--blanc);border:1px solid var(--trait);border-radius:10px;padding:14px 14px 12px}
+.recap h2{font:700 19px/1.2 var(--f-titre);color:var(--eraza-taupe-titre);margin:0 0 8px}
+.recap ul{list-style:none;margin:0;padding:0;font-size:13.5px}
+.recap li{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dashed var(--trait)}
+.recap li span:last-child{white-space:nowrap;color:var(--eraza-encre-logo)}
+.recap .total{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-weight:600;color:var(--eraza-encre-logo)}
+.recap .total output{font-size:19px}
+.qte{display:inline-flex;align-items:center;border:1px solid var(--trait);border-radius:20px}
+.qte button{width:34px;height:34px;border:0;background:none;cursor:pointer;font-size:18px;border-radius:50%;color:var(--eraza-encre-logo)}
+.qte output{min-width:22px;text-align:center}
+.qte-ligne{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13.5px}
+.note{font-size:12px;margin:10px 0 0;line-height:1.45}
+.code{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;border:1.5px dashed var(--eraza-taupe-bouton);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.code b{letter-spacing:.08em;color:var(--eraza-encre-logo)}
+.code button{background:none;border:0;color:var(--eraza-taupe-fonce);font-weight:600;font-size:12px;letter-spacing:.06em;cursor:pointer;padding:6px}
+
+/* Barre d'achat */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(248,246,242,.96);backdrop-filter:blur(6px);border-top:1px solid var(--trait);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px}
+.barre-info{flex:1;min-width:0;font-size:12.5px;line-height:1.3}
+.barre-info b{display:block;color:var(--eraza-encre-logo);font-size:14px}
+.barre-info span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-ajout{flex:0 0 auto;background:var(--eraza-taupe-fonce);color:#fff;border:0;border-radius:28px;height:50px;padding:0 22px;font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.btn-ajout:hover{background:#5E544A}
+
+/* Réassurance */
+.reassurance{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.reassurance li{background:#F1ECE5;border-radius:8px;padding:10px;font-size:12.5px;line-height:1.35}
+.reassurance b{display:block;color:var(--eraza-encre-logo);font-size:13px;margin-bottom:2px}
+
+/* Accordéons d'information */
+.infos{margin:20px 0 0;border-top:1px solid var(--trait)}
+.infos details{border-bottom:1px solid var(--trait)}
+.infos summary{list-style:none;cursor:pointer;padding:14px 0;font:700 17px/1.2 var(--f-titre);color:var(--eraza-taupe-titre);display:flex;justify-content:space-between;align-items:center}
+.infos summary::-webkit-details-marker{display:none}
+.infos summary::after{content:"+";font:400 22px/1 var(--f-texte);color:var(--eraza-taupe-fonce)}
+.infos details[open] summary::after{content:"–"}
+.infos .contenu{padding:0 0 14px;font-size:14px}
+.infos .contenu p{margin:0 0 8px}
+.infos .contenu ul{margin:0 0 8px;padding-left:18px}
+.infos table{width:100%;border-collapse:collapse;font-size:12.5px}
+.infos td{padding:5px 4px;border-bottom:1px solid var(--trait);vertical-align:top}
+.infos td:last-child{white-space:nowrap;text-align:right}
+
+footer{margin:28px 0 0;padding:20px 16px calc(var(--bar-h) + 24px);text-align:center;font-size:12px;border-top:1px solid var(--trait)}
+footer a{color:var(--eraza-taupe-fonce)}
+
+/* Mini-panier */
+.voile{position:fixed;inset:0;background:rgba(35,31,28,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.panier{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--eraza-fond-creme);z-index:50;transform:translateX(100%);transition:transform .25s ease-out;display:flex;flex-direction:column}
+.panier.ouvert{transform:none}
+.panier-tete{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--trait)}
+.panier-tete h2{font:700 21px/1 var(--f-titre);color:var(--eraza-taupe-titre);margin:0}
+.panier-lignes{flex:1;overflow:auto;padding:12px 16px;margin:0;list-style:none}
+.panier-lignes>li{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--trait);font-size:12.5px}
+.panier-lignes img{width:64px;height:84px;object-fit:cover;border-radius:6px}
+.panier-lignes b{color:var(--eraza-encre-logo);font-size:14px}
+.panier-lignes .props{margin:4px 0 0;padding:0;list-style:none;line-height:1.45}
+.panier-lignes .ligne-prix{font-weight:600;color:var(--eraza-encre-logo);white-space:nowrap}
+.panier-pied{padding:14px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--trait);background:var(--blanc)}
+.panier-pied .total{display:flex;justify-content:space-between;font-weight:600;color:var(--eraza-encre-logo);font-size:16px}
+.panier-pied .livraison{font-size:12.5px;margin:6px 0 12px}
+.btn-final{width:100%;min-height:50px;border:0;border-radius:28px;background:var(--eraza-taupe-fonce);color:#fff;font-weight:600;font-size:14px;padding:8px 16px;cursor:not-allowed}
+
+/* Tablette et ordinateur */
+@media (min-width:768px){
+  .rail-photos figure{flex-basis:46%;height:460px}
+  .achat{padding:18px 24px 0}
+  .reassurance{grid-template-columns:repeat(4,1fr)}
+}
+@media (min-width:1024px){
+  :root{--bar-h:0px}
+  .produit{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:48px;padding:16px 24px 0;align-items:start}
+  .rail-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:visible;padding:0}
+  .rail-photos figure{height:auto;aspect-ratio:3/4}
+  .rail-photos figure:first-child{grid-column:1/-1;aspect-ratio:4/3}
+  .compteur{display:none}
+  .achat{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto;padding:0 6px 0 2px;scrollbar-width:thin;scrollbar-color:var(--eraza-taupe-bouton) transparent}
+  h1{font-size:40px}
+  .barre{position:sticky;bottom:0;margin-top:12px;padding:12px 0;border-top:1px solid var(--trait);background:var(--eraza-fond-creme);backdrop-filter:none}
+  .btn-ajout{flex:1}
+  .infos{max-width:760px}
+  footer{padding-bottom:24px}
+}
+@media (max-width:370px){ h1{font-size:28px} .btn-ajout{padding:0 16px;font-size:14px} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="maquette">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="annonce">Livraison offerte en point relais à partir de 90&nbsp;€ d’achat 📦</div>
+<header class="site">
+  <span></span>
+  <a class="logo" href="#" aria-label="Eraza, accueil"><img src="img/logo.webp" alt="Eraza" width="265" height="127"></a>
+  <button class="icon-btn" type="button" id="ouvrir-panier" aria-label="Ouvrir le panier">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <span class="count" id="compte-panier"></span>
+  </button>
+</header>
+
+<main>
+<div class="produit">
+  <section class="galerie" aria-label="Photos du sac Naïa">
+    <div class="rail-photos" id="rail-photos" tabindex="0">
+      <figure><img src="img/naia-1.webp" alt="Sac Naïa bleu électrique, jaune et bleu ciel, franges dessous, posé sur un galet blanc" width="900" height="1599"></figure>
+      <figure><img src="img/naia-2.webp" alt="Naïa arc-en-ciel rose, bleu, jaune et vert citron, franges multicolores" width="900" height="1599" loading="lazy"></figure>
+      <figure><img src="img/naia-3.webp" alt="Naïa vert citron et chocolat avec chaîne dorée" width="720" height="1280" loading="lazy"></figure>
+      <figure><img src="img/naia-4.webp" alt="Naïa porté à l’épaule devant une porte bleue" width="900" height="1600" loading="lazy"></figure>
+      <figure><img src="img/naia-5.webp" alt="Naïa tenu à la main, vu de côté" width="900" height="1600" loading="lazy"></figure>
+      <figure><img src="img/naia-6.webp" alt="Naïa porté au bras" width="900" height="1600" loading="lazy"></figure>
+      <figure><img src="img/naia-7.webp" alt="Naïa porté, franges bleues et jaunes" width="900" height="1600" loading="lazy"></figure>
+      <figure><img src="img/naia-8.webp" alt="Naïa tenu par la poignée, taille M" width="900" height="1600" loading="lazy"></figure>
+      <figure><img src="img/naia-9.webp" alt="Naïa turquoise à grandes franges et chaîne argentée" width="720" height="1280" loading="lazy"></figure>
+    </div>
+    <span class="compteur" id="compteur" aria-hidden="true">1 / 9</span>
+  </section>
+
+  <section class="achat" aria-labelledby="titre-produit">
+    <div class="titre-ligne">
+      <h1 id="titre-produit">Naïa</h1>
+      <p class="prix" style="margin:0"><output id="prix-haut" aria-live="polite">49,00&nbsp;€</output><small id="prix-detail">prix de base, taille&nbsp;S</small></p>
+    </div>
+    <p class="delai">Crocheté à la main à Calais · <strong>fabriqué à la commande, expédié sous 1 à 2&nbsp;semaines</strong></p>
+
+    <fieldset class="taille">
+      <legend>Taille</legend>
+      <div class="segments">
+        <input type="radio" name="taille" id="taille-s" value="S" checked>
+        <label for="taille-s"><b><span>S — sans poignée</span><span>49&nbsp;€</span></b><span>~34 × 15&nbsp;cm</span></label>
+        <input type="radio" name="taille" id="taille-m" value="M">
+        <label for="taille-m"><b><span>M — avec poignée</span><span>59&nbsp;€</span></b><span>~42 × 18&nbsp;cm</span></label>
+      </div>
+    </fieldset>
+
+    <div class="etapes" id="etapes">
+      <!-- 1. Couleurs -->
+      <section class="etape" id="etape-1">
+        <h2><button class="etape-tete" type="button" aria-expanded="true" aria-controls="corps-1" id="tete-1">
+          <span class="num" aria-hidden="true">1</span>
+          <span><span class="etape-nom">Couleurs</span><span class="etape-resume" id="resume-1">À choisir</span></span>
+          <span class="etape-supp" id="supp-1"></span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button></h2>
+        <div class="etape-corps" id="corps-1" role="region" aria-labelledby="tete-1">
+          <p class="erreur" id="erreur-1" role="alert"></p>
+          <fieldset class="champ">
+            <legend>Couleur 1 <span class="oblig">obligatoire</span> <span class="choix" id="nom-c1">· choisissez une teinte</span></legend>
+            <div class="nuancier" id="nuancier-c1"></div>
+          </fieldset>
+          <fieldset class="champ">
+            <legend>Couleur 2 <span class="facult">facultatif</span> <span class="choix" id="nom-c2">· Aucune</span></legend>
+            <div class="nuancier" id="nuancier-c2"></div>
+          </fieldset>
+          <label class="interrupteur" for="plus-couleurs">
+            <span>Vous voulez acheter plus de couleurs&nbsp;?<small>1 à 4 couleurs supplémentaires, +3&nbsp;€ chacune</small></span>
+            <input type="checkbox" id="plus-couleurs">
+          </label>
+          <fieldset class="champ" id="champ-extra" hidden>
+            <legend>Couleurs supplémentaires <span class="oblig">1 à 4</span> <span class="choix" id="nom-extra"></span></legend>
+            <div class="nuancier" id="nuancier-extra"></div>
+          </fieldset>
+          <p class="aide">Un doute sur une couleur&nbsp;? Écrivez-moi&nbsp;: <a href="https://www.instagram.com/eraza_creations/" rel="noopener">@eraza_creations</a></p>
+          <p style="margin:12px 0 0"><button class="suivant" type="button" data-ouvrir="2">Continuer · Finitions</button></p>
+        </div>
+      </section>
+
+      <!-- 2. Finitions -->
+      <section class="etape" id="etape-2">
+        <h2><button class="etape-tete" type="button" aria-expanded="false" aria-controls="corps-2" id="tete-2">
+          <span class="num" aria-hidden="true">2</span>
+          <span><span class="etape-nom">Finitions</span><span class="etape-resume" id="resume-2"></span></span>
+          <span class="etape-supp" id="supp-2"></span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button></h2>
+        <div class="etape-corps" id="corps-2" role="region" aria-labelledby="tete-2" hidden>
+          <fieldset class="champ"><legend>Franges incluses <span class="etat">au choix</span></legend><div class="puces" data-champ="franges"></div></fieldset>
+          <fieldset class="champ"><legend>Supplément franges <span class="facult">facultatif</span></legend><div class="puces" data-champ="suppFranges"></div></fieldset>
+          <fieldset class="champ"><legend>Bouton aimanté</legend><div class="puces" data-champ="bouton"></div></fieldset>
+          <fieldset class="champ"><legend>Fil pailleté</legend><div class="puces" data-champ="fil"></div></fieldset>
+          <p style="margin:4px 0 0"><button class="suivant" type="button" data-ouvrir="3">Continuer · Accessoires</button></p>
+        </div>
+      </section>
+
+      <!-- 3. Accessoires -->
+      <section class="etape" id="etape-3">
+        <h2><button class="etape-tete" type="button" aria-expanded="false" aria-controls="corps-3" id="tete-3">
+          <span class="num" aria-hidden="true">3</span>
+          <span><span class="etape-nom">Accessoires</span><span class="etape-resume" id="resume-3"></span></span>
+          <span class="etape-supp" id="supp-3"></span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button></h2>
+        <div class="etape-corps" id="corps-3" role="region" aria-labelledby="tete-3" hidden>
+          <fieldset class="champ"><legend>Chaîne 120&nbsp;cm</legend><div class="puces" data-champ="chaine"></div></fieldset>
+          <fieldset class="champ"><legend>Bandoulière en crochet</legend><div class="puces" data-champ="bandouliere"></div></fieldset>
+          <div class="charms-visuel"><img src="img/charms.webp" alt="Les quatre charms : Citron, Coquillages, Grèce et Plage" width="600" height="1067" loading="lazy"><p>Citron, Coquillages, Grèce ou Plage&nbsp;: un petit bijou accroché au sac.</p></div>
+          <fieldset class="champ"><legend>Charms</legend><div class="puces" data-champ="charms"></div></fieldset>
+        </div>
+      </section>
+    </div>
+
+    <section class="recap" aria-labelledby="titre-recap">
+      <h2 id="titre-recap">Votre Naïa</h2>
+      <ul id="recap-lignes"></ul>
+      <div class="qte-ligne">
+        <span id="label-qte">Quantité</span>
+        <span class="qte" role="group" aria-labelledby="label-qte">
+          <button type="button" id="moins" aria-label="Diminuer la quantité">−</button>
+          <output id="qte" aria-live="polite">1</output>
+          <button type="button" id="plus" aria-label="Augmenter la quantité">+</button>
+        </span>
+      </div>
+      <div class="total"><span>Total</span><output id="total-recap">49,00&nbsp;€</output></div>
+      <p class="note">Création personnalisée, crochetée spécialement pour vous&nbsp;: vérifiez vos choix, elle n’est ni annulable ni remboursable une fois la fabrication lancée. Une erreur&nbsp;? Écrivez dans les 24&nbsp;heures.</p>
+      <div class="code"><span>−10&nbsp;% sur votre première commande&nbsp;: <b id="code-texte">BIENVENUE10</b></span><button type="button" id="copier">COPIER</button></div>
+    </section>
+
+    <div class="barre" id="barre">
+      <div class="barre-info"><b id="barre-titre">Naïa · S</b><span id="barre-etat">Couleur 1 à choisir</span></div>
+      <button class="btn-ajout" type="button" id="ajouter">Ajouter · <span id="prix-bouton">49,00&nbsp;€</span></button>
+    </div>
+  </section>
+</div>
+
+<div style="padding:0 16px;max-width:1280px;margin:0 auto">
+  <ul class="reassurance">
+    <li><b>100&nbsp;% fait main</b>Crocheté en France, à Calais, sans machine</li>
+    <li><b>Fabriqué à la commande</b>Expédié sous 1 à 2&nbsp;semaines</li>
+    <li><b>Point relais offert</b>Dès 90&nbsp;€ d’achat en France métropolitaine</li>
+    <li><b>Retrait gratuit à Calais</b>En main propre, sur rendez-vous</li>
+  </ul>
+
+  <div class="infos" id="infos">
+    <details open>
+      <summary>Description</summary>
+      <div class="contenu">
+        <p>Sac Naïa, bouton aimanté (or ou argent) et franges incluses (dessous ou côté, au choix). S&nbsp;: ~34 × 15&nbsp;cm, sans poignée · M&nbsp;: ~42 × 18&nbsp;cm, avec poignée.</p>
+        <ul>
+          <li>Modèle entièrement personnalisable</li>
+          <li>100&nbsp;% crocheté à la main</li>
+          <li>Les dimensions peuvent varier de 1 à 2&nbsp;cm (le charme du fait main)</li>
+        </ul>
+        <p><em>Fabriqué à la commande — expédié sous 1 à 2&nbsp;semaines.</em></p>
+      </div>
+    </details>
+    <details>
+      <summary>Matière et entretien</summary>
+      <div class="contenu">
+        <p>Fil 100&nbsp;% coton (fil t-shirt).</p>
+        <p><strong>Entretien</strong>&nbsp;: lavage doux à la main, séchage à plat à l’air libre. Le lavage en machine et le sèche-linge sont déconseillés et peuvent déformer la pièce.</p>
+        <p>S’agissant d’articles faits main, de légères variations de teinte et de dimensions (1 à 2&nbsp;cm) peuvent exister et ne constituent pas un défaut.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Fabrication et livraison</summary>
+      <div class="contenu">
+        <p>Les créations personnalisables sont réalisées à la main, à la commande. Comptez 1 à 2&nbsp;semaines de fabrication avant l’expédition (hors temps de transport). En période de forte affluence, ces délais peuvent être allongés&nbsp;; une information est alors affichée sur le site.</p>
+        <table>
+          <tr><td>Calais et alentours · retrait en main propre</td><td>Gratuit</td></tr>
+          <tr><td>France métropolitaine et Monaco · Point Relais (Mondial Relay)</td><td>4,90&nbsp;€, offerte dès 90&nbsp;€</td></tr>
+          <tr><td>France métropolitaine et Monaco · domicile Colissimo</td><td>6,90&nbsp;€</td></tr>
+          <tr><td>Belgique, Espagne, Italie, Luxembourg, Pays-Bas, Pologne, Portugal · Point Relais</td><td>10,90&nbsp;€</td></tr>
+          <tr><td>Reste de l’Union européenne · Colissimo International</td><td>16,90&nbsp;€</td></tr>
+          <tr><td>Suisse, Royaume-Uni, Norvège · Colissimo International</td><td>24,90&nbsp;€</td></tr>
+        </table>
+        <p style="margin-top:8px">Un e-mail contenant le numéro de suivi est envoyé dès la remise du colis au transporteur.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Retours et échanges</summary>
+      <div class="contenu">
+        <p>Chaque création personnalisable est crochetée spécialement pour vous, dans les couleurs et finitions que vous avez choisies&nbsp;: conformément à l’article L221-28 3° du Code de la consommation, elle n’ouvre pas de droit de rétractation et n’est ni annulable ni remboursable une fois la fabrication lancée.</p>
+        <p>Une erreur dans votre commande&nbsp;? Contactez-nous dans les 24&nbsp;heures&nbsp;: si la fabrication n’a pas commencé, nous ferons notre possible pour la modifier ou l’annuler.</p>
+        <p>Article défectueux, abîmé ou non conforme&nbsp;: écrivez-nous sous 7&nbsp;jours à <a href="mailto:erazacreations@gmail.com">erazacreations@gmail.com</a> avec des photographies.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<footer>© 2026 Eraza · <a href="#">Conditions générales et politiques</a></footer>
+</main>
+
+<div class="voile" id="voile"></div>
+<aside class="panier" id="panier" role="dialog" aria-modal="true" aria-labelledby="titre-panier" aria-hidden="true">
+  <div class="panier-tete">
+    <h2 id="titre-panier">Votre panier</h2>
+    <button class="icon-btn" type="button" id="fermer-panier" aria-label="Fermer le panier">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <ul class="panier-lignes" id="panier-lignes"></ul>
+  <div class="panier-pied">
+    <div class="total"><span>Sous-total</span><output id="panier-total">0,00&nbsp;€</output></div>
+    <p class="livraison" id="panier-livraison"></p>
+    <button class="btn-final" type="button" aria-disabled="true">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const NB = " ";
+  const eur = n => n.toFixed(2).replace(".", ",") + NB + "€";
+  const plus = n => "+" + (Number.isInteger(n) ? n : n.toFixed(2).replace(".", ",")) + NB + "€";
+
+  // Relevé sur eraza.fr/products/naia (appli d'options, 22/10/2026) : noms et teintes exacts.
+  const COULEURS = [["Blanc","#ffffff"],["Blanc cassé","#F5F0E6"],["Beige sable","#E3D5BA"],["Beige foncé","#C7B299"],["Marron","#7B5B3F"],["Noisette","#A97C50"],["Chocolat","#4E342E"],["Bordeaux","#6D1A2D"],["Rouge","#C6202E"],["Orange","#F06A1D"],["Corail","#FF7F6A"],["Jaune","#F5C218"],["Jaune pâle","#F3E693"],["Vert citron","#C4D62E"],["Vert pistache","#93C572"],["Vert","#3D9B4F"],["Kaki","#7A7A52"],["Vert sauge","#9CAF88"],["Vert sapin","#2E5339"],["Bleu marine","#1E2A4A"],["Bleu électrique","#1D4FA8"],["Bleu jean","#5A7CA6"],["Bleu ciel","#A7CBE8"],["Bleu turquoise","#57C8DE"],["Aubergine","#4A2545"],["Violet","#7C4DA0"],["Lilas","#C8A2C8"],["Gris","#9E9E9E"],["Noir","#1A1A1A"],["Fushia","#E03080"],["Vieux rose","#C09090"],["Rose","#F0B0C0"]];
+  const BASE = { S: 49, M: 59 };
+  const TAILLE_NOM = { S: "S — sans poignée", M: "M — avec poignée" };
+  const CHAMPS = {
+    franges:     { nom: "Franges incluses", vals: [["Dessous",0],["Côté",0]] },
+    suppFranges: { nom: "Supplément franges", vals: [["Non",0],["Oui",5]] },
+    bouton:      { nom: "Bouton aimanté", vals: [["Non",0],["Or",0],["Argent",0]] },
+    fil:         { nom: "Fil pailleté", vals: [["Aucune",0],["Or",3],["Argent",3]] },
+    chaine:      { nom: "Chaîne 120 cm", vals: [["Aucune",0],["Or",10],["Argent",10]] },
+    bandouliere: { nom: "Bandoulière en crochet", vals: [["Aucune",0],["Courte",10],["Longue",15]] },
+    charms:      { nom: "Charms", vals: [["Aucune",0],["Coquillages",5],["Plage",5],["Grèce",5],["Citron",5]] }
+  };
+  const PRIX_EXTRA = 3, MAX_EXTRA = 4;
+
+  const etat = { taille: "S", c1: null, c2: "Aucune", plus: false, extra: [], qte: 1,
+    franges: "Dessous", suppFranges: "Non", bouton: "Non", fil: "Aucune", chaine: "Aucune", bandouliere: "Aucune", charms: "Aucune" };
+  const panier = [];
+  const $ = id => document.getElementById(id);
+  const prixVal = (champ) => CHAMPS[champ].vals.find(v => v[0] === etat[champ])[1];
+
+  // --- Nuanciers
+  function nuancier(conteneur, nom, type, avecAucune) {
+    const el = $(conteneur);
+    const items = avecAucune ? [["Aucune", null], ...COULEURS] : COULEURS;
+    items.forEach(([n, hex], i) => {
+      const id = `${nom}-${i}`;
+      const inp = document.createElement("input");
+      inp.type = type; inp.name = nom; inp.id = id; inp.value = n;
+      if (avecAucune && i === 0) inp.checked = true;
+      const lab = document.createElement("label");
+      lab.htmlFor = id; lab.title = n;
+      if (hex) { lab.style.background = hex; lab.innerHTML = `<span class="sr">${n}</span>`; }
+      else { lab.className = "aucune"; lab.textContent = "Aucune"; }
+      el.append(inp, lab);
+    });
+  }
+  nuancier("nuancier-c1", "c1", "radio", false);
+  nuancier("nuancier-c2", "c2", "radio", true);
+  nuancier("nuancier-extra", "extra", "checkbox", false);
+
+  // --- Puces
+  document.querySelectorAll(".puces[data-champ]").forEach(el => {
+    const champ = el.dataset.champ;
+    CHAMPS[champ].vals.forEach(([v, p], i) => {
+      const id = `${champ}-${i}`;
+      const inp = document.createElement("input");
+      inp.type = "radio"; inp.name = champ; inp.id = id; inp.value = v;
+      if (etat[champ] === v) inp.checked = true;
+      const lab = document.createElement("label");
+      lab.htmlFor = id;
+      lab.innerHTML = v + (p ? `<em>${plus(p)}</em>` : "");
+      el.append(inp, lab);
+      inp.addEventListener("change", () => { etat[champ] = v; maj(); });
+    });
+  });
+
+  document.querySelectorAll('input[name="taille"]').forEach(i => i.addEventListener("change", () => { etat.taille = i.value; maj(); }));
+  document.querySelectorAll('input[name="c1"]').forEach(i => i.addEventListener("change", () => { etat.c1 = i.value; $("erreur-1").textContent = ""; maj(); }));
+  document.querySelectorAll('input[name="c2"]').forEach(i => i.addEventListener("change", () => { etat.c2 = i.value; maj(); }));
+  document.querySelectorAll('input[name="extra"]').forEach(i => i.addEventListener("change", () => {
+    etat.extra = [...document.querySelectorAll('input[name="extra"]:checked')].map(x => x.value);
+    if (etat.extra.length) $("erreur-1").textContent = "";
+    maj();
+  }));
+  $("plus-couleurs").addEventListener("change", e => {
+    etat.plus = e.target.checked;
+    $("champ-extra").hidden = !etat.plus;
+    if (!etat.plus) { etat.extra = []; document.querySelectorAll('input[name="extra"]').forEach(x => x.checked = false); }
+    maj();
+  });
+
+  // --- Calcul
+  function lignes() {
+    const l = [[`Taille ${TAILLE_NOM[etat.taille]}`, BASE[etat.taille]]];
+    if (etat.extra.length) l.push([`Couleur${etat.extra.length > 1 ? "s" : ""} en plus&nbsp;: ${etat.extra.join(", ")}`, etat.extra.length * PRIX_EXTRA]);
+    ["suppFranges","fil","chaine","bandouliere","charms"].forEach(c => {
+      const p = prixVal(c);
+      if (p) l.push([c === "suppFranges" ? "Supplément franges" : `${CHAMPS[c].nom} ${etat[c].toLowerCase()}`, p]);
+    });
+    return l;
+  }
+  const unitaire = () => lignes().reduce((s, x) => s + x[1], 0);
+
+  function maj() {
+    const u = unitaire(), tot = u * etat.qte;
+    $("prix-haut").textContent = eur(u);
+    const nbSupp = lignes().length - 1;
+    $("prix-detail").textContent = nbSupp ? `taille ${etat.taille}, options comprises` : `prix de base, taille ${etat.taille}`;
+    $("prix-bouton").textContent = eur(tot);
+    $("total-recap").textContent = eur(tot);
+    $("qte").textContent = etat.qte;
+    $("moins").disabled = etat.qte <= 1;
+
+    // Nuanciers : noms affichés
+    $("nom-c1").textContent = etat.c1 ? "· " + etat.c1 : "· choisissez une teinte";
+    $("nom-c2").textContent = "· " + etat.c2;
+    $("nom-extra").textContent = etat.extra.length ? "· " + etat.extra.join(", ") + " (" + plus(etat.extra.length * PRIX_EXTRA) + ")" : "";
+    const plein = etat.extra.length >= MAX_EXTRA;
+    document.querySelectorAll('input[name="extra"]').forEach(x => x.disabled = plein && !x.checked);
+
+    // Résumés des étapes
+    const coul = [etat.c1 || "Couleur 1 à choisir"];
+    if (etat.c2 !== "Aucune") coul.push(etat.c2);
+    $("resume-1").textContent = coul.join(" + ") + (etat.extra.length ? ` + ${etat.extra.length} autre${etat.extra.length > 1 ? "s" : ""}` : "");
+    $("supp-1").textContent = etat.extra.length ? plus(etat.extra.length * PRIX_EXTRA) : "";
+    $("resume-2").textContent = [
+      "Franges " + etat.franges.toLowerCase() + (etat.suppFranges === "Oui" ? " + supplément" : ""),
+      etat.bouton === "Non" ? "sans bouton aimanté" : "bouton " + etat.bouton.toLowerCase(),
+      etat.fil === "Aucune" ? "sans fil pailleté" : "fil pailleté " + etat.fil.toLowerCase()
+    ].join(" · ");
+    const s2 = prixVal("suppFranges") + prixVal("fil");
+    $("supp-2").textContent = s2 ? plus(s2) : "";
+    const acc = [];
+    if (etat.chaine !== "Aucune") acc.push("Chaîne " + etat.chaine.toLowerCase());
+    if (etat.bandouliere !== "Aucune") acc.push("Bandoulière " + etat.bandouliere.toLowerCase());
+    if (etat.charms !== "Aucune") acc.push("Charms " + etat.charms);
+    $("resume-3").textContent = acc.length ? acc.join(" · ") : "Aucun accessoire";
+    const s3 = prixVal("chaine") + prixVal("bandouliere") + prixVal("charms");
+    $("supp-3").textContent = s3 ? plus(s3) : "";
+    $("etape-1").classList.toggle("fait", !!etat.c1 && (!etat.plus || etat.extra.length > 0));
+    $("etape-2").classList.add("fait"); $("etape-3").classList.add("fait");
+
+    // Récapitulatif
+    const ul = $("recap-lignes"); ul.innerHTML = "";
+    const li0 = document.createElement("li");
+    li0.innerHTML = `<span>${etat.c1 ? "Couleurs&nbsp;: " + coul.join(", ") : "Couleur 1 à choisir"}</span><span>${etat.c1 ? "incluses" : ""}</span>`;
+    lignes().forEach(([n, p], i) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${n}</span><span>${i ? plus(p) : eur(p)}</span>`;
+      ul.append(li);
+      if (i === 0) ul.append(li0);
+    });
+
+    // Barre
+    $("barre-titre").textContent = `Naïa · ${etat.taille}` + (etat.qte > 1 ? ` × ${etat.qte}` : "");
+    $("barre-etat").textContent = !etat.c1 ? "Couleur 1 à choisir" : (etat.plus && !etat.extra.length ? "Couleurs supplémentaires à choisir" : coul.join(" + ") + (nbSupp ? ` · ${nbSupp} option${nbSupp > 1 ? "s" : ""}` : ""));
+  }
+
+  // --- Étapes repliables
+  function ouvrir(n, focus) {
+    document.querySelectorAll(".etape-tete").forEach((b, i) => {
+      const on = i + 1 === n;
+      b.setAttribute("aria-expanded", on);
+      $("corps-" + (i + 1)).hidden = !on;
+    });
+    if (focus) { const t = $("tete-" + n); t.scrollIntoView({ behavior: "smooth", block: "start" }); t.focus({ preventScroll: true }); }
+  }
+  document.querySelectorAll(".etape-tete").forEach((b, i) => b.addEventListener("click", () => {
+    const ouvert = b.getAttribute("aria-expanded") === "true";
+    if (ouvert) { b.setAttribute("aria-expanded", "false"); $("corps-" + (i + 1)).hidden = true; }
+    else ouvrir(i + 1, false);
+  }));
+  document.querySelectorAll("[data-ouvrir]").forEach(b => b.addEventListener("click", () => ouvrir(+b.dataset.ouvrir, true)));
+
+  // --- Quantité
+  $("moins").addEventListener("click", () => { if (etat.qte > 1) { etat.qte--; maj(); } });
+  $("plus").addEventListener("click", () => { etat.qte++; maj(); });
+
+  // --- Code
+  $("copier").addEventListener("click", () => {
+    (navigator.clipboard ? navigator.clipboard.writeText("BIENVENUE10") : Promise.reject()).catch(() => {});
+    $("copier").textContent = "COPIÉ"; setTimeout(() => $("copier").textContent = "COPIER", 1600);
+  });
+
+  // --- Panier
+  let dernierFocus = null;
+  function ouvrirPanier() {
+    dernierFocus = document.activeElement;
+    $("voile").classList.add("ouvert"); $("panier").classList.add("ouvert"); $("panier").setAttribute("aria-hidden", "false");
+    rendrePanier(); $("fermer-panier").focus();
+  }
+  function fermerPanier() {
+    $("voile").classList.remove("ouvert"); $("panier").classList.remove("ouvert"); $("panier").setAttribute("aria-hidden", "true");
+    if (dernierFocus) dernierFocus.focus();
+  }
+  function rendrePanier() {
+    const ul = $("panier-lignes"); ul.innerHTML = "";
+    if (!panier.length) ul.innerHTML = "<li style='display:block'>Votre panier est vide.</li>";
+    panier.forEach(a => {
+      const li = document.createElement("li");
+      li.innerHTML = `<img src="img/naia-1.webp" alt=""><div><b>Naïa</b><div>${TAILLE_NOM[a.taille]} · quantité ${a.qte}</div><ul class="props">${a.props.map(p => `<li>${p}</li>`).join("")}</ul></div><span class="ligne-prix">${eur(a.total)}</span>`;
+      ul.append(li);
+    });
+    const tot = panier.reduce((s, a) => s + a.total, 0);
+    $("panier-total").textContent = eur(tot);
+    $("panier-livraison").textContent = tot >= 90 ? "Livraison en point relais offerte (France métropolitaine)." : `Plus que ${eur(90 - tot)} pour la livraison offerte en point relais (France métropolitaine).`;
+    const n = panier.reduce((s, a) => s + a.qte, 0);
+    $("compte-panier").textContent = n || "";
+  }
+  $("ajouter").addEventListener("click", () => {
+    if (!etat.c1) { ouvrir(1, true); $("erreur-1").textContent = "Choisissez d’abord la couleur principale (Couleur 1)."; return; }
+    if (etat.plus && !etat.extra.length) { ouvrir(1, true); $("erreur-1").textContent = "Choisissez 1 à 4 couleurs supplémentaires, ou désactivez l’option."; return; }
+    const props = [`Couleur 1&nbsp;: ${etat.c1}`];
+    if (etat.c2 !== "Aucune") props.push(`Couleur 2&nbsp;: ${etat.c2}`);
+    if (etat.extra.length) props.push(`Couleurs supplémentaires&nbsp;: ${etat.extra.join(", ")}`);
+    Object.keys(CHAMPS).forEach(c => { if (c === "suppFranges" && etat[c] === "Non") return; props.push(`${CHAMPS[c].nom}&nbsp;: ${etat[c]}`); });
+    panier.push({ taille: etat.taille, qte: etat.qte, props, total: unitaire() * etat.qte });
+    ouvrirPanier();
+  });
+  $("ouvrir-panier").addEventListener("click", ouvrirPanier);
+  $("fermer-panier").addEventListener("click", fermerPanier);
+  $("voile").addEventListener("click", fermerPanier);
+  document.addEventListener("keydown", e => {
+    if (!$("panier").classList.contains("ouvert")) return;
+    if (e.key === "Escape") fermerPanier();
+    if (e.key === "Tab") {
+      const f = [...$("panier").querySelectorAll("button")];
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+
+  // --- Galerie : compteur
+  const rail = $("rail-photos");
+  rail.addEventListener("scroll", () => {
+    const figs = [...rail.children]; const x = rail.scrollLeft + rail.clientWidth / 2;
+    let i = figs.findIndex(f => f.offsetLeft + f.offsetWidth > x); if (i < 0) i = figs.length - 1;
+    $("compteur").textContent = `${i + 1} / ${figs.length}`;
+  }, { passive: true });
+
+  // --- Infos : sur ordinateur, sous la colonne d'achat
+
+  maj();
+})();
+</script>
+</body>
+</html>

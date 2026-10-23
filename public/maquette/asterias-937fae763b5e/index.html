@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Boucles ⟩ GARANCE · Asterias Bijoux (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/p1.webp">
+<link rel="icon" href="data:,">
+<style>
+/* Couleurs relevées sur asterias-bijoux.com (variables du thème Shopify, 22/10/2026) */
+:root{
+  --asterias-color-background:#ffffff;          /* --color-background 255,255,255 */
+  --asterias-color-foreground:#655f5f;          /* --color-foreground 101,95,95 */
+  --asterias-color-button:#e9dae2;              /* --color-button 233,218,226 (rose poudré) */
+  --asterias-color-button-text:#655f5f;         /* --color-button-text */
+  --asterias-color-link:#242833;                /* --color-link / --color-secondary-button-text 36,40,51 */
+  --asterias-color-utility-bar:#eae5e2;         /* .utility-bar color-scheme-2 234,229,226 */
+  --asterias-color-utility-text:#5c4d45;        /* rgba(40,19,4,.75) sur #eae5e2, aplati */
+  --asterias-color-contrast:#bfbfbf;            /* --color-background-contrast 191,191,191 */
+  --asterias-font:"Times New Roman", Tinos, Times, serif; /* --font-body-family / --font-heading-family */
+  --line:rgba(101,95,95,.18);
+  --soft:#f8f4f6;
+  --ink:#4a4545;
+  --radius:4px;
+  --gutter:20px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--asterias-color-background);color:var(--asterias-color-foreground);font-family:var(--asterias-font);font-size:16px;line-height:1.55;letter-spacing:.6px}
+img{max-width:100%;display:block}
+a{color:var(--asterias-color-link)}
+button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--asterias-color-link);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Bandeau maquette */
+.mock{background:#1f1d1d;color:#e9e4e4;font:12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.2px;text-align:center;padding:5px 10px}
+
+/* Barre d'annonce (leurs mots) */
+.utility{background:var(--asterias-color-utility-bar);color:var(--asterias-color-utility-text);font-size:13.5px;text-align:center;padding:6px 12px;border-bottom:1px solid rgba(101,95,95,.12);height:31px;overflow:hidden;position:relative}
+.utility p{margin:0;position:absolute;inset:6px 12px auto;transition:opacity .5s,transform .5s}
+.utility p[aria-hidden="true"]{opacity:0;transform:translateY(6px)}
+
+/* En-tête */
+.header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:4px 10px;height:58px;border-bottom:1px solid var(--line);background:#fff;position:relative;z-index:5}
+.header .logo{justify-self:center;display:block}
+.header .logo img{height:42px;width:auto}
+.icon-btn{width:44px;height:44px;border:0;background:none;display:grid;place-items:center;border-radius:50%;position:relative;color:var(--asterias-color-foreground)}
+.icon-btn svg{width:24px;height:24px}
+.cart-count{position:absolute;top:5px;right:3px;min-width:18px;height:18px;border-radius:9px;background:var(--asterias-color-foreground);color:#fff;font:600 11px/18px system-ui,sans-serif;letter-spacing:0;text-align:center;padding:0 4px}
+.cart-count[hidden]{display:none}
+.nav{display:none}
+.drawer-nav{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);padding:6px var(--gutter) 14px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+.drawer-nav[hidden]{display:none}
+.drawer-nav a,.nav a{display:block;text-decoration:none;color:var(--asterias-color-foreground);letter-spacing:1px;font-size:15px;padding:10px 0}
+.drawer-nav a+a{border-top:1px solid var(--line)}
+
+/* Produit */
+.product{max-width:1200px;margin:0 auto}
+.gallery{position:relative}
+.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:clamp(300px,46svh,520px);background:var(--soft)}
+.slides::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;height:100%}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide:first-child img{object-position:50% 24%}
+.slide:nth-child(2) img{object-position:50% 40%}
+.dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:2px}
+.dot{width:28px;height:28px;border:0;background:none;display:grid;place-items:center;padding:0}
+.dot::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(101,95,95,.5)}
+.dot[aria-current="true"]::before{background:var(--asterias-color-foreground);box-shadow:0 0 0 1px #fff}
+
+.info{padding:14px var(--gutter) 0}
+.vendor{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;margin:0 0 2px;color:var(--asterias-color-foreground)}
+h1{font-weight:400;font-size:31px;line-height:1.1;margin:0;color:var(--asterias-color-foreground);letter-spacing:.6px}
+.proof{list-style:none;margin:9px 0 0;padding:0;display:grid;gap:3px;font-size:14px;line-height:1.35;color:var(--ink)}
+.proof li{display:flex;gap:7px;align-items:baseline}
+.proof .star{color:#c39aa9;font-size:12px;flex:none;transform:translateY(-1px)}
+.price-row{display:flex;align-items:baseline;gap:10px;margin:10px 0 0;flex-wrap:wrap}
+.price{font-size:20px;letter-spacing:1.3px;color:var(--asterias-color-foreground)}
+.tax{font-size:12px;color:var(--asterias-color-foreground);letter-spacing:.4px}
+.buy{display:flex;gap:10px;margin-top:10px}
+.qty{display:flex;align-items:center;border:1px solid var(--asterias-color-foreground);border-radius:var(--radius);height:50px;flex:none}
+.qty button{width:38px;height:100%;border:0;background:none;font-size:20px;line-height:1}
+.qty button:disabled{opacity:.35;cursor:default}
+.qty output{width:24px;text-align:center;font-size:16px}
+.btn{flex:1;min-width:0;height:50px;border:0;border-radius:var(--radius);background:var(--asterias-color-foreground);color:#fff;font-size:15.5px;letter-spacing:.8px;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 12px}
+.btn:hover{background:#544e4e}
+.btn .btn-price{opacity:.85;font-size:14px}
+.btn .btn-price::before{content:"·";margin-right:8px}
+@media (max-width:379px){.btn .btn-price{display:none}}
+.ship{margin:10px 0 0;font-size:13.5px;line-height:1.4;color:var(--ink);display:grid;gap:3px}
+.ship p{margin:0;display:flex;gap:8px;align-items:flex-start}
+.ship svg{width:17px;height:17px;flex:none;margin-top:1px;color:var(--asterias-color-foreground)}
+.ship strong{font-weight:700;color:var(--asterias-color-foreground)}
+
+.badges{list-style:none;margin:26px 0 0;padding:16px 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.badges li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.3}
+.badges svg{width:26px;height:26px;flex:none;color:var(--asterias-color-foreground)}
+.badges b{display:block;font-weight:400;color:var(--asterias-color-foreground);letter-spacing:.5px}
+.badges span{display:block;font-size:12.5px;color:var(--ink);opacity:.85;margin-top:2px}
+
+.acc{margin-top:8px}
+.acc-item{border-bottom:1px solid var(--line)}
+.acc-item h2{margin:0;font-size:inherit;font-weight:400}
+.acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:none;border:0;padding:16px 0;text-align:left;font-size:16px;letter-spacing:.8px;color:var(--asterias-color-foreground)}
+.acc-btn svg{width:14px;height:14px;transition:transform .2s;flex:none}
+.acc-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.acc-panel{padding:0 0 18px;font-size:15px;color:var(--ink)}
+.acc-panel[hidden]{display:none}
+.acc-panel p{margin:0 0 10px}
+.acc-panel ul{margin:0 0 10px;padding-left:18px}
+.acc-panel li{margin:3px 0}
+.acc-panel h3{font-size:13px;letter-spacing:1.6px;text-transform:uppercase;font-weight:400;margin:14px 0 6px;color:var(--asterias-color-foreground)}
+.acc-panel h3:first-child{margin-top:0}
+.rates{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 10px}
+.rates td{padding:5px 0;border-bottom:1px dotted var(--line)}
+.rates td:last-child{text-align:right}
+
+.welcome{margin:26px 0 0;background:var(--soft);border:1px solid #efe3e9;border-radius:var(--radius);padding:20px 18px;text-align:center}
+.welcome h2{font-weight:400;font-size:15.5px;letter-spacing:1.4px;margin:0 0 4px;color:var(--asterias-color-foreground)}
+.welcome p{margin:0 0 12px;font-size:15px}
+.welcome form{display:flex;gap:8px;max-width:420px;margin:0 auto}
+.welcome label{flex:1;min-width:0}
+.welcome input{width:100%;height:46px;border:1px solid var(--asterias-color-foreground);border-radius:var(--radius);padding:0 12px;font:inherit;font-size:15px;background:#fff;color:var(--asterias-color-link)}
+.welcome button{height:46px;border:0;border-radius:var(--radius);background:var(--asterias-color-button);color:var(--asterias-color-link);padding:0 14px;white-space:nowrap}
+.welcome .note{font-size:13px;margin:10px 0 0;min-height:1em}
+
+.stores{margin:26px 0 0}
+.stores h2,.more h2{font-weight:400;font-size:13px;letter-spacing:2.4px;text-transform:uppercase;margin:0 0 10px;color:var(--asterias-color-foreground)}
+.stores ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
+.stores li b{font-weight:400;color:var(--asterias-color-foreground);letter-spacing:.6px}
+.stores li span{display:block;font-size:13px;color:var(--ink);opacity:.85}
+
+.more{padding:34px var(--gutter) 10px;max-width:1200px;margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.card a{text-decoration:none;color:var(--asterias-color-foreground);display:block}
+.card img{aspect-ratio:3/4;width:100%;height:auto;object-fit:cover;background:var(--soft)}
+.card .t{font-size:13.5px;line-height:1.25;margin:8px 0 2px;letter-spacing:.3px}
+.card .p{font-size:13.5px;letter-spacing:1px}
+.card button{margin-top:8px;width:100%;height:38px;border:1px solid var(--asterias-color-foreground);background:#fff;border-radius:var(--radius);font-size:13.5px;color:var(--asterias-color-foreground)}
+.card button:hover{background:var(--asterias-color-button)}
+
+footer{margin-top:40px;border-top:1px solid var(--line);padding:26px var(--gutter) 110px;text-align:center;font-size:13px;color:var(--asterias-color-foreground)}
+footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin-bottom:12px}
+footer a{color:var(--asterias-color-foreground);text-decoration:none;letter-spacing:1px;font-size:12.5px}
+
+/* Barre d'achat collante (mobile) */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 20px rgba(0,0,0,.06);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;transform:translateY(110%);transition:transform .25s}
+.sticky.show{transform:none}
+.sticky img{width:42px;height:52px;object-fit:cover;border-radius:2px}
+.sticky .s-txt{flex:1;min-width:0;font-size:14px;line-height:1.25}
+.sticky .s-txt b{display:block;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky .btn{flex:none;height:46px;padding:0 18px}
+
+/* Mini-panier */
+.overlay{position:fixed;inset:0;background:rgba(36,40,51,.42);z-index:40;opacity:0;transition:opacity .2s}
+.overlay.show{opacity:1}
+.overlay[hidden],.cart[hidden]{display:none}
+.cart{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:41;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s;box-shadow:-10px 0 30px rgba(0,0,0,.08)}
+.cart.show{transform:none}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:12px 12px 12px var(--gutter);border-bottom:1px solid var(--line)}
+.cart-head h2{margin:0;font-weight:400;font-size:18px;letter-spacing:1.5px}
+.cart-body{flex:1;overflow-y:auto;padding:14px var(--gutter)}
+.freeship{font-size:13.5px;margin:0 0 6px;color:var(--ink)}
+.bar{height:5px;background:#efe8ec;border-radius:3px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:#c39aa9;width:0;transition:width .3s}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.line img{width:64px;height:80px;object-fit:cover;background:var(--soft)}
+.line .n{font-size:14.5px;line-height:1.25;margin:0 0 6px}
+.line .qty{height:34px;width:max-content}
+.line .qty button{width:30px;font-size:17px}
+.line .lp{font-size:14.5px;letter-spacing:.8px;white-space:nowrap}
+.remove{background:none;border:0;padding:4px 0;margin-top:4px;font-size:12.5px;text-decoration:underline;color:var(--ink);display:block}
+.empty{font-size:15px;text-align:center;padding:30px 0}
+.upsell{margin-top:18px}
+.upsell h3{font-weight:400;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px}
+.upsell-row{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:6px 0}
+.upsell-row img{width:48px;height:60px;object-fit:cover}
+.upsell-row span{font-size:13.5px;line-height:1.25}
+.upsell-row button{height:34px;border:1px solid var(--asterias-color-foreground);background:#fff;border-radius:var(--radius);font-size:13px;padding:0 10px}
+.cart-foot{border-top:1px solid var(--line);padding:14px var(--gutter) calc(16px + env(safe-area-inset-bottom))}
+.sum{display:flex;justify-content:space-between;font-size:14.5px;margin:0 0 4px}
+.sum.total{font-size:17px;margin:8px 0 12px;color:var(--asterias-color-link)}
+.sum small{font-size:12.5px;opacity:.8}
+.checkout{width:100%;min-height:50px;border:0;border-radius:var(--radius);background:var(--asterias-color-button);color:var(--asterias-color-link);font-size:14.5px;line-height:1.3;padding:8px 14px;letter-spacing:.6px}
+.cart-note{font-size:12px;text-align:center;margin:8px 0 0;opacity:.85}
+
+@media (min-width:768px){
+  :root{--gutter:32px}
+  .slides{height:clamp(420px,62vh,640px)}
+  .cards{gap:18px}
+  .card .t,.card .p{font-size:15px}
+  .badges{grid-template-columns:repeat(4,1fr)}
+  .welcome{padding:24px}
+}
+@media (min-width:1024px){
+  .header{grid-template-columns:200px 1fr 200px;height:auto;padding:14px 48px 0;grid-template-rows:auto auto}
+  .header .menu-btn{display:none}
+  .header .logo{grid-column:2}
+  .header .logo img{height:58px}
+  .header .cart-btn{grid-column:3;justify-self:end}
+  .nav{display:flex;grid-column:1/4;justify-content:center;gap:30px;padding:8px 0 6px}
+  .nav a{font-size:14.5px;padding:8px 0}
+  .drawer-nav{display:none!important}
+  .product{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;padding:36px 48px 0}
+  .slides{display:grid;gap:14px;height:auto;overflow:visible;background:none;scroll-snap-type:none}
+  .slide{height:auto}
+  .slide img{height:auto;aspect-ratio:3/4;object-position:50% 50%!important;background:var(--soft)}
+  .dots{display:none}
+  .info{padding:8px 0 0}
+  h1{font-size:40px}
+  .proof{font-size:15px;margin-top:12px}
+  .price{font-size:22px}
+  .badges{grid-template-columns:1fr 1fr}
+  .more{padding:56px 48px 10px}
+  .cards{grid-template-columns:repeat(3,minmax(0,280px));justify-content:start;gap:24px}
+  .sticky{display:none}
+  footer{padding-bottom:40px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="mock" role="note">Maquette proposée par Redline Studio · page non publiée</div>
+
+<div class="utility" aria-live="off">
+  <p>Bijoux faits main dans le Sud&#8209;Ouest&nbsp;✦</p>
+  <p aria-hidden="true">Livraison offerte dès 50&nbsp;€ d’achat&nbsp;✦</p>
+  <p aria-hidden="true">-15&nbsp;% sur la collection rose&nbsp;: ROSE15&nbsp;✦</p>
+</div>
+
+<header class="header">
+  <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="drawer-nav" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <a class="logo" href="https://asterias-bijoux.com/"><img src="img/logo.webp" width="315" height="132" alt="Asterias Bijoux"></a>
+  <button class="icon-btn cart-btn" type="button" aria-label="Ouvrir le panier" data-open-cart>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <span class="cart-count" hidden>0</span>
+  </button>
+  <nav class="nav" aria-label="Menu principal">
+    <a href="https://asterias-bijoux.com/">ACCUEIL</a><a href="https://asterias-bijoux.com/">NOUVEAUTES</a><a href="https://asterias-bijoux.com/">PRIX DOUX</a><a href="https://asterias-bijoux.com/">BIJOUX</a><a href="https://asterias-bijoux.com/">ACCESSOIRES</a><a href="https://asterias-bijoux.com/pages/la-marque">A PROPOS</a>
+  </nav>
+  <nav class="drawer-nav" id="drawer-nav" aria-label="Menu" hidden>
+    <a href="https://asterias-bijoux.com/">Accueil</a><a href="https://asterias-bijoux.com/">Nouveautés</a><a href="https://asterias-bijoux.com/">Prix doux</a><a href="https://asterias-bijoux.com/">Bijoux</a><a href="https://asterias-bijoux.com/">Accessoires</a><a href="https://asterias-bijoux.com/pages/la-marque">La marque</a>
+  </nav>
+</header>
+
+<main>
+<section class="product" aria-label="Boucles GARANCE">
+  <div class="gallery">
+    <div class="slides" id="slides" tabindex="0" aria-label="Photos du bijou">
+      <div class="slide"><img src="img/p1.webp" width="1086" height="1448" alt="Boucles GARANCE portées : puce ronde dorée et goutte de perles nacrées"></div>
+      <div class="slide"><img src="img/p2.webp" width="900" height="1200" alt="La paire de boucles GARANCE tenue à la main, sur un tissu rayé" loading="lazy"></div>
+    </div>
+    <div class="dots" role="group" aria-label="Choisir la photo">
+      <button class="dot" type="button" aria-label="Photo 1 sur 2" aria-current="true" data-go="0"></button>
+      <button class="dot" type="button" aria-label="Photo 2 sur 2" aria-current="false" data-go="1"></button>
+    </div>
+  </div>
+
+  <div class="info">
+    <p class="vendor">Asterias Bijoux</p>
+    <h1>Boucles ⟩ GARANCE</h1>
+    <ul class="proof">
+      <li><span class="star" aria-hidden="true">✦</span>Montées à la main dans mon atelier du Sud&#8209;Ouest</li>
+      <li><span class="star" aria-hidden="true">✦</span>Livrées dans leur écrin Asterias, prêtes à offrir</li>
+    </ul>
+    <div class="price-row">
+      <span class="price" id="unit-price">18,00&nbsp;€</span>
+      <span class="tax">Taxes incluses</span>
+    </div>
+
+    <div class="buy">
+      <div class="qty" role="group" aria-label="Quantité">
+        <button type="button" id="qminus" aria-label="Retirer une paire" disabled>−</button>
+        <output id="qval" aria-live="polite" aria-label="Quantité">1</output>
+        <button type="button" id="qplus" aria-label="Ajouter une paire">+</button>
+      </div>
+      <button class="btn" type="button" id="add">Ajouter au panier <span class="btn-price" id="btn-price">18,00&nbsp;€</span></button>
+    </div>
+
+    <div class="ship">
+      <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><span><strong>Livraison offerte dès 50&nbsp;€</strong> en France, toujours en suivi · préparé avec soin sous 4&nbsp;à&nbsp;6&nbsp;jours</span></p>
+      <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/></svg><span>Retrait possible à Tarbes, habituellement prêt en 2&nbsp;à&nbsp;4&nbsp;jours</span></p>
+    </div>
+
+    <ul class="badges" aria-label="Nos engagements">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4.5a1.5 1.5 0 0 1 3 0V12M14 11.5V6a1.5 1.5 0 0 1 3 0v8c0 4-2.5 7-6.5 7-2.7 0-4.2-1.3-5.6-3.6L3 13.6a1.5 1.5 0 0 1 2.4-1.7L8 14.5"/></svg><div><b>Fait main</b><span>monté à la main, en petites séries</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-1.5-3-5-4-5-1.5S10 9 12 9Zm0 0c1.5-3 5-4 5-1.5S14 9 12 9Z"/></svg><div><b>Dans son écrin</b><span>prêt à offrir</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div><b>Offerte dès 50&nbsp;€</b><span>Colissimo ou Mondial Relay, en suivi</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10h16l-1-5H5l-1 5Zm0 0v10h16V10M9 20v-5h6v5"/></svg><div><b>Aussi en boutique</b><span>chez nos revendeurs à Tarbes et à Pau</span></div></li>
+    </ul>
+
+    <div class="acc">
+      <div class="acc-item">
+        <h2><button class="acc-btn" type="button" aria-expanded="true" aria-controls="acc-desc" id="accb-desc">Description<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m2 5 5 5 5-5"/></svg></button></h2>
+        <div class="acc-panel" id="acc-desc" role="region" aria-labelledby="accb-desc">
+          <p>✨ Ajoutez une touche chic et lumineuse à vos tenues avec les boucles GARANCE, où les perles rencontrent le doré pour un look élégant et féminin&nbsp;🤍</p>
+          <p>🖐️ Bijoux entièrement montés à la main dans mon atelier.</p>
+          <p>🌞 Chaque bijou étant monté à la main, de légères variations peuvent exister, rendant votre pièce unique.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <h2><button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-mat" id="accb-mat">Matériaux et entretien<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m2 5 5 5 5-5"/></svg></button></h2>
+        <div class="acc-panel" id="acc-mat" role="region" aria-labelledby="accb-mat" hidden>
+          <h3>Matériaux</h3>
+          <ul>
+            <li>Puces rondes dorées en acier inoxydable</li>
+            <li>Pendentif en forme de goutte composé de perles nacrées</li>
+          </ul>
+          <h3>Conseils d’entretien</h3>
+          <p>🧽 Évitez le contact prolongé avec les produits chimiques ou abrasifs. Nettoyez avec un chiffon doux. Malgré leur résistance à l’eau, certaines breloques peuvent noircir au contact des sels de mer ou de certains produits de beauté (savons, parfums, gels douche…).</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <h2><button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-ship" id="accb-ship">Livraison et retours<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m2 5 5 5 5-5"/></svg></button></h2>
+        <div class="acc-panel" id="acc-ship" role="region" aria-labelledby="accb-ship" hidden>
+          <h3>Livraison</h3>
+          <p>📦 Chaque bijou est livré dans son écrin ASTERIAS BIJOUX, prêt à offrir. Préparé avec soin sous 4&nbsp;à&nbsp;6&nbsp;jours (hors congés). Vous recevez un mail à l’expédition, avec un numéro de suivi La&nbsp;Poste Colissimo ou Mondial Relay. Le samedi et le dimanche ne sont pas des jours de livraison.</p>
+          <table class="rates">
+            <caption class="sr-only">Frais de livraison vers la France</caption>
+            <tr><td>France, de 1 à 10&nbsp;€</td><td>Gratuit</td></tr>
+            <tr><td>France, de 10 à 30&nbsp;€</td><td>3,50&nbsp;€</td></tr>
+            <tr><td>France, de 30 à 50&nbsp;€</td><td>4,90&nbsp;€</td></tr>
+            <tr><td>France, à partir de 50&nbsp;€</td><td>Gratuit</td></tr>
+            <tr><td>International, jusqu’à 50&nbsp;€</td><td>6,90&nbsp;€</td></tr>
+          </table>
+          <p>Vous habitez à Tarbes ou dans un rayon de 10&nbsp;km&nbsp;? Choisissez le mode «&nbsp;retrait en magasin&nbsp;»&nbsp;: commande habituellement prête en 2&nbsp;à&nbsp;4&nbsp;jours.</p>
+          <h3>Retours</h3>
+          <p>Vous disposez de 7&nbsp;jours après réception pour demander un retour, par mail à <a href="mailto:asteriasbijoux@gmail.com">asteriasbijoux@gmail.com</a>, avec la raison et des photos. L’article doit être non porté, dans son emballage d’origine. Les articles en promotion et les cartes-cadeaux ne sont pas repris, et les articles ne sont pas échangeables.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="welcome" aria-labelledby="welcome-t">
+      <h2 id="welcome-t">✦&nbsp;BIENVENUE CHEZ ASTERIAS&nbsp;✦</h2>
+      <p>Un petit cadeau&nbsp;: -10&nbsp;% sur votre première commande</p>
+      <form id="welcome-form" novalidate>
+        <label><span class="sr-only">Votre adresse mail</span><input type="email" name="email" placeholder="Votre adresse mail" autocomplete="email"></label>
+        <button type="submit">Je profite des -10&nbsp;%</button>
+      </form>
+      <p class="note" id="welcome-note" aria-live="polite"></p>
+    </section>
+
+    <section class="stores" aria-labelledby="stores-t">
+      <h2 id="stores-t">Retrouvez aussi mes bijoux</h2>
+      <ul>
+        <li><b>Loetie Beauté Mary Cohr</b><span>11 rue Massey, 65000 Tarbes</span></li>
+        <li><b>O Carré S</b><span>rue Montpensier, 64000 Pau</span></li>
+        <li><b>École de danse Dutrey</b><span>39 rue Massey, 65000 Tarbes (Noël, fête des mères)</span></li>
+      </ul>
+    </section>
+  </div>
+</section>
+
+<section class="more" aria-labelledby="more-t">
+  <h2 id="more-t">Les favorites de la boutique</h2>
+  <div class="cards" id="cards"></div>
+</section>
+</main>
+
+<footer>
+  <nav aria-label="Pied de page">
+    <a href="https://asterias-bijoux.com/pages/la-marque">LA MARQUE</a>
+    <a href="https://asterias-bijoux.com/pages/contact">CONTACTEZ-MOI</a>
+    <a href="https://asterias-bijoux.com/pages/a-propos">LIVRAISON</a>
+    <a href="https://asterias-bijoux.com/pages/points-de-vente">POINTS DE VENTE</a>
+  </nav>
+  <p>© 2026, Asterias Bijoux</p>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <img src="img/p1.webp" alt="">
+  <div class="s-txt"><b>Boucles ⟩ GARANCE</b><span id="s-price">18,00&nbsp;€</span></div>
+  <button class="btn" type="button" id="add2" tabindex="-1">Ajouter au panier</button>
+</div>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-t" hidden>
+  <div class="cart-head">
+    <h2 id="cart-t">Votre panier</h2>
+    <button class="icon-btn" type="button" id="cart-close" aria-label="Fermer le panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="cart-body">
+    <p class="freeship" id="freeship"></p>
+    <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+    <div id="lines"></div>
+    <div class="upsell" id="upsell"></div>
+  </div>
+  <div class="cart-foot">
+    <p class="sum"><span>Sous-total</span><span id="subtotal">0,00&nbsp;€</span></p>
+    <p class="sum"><span>Livraison en France <small>(retrait à Tarbes possible)</small></span><span id="shipping">–</span></p>
+    <p class="sum total"><span>Total</span><span id="total">0,00&nbsp;€</span></p>
+    <button class="checkout" type="button" id="checkout">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+    <p class="cart-note" aria-live="polite">Taxes incluses.</p>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const eur = n => new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR'}).format(n);
+  const P = {
+    garance:   {name:'Boucles ⟩ GARANCE', price:18, img:'img/p1.webp'},
+    eglantine: {name:'Grandes créoles ⟩ ÉGLANTINE', price:13, img:'img/x-eglantine.webp', url:'https://asterias-bijoux.com/products/grandes-creoles-eglantine'},
+    carmen:    {name:'Boucles ⟩ CARMEN', price:20, img:'img/x-carmen.webp', url:'https://asterias-bijoux.com/products/boucles-carmen'},
+    twiggy:    {name:'Bracelet ⟩ TWIGGY', price:15, img:'img/x-twiggy.webp', url:'https://asterias-bijoux.com/products/bracelet-twiggy'}
+  };
+  // Grille France publiée (page Livraison et politique d'expédition)
+  const shipFR = s => s <= 0 ? 0 : s < 10 ? 0 : s < 30 ? 3.5 : s < 50 ? 4.9 : 0;
+  const FREE = 50;
+  const cart = new Map();
+  let qty = 1;
+
+  // Barre d'annonce
+  const msgs = [...document.querySelectorAll('.utility p')]; let mi = 0;
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(() => {
+    msgs[mi].setAttribute('aria-hidden','true'); mi = (mi + 1) % msgs.length; msgs[mi].removeAttribute('aria-hidden');
+  }, 4000);
+
+  // Menu
+  const menuBtn = document.querySelector('.menu-btn'), dnav = document.getElementById('drawer-nav');
+  menuBtn.addEventListener('click', () => { const o = menuBtn.getAttribute('aria-expanded') === 'true'; menuBtn.setAttribute('aria-expanded', String(!o)); dnav.hidden = o; });
+
+  // Galerie
+  const slides = document.getElementById('slides');
+  const goers = document.querySelectorAll('[data-go]');
+  const setCur = i => goers.forEach(b => b.setAttribute('aria-current', String(+b.dataset.go === i)));
+  goers.forEach(b => b.addEventListener('click', () => { slides.scrollTo({left: slides.clientWidth * +b.dataset.go, behavior:'smooth'}); setCur(+b.dataset.go); }));
+  slides.addEventListener('scroll', () => setCur(Math.round(slides.scrollLeft / slides.clientWidth)), {passive:true});
+
+  // Quantité et prix
+  const qv = document.getElementById('qval'), qm = document.getElementById('qminus'), qp = document.getElementById('qplus');
+  const renderQty = () => {
+    qv.textContent = qty; qm.disabled = qty <= 1;
+    document.getElementById('btn-price').textContent = eur(P.garance.price * qty);
+    document.getElementById('s-price').textContent = eur(P.garance.price * qty);
+  };
+  qm.addEventListener('click', () => { if (qty > 1) { qty--; renderQty(); } });
+  qp.addEventListener('click', () => { if (qty < 10) { qty++; renderQty(); } });
+
+  // Accordéons
+  document.querySelectorAll('.acc-btn').forEach(b => b.addEventListener('click', () => {
+    const o = b.getAttribute('aria-expanded') === 'true'; b.setAttribute('aria-expanded', String(!o));
+    document.getElementById(b.getAttribute('aria-controls')).hidden = o;
+  }));
+
+  // Inscription (maquette)
+  document.getElementById('welcome-form').addEventListener('submit', e => { e.preventDefault();
+    document.getElementById('welcome-note').textContent = 'Maquette\u00a0: l’inscription reste celle de votre boutique.'; });
+
+  // Favorites
+  const cards = document.getElementById('cards');
+  ['eglantine','carmen','twiggy'].forEach(k => { const p = P[k];
+    cards.insertAdjacentHTML('beforeend', `<div class="card"><a href="${p.url}"><img src="${p.img}" alt="" loading="lazy" width="600" height="800"><p class="t">${p.name}</p><p class="p">${eur(p.price)}</p></a><button type="button" data-add="${k}" aria-label="Ajouter ${p.name} au panier">Ajouter</button></div>`);
+  });
+
+  // Panier
+  const overlay = document.getElementById('overlay'), drawer = document.getElementById('cart');
+  let lastFocus = null;
+  const add = (k, n) => { cart.set(k, (cart.get(k) || 0) + n); renderCart(); };
+  const renderCart = () => {
+    let sub = 0, count = 0; const lines = document.getElementById('lines'); lines.innerHTML = '';
+    cart.forEach((n, k) => { const p = P[k]; sub += p.price * n; count += n;
+      lines.insertAdjacentHTML('beforeend', `<div class="line"><img src="${p.img}" alt=""><div><p class="n">${p.name}</p><div class="qty" role="group" aria-label="Quantité ${p.name}"><button type="button" data-dec="${k}" aria-label="Retirer une unité">−</button><output aria-live="polite">${n}</output><button type="button" data-inc="${k}" aria-label="Ajouter une unité">+</button></div><button class="remove" type="button" data-rm="${k}">Retirer</button></div><span class="lp">${eur(p.price * n)}</span></div>`);
+    });
+    if (!count) lines.innerHTML = '<p class="empty">Votre panier est vide.</p>';
+    const ship = shipFR(sub), left = Math.max(0, FREE - sub);
+    document.getElementById('subtotal').textContent = eur(sub);
+    document.getElementById('shipping').textContent = !count ? '–' : ship === 0 ? 'Offerte' : eur(ship);
+    document.getElementById('total').textContent = eur(sub + (count ? ship : 0));
+    document.getElementById('freeship').textContent = !count ? 'Livraison offerte en France dès 50\u00a0€ d’achat.' : left > 0 ? `Plus que ${eur(left)} pour la livraison offerte en France.` : 'La livraison est offerte en France\u00a0✦';
+    document.getElementById('bar').style.width = Math.min(100, sub / FREE * 100) + '%';
+    const cc = document.querySelector('.cart-count'); cc.textContent = count; cc.hidden = !count;
+    const up = ['eglantine','carmen','twiggy'].filter(k => !cart.has(k));
+    document.getElementById('upsell').innerHTML = up.length && count ? '<h3>Les favorites de la boutique</h3>' + up.map(k => `<div class="upsell-row"><img src="${P[k].img}" alt=""><span>${P[k].name}<br>${eur(P[k].price)}</span><button type="button" data-add="${k}" aria-label="Ajouter ${P[k].name} au panier">Ajouter</button></div>`).join('') : '';
+  };
+  const openCart = () => { lastFocus = document.activeElement; overlay.hidden = false; drawer.hidden = false;
+    requestAnimationFrame(() => { overlay.classList.add('show'); drawer.classList.add('show'); });
+    document.getElementById('cart-close').focus(); document.body.style.overflow = 'hidden'; };
+  const closeCart = () => { overlay.classList.remove('show'); drawer.classList.remove('show'); document.body.style.overflow = '';
+    setTimeout(() => { overlay.hidden = true; drawer.hidden = true; }, 220); if (lastFocus) lastFocus.focus(); };
+  document.getElementById('add').addEventListener('click', () => { add('garance', qty); openCart(); });
+  document.getElementById('add2').addEventListener('click', () => { add('garance', qty); openCart(); });
+  document.querySelector('[data-open-cart]').addEventListener('click', () => { renderCart(); openCart(); });
+  document.getElementById('cart-close').addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', e => {
+    if (drawer.hidden) return;
+    if (e.key === 'Escape') { closeCart(); return; }
+    if (e.key === 'Tab') { const f = [...drawer.querySelectorAll('button,a[href],input')].filter(x => !x.disabled && x.offsetParent);
+      if (!f.length) return; const a = f[0], z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
+  });
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm]'); if (!t) return;
+    if (t.dataset.add) { add(t.dataset.add, 1); if (drawer.hidden) openCart(); }
+    else if (t.dataset.inc) add(t.dataset.inc, 1);
+    else if (t.dataset.dec) { const k = t.dataset.dec, n = cart.get(k) - 1; n > 0 ? cart.set(k, n) : cart.delete(k); renderCart(); }
+    else if (t.dataset.rm) { cart.delete(t.dataset.rm); renderCart(); }
+    if (!drawer.hidden && !drawer.contains(document.activeElement)) document.getElementById('cart-close').focus();
+  });
+  document.getElementById('checkout').addEventListener('click', e => { document.querySelector('.cart-note').textContent = 'Aucun paiement sur cette maquette\u00a0: la commande se finalise sur asterias-bijoux.com.'; });
+
+  // Barre collante : visible quand le bouton principal sort de l'écran
+  const sticky = document.getElementById('sticky'), add2 = document.getElementById('add2');
+  new IntersectionObserver(([en]) => { const show = !en.isIntersecting && en.boundingClientRect.top < 0;
+    sticky.classList.toggle('show', show); sticky.setAttribute('aria-hidden', String(!show)); add2.tabIndex = show ? 0 : -1;
+  }).observe(document.getElementById('add'));
+
+  renderQty(); renderCart();
+})();
+</script>
+</body>
+</html>

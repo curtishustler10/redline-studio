@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Look Autumn glow · Léatelier (maquette)</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur leatelier.fr (schémas de couleurs du thème, 22/10/2026) */
+:root{
+  --lea-violet-entete:#baaed6;   /* fond annonce + en-tête (schéma 4) */
+  --lea-encre:#533b6a;           /* texte des schémas violet, crème, orange */
+  --lea-prune:#82659d;           /* bouton du schéma 4 (popup) */
+  --lea-creme:#fff8f0;           /* fond de la fiche produit (schéma ae826bfd) */
+  --lea-peche:#ffecd0;           /* fond du guide « Comment mesurer » */
+  --lea-abricot:#ffa96e;         /* fond du pied de page (schéma 3) */
+  --lea-orange-mesure:#e67e3c;   /* flèche de mesure du guide */
+  --lea-sable:#e9dcc4;           /* pattes du dessin du guide */
+  --lea-violet-col:#7f53aa;      /* collier du dessin du guide */
+  --ligne:rgba(83,59,106,.18);
+  --font:'Poppins',sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--lea-encre);background:var(--lea-creme);font-size:15px;line-height:1.55;padding-bottom:84px}
+img{max-width:100%;height:auto;display:block}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lea-orange-mesure);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Bandeau maquette */
+.rl-bandeau{background:#2c2236;color:#efe9f5;font-size:11px;letter-spacing:.02em;text-align:center;padding:4px 12px}
+
+/* Annonce + en-tête */
+.annonce{background:var(--lea-violet-entete);color:var(--lea-encre);font-size:11px;font-weight:600;text-align:center;padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-bottom:1px solid rgba(83,59,106,.12)}
+.entete{background:var(--lea-violet-entete);position:relative}
+.entete__in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:4px 16px;min-height:56px}
+.entete__logo img{height:46px;width:auto}
+.entete__nav{display:none;gap:26px;font-size:14px}
+.entete__nav a{color:var(--lea-encre);text-decoration:none}
+.entete__nav a:hover{text-decoration:underline}
+.icone{background:none;border:0;padding:8px;cursor:pointer;display:inline-flex;position:relative;border-radius:50%}
+.icone svg{width:24px;height:24px}
+.panier-pastille{position:absolute;top:2px;right:0;min-width:18px;height:18px;border-radius:9px;background:var(--lea-encre);color:var(--lea-creme);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.panier-pastille[hidden]{display:none}
+.vague{display:block;width:100%;height:14px;background:var(--lea-creme)}
+.entete-placeholder{width:40px}
+
+/* Produit */
+.produit{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0}
+.galerie{position:relative}
+.galerie__vue{position:relative;aspect-ratio:390/290;overflow:hidden;background:#efe6dc}
+.galerie__vue img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.galerie__vue img.cocker{object-position:50% 35%}
+.galerie__pts{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.galerie__miniatures{display:none}
+.pt{width:44px;height:28px;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.pt span{width:9px;height:9px;border-radius:50%;background:rgba(255,248,240,.75);box-shadow:0 0 0 1px rgba(83,59,106,.35)}
+.pt[aria-current="true"] span{background:var(--lea-encre);width:22px;border-radius:5px}
+
+.achat{padding:14px 16px 8px}
+.achat h1{font-size:24px;line-height:1.2;font-weight:600;margin:0}
+.prix-ligne{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:4px 0 2px}
+.prix{font-size:20px;font-weight:600}
+.prix-note{font-size:12.5px;opacity:.85}
+.livraison-ligne{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;margin:0 0 12px}
+.livraison-ligne svg{width:16px;height:16px;flex:none}
+
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:600;font-size:14px;padding:0;margin:0 0 6px}
+.puces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.puce{position:relative}
+.puce input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.puce label{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1.5px solid var(--lea-encre);border-radius:10px;padding:8px 4px;min-height:44px;cursor:pointer;background:#fff;font-size:14px;line-height:1.25;transition:background .15s,color .15s}
+.puce label small{font-size:11.5px;opacity:.8;font-weight:400}
+.puce input:checked+label{background:var(--lea-encre);color:var(--lea-creme)}
+.puce input:checked+label small{opacity:.95}
+.puce input:focus-visible+label{outline:3px solid var(--lea-orange-mesure);outline-offset:2px}
+.puce label b{font-weight:600;font-size:15px}
+.bloc{margin-top:14px}
+.legende-ligne{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.legende-ligne legend{margin:0}
+.legende-aide{font-size:12px;opacity:.85}
+.unique{font-size:13.5px;background:#fff;border:1px dashed var(--ligne);border-radius:10px;padding:10px 12px;margin:0}
+
+/* Mesures guidées */
+.mesures{margin-top:12px;background:var(--lea-peche);border-radius:14px;padding:12px 12px 10px}
+.mesures__titre{font-size:13.5px;font-weight:600;margin:0 0 8px;display:flex;justify-content:space-between;gap:8px}
+.mesures__titre span{font-weight:400;font-size:12px;opacity:.85}
+.mesure{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:center;padding:6px 0}
+.mesure+.mesure{border-top:1px solid rgba(83,59,106,.12)}
+.mesure svg{width:78px;height:auto;background:var(--lea-creme);border-radius:8px}
+.mesure label{display:block;font-size:13.5px;font-weight:600;line-height:1.3}
+.mesure .aide{display:block;font-size:11.5px;font-weight:400;opacity:.85;margin-top:1px}
+.champ{display:flex;align-items:center;margin-top:5px;background:#fff;border:1.5px solid rgba(83,59,106,.45);border-radius:10px;max-width:190px}
+.champ:focus-within{border-color:var(--lea-encre);box-shadow:0 0 0 3px rgba(230,126,60,.35)}
+.champ input{border:0;background:none;padding:9px 10px;width:100%;min-width:0;font-size:16px;outline:none}
+.champ input::placeholder{color:rgba(83,59,106,.5)}
+.champ .unite{padding:0 12px;font-weight:600;font-size:14px;border-left:1px solid var(--ligne);align-self:stretch;display:flex;align-items:center;background:rgba(186,174,214,.25);border-radius:0 8px 8px 0}
+.champ[data-erreur="1"]{border-color:#b3261e}
+.retour{font-size:12.5px;margin:4px 0 0;min-height:0}
+.retour:empty{display:none}
+.retour.ok{color:#3c6b2f;font-weight:500}
+.retour.err{color:#b3261e;font-weight:500}
+.sur-mesure{font-size:13px;background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0 0}
+.sur-mesure a{color:var(--lea-encre);font-weight:600}
+.etapes-btn{background:none;border:0;padding:6px 0 2px;cursor:pointer;font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.etapes{margin:6px 0 2px;padding:0;list-style:none;display:grid;gap:6px;font-size:12.5px;line-height:1.45}
+.etapes li{display:flex;gap:8px}
+.etapes .n{flex:0 0 20px;height:20px;border-radius:50%;background:var(--lea-violet-entete);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.etapes b{font-weight:600}
+.etapes[hidden]{display:none}
+.note-guide{font-size:11.5px;opacity:.8;margin:6px 0 0}
+
+.qte-ligne{display:flex;gap:10px;align-items:stretch;margin-top:14px}
+.qte{display:flex;align-items:center;border:1.5px solid rgba(83,59,106,.45);border-radius:10px;background:#fff}
+.qte button{width:40px;height:100%;min-height:48px;border:0;background:none;cursor:pointer;font-size:18px;border-radius:10px}
+.qte output{min-width:24px;text-align:center;font-weight:600}
+.btn-ajout{flex:1;border:0;border-radius:10px;background:var(--lea-encre);color:var(--lea-creme);font-weight:600;font-size:15px;min-height:50px;cursor:pointer;padding:0 14px;white-space:nowrap}
+.btn-ajout .px-btn{font-weight:500}
+.btn-ajout:hover{background:#45305a}
+.erreur-globale{font-size:12.5px;color:#b3261e;font-weight:500;margin:8px 0 0}
+.erreur-globale:empty{display:none}
+
+.badges{list-style:none;margin:16px 0 4px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.badges li{display:flex;gap:8px;align-items:center;background:#fff;border-radius:10px;padding:9px 10px;font-size:12.5px;line-height:1.3}
+.badges svg{width:22px;height:22px;flex:none}
+.badges b{font-weight:600;display:block}
+
+.accordeons{margin-top:14px;border-top:1px solid var(--ligne)}
+.acc{border-bottom:1px solid var(--ligne)}
+.acc h2{margin:0;font-size:15px}
+.acc button{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:14px 2px;cursor:pointer;font-weight:600;text-align:left}
+.acc button svg{width:18px;height:18px;transition:transform .2s;flex:none}
+.acc button[aria-expanded="true"] svg{transform:rotate(45deg)}
+.acc__corps{padding:0 2px 14px;font-size:14px}
+.acc__corps p{margin:0 0 8px}
+.acc__corps ul{margin:0 0 8px;padding-left:18px}
+.acc__corps a{color:var(--lea-encre)}
+.tableau{width:100%;border-collapse:collapse;font-size:13px;margin:4px 0 8px}
+.tableau th,.tableau td{border-bottom:1px solid var(--ligne);padding:6px 4px;text-align:left}
+
+/* Léa */
+.lea{max-width:1200px;margin:22px auto 0;padding:0 16px}
+.lea__carte{background:var(--lea-violet-entete);border-radius:18px;overflow:hidden;display:grid}
+.lea__carte img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:50% 20%}
+.lea__txt{padding:16px 18px 20px}
+.lea__txt h2{margin:0 0 6px;font-size:18px}
+.lea__txt p{margin:0;font-size:14px}
+
+/* Pied */
+.pied{background:var(--lea-abricot);margin-top:28px;padding:24px 16px 28px;font-size:12.5px;text-align:center}
+.pied ul{list-style:none;padding:0;margin:0 0 10px;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px}
+.pied a{color:var(--lea-encre)}
+
+/* Barre d'achat collante */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--lea-creme);border-top:1px solid var(--ligne);box-shadow:0 -6px 18px rgba(83,59,106,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(0);transition:transform .25s}
+.barre.cachee,.barre.repos{transform:translateY(110%)}
+.barre__in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.barre__info{flex:1;min-width:0;line-height:1.25}
+.barre__info b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barre__info span{font-size:12px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.barre .btn-ajout{flex:0 0 auto;min-height:48px;padding:0 18px}
+
+/* Mini-panier */
+.voile{position:fixed;inset:0;background:rgba(44,34,54,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.mini{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);z-index:41;background:var(--lea-creme);transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;visibility:hidden}
+.mini.ouvert{transform:none;visibility:visible}
+.mini__tete{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--ligne)}
+.mini__tete h2{margin:0;font-size:17px}
+.mini__liste{flex:1;overflow:auto;padding:8px 16px;list-style:none;margin:0}
+.ligne{display:grid;grid-template-columns:64px 1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid var(--ligne);font-size:13px}
+.ligne img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.ligne b{font-size:14px;font-weight:600;display:block}
+.ligne .det{opacity:.85;display:block}
+.ligne .px{font-weight:600;white-space:nowrap}
+.ligne .suppr{background:none;border:0;padding:4px 0;font-size:12px;text-decoration:underline;cursor:pointer;opacity:.85}
+.mini__vide{padding:24px 16px;text-align:center;font-size:14px}
+.mini__pied{padding:14px 16px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--ligne);background:#fff}
+.seuil{font-size:12.5px;margin:0 0 6px}
+.jauge{height:6px;border-radius:3px;background:rgba(186,174,214,.45);overflow:hidden;margin-bottom:12px}
+.jauge i{display:block;height:100%;background:var(--lea-encre);width:0;transition:width .3s}
+.total{display:flex;justify-content:space-between;font-weight:600;font-size:16px;margin-bottom:2px}
+.total-note{font-size:12px;opacity:.85;margin:0 0 12px}
+.btn-paiement{width:100%;border:1.5px dashed var(--lea-encre);background:var(--lea-peche);color:var(--lea-encre);border-radius:10px;min-height:50px;font-weight:600;font-size:13.5px;cursor:pointer;padding:8px 12px}
+
+@media (max-width:420px){
+  .qte-ligne .btn-ajout{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;font-size:14.5px}
+  .qte-ligne .px-sep{display:none}
+  .qte-ligne .px-btn{font-size:12.5px;opacity:.9}
+}
+@media (min-width:768px){
+  body{font-size:15.5px}
+  .achat{padding:20px 24px}
+  .galerie__vue{aspect-ratio:4/3}
+  .lea__carte{grid-template-columns:1fr 1.2fr;align-items:center}
+  .lea__carte img{height:100%;aspect-ratio:auto;min-height:260px}
+  .lea__txt{padding:24px 28px}
+  .badges{grid-template-columns:repeat(4,1fr)}
+}
+@media (min-width:1024px){
+  body{padding-bottom:0}
+  .entete__in{padding:10px 32px;min-height:86px}
+  .entete__logo img{height:64px}
+  .entete__nav{display:flex}
+  .entete-placeholder{display:none}
+  .produit{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;padding:28px 32px 0}
+  .galerie{position:sticky;top:20px;align-self:start}
+  .galerie__vue{aspect-ratio:1/1;border-radius:14px}
+  .galerie__pts{display:none}
+  .galerie__miniatures{display:flex;gap:10px;margin-top:10px}
+  .mini-btn{border:2px solid transparent;padding:0;background:none;border-radius:10px;overflow:hidden;cursor:pointer;width:84px;height:84px}
+  .mini-btn img{width:100%;height:100%;object-fit:cover}
+  .mini-btn[aria-current="true"]{border-color:var(--lea-encre)}
+  .achat{padding:4px 0 0}
+  .achat h1{font-size:34px}
+  .prix{font-size:22px}
+  .badges{grid-template-columns:1fr 1fr}
+  .lea{padding:0 32px;margin-top:40px}
+  .barre__in .barre__info b{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="rl-bandeau">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="annonce">Livraison Mondial Relay OFFERTE dès 60&nbsp;€ d’achats en France</div>
+
+<header class="entete">
+  <div class="entete__in">
+    <nav class="entete__nav" aria-label="Menu principal">
+      <a href="#">Accueil</a><a href="#">Collection Automne</a><a href="#">Looks matchy</a>
+    </nav>
+    <span class="entete-placeholder" aria-hidden="true"></span>
+    <a class="entete__logo" href="#" aria-label="Léatelier, accueil"><img src="img/logo.webp" alt="Léatelier" width="400" height="244"></a>
+    <nav class="entete__nav" aria-label="Menu secondaire">
+      <a href="#">Accessoires</a><a href="#">À propos</a>
+    </nav>
+    <button class="icone" type="button" id="ouvrirPanier" aria-label="Ouvrir le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span class="panier-pastille" id="pastille" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<main class="produit">
+  <section class="galerie" aria-label="Photos du produit">
+    <div class="galerie__vue">
+      <img id="vue" src="img/autumn-glow-duo.webp" alt="Bandana et chouchou Autumn glow, tissu rouille irisé, posés à plat" width="1200" height="1200" fetchpriority="high">
+      <div class="galerie__pts" role="group" aria-label="Choisir la photo">
+        <button class="pt" type="button" data-photo="0" aria-current="true" aria-label="Photo 1 : le duo à plat"><span></span></button>
+        <button class="pt" type="button" data-photo="1" aria-current="false" aria-label="Photo 2 : porté par un cocker"><span></span></button>
+      </div>
+    </div>
+    <div class="galerie__miniatures" role="group" aria-label="Choisir la photo">
+      <button class="mini-btn" type="button" data-photo="0" aria-current="true" aria-label="Photo 1 : le duo à plat"><img src="img/autumn-glow-duo.webp" alt="" width="84" height="84"></button>
+      <button class="mini-btn" type="button" data-photo="1" aria-current="false" aria-label="Photo 2 : porté par un cocker"><img src="img/autumn-glow-cocker.webp" alt="" width="84" height="84"></button>
+    </div>
+  </section>
+
+  <section class="achat" aria-labelledby="titre">
+    <h1 id="titre">Look Autumn glow</h1>
+    <div class="prix-ligne">
+      <span class="prix" id="prix" aria-live="polite">29,90&nbsp;€</span>
+      <span class="prix-note">Taxes incluses.</span>
+    </div>
+    <p class="livraison-ligne">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
+      Livraison Mondial Relay offerte dès 60&nbsp;€ en France
+    </p>
+
+    <form id="formulaire" novalidate>
+      <fieldset>
+        <legend>Compose ton look matchy</legend>
+        <div class="puces" id="looks">
+          <div class="puce"><input type="radio" name="look" id="look-duo" value="Duo matchy" checked><label for="look-duo"><b>Duo matchy</b><small>les deux</small></label></div>
+          <div class="puce"><input type="radio" name="look" id="look-bandana" value="Bandana"><label for="look-bandana"><b>Bandana</b><small>pour lui</small></label></div>
+          <div class="puce"><input type="radio" name="look" id="look-chouchou" value="Chouchou"><label for="look-chouchou"><b>Chouchou</b><small>pour toi</small></label></div>
+        </div>
+      </fieldset>
+
+      <div id="blocTaille">
+        <fieldset class="bloc">
+          <div class="legende-ligne">
+            <legend>Taille du bandana</legend>
+            <span class="legende-aide">selon la hauteur du poitrail</span>
+          </div>
+          <div class="puces" id="tailles">
+            <div class="puce"><input type="radio" name="taille" id="t-s" value="S" checked><label for="t-s"><b>S</b><small>jusqu’à 13&nbsp;cm</small></label></div>
+            <div class="puce"><input type="radio" name="taille" id="t-m" value="M"><label for="t-m"><b>M</b><small>14 à 17&nbsp;cm</small></label></div>
+            <div class="puce"><input type="radio" name="taille" id="t-l" value="L"><label for="t-l"><b>L</b><small>18 à 24&nbsp;cm</small></label></div>
+          </div>
+        </fieldset>
+
+        <div class="mesures" id="mesures">
+          <p class="mesures__titre">Ses mesures pour la couture <span>au centimètre près</span></p>
+
+          <div class="mesure">
+            <svg viewBox="150 35 135 170" role="img" aria-label="Chien de profil : la flèche part du collier et descend tout droit entre les pattes avant">
+              <g stroke="#533b6a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M150,150 L146,198 L162,198 L162,188 L168,150 Z" fill="#e9dcc4"/>
+                <path d="M270,72 L262,64 L238,58 Q232,44 214,42 Q196,42 190,58 Q186,72 176,84 Q128,78 82,88 L92,152 Q120,150 152,150 L164,150 L162,198 L182,198 L182,188 L188,150 Q206,138 206,116 Q206,102 218,94 L246,92 Q264,90 270,80 Z" fill="#fff8f0"/>
+                <path d="M206,50 Q192,58 196,84 Q212,80 214,58 Z" fill="#e9dcc4"/>
+              </g>
+              <path d="M183,74 L212,98" stroke="#7f53aa" stroke-width="7" stroke-linecap="round"/>
+              <circle cx="238" cy="62" r="3" fill="#533b6a"/><circle cx="267" cy="71" r="4.5" fill="#533b6a"/>
+              <g stroke="#e67e3c" stroke-width="4" stroke-linecap="round" fill="none">
+                <line x1="198" y1="96" x2="198" y2="146" stroke-dasharray="6 5"/><line x1="189" y1="94" x2="207" y2="94"/><line x1="189" y1="148" x2="207" y2="148"/>
+              </g>
+            </svg>
+            <div>
+              <label for="poitrail">Hauteur du poitrail <span class="aide">du collier jusqu’entre les pattes avant, à la verticale</span></label>
+              <div class="champ" id="champPoitrail"><input id="poitrail" name="poitrail" type="text" inputmode="decimal" autocomplete="off" placeholder="Exemple : 12" aria-describedby="retourPoitrail"><span class="unite" aria-hidden="true">cm</span></div>
+              <p class="retour" id="retourPoitrail" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="sur-mesure" id="surMesure" hidden>
+            <p style="margin:0 0 4px">Ton compagnon a un grand gabarit&#8239;! Contacte-moi pour un bandana adapté à sa taille.</p>
+            <a href="#">Me contacter</a>
+          </div>
+
+          <div class="mesure">
+            <svg viewBox="150 35 135 170" role="img" aria-label="Chien de profil : le mètre ruban fait le tour du cou, là où repose le collier">
+              <g stroke="#533b6a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M150,150 L146,198 L162,198 L162,188 L168,150 Z" fill="#e9dcc4"/>
+                <path d="M270,72 L262,64 L238,58 Q232,44 214,42 Q196,42 190,58 Q186,72 176,84 Q128,78 82,88 L92,152 Q120,150 152,150 L164,150 L162,198 L182,198 L182,188 L188,150 Q206,138 206,116 Q206,102 218,94 L246,92 Q264,90 270,80 Z" fill="#fff8f0"/>
+                <path d="M206,50 Q192,58 196,84 Q212,80 214,58 Z" fill="#e9dcc4"/>
+              </g>
+              <circle cx="238" cy="62" r="3" fill="#533b6a"/><circle cx="267" cy="71" r="4.5" fill="#533b6a"/>
+              <ellipse cx="197" cy="86" rx="9" ry="19" transform="rotate(-50 197 86)" fill="none" stroke="#e67e3c" stroke-width="4" stroke-dasharray="6 5"/>
+            </svg>
+            <div>
+              <label for="cou">Tour de cou <span class="aide">là où repose son collier, sans serrer</span></label>
+              <div class="champ" id="champCou"><input id="cou" name="cou" type="text" inputmode="decimal" autocomplete="off" placeholder="Exemple : 35" aria-describedby="retourCou"><span class="unite" aria-hidden="true">cm</span></div>
+              <p class="retour" id="retourCou" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <button type="button" class="etapes-btn" id="etapesBtn" aria-expanded="false" aria-controls="etapes">Comment bien mesurer&#8239;? Les 4 étapes</button>
+          <ol class="etapes" id="etapes" hidden>
+            <li><span class="n">1</span><span><b>Ton animal est debout</b>, bien droit sur ses quatre pattes, la tête dans le prolongement du dos. Pas assis ni couché&#8239;: son poitrail change de forme.</span></li>
+            <li><span class="n">2</span><span><b>Pose le mètre ruban sous son collier</b>, là où le bandana reposera.</span></li>
+            <li><span class="n">3</span><span><b>Descends tout droit, à la verticale</b>, jusqu’entre ses pattes avant, sans suivre la courbe du poitrail.</span></li>
+            <li><span class="n">4</span><span><b>Note la mesure au centimètre près.</b> Si tu hésites entre deux chiffres, garde le plus petit.</span></li>
+          </ol>
+          <p class="note-guide">Ce résultat est donné à titre indicatif. En cas de doute, écris-moi&#8239;: je t’aide à choisir.</p>
+        </div>
+      </div>
+
+      <div class="bloc" id="blocUnique" hidden>
+        <p class="unique"><b>Taille unique</b> · le chouchou assorti, pour toi.</p>
+      </div>
+
+      <div class="qte-ligne">
+        <div class="qte" role="group" aria-label="Quantité">
+          <button type="button" id="moins" aria-label="Réduire la quantité">−</button>
+          <output id="qte" aria-live="polite">1</output>
+          <button type="button" id="plus" aria-label="Augmenter la quantité">+</button>
+        </div>
+        <button type="submit" class="btn-ajout" id="ajout">Ajouter au panier<span class="px-sep"> · </span><span class="px-btn">29,90&nbsp;€</span></button>
+      </div>
+      <p class="erreur-globale" id="erreurGlobale" role="alert"></p>
+    </form>
+
+    <ul class="badges" aria-label="Ce qui fait Léatelier">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span><b>Fait main</b>avec amour, en Lorraine</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5"/></svg><span><b>Tissus de seconde main</b>choisis avec soin</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg><span><b>Pièce unique</b>le motif varie à la découpe</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><span><b>Livraison offerte</b>dès 60&nbsp;€ en France</span></li>
+    </ul>
+
+    <div class="accordeons">
+      <div class="acc">
+        <h2><button type="button" aria-expanded="true" aria-controls="acc1">Description<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h2>
+        <div class="acc__corps" id="acc1">
+          <p>Un bandana pour ton chien ou ton chat, un chouchou assorti pour toi&#8239;: parfaits pour les balades et les photos.</p>
+          <p>Disponible en duo, bandana seul ou chouchou seul.</p>
+        </div>
+      </div>
+      <div class="acc">
+        <h2><button type="button" aria-expanded="false" aria-controls="acc2">Matières et fabrication<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h2>
+        <div class="acc__corps" id="acc2" hidden>
+          <p>Fait main à partir de tissus de seconde main. Le motif varie selon la découpe&#8239;: chaque pièce est unique.</p>
+          <p>Créations artisanales, fabriquées à la main en petites séries ou sur commande&#8239;: de légères différences de teinte, de motif ou de finition peuvent exister.</p>
+        </div>
+      </div>
+      <div class="acc">
+        <h2><button type="button" aria-expanded="false" aria-controls="acc3">Guide des tailles<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h2>
+        <div class="acc__corps" id="acc3" hidden>
+          <p>La taille du bandana dépend de la hauteur du poitrail de ton animal&#8239;: c’est elle qui décide de la taille du triangle, pour qu’il tombe joliment.</p>
+          <table class="tableau">
+            <thead><tr><th scope="col">Taille</th><th scope="col">Hauteur du poitrail</th></tr></thead>
+            <tbody><tr><td>S</td><td>jusqu’à 13&nbsp;cm</td></tr><tr><td>M</td><td>de 14 à 17&nbsp;cm</td></tr><tr><td>L</td><td>de 18 à 24&nbsp;cm</td></tr><tr><td>Au-delà</td><td>sur demande, contacte-moi</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="acc">
+        <h2><button type="button" aria-expanded="false" aria-controls="acc4">Livraison et retours<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></h2>
+        <div class="acc__corps" id="acc4" hidden>
+          <ul>
+            <li>Chaque commande est préparée avec soin sous 5 à 10 jours ouvrés après validation du paiement, depuis l’atelier en France.</li>
+            <li>Envoi Mondial Relay, livraison généralement en 2 à 5 jours ouvrés après l’expédition (à titre indicatif).</li>
+            <li>Livraison offerte dès 60&nbsp;€ d’achat&#8239;; sinon, frais calculés à la commande selon le poids.</li>
+            <li>Livraison en France métropolitaine uniquement.</li>
+            <li>Retours&#8239;: 14 jours à compter de la réception, article non porté avec ses étiquettes et dans son emballage d’origine, frais de retour à ta charge. Le droit de rétractation ne s’applique pas aux produits personnalisés ou confectionnés sur mesure.</li>
+          </ul>
+          <p>Une question&#8239;? <a href="#">contact@leatelier.fr</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="lea" aria-labelledby="leaTitre">
+  <div class="lea__carte">
+    <img src="img/lea.webp" alt="Léa, la fondatrice, avec son chien qui porte un bandana Léatelier" width="900" height="591" loading="lazy">
+    <div class="lea__txt">
+      <h2 id="leaTitre">Léa de Léatelier</h2>
+      <p>Moi c’est Léa. La couture, c’est une passion qui m’accompagne depuis toujours, et les animaux en font partie tout autant. Léatelier est né de l’envie de réunir les deux&#8239;: donner une seconde vie à de beaux tissus chinés, pour créer des pièces qu’on ne voit pas partout pensées pour vous et vos compagnons.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="pied">
+  <ul>
+    <li><a href="#">Politique d’expédition</a></li><li><a href="#">Politique de remboursement</a></li><li><a href="#">Conditions générales de vente</a></li><li><a href="#">Mentions légales</a></li><li><a href="#">Coordonnées</a></li>
+  </ul>
+  <p style="margin:0">© 2026, Léatelier</p>
+</footer>
+
+<div class="barre" id="barre">
+  <div class="barre__in">
+    <div class="barre__info"><b id="barreTitre">Look Autumn glow</b><span id="barreDet">Duo matchy · taille S</span></div>
+    <button type="button" class="btn-ajout" id="ajoutBarre">Ajouter au panier</button>
+  </div>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="mini" id="mini" role="dialog" aria-modal="true" aria-labelledby="miniTitre" aria-hidden="true">
+  <div class="mini__tete">
+    <h2 id="miniTitre">Ton panier</h2>
+    <button class="icone" type="button" id="fermerPanier" aria-label="Fermer le panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ul class="mini__liste" id="liste"></ul>
+  <p class="mini__vide" id="vide">Ton panier est vide.</p>
+  <div class="mini__pied" id="miniPied">
+    <p class="seuil" id="seuil"></p>
+    <div class="jauge" aria-hidden="true"><i id="jauge"></i></div>
+    <div class="total"><span>Total</span><span id="total">0,00&nbsp;€</span></div>
+    <p class="total-note">Taxes incluses. Frais d’expédition calculés à l’étape de paiement.</p>
+    <button type="button" class="btn-paiement" id="paiement">Maquette&#8239;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(function(){
+  // Variantes et prix : products/look-autumn-glow.json (22/10/2026)
+  var PRIX = {
+    'Duo matchy':{S:29.90,M:30.90,L:31.90},
+    'Bandana':{S:22.90,M:23.90,L:24.90},
+    'Chouchou':{'Taille unique':7.90}
+  };
+  // Règle du guide de la boutique : hauteur de poitrail maximum par taille (S 13, M 17, L 24 ; au-delà, sur mesure).
+  var TAILLES = [{n:'S',max:13},{n:'M',max:17},{n:'L',max:24}];
+  var SEUIL = 60; // livraison offerte dès 60 € (accueil + politique d'expédition)
+  var PHOTOS = [
+    {src:'img/autumn-glow-duo.webp',alt:'Bandana et chouchou Autumn glow, tissu rouille irisé, posés à plat',cls:''},
+    {src:'img/autumn-glow-cocker.webp',alt:'Cocker assis en balade, avec le bandana Autumn glow',cls:'cocker'}
+  ];
+  var $ = function(s){return document.querySelector(s)};
+  var $$ = function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var euro = function(n){return n.toFixed(2).replace('.',',')+' €'};
+  var etat = {qte:1, panier:[]};
+
+  function look(){return $('input[name=look]:checked').value}
+  function taille(){return look()==='Chouchou'?'Taille unique':$('input[name=taille]:checked').value}
+  function prixUnitaire(){return PRIX[look()][taille()]}
+  function nombre(v){v=(v||'').replace(',','.').replace(/[^\d.]/g,'');return parseFloat(v)}
+
+  // Galerie
+  function photo(i){
+    var v=$('#vue'); v.src=PHOTOS[i].src; v.alt=PHOTOS[i].alt; v.className=PHOTOS[i].cls;
+    $$('[data-photo]').forEach(function(b){b.setAttribute('aria-current', String(+b.dataset.photo===i))});
+  }
+  $$('[data-photo]').forEach(function(b){b.addEventListener('click',function(){photo(+b.dataset.photo)})});
+  var x0=null;
+  $('.galerie__vue').addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  $('.galerie__vue').addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)photo(dx<0?1:0);x0=null});
+
+  // Affichage
+  function maj(){
+    var chouchou = look()==='Chouchou';
+    $('#blocTaille').hidden = chouchou;
+    $('#blocUnique').hidden = !chouchou;
+    var p = prixUnitaire()*etat.qte;
+    $('#prix').textContent = euro(prixUnitaire());
+    $('.px-btn').textContent = euro(p);
+    $('#qte').textContent = etat.qte;
+    $('#barreDet').textContent = look()+(chouchou?' · taille unique':' · taille '+taille());
+    $('#ajoutBarre').textContent = 'Ajouter · '+euro(p);
+  }
+  $$('input[name=look], input[name=taille]').forEach(function(r){r.addEventListener('change',function(){
+    if(r.name==='taille') verifierAccord(); maj();
+  })});
+  $('#moins').addEventListener('click',function(){if(etat.qte>1){etat.qte--;maj()}});
+  $('#plus').addEventListener('click',function(){etat.qte++;maj()});
+
+  // Poitrail : la mesure choisit la taille (règle du guide)
+  function tailleDuPoitrail(v){v=Math.round(v);for(var i=0;i<TAILLES.length;i++)if(v<=TAILLES[i].max)return i;return -1}
+  function verifierAccord(){
+    var v=nombre($('#poitrail').value), r=$('#retourPoitrail');
+    if(!(v>0))return;
+    var i=tailleDuPoitrail(v), t=taille();
+    if(i>=0 && TAILLES[i].n!==t){
+      r.className='retour err';
+      r.textContent='Pour '+Math.round(v)+' cm, le guide conseille la taille '+TAILLES[i].n+'.';
+    } else if(i>=0){ r.className='retour ok'; r.textContent='Taille '+t+' conseillée pour '+Math.round(v)+' cm.'; }
+  }
+  $('#poitrail').addEventListener('input',function(){
+    var v=nombre(this.value), r=$('#retourPoitrail');
+    $('#champPoitrail').removeAttribute('data-erreur');
+    $('#surMesure').hidden=true;
+    if(!(v>0)){r.textContent='';r.className='retour';return}
+    var i=tailleDuPoitrail(v);
+    if(i<0){r.className='retour err';r.textContent='';$('#surMesure').hidden=false;return}
+    $('#t-'+TAILLES[i].n.toLowerCase()).checked=true;
+    r.className='retour ok';
+    r.textContent='Taille '+TAILLES[i].n+' conseillée pour '+Math.round(v)+' cm, sélectionnée pour toi.';
+    maj();
+  });
+  $('#cou').addEventListener('input',function(){
+    $('#champCou').removeAttribute('data-erreur');
+    var r=$('#retourCou'); r.textContent=''; r.className='retour';
+  });
+
+  $('#etapesBtn').addEventListener('click',function(){
+    var o=this.getAttribute('aria-expanded')==='true';
+    this.setAttribute('aria-expanded',String(!o)); $('#etapes').hidden=o;
+  });
+
+  // Accordéons
+  $$('.acc button').forEach(function(b){b.addEventListener('click',function(){
+    var o=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',String(!o));
+    document.getElementById(b.getAttribute('aria-controls')).hidden=o;
+  })});
+
+  // Ajout au panier
+  function valider(){
+    if(look()==='Chouchou')return true;
+    var manque=[], p=nombre($('#poitrail').value), c=nombre($('#cou').value);
+    if(!(p>0)){manque.push('poitrail');$('#champPoitrail').setAttribute('data-erreur','1');$('#retourPoitrail').className='retour err';$('#retourPoitrail').textContent='Indique la hauteur de son poitrail, en cm.'}
+    else if(tailleDuPoitrail(p)<0){
+      $('#erreurGlobale').textContent='Pour un poitrail de plus de 24\u00a0cm, contacte-moi pour un bandana adapté à sa taille.';
+      $('#mesures').scrollIntoView({behavior:'smooth',block:'center'});
+      return false;
+    }
+    if(!(c>0)){manque.push('cou');$('#champCou').setAttribute('data-erreur','1');$('#retourCou').className='retour err';$('#retourCou').textContent='Indique son tour de cou, en cm.'}
+    if(manque.length){
+      $('#erreurGlobale').textContent='Merci d’indiquer le tour de cou et la hauteur du poitrail de ton animal avant de commander.';
+      var cible=$(manque[0]==='poitrail'?'#poitrail':'#cou');
+      $('#mesures').scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(function(){cible.focus({preventScroll:true})},350);
+      return false;
+    }
+    $('#erreurGlobale').textContent='';
+    return true;
+  }
+  function ajouter(){
+    if(!valider())return;
+    var chouchou=look()==='Chouchou';
+    var l={look:look(),taille:taille(),prix:prixUnitaire(),qte:etat.qte,
+      poitrail:chouchou?null:Math.round(nombre($('#poitrail').value)*10)/10,
+      cou:chouchou?null:Math.round(nombre($('#cou').value)*10)/10};
+    var cle=[l.look,l.taille,l.poitrail,l.cou].join('|');
+    var ex=etat.panier.filter(function(x){return x.cle===cle})[0];
+    if(ex)ex.qte+=l.qte; else {l.cle=cle;etat.panier.push(l)}
+    rendrePanier(); ouvrir();
+  }
+  $('#formulaire').addEventListener('submit',function(e){e.preventDefault();ajouter()});
+  $('#ajoutBarre').addEventListener('click',ajouter);
+
+  function nb(v){return String(v).replace('.',',')}
+  function rendrePanier(){
+    var liste=$('#liste'); liste.innerHTML='';
+    var total=0, n=0;
+    etat.panier.forEach(function(l,idx){
+      total+=l.prix*l.qte; n+=l.qte;
+      var li=document.createElement('li'); li.className='ligne';
+      var det=l.look+' · '+(l.taille==='Taille unique'?'taille unique':'taille '+l.taille);
+      var mes=l.poitrail?('Poitrail '+nb(l.poitrail)+' cm · cou '+nb(l.cou)+' cm'):'';
+      li.innerHTML='<img src="img/autumn-glow-duo.webp" alt="">'+
+        '<div><b>Look Autumn glow</b><span class="det"></span><span class="det mes"></span><span class="det">Quantité : '+l.qte+'</span>'+
+        '<button type="button" class="suppr">Retirer</button></div><span class="px">'+euro(l.prix*l.qte)+'</span>';
+      li.querySelector('.det').textContent=det;
+      li.querySelector('.mes').textContent=mes;
+      li.querySelector('.suppr').setAttribute('aria-label','Retirer '+det);
+      li.querySelector('.suppr').addEventListener('click',function(){etat.panier.splice(idx,1);rendrePanier();$('#fermerPanier').focus()});
+      liste.appendChild(li);
+    });
+    $('#vide').hidden=n>0; $('#miniPied').hidden=n===0; liste.hidden=n===0;
+    $('#total').textContent=euro(total);
+    var reste=SEUIL-total;
+    $('#seuil').textContent = reste>0 ? 'Plus que '+euro(reste)+' pour la livraison offerte.' : 'La livraison Mondial Relay t’est offerte.';
+    $('#jauge').style.width=Math.min(100,total/SEUIL*100)+'%';
+    var pa=$('#pastille'); pa.textContent=n; pa.hidden=n===0;
+  }
+
+  // Mini-panier : ouverture, fermeture, Échap, piège du focus
+  var dernierFocus=null;
+  function ouvrir(){
+    dernierFocus=document.activeElement;
+    $('#mini').classList.add('ouvert'); $('#voile').classList.add('ouvert');
+    $('#mini').setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){$('#fermerPanier').focus()},50);
+  }
+  function fermer(){
+    if(!$('#mini').classList.contains('ouvert'))return;
+    $('#mini').classList.remove('ouvert'); $('#voile').classList.remove('ouvert');
+    $('#mini').setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(dernierFocus)dernierFocus.focus();
+  }
+  $('#ouvrirPanier').addEventListener('click',function(){rendrePanier();ouvrir()});
+  $('#fermerPanier').addEventListener('click',fermer);
+  $('#voile').addEventListener('click',fermer);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape')fermer();
+    if(e.key==='Tab'&&$('#mini').classList.contains('ouvert')){
+      var f=$$('#mini button:not([hidden])').filter(function(b){return b.offsetParent!==null});
+      if(!f.length)return;
+      if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f[f.length-1].focus()}
+      else if(!e.shiftKey&&document.activeElement===f[f.length-1]){e.preventDefault();f[0].focus()}
+    }
+  });
+
+  // Barre collante : visible tant que le bouton du formulaire n'est pas à l'écran
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){$('#barre').classList.toggle('cachee',e.isIntersecting)})},{threshold:.6}).observe($('#ajout'));
+  }
+  // Sur ordinateur, le bloc d'achat est déjà à l'écran à l'ouverture : la barre n'arrive qu'après défilement.
+  var grand=window.matchMedia('(min-width:1024px)');
+  function repos(){$('#barre').classList.toggle('repos',grand.matches&&window.scrollY<300)}
+  window.addEventListener('scroll',repos,{passive:true}); grand.addEventListener('change',repos); repos();
+  maj(); rendrePanier();
+})();
+</script>
+</body>
+</html>

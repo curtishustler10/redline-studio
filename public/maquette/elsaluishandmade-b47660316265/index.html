@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pantalon bleu · elsaluis (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,800..900,100,0&family=Jost:wght@300;400;500&family=Suez+One&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/p1.webp">
+<style>
+/* Couleurs relevées sur elsaluis-handmade.com (styles calculés, fiche « Pantalon bleu », 22/10/2026) */
+:root{
+  --elsa-caramel:#cea48b;          /* titres, prix, logo, texte de la fiche */
+  --elsa-rose:#eccec8;             /* bordure / fond du bouton « Ajouter au panier » (à 34 %) */
+  --elsa-rose-34:rgba(236,206,200,.34);
+  --elsa-poudre:#f3e8e2;           /* fond du menu */
+  --elsa-encre:#404040;            /* texte du bouton « Ajouter au panier » */
+  --elsa-gris:#575757;             /* textes secondaires */
+  --elsa-blanc:#fff;
+  /* dérivé (non relevé) : caramel assombri pour les petits textes, contraste AA sur blanc */
+  --caramel-lisible:#8a5d43;
+  --titre:'Fraunces', 'Cooper Black', Georgia, serif;   /* au plus près de Capuche (titres du site) */
+  --bouton:'Suez One', Georgia, serif;                  /* police des boutons du site */
+  --texte:'Jost', 'Futura', 'Avenir', sans-serif;       /* au plus près de Futura LT (texte du site) */
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--texte);font-weight:400;color:var(--elsa-encre);background:var(--elsa-blanc);line-height:1.55;font-size:16px}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--caramel-lisible);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.bandeau{background:#f7f3f1;color:#6b6460;font-size:11.5px;letter-spacing:.02em;text-align:center;padding:5px 12px;line-height:1.3}
+
+/* En-tête */
+.entete{position:relative;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:8px 14px 6px;border-bottom:1px solid var(--elsa-poudre)}
+.entete .logo{justify-self:center;display:flex;align-items:center;gap:10px;text-decoration:none}
+.entete .logo img{width:46px;height:46px}
+.entete .slogan{display:none;font-family:var(--titre);font-weight:800;color:var(--caramel-lisible);font-size:13px;line-height:1.25;max-width:360px}
+.icone{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;border-radius:50%;position:relative}
+.icone svg{width:24px;height:24px;stroke:var(--elsa-caramel);fill:none;stroke-width:1.6}
+.pastille{position:absolute;top:4px;right:2px;min-width:18px;height:18px;border-radius:9px;background:var(--elsa-caramel);color:#fff;font-size:11px;font-weight:500;display:grid;place-items:center;padding:0 4px}
+.pastille[hidden]{display:none}
+.menu{display:none}
+.menu-mobile{display:none;background:var(--elsa-poudre);padding:8px 18px 14px}
+.menu-mobile.ouvert{display:block}
+.menu-mobile a{display:block;padding:9px 0;text-decoration:none;font-family:var(--bouton);color:var(--elsa-encre);border-bottom:1px solid rgba(206,164,139,.35)}
+
+/* Fiche */
+.fiche{max-width:1240px;margin:0 auto}
+.fil{display:none}
+.galerie{position:relative}
+.piste{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 14px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.piste::-webkit-scrollbar{display:none}
+.vue{flex:0 0 auto;margin:0;scroll-snap-align:start;scroll-margin-left:14px;position:relative}
+.vue img{height:min(42svh,380px);width:auto;aspect-ratio:3/4;object-fit:cover;border-radius:10px;background:var(--elsa-poudre)}
+.vue figcaption{position:absolute;left:8px;bottom:8px;right:8px;background:rgba(255,255,255,.92);color:var(--elsa-encre);font-size:12.5px;line-height:1.3;padding:6px 8px;border-radius:7px}
+.compteur{position:absolute;top:18px;left:22px;background:rgba(255,255,255,.9);font-size:12px;padding:2px 8px;border-radius:10px;color:var(--elsa-encre)}
+
+.achat{padding:12px 18px 0}
+.ligne-titre{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+h1{font-family:var(--titre);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:900;color:var(--elsa-caramel);font-size:30px;line-height:1.05;margin:0;letter-spacing:-.01em}
+.prix{margin:0;font-family:var(--texte);font-weight:400;font-size:21px;color:var(--elsa-encre);white-space:nowrap}
+.prix small{display:block;font-size:12px;color:var(--elsa-gris);text-align:right}
+.accroche{margin:4px 0 0;font-size:14.5px;color:var(--elsa-gris);line-height:1.4}
+
+/* Le correctif : la taille et les mesures avant le bouton */
+.taille{margin:12px 0 0;border:0;padding:0}
+.taille legend{display:flex;justify-content:space-between;width:100%;font-size:14px;font-weight:500;color:var(--elsa-encre);margin-bottom:6px;padding:0}
+.taille legend span{font-weight:400;color:var(--elsa-gris)}
+.choix{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:6px}
+.choix label{position:relative;display:block}
+.choix input{position:absolute;opacity:0;inset:0;margin:0}
+.choix .pastille-taille{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50px;border:1.5px solid var(--elsa-rose);border-radius:12px;background:#fff;text-align:center;line-height:1.15;padding:4px;cursor:pointer;transition:border-color .15s,background .15s}
+.choix b{font-family:var(--bouton);font-weight:400;font-size:15px;color:var(--elsa-encre)}
+.choix i{font-style:normal;font-size:11.5px;color:var(--elsa-gris)}
+.choix input:checked + .pastille-taille{border-color:var(--elsa-caramel);background:var(--elsa-rose-34);box-shadow:inset 0 0 0 1px var(--elsa-caramel)}
+.choix input:focus-visible + .pastille-taille{outline:3px solid var(--caramel-lisible);outline-offset:2px}
+.mesures{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin:8px 0 0;font-size:13px;color:var(--elsa-gris);line-height:1.35}
+.mesures strong{font-weight:500;color:var(--elsa-encre)}
+.lien{background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;color:var(--caramel-lisible);font-size:13px;font-weight:500}
+
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;margin-top:12px;border:1.5px solid var(--elsa-caramel);border-radius:15px;background:var(--elsa-caramel);color:var(--elsa-encre);font-family:var(--bouton);font-size:19px;transition:filter .15s}
+.cta:hover{filter:brightness(.96)}
+.cta.secondaire{background:var(--elsa-rose-34)}
+.sous-cta{display:grid;gap:3px;margin:9px 0 0;padding:0;list-style:none;font-size:13px;color:var(--elsa-gris)}
+.sous-cta li{display:flex;gap:7px;align-items:flex-start}
+.sous-cta svg{flex:0 0 15px;width:15px;height:15px;margin-top:3px;stroke:var(--elsa-caramel);fill:none;stroke-width:2}
+
+.demande{display:none;margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--elsa-rose-34);font-size:14px;line-height:1.45}
+.demande.visible{display:block}
+.demande p{margin:0 0 8px}
+.demande .actions{display:flex;flex-wrap:wrap;gap:8px}
+.demande a{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:12px;border:1.5px solid var(--elsa-caramel);background:#fff;text-decoration:none;font-family:var(--bouton);font-size:15px}
+
+/* Réassurance */
+.reassurance{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 18px 0;padding:0;list-style:none}
+.reassurance li{background:var(--elsa-poudre);border-radius:12px;padding:11px 12px;font-size:13px;line-height:1.3;color:var(--elsa-encre)}
+.reassurance b{display:block;font-family:var(--bouton);font-weight:400;font-size:15px;margin-bottom:2px}
+
+/* Accordéons */
+.details{margin:22px 18px 0;border-top:1px solid var(--elsa-rose)}
+.details details{border-bottom:1px solid var(--elsa-rose)}
+.details summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:15px 2px;cursor:pointer;font-family:var(--bouton);font-size:17px;color:var(--elsa-encre)}
+.details summary::-webkit-details-marker{display:none}
+.details summary::after{content:"";width:10px;height:10px;border-right:2px solid var(--elsa-caramel);border-bottom:2px solid var(--elsa-caramel);transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+.details details[open] summary::after{transform:rotate(225deg) translateY(-2px)}
+.details .corps{padding:0 2px 16px;font-size:15.5px;color:#4c4743}
+.details .corps p{margin:0 0 10px}
+.details .corps ul{margin:0 0 10px;padding-left:18px}
+.tableau{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0 10px}
+.tableau th,.tableau td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--elsa-poudre);vertical-align:top}
+.tableau th{font-weight:500;color:var(--elsa-encre)}
+.schema{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center;margin:6px 0 12px}
+.schema svg{width:92px;height:auto}
+.schema .tableau th{font-size:13.5px}
+.note{font-size:13.5px;color:var(--elsa-gris)}
+
+/* Ensemble */
+.ensemble{margin:28px 18px 0}
+.ensemble h2,.histoire h2{font-family:var(--titre);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:900;color:var(--elsa-caramel);font-size:24px;line-height:1.1;margin:0 0 4px}
+.ensemble > p{margin:0 0 12px;font-size:14.5px;color:var(--elsa-gris)}
+.cartes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.carte{display:flex;flex-direction:column;gap:6px}
+.carte img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:10px}
+.carte h3{margin:0;font-family:var(--texte);font-weight:500;font-size:14.5px;line-height:1.25}
+.carte .p{font-size:14px;color:var(--elsa-gris)}
+.ajout{min-height:42px;border-radius:12px;border:1.5px solid var(--elsa-caramel);background:var(--elsa-rose-34);font-family:var(--bouton);font-size:14.5px;color:var(--elsa-encre)}
+
+.histoire{margin:32px 18px 0;padding:20px 18px;border-radius:16px;background:var(--elsa-poudre)}
+.histoire .sur-titre{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--caramel-lisible);margin:0 0 6px}
+.histoire p{margin:0 0 10px;font-size:15px}
+.histoire a{font-family:var(--bouton);color:var(--elsa-encre)}
+
+.pied{margin:36px 0 0;padding:24px 18px 110px;text-align:center;font-size:13.5px;color:var(--elsa-gris);border-top:1px solid var(--elsa-poudre)}
+.pied img{width:64px;height:64px;margin:0 auto 8px}
+.pied a{color:var(--caramel-lisible)}
+.pied nav{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;margin-top:8px}
+
+/* Barre d'achat collante (mobile) */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--elsa-rose);box-shadow:0 -6px 18px rgba(64,64,64,.08);transform:translateY(110%);transition:transform .25s}
+.barre.visible{transform:none}
+.barre .info{flex:1;min-width:0;line-height:1.2}
+.barre .info b{display:block;font-family:var(--bouton);font-weight:400;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barre .info span{font-size:13px;color:var(--elsa-gris)}
+.barre .cta{width:auto;margin:0;min-height:48px;padding:0 18px;font-size:16px}
+
+/* Mini-panier */
+dialog.panier{margin:0 0 0 auto;height:100%;max-height:100%;width:min(420px,100%);max-width:100%;border:0;padding:0;background:#fff;color:var(--elsa-encre);display:none;flex-direction:column}
+dialog.panier[open]{display:flex;animation:entre .22s ease-out}
+dialog::backdrop{background:rgba(64,64,64,.42)}
+@keyframes entre{from{transform:translateX(30px);opacity:.6}to{transform:none;opacity:1}}
+.panier header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--elsa-poudre)}
+.panier header h2{margin:0;font-family:var(--titre);font-variation-settings:"SOFT" 100,"WONK" 0;font-weight:900;color:var(--elsa-caramel);font-size:22px}
+.fermer{width:44px;height:44px;border:0;background:var(--elsa-poudre);border-radius:50%;font-size:22px;line-height:1}
+.panier .contenu{flex:1;overflow:auto;padding:12px 16px}
+.seuil{background:var(--elsa-poudre);border-radius:12px;padding:10px 12px;font-size:13.5px;margin-bottom:12px}
+.jauge{height:6px;border-radius:3px;background:#fff;margin-top:7px;overflow:hidden}
+.jauge span{display:block;height:100%;background:var(--elsa-caramel);width:0;transition:width .3s}
+.article{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--elsa-poudre)}
+.article img{width:64px;height:84px;object-fit:cover;border-radius:8px}
+.article b{display:block;font-weight:500;font-size:15px}
+.article small{color:var(--elsa-gris);font-size:13px}
+.retirer{border:0;background:none;text-decoration:underline;font-size:13px;color:var(--elsa-gris);padding:6px 0;min-height:32px}
+.vide{color:var(--elsa-gris);font-size:14.5px;padding:18px 0}
+.suggestion{margin-top:16px}
+.suggestion h3{font-family:var(--bouton);font-weight:400;font-size:15.5px;margin:0 0 8px}
+.suggestion .article{grid-template-columns:52px 1fr auto}
+.suggestion .article img{width:52px;height:68px}
+.panier footer{padding:14px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--elsa-poudre)}
+.total{display:flex;justify-content:space-between;font-size:17px;font-weight:500}
+.panier footer .note{margin:4px 0 10px}
+.panier footer .cta{margin-top:0;font-size:16px;line-height:1.2;padding:8px 14px;text-align:center}
+
+/* Guide des mesures */
+dialog.guide{border:0;border-radius:16px;padding:0;width:min(520px,calc(100% - 24px));max-height:calc(100% - 40px);color:var(--elsa-encre)}
+dialog.guide .contenu{padding:4px 18px 18px}
+
+@media (min-width:768px){
+  .bandeau{font-size:12px}
+  .entete{grid-template-columns:1fr auto 1fr;padding:12px 28px}
+  .entete .logo img{width:72px;height:72px}
+  .entete .slogan{display:block}
+  .entete .burger{visibility:hidden}
+  .menu{display:flex;justify-content:center;flex-wrap:wrap;gap:2px;background:var(--elsa-poudre);padding:0 12px}
+  .menu a{font-family:var(--bouton);font-size:14px;color:var(--elsa-encre);text-decoration:none;padding:9px 12px}
+  .menu a[aria-current]{color:var(--caramel-lisible)}
+  .entete .gauche{justify-self:start}
+  .entete .panier-btn{justify-self:end}
+  .fiche{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;padding:0 28px;align-items:start}
+  .fil{display:block;grid-column:1/-1;font-size:13.5px;color:var(--elsa-gris);padding:16px 0 0}
+  .fil a{color:var(--elsa-gris)}
+  .galerie{grid-column:1}
+  .piste{display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:visible;padding:0}
+  .vue img{width:100%;height:auto}
+  .compteur{display:none}
+  .colonne{grid-column:2;position:sticky;top:16px}
+  .achat{padding:0}
+  h1{font-size:40px}
+  .reassurance,.details{margin-left:0;margin-right:0}
+  .ensemble{grid-column:1;margin:8px 0 0}
+  .histoire{grid-column:1/-1;margin-left:0;margin-right:0}
+  .cartes{grid-template-columns:1fr 1fr;max-width:560px}
+  .histoire{display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:28px}
+  .barre{display:none}
+  .pied{padding-bottom:30px}
+}
+@media (min-width:1200px){
+  .fiche{gap:56px}
+  h1{font-size:46px}
+  .ensemble{max-width:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="bandeau">Maquette proposée par Redline Studio · page non publiée</div>
+
+<header>
+  <div class="entete">
+    <button class="icone burger gauche" type="button" aria-expanded="false" aria-controls="menu-mobile" id="burger">
+      <span class="sr">Menu</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a class="logo" href="https://www.elsaluis-handmade.com/">
+      <img src="img/logo.webp" alt="elsaluis" width="72" height="72">
+      <span class="slogan">Boutique de vêtements fabriqués entièrement à la main, à Bordeaux</span>
+    </a>
+    <button class="icone panier-btn" type="button" id="ouvrir-panier" aria-haspopup="dialog">
+      <span class="sr">Panier</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 7H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+      <span class="pastille" id="pastille" hidden>0</span>
+    </button>
+  </div>
+  <nav class="menu" aria-label="Boutique">
+    <a href="https://www.elsaluis-handmade.com/">Accueil</a>
+    <a href="https://www.elsaluis-handmade.com/en-savoir-plus">À propos</a>
+    <a href="https://www.elsaluis-handmade.com/tous-les-articles">Tous les articles</a>
+    <a href="https://www.elsaluis-handmade.com/pantalons" aria-current="page">Pantalons</a>
+    <a href="https://www.elsaluis-handmade.com/hauts">Blouses</a>
+    <a href="https://www.elsaluis-handmade.com/shorts">Shorts</a>
+    <a href="https://www.elsaluis-handmade.com/gilets-vestes">Gilets &amp; vestes</a>
+    <a href="https://www.elsaluis-handmade.com/collection-upcycling">Pièces upcyclées</a>
+  </nav>
+  <nav class="menu-mobile" id="menu-mobile" aria-label="Boutique">
+    <a href="https://www.elsaluis-handmade.com/">Accueil</a>
+    <a href="https://www.elsaluis-handmade.com/en-savoir-plus">À propos</a>
+    <a href="https://www.elsaluis-handmade.com/tous-les-articles">Tous les articles</a>
+    <a href="https://www.elsaluis-handmade.com/pantalons">Pantalons</a>
+    <a href="https://www.elsaluis-handmade.com/hauts">Blouses</a>
+    <a href="https://www.elsaluis-handmade.com/gilets-vestes">Gilets &amp; vestes</a>
+    <a href="https://www.elsaluis-handmade.com/collection-upcycling">Pièces upcyclées</a>
+  </nav>
+</header>
+
+<main class="fiche">
+  <p class="fil"><a href="https://www.elsaluis-handmade.com/">Accueil</a> / <a href="https://www.elsaluis-handmade.com/pantalons">Pantalons</a> / Pantalon bleu</p>
+
+  <section class="galerie" aria-label="Photos du pantalon bleu">
+    <div class="piste" id="piste" tabindex="0">
+      <figure class="vue"><img src="img/p1.webp" alt="Pantalon bleu à rayures diagonales bleu ciel et vert d’eau, sur cintre, vu de face" width="960" height="1280"></figure>
+      <figure class="vue"><img src="img/p2.webp" alt="Détail de la taille élastique et du tissu rayé" width="960" height="1280" loading="lazy"></figure>
+      <figure class="vue"><img src="img/p3.webp" alt="Le pantalon bleu avec le top bleu taillé dans le même tissu" width="960" height="1280" loading="lazy"></figure>
+      <figure class="vue" id="photo-elsa"><img src="img/p4.webp" alt="Elsa porte le modèle du pantalon, photo dans un miroir" width="780" height="1040" loading="lazy">
+        <figcaption>Elsa porte le modèle et fait généralement un&nbsp;40.</figcaption></figure>
+    </div>
+    <span class="compteur" id="compteur" aria-hidden="true">1&nbsp;/&nbsp;4</span>
+  </section>
+
+  <div class="colonne">
+    <section class="achat" aria-labelledby="titre">
+      <div class="ligne-titre">
+        <h1 id="titre">Pantalon bleu</h1>
+        <p class="prix" id="prix" aria-live="polite">65,00&nbsp;€</p>
+      </div>
+      <p class="accroche">Cousu main dans un coton de seconde main chiné avec soin. Taille élastique, coupe droite.</p>
+
+      <fieldset class="taille">
+        <legend>Taille <span id="taille-choisie">Taille unique · 36 à 42</span></legend>
+        <div class="choix">
+          <label><input type="radio" name="taille" value="tu" checked><span class="pastille-taille"><b>T.U.</b><i>36 à 42</i></span></label>
+          <label><input type="radio" name="taille" value="32-34"><span class="pastille-taille"><b>32&#8209;34</b><i>sur demande</i></span></label>
+          <label><input type="radio" name="taille" value="42-44"><span class="pastille-taille"><b>42&#8209;44</b><i>sur demande</i></span></label>
+        </div>
+      </fieldset>
+      <p class="mesures">
+        <span><strong>Taille</strong> 32&nbsp;cm à plat, étirable jusqu’à 59&nbsp;cm</span>
+        <span><strong>Jambe</strong> 99&nbsp;cm ext. · 70&nbsp;cm int.</span>
+        <button class="lien" type="button" id="ouvrir-guide" aria-haspopup="dialog">Guide des mesures</button>
+        <button class="lien" type="button" id="voir-elsa">Elsa (taille&nbsp;40) le porte</button>
+      </p>
+
+      <button class="cta" type="button" id="ajouter">Ajouter au panier</button>
+      <div class="demande" id="demande" aria-live="polite">
+        <p id="demande-texte">Dans la limite des tissus disponibles, Elsa peut coudre ce pantalon dans une autre taille et personnaliser la longueur. Écrivez-lui pour en discuter&nbsp;:</p>
+        <div class="actions">
+          <a href="https://www.instagram.com/elsaluis.handmade/" target="_blank" rel="noopener">Instagram @elsaluis.handmade</a>
+          <a id="mail" href="mailto:elsaluis.handmade@gmail.com">Par e-mail</a>
+        </div>
+      </div>
+      <ul class="sous-cta">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Livraison offerte à partir de 150&nbsp;€ d’achat</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Cousu à la main&nbsp;: confection jusqu’à 10&nbsp;jours ouvrés avant l’envoi</li>
+      </ul>
+    </section>
+
+    <ul class="reassurance">
+      <li><b>Fait main</b>Fabriqué entièrement à la main, à Bordeaux</li>
+      <li><b>Upcycling</b>Tissu de seconde main chiné avec soin</li>
+      <li><b>Livraison offerte</b>À partir de 150&nbsp;€ d’achat</li>
+      <li><b>14&nbsp;jours</b>pour changer d’avis après réception</li>
+    </ul>
+
+    <div class="details">
+      <details open>
+        <summary>Description</summary>
+        <div class="corps">
+          <p>Fabriqué à la main à partir d’un tissu de seconde main chiné avec soin.</p>
+          <p>Veuillez noter que chaque morceau de tissu a son propre passé. Les tissus upcyclés sont pour la plupart d’anciens linges de maison (draps, nappes…) ou des coupons de tissus. Il peut parfois y avoir de légères imperfections. C’est ça aussi le charme de l’upcycling.</p>
+          <p>Du bon coton bien robuste et super confort.</p>
+          <p>Le pantalon a une taille élastique pour s’adapter à plusieurs morphologies. Coupe droite. Pas de poche. Il se porte taille haute.</p>
+        </div>
+      </details>
+      <details id="details-taille">
+        <summary>Taille et mesures</summary>
+        <div class="corps">
+          <p>Taille unique (T.U.) qui correspond à un 36&#8209;42. Elsa (sur la dernière photo) porte le modèle du pantalon et fait généralement une taille&nbsp;40.</p>
+          <table class="tableau">
+            <caption class="sr">Mesures de la pièce</caption>
+            <tbody>
+              <tr><th scope="row">Largeur non étirée (taille)</th><td>32&nbsp;cm (étirable jusqu’à 59&nbsp;cm)</td></tr>
+              <tr><th scope="row">Longueur extérieure jambe</th><td>99&nbsp;cm</td></tr>
+              <tr><th scope="row">Longueur intérieure jambe</th><td>70&nbsp;cm</td></tr>
+            </tbody>
+          </table>
+          <p class="note">Étant cousu à la main, les mesures peuvent légèrement varier.</p>
+          <p>Dans la limite des tissus disponibles, possibilité de commander une taille différente (32&#8209;34 ou 42&#8209;44) et de personnaliser la longueur si besoin (un p’tit pantalon mais + long&nbsp;!). Envoyez-moi un message sur Instagram @elsaluis.handmade ou un e-mail pour que l’on en discute&nbsp;:)</p>
+        </div>
+      </details>
+      <details>
+        <summary>Matière et entretien</summary>
+        <div class="corps">
+          <p>Coton de seconde main (ancien linge de maison ou coupon de tissu).</p>
+          <ul><li>Lavage en douceur à 30° max</li><li>Pas de sèche-linge</li></ul>
+        </div>
+      </details>
+      <details>
+        <summary>Livraison et retours</summary>
+        <div class="corps">
+          <p><strong>Livraison offerte</strong> à partir de 150&nbsp;€ d’achat. Sinon, les frais de livraison sont précisés avant la validation de la commande.</p>
+          <p><strong>Fabrication.</strong> Chaque pièce étant confectionnée à la main, le délai de fabrication peut aller jusqu’à 10&nbsp;jours ouvrés avant expédition. Ce délai s’ajoute au délai de livraison du transporteur.</p>
+          <p><strong>Retours.</strong> Vous disposez de 14&nbsp;jours à compter de la réception de votre commande pour exercer votre droit de rétractation&nbsp;: envoyez un e-mail à elsaluis.handmade@gmail.com avec votre numéro de commande. Les frais de retour sont à la charge du client ; les articles doivent être retournés non portés, non lavés, propres et dans leur état d’origine. Les créations personnalisées ou réalisées spécialement selon vos demandes ne sont pas concernées par le droit de rétractation.</p>
+          <p class="note">D’après les <a href="https://www.elsaluis-handmade.com/general-5">conditions générales de vente</a> (septembre 2026).</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <section class="ensemble" aria-labelledby="titre-ensemble">
+    <h2 id="titre-ensemble">Pour compléter</h2>
+    <p>Le top bleu est taillé dans le même tissu (photo&nbsp;3).</p>
+    <div class="cartes">
+      <article class="carte">
+        <img src="img/top.webp" alt="Top bleu noué sur le devant, même tissu rayé que le pantalon" width="600" height="800" loading="lazy">
+        <h3>Top bleu S-M</h3><span class="p">55,00&nbsp;€</span>
+        <button class="ajout" type="button" data-ajout="top">Ajouter</button>
+      </article>
+      <article class="carte">
+        <img src="img/gilet.webp" alt="Gilet sans manches en laine bleu ciel à poches" width="600" height="800" loading="lazy">
+        <h3>Gilet 100&nbsp;% laine bleu ciel</h3><span class="p">70,00&nbsp;€</span>
+        <button class="ajout" type="button" data-ajout="gilet">Ajouter</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="histoire" aria-labelledby="titre-histoire">
+    <div>
+      <p class="sur-titre">Derrière la machine à coudre</p>
+      <h2 id="titre-histoire">Je m’appelle Elsa</h2>
+    </div>
+    <div>
+      <p>Face à une industrie de la mode dominée par la fast fashion, j’ai voulu proposer une autre vision&nbsp;: des vêtements faits à la main, en petites quantités, à partir de lin européen et de tissus revalorisés grâce à l’upcycling.</p>
+      <p>Des pièces pensées pour durer, créées avec soin, et imaginées pour celles et ceux qui veulent consommer la mode autrement.</p>
+      <a href="https://www.elsaluis-handmade.com/en-savoir-plus">En savoir plus sur la marque</a>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <img src="img/logo.webp" alt="" width="64" height="64" loading="lazy">
+  <p>Merci de soutenir une marque indépendante et artisanale&nbsp;♡</p>
+  <nav aria-label="Informations">
+    <a href="https://www.instagram.com/elsaluis.handmade/" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:elsaluis.handmade@gmail.com">elsaluis.handmade@gmail.com</a>
+    <a href="https://www.elsaluis-handmade.com/general-5">CGV</a>
+  </nav>
+</footer>
+
+<div class="barre" id="barre" aria-hidden="true">
+  <div class="info"><b>Pantalon bleu</b><span id="barre-detail">65,00&nbsp;€ · T.U. 36 à 42</span></div>
+  <button class="cta" type="button" id="barre-cta" tabindex="-1">Ajouter au panier</button>
+</div>
+
+<dialog class="panier" id="panier" aria-labelledby="titre-panier">
+  <header><h2 id="titre-panier">Votre panier</h2><button class="fermer" type="button" id="fermer-panier" aria-label="Fermer le panier">×</button></header>
+  <div class="contenu">
+    <div class="seuil" id="seuil"><span id="seuil-texte"></span><div class="jauge" aria-hidden="true"><span id="jauge"></span></div></div>
+    <div id="lignes"></div>
+    <div class="suggestion" id="suggestion"></div>
+  </div>
+  <footer>
+    <div class="total"><span>Sous-total</span><span id="total">0,00&nbsp;€</span></div>
+    <p class="note">Frais de livraison précisés avant la validation de la commande.</p>
+    <button class="cta" type="button" id="payer">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+  </footer>
+</dialog>
+
+<dialog class="guide" id="guide" aria-labelledby="titre-guide">
+  <div class="panier" style="display:block"><header><h2 id="titre-guide">Guide des mesures</h2><button class="fermer" type="button" id="fermer-guide" aria-label="Fermer le guide">×</button></header></div>
+  <div class="contenu">
+    <div class="schema">
+      <svg viewBox="0 0 120 170" role="img" aria-label="Schéma du pantalon et de ses mesures">
+        <path d="M30 18h60l8 140H70L60 62 50 158H22z" fill="#f3e8e2" stroke="#cea48b" stroke-width="2"/>
+        <path d="M30 18h60v9H30z" fill="#eccec8" stroke="#cea48b" stroke-width="2"/>
+        <path d="M30 8h60" stroke="#8a5d43" stroke-width="1.6" marker-start="url(#f)" marker-end="url(#f)"/>
+        <path d="M110 18v140" stroke="#8a5d43" stroke-width="1.6" marker-start="url(#f)" marker-end="url(#f)"/>
+        <path d="M60 64v94" stroke="#8a5d43" stroke-width="1.6" stroke-dasharray="3 3"/>
+        <text x="60" y="6" font-size="13" font-weight="500" text-anchor="middle" fill="#404040" font-family="Jost,sans-serif">A</text>
+        <text x="116" y="92" font-size="13" font-weight="500" fill="#404040" font-family="Jost,sans-serif">B</text>
+        <text x="64" y="120" font-size="13" font-weight="500" fill="#404040" font-family="Jost,sans-serif">C</text>
+        <defs><marker id="f" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5"><circle cx="3" cy="3" r="2.4" fill="#8a5d43"/></marker></defs>
+      </svg>
+      <table class="tableau">
+        <caption class="sr">Mesures de la pièce</caption>
+        <tbody>
+          <tr><th scope="row">A · Taille, à plat</th><td>32&nbsp;cm, étirable jusqu’à 59&nbsp;cm</td></tr>
+          <tr><th scope="row">B · Longueur ext. jambe</th><td>99&nbsp;cm</td></tr>
+          <tr><th scope="row">C · Longueur int. jambe</th><td>70&nbsp;cm</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Taille unique (T.U.) qui correspond à un 36&#8209;42. Elsa fait généralement une taille&nbsp;40 et porte le modèle sur la dernière photo.</p>
+    <p class="note">Étant cousu à la main, les mesures peuvent légèrement varier. Pour un 32&#8209;34, un 42&#8209;44 ou une longueur personnalisée, écrivez à Elsa sur Instagram ou par e-mail.</p>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const euros = n => n.toFixed(2).replace('.', ',') + ' €';
+  const SEUIL = 150; // livraison offerte dès 150 € (accueil du site)
+  const CATALOGUE = {
+    pantalon: { nom: 'Pantalon bleu', detail: 'Taille unique · 36 à 42', prix: 65, img: 'img/p1.webp' },
+    top:      { nom: 'Top bleu S-M', detail: 'Même tissu que le pantalon', prix: 55, img: 'img/top.webp' },
+    gilet:    { nom: 'Gilet 100 % laine bleu ciel', detail: 'Pièce faite main', prix: 70, img: 'img/gilet.webp' }
+  };
+  const panier = new Set();
+  const $ = id => document.getElementById(id);
+  const dlg = $('panier'), guide = $('guide');
+
+  /* Choix de taille : le prix, le bouton et la barre suivent */
+  const radios = document.querySelectorAll('input[name="taille"]');
+  function majTaille() {
+    const v = document.querySelector('input[name="taille"]:checked').value;
+    const tu = v === 'tu', lib = v.replace('-', '\u2011');
+    $('taille-choisie').textContent = tu ? 'Taille unique · 36 à 42' : lib + ' · sur demande';
+    $('prix').innerHTML = tu ? euros(65) : 'Sur demande';
+    $('ajouter').textContent = tu ? (panier.has('pantalon') ? 'Dans votre panier · voir' : 'Ajouter au panier') : 'Demander le ' + lib + ' à Elsa';
+    $('ajouter').classList.toggle('secondaire', !tu);
+    $('barre-cta').textContent = tu ? 'Ajouter' : 'Demander';
+    $('barre-detail').innerHTML = tu ? euros(65) + ' · T.U. 36 à 42' : 'Taille ' + lib + ' · sur demande';
+    $('mail').href = 'mailto:elsaluis.handmade@gmail.com?subject=' + encodeURIComponent('Pantalon bleu en ' + v);
+    if (tu) $('demande').classList.remove('visible');
+  }
+  radios.forEach(r => r.addEventListener('change', majTaille));
+
+  function actionPrincipale() {
+    const v = document.querySelector('input[name="taille"]:checked').value;
+    if (v !== 'tu') {
+      $('demande').classList.add('visible');
+      $('demande').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      return;
+    }
+    panier.add('pantalon');
+    ouvrirPanier();
+  }
+  $('ajouter').addEventListener('click', actionPrincipale);
+  $('barre-cta').addEventListener('click', actionPrincipale);
+
+  document.querySelectorAll('[data-ajout]').forEach(b => b.addEventListener('click', () => { panier.add(b.dataset.ajout); ouvrirPanier(); }));
+
+  /* Mini-panier */
+  function ligne(cle, suggestion) {
+    const a = CATALOGUE[cle];
+    return '<div class="article"><img src="' + a.img + '" alt=""><div><b>' + a.nom + '</b><small>' + a.detail + '</small><br><small>' + euros(a.prix) + '</small></div>' +
+      (suggestion ? '<button class="ajout" type="button" data-plus="' + cle + '">Ajouter</button>' : '<button class="retirer" type="button" data-retirer="' + cle + '">Retirer<span class="sr"> ' + a.nom + '</span></button>') + '</div>';
+  }
+  function rendre() {
+    const total = [...panier].reduce((s, k) => s + CATALOGUE[k].prix, 0);
+    $('lignes').innerHTML = panier.size ? [...panier].map(k => ligne(k)).join('') : '<p class="vide">Votre panier est vide.</p>';
+    const autres = Object.keys(CATALOGUE).filter(k => !panier.has(k));
+    $('suggestion').innerHTML = panier.size && autres.length ? '<h3>Pour compléter</h3>' + autres.map(k => ligne(k, true)).join('') : '';
+    $('total').innerHTML = euros(total);
+    $('seuil').hidden = !panier.size;
+    $('seuil-texte').innerHTML = total >= SEUIL ? 'La livraison vous est offerte.' : 'Plus que ' + euros(SEUIL - total) + ' pour la livraison offerte.';
+    $('jauge').style.width = Math.min(100, total / SEUIL * 100) + '%';
+    const p = $('pastille'); p.hidden = !panier.size; p.textContent = panier.size;
+    majTaille();
+  }
+  function ouvrirPanier() { rendre(); if (!dlg.open) dlg.showModal(); $('fermer-panier').focus(); }
+  dlg.addEventListener('click', e => {
+    const r = e.target.closest('[data-retirer]'), plus = e.target.closest('[data-plus]');
+    if (r) { panier.delete(r.dataset.retirer); rendre(); $('fermer-panier').focus(); }
+    else if (plus) { panier.add(plus.dataset.plus); rendre(); $('fermer-panier').focus(); }
+    else if (e.target === dlg) dlg.close();
+  });
+  $('fermer-panier').addEventListener('click', () => dlg.close());
+  $('ouvrir-panier').addEventListener('click', ouvrirPanier);
+  $('payer').addEventListener('click', () => { $('payer').textContent = 'Maquette : le paiement reste celui de votre boutique ✓'; });
+
+  /* Guide des mesures */
+  $('ouvrir-guide').addEventListener('click', () => guide.showModal());
+  $('fermer-guide').addEventListener('click', () => guide.close());
+  guide.addEventListener('click', e => { if (e.target === guide) guide.close(); });
+
+  /* Galerie : compteur et lien vers la photo d’Elsa */
+  const piste = $('piste'), vues = [...piste.children];
+  piste.addEventListener('scroll', () => {
+    const i = Math.round(piste.scrollLeft / (vues[0].offsetWidth + 8));
+    $('compteur').textContent = Math.min(i + 1, vues.length) + ' / ' + vues.length;
+  }, { passive: true });
+  $('voir-elsa').addEventListener('click', () => {
+    const el = $('photo-elsa');
+    if (getComputedStyle(piste).display === 'flex') { piste.scrollTo({ left: el.offsetLeft - 14, behavior: 'smooth' }); piste.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+    else el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  });
+
+  /* Menu mobile */
+  $('burger').addEventListener('click', () => {
+    const o = $('menu-mobile').classList.toggle('ouvert');
+    $('burger').setAttribute('aria-expanded', o);
+  });
+
+  /* Barre collante : visible dès que le bouton principal sort de l’écran */
+  const barre = $('barre');
+  new IntersectionObserver(([e]) => {
+    const v = !e.isIntersecting && e.boundingClientRect.top < 0;
+    barre.classList.toggle('visible', v);
+    barre.setAttribute('aria-hidden', !v);
+    $('barre-cta').tabIndex = v ? 0 : -1;
+  }).observe($('ajouter'));
+
+  rendre();
+})();
+</script>
+</body>
+</html>
