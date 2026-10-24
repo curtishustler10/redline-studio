@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Huile apaisante Premières quenottes · Pototam (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Josefin+Sans:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* Couleurs relevées sur pototam.fr le 24/10/2026 (variables du thème Shopify) */
+  :root {
+    --pototam-jaune: rgb(255, 240, 0);          /* --primary-button-background, bandeau d'annonce */
+    --pototam-jaune-pale: rgb(255, 242, 186);   /* --secondary-background */
+    --pototam-texte: rgb(26, 26, 26);           /* --text-color */
+    --pototam-bordure: rgb(221, 221, 221);      /* --border-color */
+    --pototam-gris: #5f5f5f;
+    --pototam-titres: "Josefin Sans", sans-serif; /* --heading-font-family */
+    --pototam-corps: Figtree, sans-serif;         /* --text-font-family */
+    --barre-h: 72px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: var(--pototam-corps); font-weight: 500; color: var(--pototam-texte); background: #fff; font-size: 15px; line-height: 1.55; }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid #1a1a1a; outline-offset: 2px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .maquette { background: #1a1a1a; color: #e9e9e9; font-size: 11px; letter-spacing: .02em; text-align: center; padding: 4px 12px; }
+  .annonce { background: var(--pototam-jaune); text-align: center; font-size: 12px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; padding: 8px 12px; line-height: 1.35; }
+  header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 56px; padding: 0 16px; border-bottom: 1px solid var(--pototam-bordure); background: #fff; }
+  header .g { display: flex; gap: 14px; }
+  header .d { display: flex; justify-content: flex-end; }
+  .ico { background: none; border: 0; padding: 6px; display: inline-flex; position: relative; border-radius: 6px; }
+  .ico svg { width: 22px; height: 22px; }
+  .logo img { height: 34px; width: auto; }
+  .pastille { position: absolute; top: -2px; right: -4px; background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; border-radius: 9px; display: grid; place-items: center; padding: 0 4px; }
+
+  main { max-width: 1180px; margin: 0 auto; }
+  .produit { display: grid; gap: 0; }
+  .galerie { padding: 12px 16px 0; }
+  .vue { position: relative; border-radius: 10px; overflow: hidden; background: var(--pototam-jaune-pale); aspect-ratio: 4 / 3; }
+  .vue img { width: 100%; height: 100%; object-fit: cover; }
+  .miniatures { display: flex; gap: 8px; margin-top: 8px; }
+  .miniatures button { width: 52px; height: 52px; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden; background: var(--pototam-jaune-pale); }
+  .miniatures button[aria-pressed="true"] { border-color: #1a1a1a; }
+  .miniatures img { width: 100%; height: 100%; object-fit: cover; }
+
+  .infos { padding: 12px 16px 0; }
+  h1 { font-family: var(--pototam-titres); font-weight: 700; font-size: 23px; line-height: 1.15; margin: 0 0 6px; }
+  .note { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--pototam-gris); text-decoration: none; }
+  .note .etoiles { color: #f2b705; letter-spacing: 1px; font-size: 15px; }
+  .note:hover { text-decoration: underline; }
+  .prix-ligne { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 8px; }
+  .prix { font-size: 22px; font-weight: 700; }
+  .reperes { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding: 0; list-style: none; }
+  .reperes li { background: var(--pototam-jaune-pale); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; font-weight: 600; }
+
+  .achat { display: grid; grid-template-columns: 116px 1fr; gap: 10px; align-items: stretch; }
+  .qte { display: grid; grid-template-columns: 36px 1fr 36px; border: 1px solid #bdbdbd; border-radius: 8px; height: 52px; align-items: center; }
+  .qte button { background: none; border: 0; height: 100%; font-size: 20px; border-radius: 8px; }
+  .qte output { text-align: center; font-weight: 600; font-size: 16px; }
+  .btn { background: var(--pototam-jaune); border: 0; border-radius: 8px; height: 52px; font-weight: 700; font-size: 14.5px; letter-spacing: .08em; text-transform: uppercase; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: inset 0 -2px 0 rgba(0,0,0,.08); }
+  .btn:hover { filter: brightness(.97); }
+  .btn .p { letter-spacing: 0; font-weight: 600; }
+  .livraison { margin: 10px 0 0; font-size: 13.5px; display: flex; gap: 8px; align-items: center; }
+  .livraison svg { flex: none; width: 18px; height: 18px; }
+
+  .badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 28px 16px 8px; list-style: none; padding: 0; }
+  .badges li { text-align: center; font-family: var(--pototam-titres); font-weight: 700; font-size: 13px; text-transform: uppercase; line-height: 1.15; }
+  .badges .bulle { width: 64px; height: 58px; margin: 0 auto 8px; background: var(--pototam-jaune); border-radius: 46% 54% 50% 50% / 55% 48% 52% 45%; display: grid; place-items: center; }
+  .badges .bulle svg { width: 30px; height: 30px; }
+  .badges .bulle span { font-size: 17px; line-height: 1; }
+
+  .resume { margin: 18px 16px 0; padding: 14px 16px; background: var(--pototam-jaune-pale); border-radius: 10px; }
+  .resume strong { display: block; font-family: var(--pototam-titres); font-size: 15px; margin-bottom: 4px; }
+  .resume p { margin: 0; }
+
+  .accordeons { margin: 18px 16px 0; border-top: 1px solid var(--pototam-bordure); }
+  details { border-bottom: 1px solid var(--pototam-bordure); }
+  summary { list-style: none; display: flex; justify-content: space-between; align-items: center; padding: 16px 2px; font-family: var(--pototam-titres); font-weight: 700; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-family: var(--pototam-corps); font-size: 22px; font-weight: 500; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  .contenu { padding: 0 2px 16px; }
+  .contenu h3 { font-family: var(--pototam-titres); font-size: 16px; margin: 4px 0 6px; }
+  .contenu ul { padding-left: 18px; margin: 6px 0 10px; }
+  .contenu li { margin-bottom: 6px; }
+  .inci { font-size: 12.5px; color: var(--pototam-gris); }
+
+  .avis { margin: 30px 16px 0; }
+  .avis h2 { font-family: var(--pototam-titres); font-size: 21px; margin: 0 0 4px; }
+  .avis .total { color: var(--pototam-gris); margin: 0 0 14px; font-size: 14px; }
+  .avis .total .etoiles { color: #f2b705; letter-spacing: 1px; }
+  .avis-liste { display: grid; gap: 12px; }
+  blockquote { margin: 0; border: 1px solid var(--pototam-bordure); border-radius: 10px; padding: 14px 16px; }
+  blockquote .etoiles { color: #f2b705; letter-spacing: 1px; }
+  blockquote p { margin: 6px 0 8px; }
+  blockquote footer { font-size: 13px; color: var(--pototam-gris); }
+
+  .pied { margin: 40px 0 0; padding: 26px 16px calc(var(--barre-h) + 30px); background: var(--pototam-jaune); text-align: center; }
+  .pied img { height: 32px; width: auto; margin: 0 auto 8px; }
+  .pied p { margin: 0; font-weight: 600; font-size: 13.5px; }
+
+  /* Barre d'achat collante : rien ne la recouvre */
+  .barre { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #fff; border-top: 1px solid var(--pototam-bordure); box-shadow: 0 -4px 16px rgba(0,0,0,.06); height: var(--barre-h); padding: 10px 16px; display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: center; transform: translateY(110%); transition: transform .2s ease; }
+  .barre.visible { transform: none; }
+  .barre img { width: 44px; height: 44px; border-radius: 6px; object-fit: cover; background: var(--pototam-jaune-pale); }
+  .barre .t { font-size: 13px; line-height: 1.25; min-width: 0; }
+  .barre .t b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .barre .btn { height: 46px; padding: 0 18px; font-size: 13.5px; }
+  .chat { position: fixed; right: 16px; bottom: 16px; z-index: 31; width: 48px; height: 48px; border-radius: 50%; border: 0; background: #1a1a1a; color: #fff; display: grid; place-items: center; box-shadow: 0 4px 12px rgba(0,0,0,.2); transition: bottom .2s ease; }
+  .chat svg { width: 22px; height: 22px; }
+  body.barre-on .chat { bottom: calc(var(--barre-h) + 12px); }
+  .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--barre-h) + 70px); background: #1a1a1a; color: #fff; font-size: 13px; padding: 8px 14px; border-radius: 8px; z-index: 40; opacity: 0; pointer-events: none; transition: opacity .2s; max-width: calc(100% - 32px); text-align: center; }
+  .toast.on { opacity: 1; }
+
+  /* Mini-panier */
+  .voile { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .voile.on { opacity: 1; pointer-events: auto; }
+  .panier { position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100%); background: #fff; z-index: 51; transform: translateX(100%); transition: transform .25s ease; display: flex; flex-direction: column; }
+  .panier.on { transform: none; }
+  .panier-tete { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--pototam-bordure); }
+  .panier-tete h2 { font-family: var(--pototam-titres); font-size: 19px; margin: 0; }
+  .progres { padding: 14px 16px; background: var(--pototam-jaune-pale); font-size: 13.5px; }
+  .jauge { height: 6px; background: #fff; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+  .jauge i { display: block; height: 100%; background: #1a1a1a; width: 0; transition: width .2s; }
+  .ligne { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; padding: 16px; align-items: center; }
+  .ligne img { width: 64px; height: 64px; border-radius: 8px; object-fit: cover; }
+  .ligne .n { font-weight: 600; font-size: 14px; line-height: 1.3; }
+  .ligne .q { font-size: 13px; color: var(--pototam-gris); }
+  .panier-pied { margin-top: auto; padding: 16px; border-top: 1px solid var(--pototam-bordure); }
+  .sous-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; margin-bottom: 12px; }
+  .panier-pied .btn { width: 100%; font-size: 12.5px; letter-spacing: .04em; }
+
+  @media (min-width: 720px) {
+    .annonce { font-size: 13px; }
+    header { height: 72px; padding: 0 clamp(24px, 3vw, 40px); }
+    .logo img { height: 44px; }
+    .produit { grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 3.4vw, 48px); padding: 28px clamp(24px, 3vw, 40px) 0; align-items: start; }
+    .galerie { padding: 0; display: grid; grid-template-columns: 72px 1fr; gap: 12px; }
+    .vue { aspect-ratio: 1 / 1; grid-column: 2; grid-row: 1; }
+    .miniatures { flex-direction: column; margin: 0; grid-column: 1; grid-row: 1; }
+    .miniatures button { width: 72px; height: 72px; }
+    .infos { padding: 8px 0 0; position: sticky; top: 20px; }
+    h1 { font-size: clamp(26px, 2.6vw, 34px); }
+    .prix { font-size: 26px; }
+    .achat { grid-template-columns: 130px 1fr; }
+    .badges, .resume, .accordeons, .avis { margin-left: 0; margin-right: 0; }
+    .suite { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 3.4vw, 48px); padding: 0 clamp(24px, 3vw, 40px); }
+    .avis { margin-top: 18px; }
+    .barre { display: none; }
+    body.barre-on .chat { bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="maquette">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="annonce">Livraison Mondial Relay offerte en France métropolitaine dès 35&nbsp;€ d’achats</div>
+<header>
+  <div class="g">
+    <button class="ico" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <button class="ico" type="button" aria-label="Rechercher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+  </div>
+  <a class="logo" href="#" aria-label="Pototam, accueil"><img src="img/logo.webp" alt="Pototam" width="240" height="65"></a>
+  <div class="d">
+    <button class="ico" type="button" id="ouvrirPanier" aria-label="Ouvrir le panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg><span class="pastille" id="pastille">0</span></button>
+  </div>
+</header>
+
+<main>
+  <section class="produit">
+    <div class="galerie">
+      <div class="vue"><img id="vue" src="img/q1.webp" alt="Roll-on Premières quenottes posé sur fond jaune" width="1200" height="1200"></div>
+      <div class="miniatures" role="group" aria-label="Photos du produit">
+        <button type="button" aria-pressed="true" data-src="img/q1.webp" data-alt="Roll-on Premières quenottes posé sur fond jaune"><img src="img/q1-mini.webp" alt="Photo 1 : le roll-on"></button>
+        <button type="button" aria-pressed="false" data-src="img/q2.webp" data-alt="Un papa applique le roll-on à son bébé assis sur le lit"><img src="img/q2-mini.webp" alt="Photo 2 : un papa et son bébé"></button>
+        <button type="button" aria-pressed="false" data-src="img/q3.webp" data-alt="Le roll-on Premières quenottes tenu près d’un bébé souriant"><img src="img/q3-mini.webp" alt="Photo 3 : le roll-on en main"></button>
+      </div>
+    </div>
+
+    <div class="infos">
+      <h1>Huile apaisante – Premières quenottes – 10&nbsp;ml</h1>
+      <a class="note" href="#avis"><span class="etoiles" aria-hidden="true">★★★★☆</span><span>4,4 · 373 avis</span></a>
+      <div class="prix-ligne"><span class="prix">9,90&nbsp;€</span></div>
+      <ul class="reperes" aria-label="En bref">
+        <li>Pour les poussées dentaires</li>
+        <li>Applicable dès 3&nbsp;mois</li>
+        <li>4 ingrédients seulement</li>
+      </ul>
+      <div class="achat">
+        <div class="qte" role="group" aria-label="Quantité">
+          <button type="button" id="moins" aria-label="Réduire la quantité">−</button>
+          <output id="qte" aria-live="polite">1</output>
+          <button type="button" id="plus" aria-label="Augmenter la quantité">+</button>
+        </div>
+        <button class="btn" type="button" id="ajouter">Ajouter au panier</button>
+      </div>
+      <p class="livraison"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><span>Livraison Mondial Relay offerte dès&nbsp;35&nbsp;€, domicile dès&nbsp;55&nbsp;€</span></p>
+    </div>
+  </section>
+
+  <div class="suite">
+    <div>
+      <ul class="badges">
+        <li><div class="bulle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 2.5 15 5l3.5-.5 1 3.4 2.5 2.3-1.6 3.1.8 3.5-3.4 1.2L16 21l-3.4-1-3.3 1.4-1.9-3-3.5-.7.3-3.6L2 11.3l2.3-2.6-.3-3.5 3.5-.6L9.3 2Z"/></svg></div>Fabriqué en France</li>
+        <li><div class="bulle" aria-hidden="true"><span>+3</span></div>Dès 3 mois</li>
+        <li><div class="bulle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></div>Bio &amp; naturel</li>
+      </ul>
+      <div class="resume">
+        <strong>100&nbsp;% naturel et 100&nbsp;% biologique</strong>
+        <p>Le Calendula, la Camomille et la Lavande Fine sont les 3 actifs présents dans ce soin. Directement issus des plantes et reconnus pour leurs propriétés calmantes et apaisantes, ils soulagent les gencives de bébé lors de ses poussées dentaires.</p>
+      </div>
+
+      <div class="accordeons">
+        <details open>
+          <summary>Description</summary>
+          <div class="contenu">
+            <h3>Pour les poussées dentaires</h3>
+            <p>Ce p’tit roll-on Premières Quenottes a été conçu pour accompagner bébé lors des premières dents. Calmant et apaisant, ce soin 100&nbsp;% naturel et 100&nbsp;% biologique est l’allié incontournable des parents pour prendre soin de bébé lorsque ses gencives deviennent douloureuses.</p>
+            <p>Avec l’huile apaisante Premières Quenottes, Pototam aide bébé (et ses parents&nbsp;!) à vivre sereinement cette étape naturelle.</p>
+            <h3>Les actifs clés</h3>
+            <ul>
+              <li><b>Huile essentielle de Camomille Romaine</b>&nbsp;: réputée pour ses propriétés relaxantes, efficace mais douce, elle est merveilleuse pour calmer les gencives endolories.</li>
+              <li><b>Huile essentielle de Lavande Fine</b>&nbsp;: ses vertus anesthésiantes locales renommées en font ici un élément incontournable. Elle est aussi la plus douce et la mieux tolérée des huiles essentielles de lavande.</li>
+              <li><b>Macérât huileux de Calendula</b>&nbsp;: les bienfaits apaisants de cette plante médicinale renommée participent à l’efficacité de ce soin.</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Ingrédients</summary>
+          <div class="contenu">
+            <p>Le roll-on Premières Quenottes est composé de 4 ingrédients seulement&nbsp;:</p>
+            <ul>
+              <li>Huile de tournesol Bio&nbsp;: sert de support aux huiles essentielles</li>
+              <li>Macérât huileux de Calendula Bio (à base d’huile de tournesol)&nbsp;: pour ses vertus apaisantes</li>
+              <li>Huile essentielle de Camomille Bio&nbsp;: son effet antalgique apaise bébé</li>
+              <li>Huile essentielle de Lavande Fine Bio&nbsp;: pour soulager la douleur</li>
+            </ul>
+            <p>100&nbsp;% du total des ingrédients sont issus de l’Agriculture Biologique.</p>
+            <p class="inci">INCI&nbsp;: HELIANTHUS ANNUUS SEED OIL / CALENDULA OFFICINALIS FLOWER EXTRACT, ANTHEMIS NOBILIS FLOWER EXTRACT, LAVANDULA ANGUSTIFOLIA OIL, LINALOOL, LIMONENE, GERANIOL, COUMARIN.</p>
+            <p>Écoresponsable · Vegan &amp; Cruelty Free</p>
+          </div>
+        </details>
+        <details>
+          <summary>Utilisation</summary>
+          <div class="contenu">
+            <p>Après vous être bien lavé les mains, appliquez une petite quantité d’huile sur le bout du doigt, puis massez la gencive de bébé durant 5 à 10 secondes.</p>
+            <p>Répétez l’opération 2 à 3 fois par jour maximum, durant 5 jours maximum. Faire une pause de 3 jours avant de renouveler l’application si besoin.</p>
+            <p>Applicable dès 3&nbsp;mois. Éviter le contact avec les yeux. Ne pas dépasser les doses recommandées.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Livraison et retours</summary>
+          <div class="contenu">
+            <ul>
+              <li>Livraison Mondial Relay offerte dès 35&nbsp;€, livraison à domicile offerte dès 55&nbsp;€.</li>
+              <li><em>Note de la maquette&nbsp;: seuils repris de votre fiche produit. Le tableau de votre politique d’expédition indique 40&nbsp;€ en point relais et 50&nbsp;€ à domicile&nbsp;; un seul seuil est à retenir avant la mise en ligne.</em></li>
+              <li>Colis expédiés en moins de 72&nbsp;h (hors week-end et jours fériés)&nbsp;; Colissimo livre ensuite en 2 jours ouvrés, Mondial Relay en 3 à 5 jours ouvrés.</li>
+              <li>Rétractation possible sous 14 jours à partir de la date de livraison, produits non utilisés dans leur emballage d’origine&nbsp;; frais de retour à votre charge.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <section class="avis" id="avis" aria-labelledby="avis-titre">
+      <h2 id="avis-titre">Avis sur les produits</h2>
+      <p class="total"><span class="etoiles" aria-hidden="true">★★★★☆</span> 4,4 · 373 avis</p>
+      <div class="avis-liste">
+        <blockquote>
+          <span class="etoiles" aria-hidden="true">★★★★★</span>
+          <p><b>Super&nbsp;!</b> Plusieurs nuits ma fille s’est réveillée en pleurant et rien ne l’apaisée, je lui ai mis popotam sur les gencives, une tétée après et elle s’est rendormie en continuant une bonne nuit&nbsp;! Cela fait 2 semaines que j’utilise le roll-on mais pour le moment j’en suis très satisfaite&nbsp;!</p>
+          <footer>Deborah L., Tourcoing</footer>
+        </blockquote>
+        <blockquote>
+          <span class="etoiles" aria-hidden="true">★★★★☆</span>
+          <p>J’ai utilisé uniquement l’huile apaisante pour le moment c’est efficace&nbsp;!</p>
+          <footer>Suzie R., Lathus-Saint-Rémy</footer>
+        </blockquote>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="pied">
+  <img src="img/logo.webp" alt="Pototam" width="240" height="65">
+  <p>Fabriqué en France, dans la Loire</p>
+</footer>
+
+<div class="barre" id="barre" aria-hidden="true">
+  <img src="img/q1-mini.webp" alt="">
+  <div class="t"><b>Premières quenottes – 10&nbsp;ml</b><span>9,90&nbsp;€</span></div>
+  <button class="btn" type="button" id="ajouterBarre" tabindex="-1">Ajouter</button>
+</div>
+<button class="chat" type="button" id="chat" aria-label="Chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="voile" id="voile"></div>
+<aside class="panier" id="panier" role="dialog" aria-modal="true" aria-labelledby="panier-titre" aria-hidden="true">
+  <div class="panier-tete">
+    <h2 id="panier-titre">Votre panier</h2>
+    <button class="ico" type="button" id="fermer" aria-label="Fermer le panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="progres"><span id="progresTexte"></span><div class="jauge"><i id="jauge"></i></div></div>
+  <div class="ligne">
+    <img src="img/q1-mini.webp" alt="">
+    <div><div class="n">Huile apaisante – Premières quenottes – 10&nbsp;ml</div><div class="q" id="ligneQte"></div></div>
+    <div id="ligneTotal"></div>
+  </div>
+  <div class="panier-pied">
+    <div class="sous-total"><span>Sous-total</span><span id="sousTotal"></span></div>
+    <button class="btn" type="button" id="payer">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const PRIX = 9.90, SEUIL_RELAIS = 35;
+  const eur = n => n.toFixed(2).replace('.', ',') + ' €';
+  const $ = id => document.getElementById(id);
+  let qte = 1, panier = 0;
+
+  // Galerie
+  document.querySelectorAll('.miniatures button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.miniatures button').forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    $('vue').src = b.dataset.src; $('vue').alt = b.dataset.alt;
+  }));
+
+  // Quantité : le bouton affiche le montant
+  const majBouton = () => {
+    $('qte').textContent = qte;
+    $('ajouter').innerHTML = 'Ajouter au panier' + (qte > 1 ? ' <span class="p">· ' + eur(qte * PRIX) + '</span>' : '');
+  };
+  $('moins').addEventListener('click', () => { if (qte > 1) { qte--; majBouton(); } });
+  $('plus').addEventListener('click', () => { if (qte < 20) { qte++; majBouton(); } });
+
+  // Mini-panier
+  let dernierFocus = null;
+  const ouvrir = () => {
+    const total = panier * PRIX, reste = SEUIL_RELAIS - total;
+    $('pastille').textContent = panier;
+    $('ligneQte').textContent = 'Quantité : ' + panier + ' × ' + eur(PRIX);
+    $('ligneTotal').textContent = eur(total);
+    $('sousTotal').textContent = eur(total);
+    $('progresTexte').textContent = reste > 0 ? 'Plus que ' + eur(reste) + ' avant la livraison Mondial Relay offerte' : 'La livraison Mondial Relay vous est offerte';
+    $('jauge').style.width = Math.min(100, total / SEUIL_RELAIS * 100) + '%';
+    dernierFocus = document.activeElement;
+    $('voile').classList.add('on'); $('panier').classList.add('on'); $('panier').setAttribute('aria-hidden', 'false');
+    $('fermer').focus();
+  };
+  const fermer = () => {
+    $('voile').classList.remove('on'); $('panier').classList.remove('on'); $('panier').setAttribute('aria-hidden', 'true');
+    if (dernierFocus) dernierFocus.focus();
+  };
+  const ajouter = n => { panier += n; ouvrir(); };
+  $('ajouter').addEventListener('click', () => ajouter(qte));
+  $('ajouterBarre').addEventListener('click', () => ajouter(qte));
+  $('ouvrirPanier').addEventListener('click', ouvrir);
+  $('fermer').addEventListener('click', fermer);
+  $('voile').addEventListener('click', fermer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('panier').classList.contains('on')) fermer(); });
+  $('payer').addEventListener('click', () => toast('Maquette : le paiement reste celui de votre boutique'));
+
+  // Barre collante : visible quand le bouton principal sort de l'écran ; le chat remonte au-dessus
+  const io = new IntersectionObserver(([e]) => {
+    const on = !e.isIntersecting && e.boundingClientRect.top < 0;
+    $('barre').classList.toggle('visible', on);
+    $('barre').setAttribute('aria-hidden', on ? 'false' : 'true');
+    $('ajouterBarre').tabIndex = on ? 0 : -1;
+    document.body.classList.toggle('barre-on', on);
+  });
+  io.observe($('ajouter'));
+
+  let tt;
+  const toast = m => { $('toast').textContent = m; $('toast').classList.add('on'); clearTimeout(tt); tt = setTimeout(() => $('toast').classList.remove('on'), 2200); };
+  $('chat').addEventListener('click', () => toast('Maquette : votre chat s’ouvre ici, au-dessus du bouton d’achat'));
+})();
+</script>
+</body>
+</html>

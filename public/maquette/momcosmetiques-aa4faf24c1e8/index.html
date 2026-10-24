@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Badabôm · Môm (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur mom-cosmetiques.fr le 24/10/2026 (styles calculés + pixels de la capture mobile) */
+:root{
+  --mom-brun:#614c38;        /* couleur du texte et des titres (body, h1) */
+  --mom-orange:#ce7c32;      /* bandeau « Frais de port offerts » et bouton panier */
+  --mom-creme:#fffbf2;       /* fond de l'en-tête et des boutons */
+  --mom-sauge:#aeb299;       /* bande de recherche */
+  --mom-peche:#e5ac8f;       /* bande du menu */
+  --mom-gris:#424242;        /* texte des boutons */
+  --ligne:#e9dfcf;
+  --rayon:30px;              /* arrondi des boutons du site */
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:var(--mom-brun);background:#fff;line-height:1.5;font-size:16px}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:Quicksand,"Nunito Sans",sans-serif;font-weight:700;line-height:1.2;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mom-orange);outline-offset:2px}
+button{font:inherit;color:inherit;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.maquette{background:#2b2118;color:#f4ece0;font-size:11px;text-align:center;padding:4px 8px;letter-spacing:.02em}
+.bandeau{background:var(--mom-orange);color:#fff;text-align:center;font-size:13.5px;padding:7px 12px;font-weight:600}
+.bandeau b{font-weight:800}
+header{background:var(--mom-creme);border-bottom:1px solid var(--ligne)}
+.entete{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;gap:12px}
+.entete img{height:40px;width:auto}
+.panier-btn{display:flex;align-items:center;gap:6px;background:var(--mom-orange);color:#fff;border:0;border-radius:var(--rayon);padding:8px 14px;font-weight:700;font-size:14px}
+.panier-btn span.n{background:#fff;color:var(--mom-brun);border-radius:20px;min-width:20px;padding:0 6px;font-size:12px;line-height:20px;text-align:center}
+nav.menu{background:var(--mom-peche)}
+nav.menu ul{max-width:1200px;margin:0 auto;list-style:none;display:flex;gap:18px;padding:5px 16px;overflow-x:auto;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;scrollbar-width:none}
+nav.menu a{text-decoration:none;color:var(--mom-brun)}
+
+main{max-width:1200px;margin:0 auto}
+.fil{display:none;font-size:12.5px;padding:8px 16px 0;opacity:.85}
+.produit{display:grid;grid-template-columns:1fr;gap:0}
+.galerie{position:relative}
+.galerie .vue{aspect-ratio:1/1;max-height:270px;width:100%;overflow:hidden;background:var(--mom-creme)}
+.galerie .vue img{width:100%;height:100%;object-fit:cover}
+.vignettes{display:flex;gap:6px;position:absolute;left:12px;bottom:10px}
+.vignettes button{border:2px solid #fff;border-radius:10px;padding:0;overflow:hidden;width:44px;height:44px;background:var(--mom-creme);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.vignettes button[aria-current="true"]{border-color:var(--mom-orange)}
+.vignettes img{width:100%;height:100%;object-fit:cover}
+
+.infos{padding:10px 16px 16px}
+.infos h1{font-size:23px;letter-spacing:.01em}
+.infos .sous{font-size:14.5px;margin:2px 0 6px}
+.note{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;text-decoration:none;font-weight:600}
+.etoiles{color:var(--mom-orange);letter-spacing:1px;font-size:15px}
+
+fieldset.formats{border:0;padding:0;margin:12px 0 0}
+fieldset.formats legend{font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;padding:0}
+.cartes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.carte{position:relative}
+.carte input{position:absolute;opacity:0;inset:0;margin:0}
+.carte label{display:flex;flex-direction:column;align-items:center;text-align:center;border:2px solid var(--ligne);border-radius:14px;padding:16px 4px 8px;background:#fff;cursor:pointer;height:100%;min-height:86px}
+.carte .poids{font-weight:800;font-size:17px}
+.carte .nom{font-size:12.5px}
+.carte .prix{font-weight:800;font-size:15px;margin-top:2px}
+.carte input:checked + label{border-color:var(--mom-orange);background:var(--mom-creme);box-shadow:0 0 0 1px var(--mom-orange)}
+.carte input:focus-visible + label{outline:3px solid var(--mom-orange);outline-offset:2px}
+.carte .pref{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--mom-brun);color:#fff;font-size:10px;font-weight:800;padding:1px 8px;border-radius:20px;white-space:nowrap;pointer-events:none}
+.usage{font-size:13.5px;margin:8px 0 0;min-height:2.6em}
+
+.achat{display:flex;gap:10px;margin-top:10px}
+.qte{display:flex;align-items:center;border:2px solid var(--ligne);border-radius:var(--rayon);background:#fff}
+.qte button{background:none;border:0;width:38px;height:48px;font-size:20px;font-weight:700}
+.qte output{min-width:22px;text-align:center;font-weight:800}
+.ajouter{flex:1;background:var(--mom-brun);color:var(--mom-creme);border:0;border-radius:var(--rayon);font-weight:800;font-size:16px;min-height:52px;padding:0 16px;letter-spacing:.02em}
+.ajouter:hover{background:#4d3c2c}
+.paiement{font-size:12.5px;margin:8px 0 0;text-align:center}
+
+.badges{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.badges li{background:var(--mom-creme);border-radius:12px;padding:9px 10px;font-size:13px;font-weight:700;display:flex;gap:8px;align-items:center;line-height:1.25}
+.badges svg{flex:none}
+
+.bloc{padding:22px 16px;border-top:1px solid var(--ligne)}
+.bloc h2{font-size:20px;margin-bottom:10px}
+details{border-bottom:1px solid var(--ligne)}
+details summary{list-style:none;cursor:pointer;padding:14px 0;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";font-size:22px;line-height:1;color:var(--mom-orange)}
+details[open] summary::after{content:"−"}
+details .corps{padding:0 0 14px;font-size:15px}
+details ul{padding-left:18px;margin:6px 0}
+details p{margin:6px 0}
+
+.histoire{background:var(--mom-creme)}
+.histoire blockquote{margin:0;font-size:17px;font-family:Quicksand,sans-serif;font-weight:600;line-height:1.45}
+.histoire .sign{margin-top:10px;font-size:14px;font-weight:700}
+
+.avis-tete{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.avis-tete .grand{font-size:30px;font-weight:800;font-family:Quicksand,sans-serif}
+.avis{display:grid;gap:10px}
+.avis article{border:1px solid var(--ligne);border-radius:14px;padding:12px 14px}
+.avis p{margin:4px 0 6px;font-size:15px}
+.avis .qui{font-size:13px;font-weight:700}
+
+.duo{display:flex;gap:12px;align-items:center;background:#f3f1ea;border-radius:14px;padding:10px}
+.duo img{width:84px;height:84px;border-radius:10px;object-fit:cover;flex:none}
+.duo .t{font-weight:800;font-size:15px}
+.duo p{margin:2px 0;font-size:13.5px}
+.duo button{margin-top:6px;background:#fff;border:2px solid var(--mom-brun);border-radius:var(--rayon);padding:6px 14px;font-weight:800;font-size:13.5px}
+
+footer{background:var(--mom-sauge);color:#2f2519;padding:22px 16px 90px;font-size:14px}
+footer .in{max-width:1200px;margin:0 auto}
+footer p{margin:0 0 8px}
+
+/* barre d'achat collante */
+.collante{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--ligne);box-shadow:0 -4px 14px rgba(0,0,0,.08);padding:8px 12px;display:flex;gap:10px;align-items:center;transform:translateY(110%);transition:transform .2s;z-index:20}
+.collante.vue{transform:none}
+.collante .r{flex:1;font-size:13.5px;line-height:1.25}
+.collante .r b{display:block;font-size:15px}
+.collante .ajouter{flex:none;min-height:46px;font-size:15px}
+
+/* mini-panier */
+.voile{position:fixed;inset:0;background:rgba(43,33,24,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.voile.ouvert{opacity:1;pointer-events:auto}
+aside.mini{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:#fff;z-index:31;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column}
+aside.mini.ouvert{transform:none}
+.mini .haut{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--ligne)}
+.mini .haut h2{font-size:19px}
+.fermer{background:none;border:0;font-size:28px;line-height:1;width:44px;height:44px}
+.lignes{flex:1;overflow:auto;padding:8px 16px;list-style:none;margin:0}
+.lignes li{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ligne);font-size:14px}
+.lignes img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+.lignes .d{flex:1}
+.lignes .d b{display:block}
+.mini .bas{padding:14px 16px 18px;border-top:1px solid var(--ligne)}
+.port{font-size:13.5px;margin:0 0 6px}
+.jauge{height:6px;background:var(--ligne);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.jauge i{display:block;height:100%;background:var(--mom-orange);width:0}
+.total{display:flex;justify-content:space-between;font-weight:800;font-size:17px;margin-bottom:12px}
+.payer{width:100%;background:var(--mom-brun);color:var(--mom-creme);border:0;border-radius:var(--rayon);min-height:52px;font-weight:800;font-size:14.5px;padding:8px 14px}
+
+@media (min-width:768px){
+  .galerie .vue{max-height:none}
+  .produit{grid-template-columns:1fr 1fr;gap:32px;padding:16px}
+  .fil{display:block}
+  .vignettes{position:static;padding:10px 0 0}
+  .vignettes button{width:72px;height:72px;border-color:transparent;box-shadow:none}
+  .infos{padding:0}
+  .infos h1{font-size:28px}
+  .bloc{padding:28px 16px}
+  .avis{grid-template-columns:repeat(3,1fr)}
+  .collante{display:none}
+  footer{padding-bottom:24px}
+}
+@media (min-width:1100px){
+  .produit{grid-template-columns:600px 1fr;gap:48px;padding:24px 16px}
+  .infos h1{font-size:32px}
+  .bas-page{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;padding:0 0 10px}
+  .bas-page .bloc{border-top:1px solid var(--ligne)}
+  .avis{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="maquette">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="bandeau"><b>Frais de port offerts</b> dès 80&nbsp;€ d’achat (via Mondial Relay)</div>
+<header>
+  <div class="entete">
+    <a href="#" aria-label="Môm, accueil"><img src="img/logo.webp" alt="Môm, les cosmétiques vraiment sains" width="182" height="40"></a>
+    <button class="panier-btn" type="button" id="ouvrirPanier" aria-controls="mini" aria-expanded="false">Panier <span class="n" id="compte">0</span></button>
+  </div>
+  <nav class="menu" aria-label="Menu principal">
+    <ul><li><a href="#">Boutique</a></li><li><a href="#">Mon histoire</a></li><li><a href="#">Les points de vente</a></li><li><a href="#">Accès pro</a></li><li><a href="#">Blog</a></li><li><a href="#">Récompenses</a></li></ul>
+  </nav>
+</header>
+
+<main>
+  <p class="fil">Accueil / Les cosmétiques / Badabôm</p>
+  <section class="produit">
+    <div class="galerie">
+      <div class="vue"><img id="photo" src="img/badabom-1.webp" alt="Une main d’enfant prend du Badabôm dans son pot en verre" width="1080" height="1080"></div>
+      <div class="vignettes" role="group" aria-label="Photos du produit">
+        <button type="button" aria-current="true" data-src="img/badabom-1.webp" data-alt="Une main d’enfant prend du Badabôm dans son pot en verre"><img src="img/badabom-1.webp" alt="" width="1080" height="1080"><span class="sr">Photo 1</span></button>
+        <button type="button" aria-current="false" data-src="img/badabom-2.webp" data-alt="Le pot de Badabôm tenu dans une main"><img src="img/badabom-2.webp" alt="" width="1080" height="1080"><span class="sr">Photo 2</span></button>
+        <button type="button" aria-current="false" data-src="img/badabom-3.webp" data-alt="Les trois pots de Badabôm"><img src="img/badabom-3.webp" alt="" width="1080" height="1080"><span class="sr">Photo 3</span></button>
+      </div>
+    </div>
+
+    <div class="infos">
+      <h1>Badabôm</h1>
+      <p class="sous">Baume bio multi-usages pour toute la famille</p>
+      <a class="note" href="#avis"><span class="etoiles" aria-hidden="true">★★★★★</span> Noté 5,00 sur 5 · 12 avis client</a>
+
+      <fieldset class="formats">
+        <legend>Choisissez le format qui vous correspond</legend>
+        <div class="cartes">
+          <div class="carte"><input type="radio" name="format" id="f30" value="30" checked><label for="f30"><span class="poids">30 g</span><span class="nom">Le nomade</span><span class="prix">16,90&nbsp;€</span></label></div>
+          <div class="carte"><input type="radio" name="format" id="f60" value="60"><label for="f60"><span class="poids">60 g</span><span class="nom">Le pratique</span><span class="prix">22,90&nbsp;€</span></label><span class="pref">Le préféré des familles</span></div>
+          <div class="carte"><input type="radio" name="format" id="f120" value="120"><label for="f120"><span class="poids">120 g</span><span class="nom">Le familial</span><span class="prix">29,90&nbsp;€</span></label></div>
+        </div>
+      </fieldset>
+      <p class="usage" id="usage" aria-live="polite">À emporter partout, dans la trousse à langer, le sac à main ou la valise.</p>
+
+      <div class="achat">
+        <div class="qte" role="group" aria-label="Quantité">
+          <button type="button" id="moins" aria-label="Retirer un">−</button>
+          <output id="qte" aria-live="polite">1</output>
+          <button type="button" id="plus" aria-label="Ajouter un">+</button>
+        </div>
+        <button class="ajouter" type="button" id="ajouter">Ajouter au panier · <span id="prixBtn">16,90&nbsp;€</span></button>
+      </div>
+      <p class="paiement">Paiement sécurisé &amp; possibilité 3 fois sans frais</p>
+
+      <ul class="badges">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#8a9a5b" d="M17 3C9 3 4 8 4 15c0 2 .5 4 1 5 1-5 5-9 10-11-4 3-7 7-8 12 9 0 13-6 13-13 0-2 0-4-3-5z"/></svg>Certifié bio</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ce7c32" d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>Fabriqués à la main en Charente</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5" fill="#e5ac8f"/><path fill="#e5ac8f" d="M4 22c0-4 4-7 8-7s8 3 8 7z"/></svg>Utilisable dès la naissance</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#614c38" d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="2" fill="#614c38"/><circle cx="17" cy="17" r="2" fill="#614c38"/></svg>Livraison gratuite dès 80&nbsp;€ d’achat</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="bas-page">
+    <div>
+      <section class="bloc" aria-labelledby="t-tout">
+        <h2 id="t-tout">Le réflexe des familles pour les petits inconforts du quotidien</h2>
+        <p style="margin:0 0 8px">Le badabôm nourrit, protège et apaise les peaux sèches et fragilisées grâce à une formule certifiée bio, utilisable dès la naissance.</p>
+        <details open>
+          <summary>Pourquoi les familles l’adorent</summary>
+          <div class="corps">
+            <p><b>Apaise les sensations d’inconfort.</b> Le macérât de calendula prend soin des peaux sensibles et fragilisées.</p>
+            <p><b>Protège la peau.</b> La cire d’abeille et l’oxyde de zinc contribuent à préserver la peau des agressions extérieures.</p>
+            <p><b>Nourrit intensément.</b> Le beurre de cacao et l’huile de coco apportent confort et souplesse aux zones sèches.</p>
+            <p><b>Un seul soin pour toute la famille.</b> Un indispensable à glisser dans le sac à langer, la salle de bain ou la trousse de voyage.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Quand l’utiliser&#8239;?</summary>
+          <div class="corps"><ul>
+            <li>Rougeurs du siège</li><li>Zones sèches et rugueuses</li><li>Lèvres desséchées</li><li>Frottements du quotidien</li><li>Petites irritations cutanées</li><li>Après les petites aventures du quotidien</li>
+          </ul></div>
+        </details>
+        <details>
+          <summary>Une formule simple et efficace</summary>
+          <div class="corps"><ul>
+            <li>Macérât de calendula bio français</li><li>Huile de coco bio équitable</li><li>Beurre de cacao bio</li><li>Cire d’abeille bio</li><li>Oxyde de zinc</li><li>Allantoïne</li><li>Vitamine E</li>
+          </ul><p>Rien d’inutile. Juste l’essentiel.</p></div>
+        </details>
+        <details>
+          <summary>Conseils d’utilisation et conservation</summary>
+          <div class="corps">
+            <p>Prélever une petite quantité de baume et appliquer sur les zones concernées aussi souvent que nécessaire. Usage externe.</p>
+            <p>Les produits sont à conserver au sec en dessous de 25°C pour garantir une qualité optimale.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Bôm ou badabôm&#8239;?</summary>
+          <div class="corps"><p>«&#8239;J’aime dire que le bôm s’utilise en préventif et le badabôm en curatif.. Le bôm va nourrir en profondeur et le badabôm aider les p’tits bobos..&#8239;»</p></div>
+        </details>
+        <details>
+          <summary>Livraison, retrait et retours</summary>
+          <div class="corps">
+            <p>Frais de port offerts dès 80&nbsp;€ d’achat (via Mondial Relay).</p>
+            <p>Le délai de préparation de la commande est de 3 jours ouvrés maximum. À titre indicatif, le délai d’acheminement est d’environ 4 jours ouvrés pour Mondial Relay et 3 jours ouvrés pour Colissimo.</p>
+            <p>Click &amp; Collect&#8239;: commandez en ligne et récupérez votre commande directement au laboratoire, sur rendez-vous.</p>
+            <p>Droit de rétractation&#8239;: quatorze jours à compter de la réception, sauf pour les produits scellés descellés après la livraison (protection de la santé ou hygiène).</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="bloc" aria-labelledby="t-duo">
+        <h2 id="t-duo">Pour découvrir la gamme</h2>
+        <div class="duo">
+          <img src="img/duo.webp" alt="Le duo Badabôm et Bôm" width="600" height="600">
+          <div>
+            <div class="t">Le duo · 17,90&nbsp;€</div>
+            <p>Pour découvrir les essentiels de la gamme môm ou faire un joli cadeau.</p>
+            <button type="button" id="ajouterDuo">Ajouter le duo</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <section class="bloc histoire" aria-labelledby="t-hist">
+        <h2 id="t-hist">L’histoire de Badabôm</h2>
+        <blockquote>«&#8239;Le badabôm est né dans ma salle de bain de jeune maman.&#8239;» J’ai alors formulé ce baume avec une idée en tête&#8239;: créer le produit que j’aurais aimé avoir toujours sous la main.</blockquote>
+        <p class="sign">Angélique, maman et artisane</p>
+      </section>
+
+      <section class="bloc" id="avis" aria-labelledby="t-avis">
+        <h2 id="t-avis">Ce que les familles nous racontent</h2>
+        <div class="avis-tete"><span class="grand">5,00</span><span class="etoiles" aria-hidden="true">★★★★★</span><span>Noté 5,00 sur 5 · 12 avis client</span></div>
+        <div class="avis">
+          <article><p>Le badabom est devenu indispensable chez nous pour les bobos et les fesses rouges de bébé. Un produit fantastique ☺️</p><div class="qui">Du rosier</div></article>
+          <article><p>Super! Ma fille le réclame après chaque bobo. Efficace et agréable à appliquer</p><div class="qui">Céline</div></article>
+          <article><p>J'ai acheté ce badaboum à un salon. Il est génial, hyper efficace sur les bosses de mon mini aventurier! Sur mes bleus... Merci</p><div class="qui">Marie</div></article>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="in">
+    <p>Je suis Angélique, maman et artisane, j’ai créé Môm avec une idée simple&#8239;: faire les choses comme je les ferais pour ma propre famille.</p>
+    <p>© Môm Cosmétiques</p>
+  </div>
+</footer>
+
+<div class="collante" id="collante" aria-hidden="true">
+  <div class="r"><b>Badabôm <span id="cFormat">30 g</span></b><span id="cPrix">16,90&nbsp;€</span></div>
+  <button class="ajouter" type="button" id="ajouterCollant" tabindex="-1">Ajouter au panier</button>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="mini" id="mini" role="dialog" aria-modal="true" aria-labelledby="t-mini" aria-hidden="true">
+  <div class="haut"><h2 id="t-mini">Votre panier</h2><button class="fermer" type="button" id="fermer" aria-label="Fermer le panier">×</button></div>
+  <ul class="lignes" id="lignes"></ul>
+  <div class="bas">
+    <p class="port" id="port"></p>
+    <div class="jauge" aria-hidden="true"><i id="jauge"></i></div>
+    <div class="total"><span>Total</span><span id="total"></span></div>
+    <button class="payer" type="button" id="payer">Maquette&#8239;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const FORMATS = {
+    '30':  { poids: '30 g',  nom: 'Le nomade',   prix: 16.90, usage: 'À emporter partout, dans la trousse à langer, le sac à main ou la valise.' },
+    '60':  { poids: '60 g',  nom: 'Le pratique', prix: 22.90, usage: 'Le juste milieu : suffisamment généreux pour un usage régulier tout en restant facile à emporter.' },
+    '120': { poids: '120 g', nom: 'Le familial', prix: 29.90, usage: 'Pour la maison, le grand format trouve sa place dans la salle de bain.' }
+  };
+  const DUO = { cle: 'duo', titre: 'Le duo', sous: 'Badabôm + Bôm', prix: 17.90, img: 'img/duo.webp' };
+  const SEUIL_PORT = 80; // « Frais de port offerts dès 80€ d'achat (via Mondial Relay) »
+  const eur = n => n.toFixed(2).replace('.', ',') + ' €';
+  const $ = id => document.getElementById(id);
+  let format = '30', qte = 1;
+  const panier = new Map();
+
+  function majFormat() {
+    const f = FORMATS[format];
+    $('usage').textContent = f.usage.replace(' :', ' :');
+    $('prixBtn').textContent = eur(f.prix * qte);
+    $('cFormat').textContent = f.poids;
+    $('cPrix').textContent = eur(f.prix * qte);
+  }
+  document.querySelectorAll('input[name=format]').forEach(r => r.addEventListener('change', e => { format = e.target.value; majFormat(); }));
+  $('moins').addEventListener('click', () => { qte = Math.max(1, qte - 1); $('qte').textContent = qte; majFormat(); });
+  $('plus').addEventListener('click', () => { qte = Math.min(20, qte + 1); $('qte').textContent = qte; majFormat(); });
+
+  document.querySelectorAll('.vignettes button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.vignettes button').forEach(x => x.setAttribute('aria-current', 'false'));
+    b.setAttribute('aria-current', 'true');
+    $('photo').src = b.dataset.src; $('photo').alt = b.dataset.alt;
+  }));
+
+  function ajouter(cle, ligne, n) {
+    const l = panier.get(cle) || { ...ligne, n: 0 };
+    l.n += n; panier.set(cle, l); rendre(); ouvrir();
+  }
+  const ajouterBaume = () => { const f = FORMATS[format]; ajouter('b' + format, { titre: 'Badabôm', sous: f.poids + ' · ' + f.nom, prix: f.prix, img: 'img/badabom-1.webp' }, qte); };
+  $('ajouter').addEventListener('click', ajouterBaume);
+  $('ajouterCollant').addEventListener('click', ajouterBaume);
+  $('ajouterDuo').addEventListener('click', () => ajouter(DUO.cle, DUO, 1));
+
+  function rendre() {
+    const ul = $('lignes'); ul.innerHTML = '';
+    let total = 0, nb = 0;
+    panier.forEach((l, cle) => {
+      total += l.prix * l.n; nb += l.n;
+      const li = document.createElement('li');
+      li.innerHTML = `<img src="${l.img}" alt=""><div class="d"><b>${l.titre}</b>${l.sous} · ${l.n} × ${eur(l.prix)}</div><b>${eur(l.prix * l.n)}</b>`;
+      ul.appendChild(li);
+    });
+    $('total').textContent = eur(total);
+    $('compte').textContent = nb;
+    const reste = SEUIL_PORT - total;
+    $('port').textContent = reste > 0 ? `Plus que ${eur(reste)} pour la livraison offerte (Mondial Relay)` : 'Frais de port offerts (via Mondial Relay)';
+    $('jauge').style.width = Math.min(100, total / SEUIL_PORT * 100) + '%';
+  }
+
+  let retour = null;
+  function ouvrir() {
+    retour = document.activeElement;
+    $('mini').classList.add('ouvert'); $('voile').classList.add('ouvert');
+    $('mini').setAttribute('aria-hidden', 'false'); $('ouvrirPanier').setAttribute('aria-expanded', 'true');
+    $('fermer').focus();
+  }
+  function fermer() {
+    $('mini').classList.remove('ouvert'); $('voile').classList.remove('ouvert');
+    $('mini').setAttribute('aria-hidden', 'true'); $('ouvrirPanier').setAttribute('aria-expanded', 'false');
+    if (retour) retour.focus();
+  }
+  $('ouvrirPanier').addEventListener('click', () => { rendre(); ouvrir(); });
+  $('fermer').addEventListener('click', fermer);
+  $('voile').addEventListener('click', fermer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('mini').classList.contains('ouvert')) fermer(); });
+  $('payer').addEventListener('click', () => { $('payer').textContent = 'Maquette : le paiement reste celui de votre boutique'; });
+
+  // barre collante : visible quand le bouton principal sort de l'écran
+  const io = new IntersectionObserver(([e]) => {
+    const vis = !e.isIntersecting && e.boundingClientRect.top < 0;
+    $('collante').classList.toggle('vue', vis);
+    $('collante').setAttribute('aria-hidden', String(!vis));
+    $('ajouterCollant').tabIndex = vis ? 0 : -1;
+  });
+  io.observe($('ajouter'));
+  majFormat(); rendre();
+})();
+</script>
+</body>
+</html>

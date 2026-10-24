@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Savon Calendula · Savons M (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Couleurs relevées sur savons-m.fr le 24/10/2026 */
+    --sm-vert-bouton: #adc599;   /* fond du bouton « Ajouter à mon panier » et du pied de page */
+    --sm-vert-accent: #8fa777;   /* fil d'Ariane, étoiles Judge.me, liens « Voir plus » */
+    --sm-texte: #333333;         /* texte courant (Poppins) */
+    --sm-titre: #303030;         /* titres (Alegreya Sans) */
+    /* Dérivés pour le contraste (texte vert sur blanc) */
+    --sm-vert-texte: #56703f;
+    --sm-vert-pale: #f1f5ec;
+    --sm-ligne: #e3e8dc;
+    --font-titre: "Alegreya Sans", sans-serif;
+    --font-texte: "Poppins", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: var(--font-texte); color: var(--sm-texte); font-size: 14px; line-height: 1.6; background: #fff; }
+  img { max-width: 100%; display: block; }
+  a { color: var(--sm-vert-texte); }
+  button { font: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--sm-vert-texte); outline-offset: 2px; }
+
+  .bandeau { background: var(--sm-titre); color: #fff; font-size: 11px; text-align: center; padding: 5px 12px; letter-spacing: .3px; }
+
+  header.entete { position: sticky; top: 0; z-index: 30; background: #fff; border-bottom: 1px solid var(--sm-ligne); }
+  .entete-in { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 58px; padding: 0 12px; }
+  .icone { background: none; border: 0; width: 44px; height: 44px; display: grid; place-items: center; color: var(--sm-titre); border-radius: 6px; position: relative; }
+  .icone svg { width: 22px; height: 22px; }
+  .logo img { height: 46px; width: auto; }
+  .compteur { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; border-radius: 9px; background: var(--sm-vert-texte); color: #fff; font-size: 11px; line-height: 18px; text-align: center; padding: 0 4px; }
+  nav.menu { display: none; }
+  nav.menu a { color: var(--sm-titre); text-decoration: none; font-family: var(--font-titre); font-size: 17px; }
+
+  .fil { max-width: 1200px; margin: 0 auto; padding: 8px 16px 0; font-size: 11px; text-transform: uppercase; letter-spacing: .4px; color: var(--sm-vert-texte); }
+  .fil a { text-decoration: none; }
+
+  main { max-width: 1200px; margin: 0 auto; }
+  .produit { display: grid; grid-template-columns: 1fr; }
+  .visuel { padding: 6px 16px 0; }
+  .visuel figure { margin: 0; background: #fafbf8; border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 10; display: grid; place-items: center; }
+  .visuel figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; }
+
+  .infos { padding: 12px 16px 0; }
+  h1 { font-family: var(--font-titre); font-weight: 500; color: var(--sm-titre); font-size: 28px; line-height: 1.1; margin: 0; }
+  .ligne-note { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 13px; }
+  .etoiles { color: var(--sm-vert-accent); letter-spacing: 1px; font-size: 15px; }
+  .lien-avis { background: none; border: 0; padding: 0; color: var(--sm-vert-texte); text-decoration: underline; font-size: 13px; }
+  .prix-ligne { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+  .prix { font-size: 22px; font-weight: 500; color: var(--sm-titre); letter-spacing: .5px; }
+  .poids { font-size: 13px; color: #666; }
+  .accroche { margin: 6px 0 0; font-size: 13.5px; }
+
+  .compo { margin-top: 10px; background: var(--sm-vert-pale); border: 1px solid var(--sm-ligne); border-radius: 8px; padding: 9px 12px; font-size: 12.5px; line-height: 1.5; }
+  .compo strong { font-weight: 600; color: var(--sm-titre); }
+  .puces { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .puces span { background: #fff; border: 1px solid var(--sm-ligne); border-radius: 999px; padding: 1px 9px; font-size: 11.5px; }
+
+  .achat { display: flex; gap: 10px; margin-top: 12px; }
+  .qte { display: flex; align-items: center; border: 1px solid #cfd6c6; border-radius: 4px; height: 48px; }
+  .qte button { width: 40px; height: 46px; background: none; border: 0; font-size: 20px; color: var(--sm-titre); }
+  .qte output { min-width: 26px; text-align: center; font-weight: 500; }
+  .btn-ajout { flex: 1; height: 48px; border: 0; border-radius: 4px; background: var(--sm-vert-bouton); color: var(--sm-titre); font-family: var(--font-titre); font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .btn-ajout:hover { background: #a1bb8b; }
+
+  .complements { margin-top: 14px; border-top: 1px solid var(--sm-ligne); padding-top: 12px; }
+  .complements h2 { font-family: var(--font-titre); font-size: 17px; font-weight: 500; margin: 0 0 8px; color: var(--sm-titre); }
+  .compl { display: grid; grid-template-columns: auto 56px 1fr auto; align-items: center; gap: 10px; padding: 8px 0; }
+  .compl + .compl { border-top: 1px dashed var(--sm-ligne); }
+  .compl input { width: 20px; height: 20px; accent-color: var(--sm-vert-texte); margin: 0; }
+  .compl img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; }
+  .compl .nom { font-size: 13px; line-height: 1.35; }
+  .compl .nom small { display: block; color: #666; font-size: 11.5px; }
+  .compl .p { font-weight: 500; font-size: 13.5px; }
+
+  .badges { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 16px 0; }
+  .badge { display: flex; gap: 8px; align-items: flex-start; border: 1px solid var(--sm-ligne); border-radius: 8px; padding: 9px 10px; font-size: 12px; line-height: 1.35; }
+  .badge svg { flex: none; width: 20px; height: 20px; color: var(--sm-vert-texte); }
+
+  section.bloc { padding: 22px 16px 0; scroll-margin-top: 70px; }
+  section.bloc > h2 { font-family: var(--font-titre); font-weight: 500; font-size: 22px; color: var(--sm-titre); margin: 0 0 10px; }
+
+  .avis-resume { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 13px; margin-bottom: 10px; }
+  .carte-avis { border: 1px solid var(--sm-ligne); border-radius: 10px; padding: 14px; background: #fff; }
+  .carte-avis .tete { display: flex; justify-content: space-between; font-size: 12px; color: #666; }
+  .carte-avis h3 { font-family: var(--font-titre); font-size: 17px; margin: 4px 0 2px; color: var(--sm-titre); font-weight: 500; }
+  .carte-avis p { margin: 0; font-size: 13.5px; }
+  .boutique-note { margin-top: 10px; font-size: 12.5px; background: var(--sm-vert-pale); border-radius: 8px; padding: 10px 12px; }
+
+  details { border-bottom: 1px solid var(--sm-ligne); }
+  details:first-of-type { border-top: 1px solid var(--sm-ligne); }
+  summary { list-style: none; display: flex; justify-content: space-between; align-items: center; padding: 14px 2px; font-family: var(--font-titre); font-size: 18px; color: var(--sm-titre); cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-size: 22px; color: var(--sm-vert-texte); }
+  details[open] summary::after { content: "–"; }
+  .contenu { padding: 0 2px 14px; font-size: 13.5px; }
+  .contenu p { margin: 0 0 10px; }
+  .contenu ul { margin: 0 0 10px; padding-left: 18px; }
+  .contenu .inci { font-size: 12.5px; color: #555; }
+
+  footer.pied { margin-top: 36px; background: var(--sm-vert-bouton); color: var(--sm-titre); padding: 26px 16px 96px; text-align: center; font-size: 13px; }
+  footer.pied .slogan { font-family: var(--font-titre); font-size: 20px; margin: 0 0 6px; }
+
+  /* Barre d'achat collante */
+  .barre { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #fff; border-top: 1px solid var(--sm-ligne); box-shadow: 0 -4px 14px rgba(0,0,0,.06); padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 12px; transform: translateY(110%); transition: transform .2s ease; }
+  .barre.visible { transform: none; }
+  .barre .t { flex: 1; min-width: 0; line-height: 1.25; }
+  .barre .t strong { display: block; font-family: var(--font-titre); font-size: 16px; font-weight: 500; color: var(--sm-titre); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .barre .t span { font-size: 13px; }
+  .barre .btn-ajout { flex: none; padding: 0 18px; height: 44px; font-size: 15px; }
+
+  /* Mini-panier */
+  .voile { position: fixed; inset: 0; background: rgba(30,30,30,.45); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .voile.ouvert { opacity: 1; pointer-events: auto; }
+  .panier { position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100%); background: #fff; z-index: 60; transform: translateX(100%); transition: transform .25s ease; display: flex; flex-direction: column; }
+  .panier.ouvert { transform: none; }
+  .panier-tete { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--sm-ligne); }
+  .panier-tete h2 { font-family: var(--font-titre); font-weight: 500; font-size: 21px; margin: 0; color: var(--sm-titre); }
+  .panier-lignes { flex: 1; overflow: auto; padding: 6px 16px; }
+  .pl { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--sm-ligne); font-size: 13px; }
+  .pl img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; }
+  .pl small { color: #666; display: block; }
+  .vide { color: #666; padding: 20px 0; }
+  .panier-pied { padding: 14px 16px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--sm-ligne); }
+  .total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; color: var(--sm-titre); margin-bottom: 4px; }
+  .note-frais { font-size: 12px; color: #666; margin: 0 0 10px; }
+  .btn-paiement { width: 100%; min-height: 48px; border: 1px dashed var(--sm-vert-texte); background: var(--sm-vert-pale); color: var(--sm-titre); border-radius: 4px; font-size: 13px; padding: 8px 12px; }
+
+  @media (min-width: 768px) {
+    .produit { grid-template-columns: 1fr 1fr; gap: 28px; padding: 10px 20px 0; align-items: start; }
+    .visuel { padding: 0; position: sticky; top: 76px; }
+    .visuel figure { aspect-ratio: 1 / 1; }
+    .visuel figure img { object-fit: contain; }
+    .infos { padding: 4px 0 0; }
+    .badges { margin: 16px 0 0; }
+    .suite { padding: 0 4px; }
+  }
+  @media (min-width: 1024px) {
+    nav.menu { display: flex; gap: 26px; }
+    .entete-in { height: 76px; padding: 0 24px; }
+    .logo img { height: 60px; }
+    .burger { display: none; }
+    .fil { padding: 16px 24px 0; }
+    .produit { grid-template-columns: 1.05fr 1fr; gap: 48px; padding: 12px 24px 0; align-items: start; }
+    .visuel { padding: 0; position: sticky; top: 96px; }
+    .visuel figure { aspect-ratio: 1 / 1; }
+    .visuel figure img { object-fit: contain; }
+    .infos { padding: 10px 0 0; }
+    h1 { font-size: 40px; }
+    .badges { margin: 18px 0 0; grid-template-columns: 1fr 1fr; }
+    .suite { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 0 24px; }
+    section.bloc { padding: 34px 0 0; }
+    .barre { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="bandeau">Maquette proposée par Redline Studio · page non publiée</div>
+
+<header class="entete">
+  <div class="entete-in">
+    <button class="icone burger" type="button" aria-label="Ouvrir le menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a class="logo" href="#" aria-label="Savons M, accueil"><img src="img/logo.webp" alt="Savons M" width="410" height="382"></a>
+    <nav class="menu" aria-label="Menu principal">
+      <a href="#">Savons</a><a href="#">Baume</a><a href="#">Accessoires</a><a href="#">Cartes Cadeaux</a><a href="#">À propos</a><a href="#">Nos points de vente</a>
+    </nav>
+    <button class="icone" type="button" id="ouvrir-panier" aria-label="Ouvrir le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 7h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 7Z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg>
+      <span class="compteur" id="compteur" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<div class="fil"><a href="#">Accueil</a> / <a href="#">Produits</a> / Savon Calendula</div>
+
+<main>
+  <div class="produit">
+    <div class="visuel">
+      <figure><img src="img/savon-calendula.webp" alt="Savon Calendula Savons M, pain et étui jaune à fleurs de soucis" width="1000" height="1000"></figure>
+    </div>
+
+    <div class="infos">
+      <h1>Savon Calendula</h1>
+      <div class="ligne-note">
+        <span class="etoiles" aria-hidden="true">★★★★★</span>
+        <button class="lien-avis" type="button" id="voir-avis">1 avis client · le lire</button>
+      </div>
+      <div class="prix-ligne"><span class="prix" id="prix-principal">5,90&nbsp;€</span><span class="poids">Poids&nbsp;: 100g</span></div>
+      <p class="accroche">Savon au macérât huileux de Calendula bio pour une peau apaisée.</p>
+
+      <div class="compo" id="compo">
+        <strong>Composition, alignée sur votre INCI&nbsp;:</strong> huile de tournesol de Lorraine, huile de coco, beurre de karité, glycérine, eau, huile de ricin, fleur et extrait de fleur de calendula.
+        <div class="puces"><span>senteur neutre</span><span>sans huiles essentielles</span><span>sans huile palme</span><span>tous types de peaux, même les bébés</span></div>
+      </div>
+
+      <div class="achat">
+        <div class="qte" role="group" aria-label="Quantité">
+          <button type="button" id="moins" aria-label="Retirer un savon">−</button>
+          <output id="qte" aria-live="polite">1</output>
+          <button type="button" id="plus" aria-label="Ajouter un savon">+</button>
+        </div>
+        <button class="btn-ajout" type="button" id="ajouter">Ajouter au panier · <span id="prix-bouton">5,90&nbsp;€</span></button>
+      </div>
+
+      <div class="complements">
+        <h2>Pour aller avec</h2>
+        <label class="compl">
+          <input type="checkbox" id="opt-porte" data-nom="Porte Savon Bois Palette Petit" data-prix="5" data-img="img/porte-savon-petit-mini.webp">
+          <img src="img/porte-savon-petit-mini.webp" alt="" width="240" height="240">
+          <span class="nom">Porte Savon Bois Palette Petit<small>Érable massif, aux dimensions de nos savons</small></span>
+          <span class="p">5,00&nbsp;€</span>
+        </label>
+        <label class="compl">
+          <input type="checkbox" id="opt-baume" data-nom="Baume Corps Calendula" data-prix="19" data-img="img/baume-calendula-mini.webp">
+          <img src="img/baume-calendula-mini.webp" alt="" width="240" height="240">
+          <span class="nom">Baume Corps Calendula<small>Contenance&nbsp;: 100ml · corps - visage - mains</small></span>
+          <span class="p">19,00&nbsp;€</span>
+        </label>
+      </div>
+
+      <div class="badges">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 11V6a1.5 1.5 0 0 1 3 0v4M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 9.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-.5A6.5 6.5 0 0 1 6 17.6L4 13.5a1.6 1.6 0 0 1 2.8-1.5L7 12.4"/></svg><span>Fabriqués en France, à la main</span></div>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg><span>Tournesol bio cultivé à moins de 30km</span></div>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3c3 4 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 3-6 6-10Z"/></svg><span>Saponifiés à froid</span></div>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg><span>Carte bancaire ou PayPal</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="suite">
+    <section class="bloc" id="avis" tabindex="-1" aria-labelledby="titre-avis">
+      <h2 id="titre-avis">Avis clients</h2>
+      <div class="avis-resume"><span class="etoiles" aria-hidden="true">★★★★★</span><span>Basé sur 1 avis</span></div>
+      <article class="carte-avis">
+        <div class="tete"><span>Sophie</span><span>20/03/25</span></div>
+        <h3>Parfait</h3>
+        <p>«&nbsp;Idéal dès bébé&#8239;! Et une continuité pour mes enfants, une peau atopique lavée tout en douceur. Je recommande&#8239;!&nbsp;»</p>
+      </article>
+      <p class="boutique-note">Sur toute la boutique&nbsp;: basé sur 66 avis.</p>
+    </section>
+
+    <section class="bloc" aria-labelledby="titre-details">
+      <h2 id="titre-details">Tout savoir</h2>
+      <details open>
+        <summary>Description</summary>
+        <div class="contenu">
+          <p>Le savon Calendula ou fleur de soucis est particulièrement apprécié pour ses effets apaisants sur la peau. En effet le macérat de Calendula est reconnu pour ses nombreuses propriétés bienfaisantes pour la peau, ce qui en fait un ingrédient précieux en cosmétique naturelle.</p>
+          <p>L’extrait de Calendula est reconnu apaisant et anti-inflammatoire&nbsp;: grâce aux flavonoïdes présents dans les fleurs de soucis, il réduit les inflammations cutanées et apaise les irritations, idéal pour les peaux sensibles ou sujettes aux rougeurs. Il est aussi cicatrisant&nbsp;: il favorise la régénération de la peau et aide à accélérer la cicatrisation des petites coupures, égratignures et irritations.</p>
+          <p>Sa douceur et ses propriétés apaisantes en font un soin sûr et efficace pour la peau fragile et délicate des bébés.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Utilisation et conseils</summary>
+        <div class="contenu">
+          <ul>
+            <li>corps - visage - mains</li>
+            <li>apaisant - hydratant - adoucissant</li>
+            <li>convient à toute la famille</li>
+            <li>belle mousse crémeuse et onctueuse</li>
+          </ul>
+          <p>Pour une bonne conservation et une plus longue consommation, un savon doit être maintenu au sec entre chaque utilisation. Nous vous recommandons donc d’utiliser un porte-savon adéquat.</p>
+        </div>
+      </details>
+      <details id="ingredients">
+        <summary>Ingrédients</summary>
+        <div class="contenu">
+          <p>Le savon au Calendula est composé d’une base d’huile de Tournesol locale de Lorraine, d’huile de Coco, de beurre de karité, d’huile de Ricin et enrichi à l’extrait de fleur de Soucis.</p>
+          <p><strong>Ingrédients INCI&nbsp;:</strong> <span class="inci">Sodium Sunflowerseedate**, Sodium Cocoate**, Sodium Shea Butterate**, Aqua, Helianthus Annuus Seed Oil*, Glycerin, Sodium Castorate**, Cocos Nucifera Oil*, Butyrospermum Parkii Butter*, Ricinus Communis Seed Oil*, Calendula Officinalis Flower*, Calendula Officinalis Flower Extract*</span></p>
+          <p class="inci">* Ingrédients issu de l’agriculture biologique<br>** Ingrédients transformés issu d’ingrédients biologique</p>
+          <p class="inci">Ces informations sont à titre informatif et ne sont pas destinées à remplacer des conseils ou des prescriptions médicales.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Livraison et retours</summary>
+        <div class="contenu">
+          <p>Nous vous livrons à domicile ou en point relais.</p>
+          <p>S’il arrivait qu’un article soit défectueux ou non conforme, l’acheteur a 15 jours ouvrables, à compter de la réception des articles, pour demander un échange ou un remboursement.</p>
+          <p>Le remboursement est dû dans un délai maximum de 14 jours ouvrés à compter de la date de réception du ou des colis retourné(s).</p>
+          <p>Retrouvez aussi les produits Savons M chez les commerçants partenaires.</p>
+        </div>
+      </details>
+    </section>
+  </div>
+</main>
+
+<footer class="pied">
+  <p class="slogan">Savons M, des savons au naturel&#8239;!</p>
+  <p>Un petit geste pour le corps, un grand geste pour la planète&#8239;!</p>
+</footer>
+
+<div class="barre" id="barre" aria-hidden="true">
+  <div class="t"><strong>Savon Calendula</strong><span id="prix-barre">5,90&nbsp;€</span></div>
+  <button class="btn-ajout" type="button" id="ajouter-barre" tabindex="-1">Ajouter</button>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="panier" id="panier" role="dialog" aria-modal="true" aria-labelledby="titre-panier" aria-hidden="true">
+  <div class="panier-tete">
+    <h2 id="titre-panier">Votre panier</h2>
+    <button class="icone" type="button" id="fermer-panier" aria-label="Fermer le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="panier-lignes" id="lignes"><p class="vide">Votre panier est vide.</p></div>
+  <div class="panier-pied">
+    <div class="total"><span>Total</span><span id="total">–</span></div>
+    <p class="note-frais">Prix hors frais de port.</p>
+    <button class="btn-paiement" type="button">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(function () {
+  var PRIX_SAVON = 5.9;
+  var qte = 1;
+  var panier = []; // {nom, prix, img, qte, detail}
+  var $ = function (id) { return document.getElementById(id); };
+  var euros = function (n) { return n.toFixed(2).replace('.', ',') + ' €'; };
+  var opts = [$('opt-porte'), $('opt-baume')];
+
+  function totalFiche() {
+    var t = PRIX_SAVON * qte;
+    opts.forEach(function (o) { if (o.checked) t += parseFloat(o.dataset.prix); });
+    return t;
+  }
+  function majPrix() {
+    $('qte').textContent = qte;
+    $('prix-bouton').textContent = euros(totalFiche());
+    $('prix-barre').textContent = euros(totalFiche());
+    $('moins').disabled = qte <= 1;
+  }
+  $('moins').addEventListener('click', function () { if (qte > 1) { qte--; majPrix(); } });
+  $('plus').addEventListener('click', function () { qte++; majPrix(); });
+  opts.forEach(function (o) { o.addEventListener('change', majPrix); });
+
+  function ajouterLigne(nom, prix, img, n, detail) {
+    var l = panier.find(function (x) { return x.nom === nom; });
+    if (l) l.qte += n; else panier.push({ nom: nom, prix: prix, img: img, qte: n, detail: detail });
+  }
+  function rendrePanier() {
+    var box = $('lignes');
+    var total = 0, nb = 0;
+    if (!panier.length) { box.innerHTML = '<p class="vide">Votre panier est vide.</p>'; }
+    else {
+      box.innerHTML = '';
+      panier.forEach(function (l) {
+        total += l.prix * l.qte; nb += l.qte;
+        var d = document.createElement('div'); d.className = 'pl';
+        d.innerHTML = '<img src="' + l.img + '" alt="" width="56" height="56"><div><strong></strong><small></small></div><span></span>';
+        d.querySelector('strong').textContent = l.nom;
+        d.querySelector('small').textContent = l.detail + ' · quantité ' + l.qte;
+        d.querySelector('span').textContent = euros(l.prix * l.qte);
+        box.appendChild(d);
+      });
+    }
+    $('total').textContent = euros(total);
+    var c = $('compteur'); c.textContent = nb; c.hidden = nb === 0;
+  }
+
+  var dernierFocus = null;
+  function ouvrir() {
+    dernierFocus = document.activeElement;
+    $('panier').classList.add('ouvert'); $('voile').classList.add('ouvert');
+    $('panier').setAttribute('aria-hidden', 'false');
+    $('fermer-panier').focus();
+  }
+  function fermer() {
+    $('panier').classList.remove('ouvert'); $('voile').classList.remove('ouvert');
+    $('panier').setAttribute('aria-hidden', 'true');
+    if (dernierFocus && dernierFocus.focus) dernierFocus.focus();
+  }
+  function ajouter() {
+    ajouterLigne('Savon Calendula', PRIX_SAVON, 'img/savon-calendula-mini.webp', qte, '100 g');
+    opts.forEach(function (o) {
+      if (o.checked) { ajouterLigne(o.dataset.nom, parseFloat(o.dataset.prix), o.dataset.img, 1, 'complément'); o.checked = false; }
+    });
+    qte = 1; majPrix(); rendrePanier(); ouvrir();
+  }
+  $('ajouter').addEventListener('click', ajouter);
+  $('ajouter-barre').addEventListener('click', ajouter);
+  $('ouvrir-panier').addEventListener('click', function () { rendrePanier(); ouvrir(); });
+  $('fermer-panier').addEventListener('click', fermer);
+  $('voile').addEventListener('click', fermer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('panier').classList.contains('ouvert')) fermer(); });
+
+  $('voir-avis').addEventListener('click', function () {
+    var a = $('avis'); a.scrollIntoView({ behavior: 'smooth', block: 'start' }); a.focus({ preventScroll: true });
+  });
+
+  // Barre collante : visible quand le bouton principal sort de l'écran
+  var barre = $('barre');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var hors = !entries[0].isIntersecting;
+      barre.classList.toggle('visible', hors);
+      barre.setAttribute('aria-hidden', hors ? 'false' : 'true');
+      $('ajouter-barre').tabIndex = hors ? 0 : -1;
+    }).observe($('ajouter'));
+  }
+  majPrix();
+})();
+</script>
+</body>
+</html>
