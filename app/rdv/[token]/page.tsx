@@ -10,8 +10,15 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Réserver un appel · Redline Studio",
+  description: "Choisissez un créneau de 30 minutes avec Curtis, fondateur de Redline Studio.",
   // Personal link: never indexed.
   robots: { index: false, follow: false },
+  openGraph: {
+    title: "Réserver un appel · Redline Studio",
+    description: "Choisissez un créneau de 30 minutes avec Curtis, fondateur de Redline Studio.",
+    siteName: "Redline Studio",
+    locale: "fr_FR",
+  },
 };
 
 const COPY = {

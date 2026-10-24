@@ -27,21 +27,21 @@ const hand = Caveat({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://redlinestudio.agency'),
-  title: "Redline Studio · Le fil rouge entre vous et vos clients",
-  description: "Site, pubs, avis Google : je m'occupe du digital de votre commerce, de A à Z, et je vous explique tout en français normal.",
+  title: "Redline Studio · Emails & pages produit pour boutiques en ligne",
+  description: "Emails automatiques & pages produit pour boutiques en ligne : les paniers abandonnés qui reviennent en commandes.",
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: '/',
-    title: "Redline Studio · Le fil rouge entre vous et vos clients",
-    description: "Site, pubs, avis Google : je m'occupe du digital de votre commerce, de A à Z, et je vous explique tout en français normal.",
+    title: "Redline Studio · Emails & pages produit pour boutiques en ligne",
+    description: "Emails automatiques & pages produit pour boutiques en ligne : les paniers abandonnés qui reviennent en commandes.",
     siteName: 'Redline Studio',
     locale: 'fr_FR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Redline Studio · Le fil rouge entre vous et vos clients",
-    description: "Site, pubs, avis Google : je m'occupe du digital de votre commerce, de A à Z, et je vous explique tout en français normal.",
+    title: "Redline Studio · Emails & pages produit pour boutiques en ligne",
+    description: "Emails automatiques & pages produit pour boutiques en ligne : les paniers abandonnés qui reviennent en commandes.",
   },
 }
 
