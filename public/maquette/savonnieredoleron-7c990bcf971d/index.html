@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Coffret 3 Bougies Artisanales 195 g au Choix · La Savonnière d’Oléron (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur lasavonnieredoleron.com le 24/10/2026 */
+:root{
+  --sdo-texte:#3D4246;          /* body, h1 */
+  --sdo-bouton:#557B97;         /* bouton « Ajouter au panier » */
+  --sdo-bouton-fonce:#46677F;
+  --sdo-turquoise:#289898;      /* logo */
+  --sdo-turquoise-clair:#E6F3F3;
+  --sdo-pied:#F5F5F5;           /* pied de page */
+  --sdo-filet:#E8E9EB;          /* bordure d'en-tête */
+  --sdo-carte:#FAF8F5;          /* fond des accordions de leur description */
+  --sdo-carte-bord:#D8D2CA;     /* bord des accordions de leur description */
+  --sdo-gris:#69727B;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Alegreya,Georgia,serif;color:var(--sdo-texte);background:#fff;font-size:16px;line-height:1.5}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sdo-turquoise);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.bandeau-maquette{background:var(--sdo-carte);color:var(--sdo-gris);font-size:11.5px;letter-spacing:.02em;text-align:center;padding:3px 12px;line-height:1.4;border-bottom:1px solid var(--sdo-carte-bord)}
+.annonce{background:var(--sdo-pied);text-align:center;font-size:14px;padding:6px 14px;line-height:1.35}
+.annonce strong{color:var(--sdo-turquoise);font-weight:700}
+
+header.entete{border-bottom:1px solid var(--sdo-filet);background:#fff}
+.entete .int{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:6px 14px;min-height:64px}
+.entete .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;margin-right:auto}
+.entete .logo img{width:52px;height:52px}
+.entete .logo span{font-size:19px;line-height:1.1;display:none}
+.ico{background:none;border:0;padding:8px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;position:relative}
+.ico svg{width:24px;height:24px;stroke:var(--sdo-texte);fill:none;stroke-width:1.8}
+.ico .pastille{position:absolute;top:2px;right:0;background:var(--sdo-turquoise);color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:none;align-items:center;justify-content:center;padding:0 4px;line-height:1}
+.ico .pastille.on{display:flex}
+nav.menu{display:none}
+
+main{max-width:1200px;margin:0 auto}
+.produit{display:block}
+.galerie{position:relative}
+.galerie .principale{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:50% 38%;background:var(--sdo-carte)}
+.vignettes{display:none}
+.infos{padding:14px 16px 0}
+.fil{display:none;font-size:13px;color:var(--sdo-gris);margin:0 0 2px;text-transform:uppercase;letter-spacing:.08em}
+h1{font-weight:400;font-size:26px;line-height:1.15;margin:0 0 6px}
+.prix{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0 0 4px}
+.prix .montant{font-size:22px;font-weight:500}
+.prix .eco{font-size:14px;background:var(--sdo-turquoise-clair);color:#1D6E6E;padding:1px 8px;border-radius:12px;font-weight:500}
+.prix-note{font-size:13.5px;color:var(--sdo-gris);margin:0 0 8px}
+
+.formats{display:flex;gap:8px;margin:0 0 12px}
+.formats button{flex:1;border:1px solid var(--sdo-carte-bord);background:#fff;border-radius:4px;padding:5px 8px;cursor:pointer;font-size:15px;line-height:1.2}
+.formats button small{display:inline;margin-left:6px;font-size:12.5px;color:var(--sdo-gris)}
+.formats button[aria-pressed=true]{border-color:var(--sdo-texte);box-shadow:inset 0 0 0 1px var(--sdo-texte)}
+
+.trio{background:var(--sdo-carte);border:1px solid var(--sdo-carte-bord);border-radius:6px;padding:8px 10px 10px;margin:0 0 12px}
+.trio-tete{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 8px}
+.trio-tete h2{font-size:18px;font-weight:500;margin:0}
+.trio-tete .compte{font-size:14px;color:var(--sdo-gris)}
+.emplacements{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.emp{min-width:0;border:1.5px dashed var(--sdo-carte-bord);background:#fff;border-radius:6px;min-height:54px;padding:4px;display:flex;align-items:center;gap:6px;cursor:pointer;text-align:left;font-size:13px;line-height:1.15}
+.emp .num{width:26px;height:26px;border-radius:50%;background:var(--sdo-pied);display:flex;align-items:center;justify-content:center;flex:none;color:var(--sdo-gris);font-size:13px}
+.emp .n{min-width:0;overflow-wrap:break-word}
+.emp img{width:30px;height:42px;object-fit:cover;border-radius:4px;flex:none}
+.emp.plein{border-style:solid;border-color:var(--sdo-turquoise)}
+.emp{position:relative}
+.emp .x{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:#fff;border:1px solid var(--sdo-turquoise);color:var(--sdo-turquoise);font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center}
+.emp.actif{border-color:var(--sdo-texte)}
+.aide{font-size:13.5px;color:var(--sdo-gris);margin:8px 0 0}
+.trio .aide{display:none}
+
+.groupe{margin:0 0 10px}
+.groupe h3{font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--sdo-gris);margin:0 0 6px}
+.senteurs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.senteur{position:relative;border:1px solid var(--sdo-filet);background:#fff;border-radius:6px;padding:0 0 6px;cursor:pointer;text-align:center;overflow:hidden}
+.senteur img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 62%}
+.senteur .nom{display:block;font-size:13.5px;font-weight:500;line-height:1.1;margin:5px 3px 1px}
+.senteur .notes{display:block;font-size:11.5px;line-height:1.15;color:var(--sdo-gris);margin:0 3px}
+.senteur .badge{position:absolute;top:4px;right:4px;background:var(--sdo-turquoise);color:#fff;border-radius:11px;min-width:22px;height:22px;font-size:12px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 5px}
+.senteur.choisie{border-color:var(--sdo-turquoise);box-shadow:0 0 0 1px var(--sdo-turquoise)}
+.senteur.choisie .badge{display:flex}
+.senteur:disabled{cursor:default}
+
+.acheter-bureau{display:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;border:0;border-radius:2px;background:var(--sdo-bouton);color:#fff;text-transform:uppercase;letter-spacing:1.12px;font-size:15px;cursor:pointer;padding:10px 14px}
+.btn:hover{background:var(--sdo-bouton-fonce)}
+.btn.attente{background:#fff;color:var(--sdo-bouton);box-shadow:inset 0 0 0 1.5px var(--sdo-bouton)}
+.message{font-size:14px;color:#9A3B2C;min-height:0;margin:6px 0 0}
+
+.reassurance{list-style:none;padding:0;margin:16px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.reassurance li{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.25;background:#fff;border:1px solid var(--sdo-filet);border-radius:6px;padding:8px}
+.reassurance svg{width:22px;height:22px;flex:none;stroke:var(--sdo-turquoise);fill:none;stroke-width:1.7}
+
+.accordeons{border-top:1px solid var(--sdo-filet);margin:6px 0 0}
+details.acc{border-bottom:1px solid var(--sdo-filet)}
+details.acc summary{list-style:none;cursor:pointer;padding:14px 2px;font-size:17px;display:flex;justify-content:space-between;align-items:center}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";font-size:22px;line-height:1;color:var(--sdo-gris)}
+details.acc[open] summary::after{content:"–"}
+details.acc .corps{padding:0 2px 14px;font-size:15.5px}
+details.acc .corps p{margin:0 0 10px}
+details.acc ul{margin:0 0 10px;padding-left:18px}
+details.acc h4{font-size:15px;margin:10px 0 4px;font-weight:700}
+
+.avis{background:var(--sdo-pied);padding:22px 16px;margin:22px 0 0}
+.avis h2{font-weight:400;font-size:22px;margin:0 0 2px}
+.avis .src{font-size:13.5px;color:var(--sdo-gris);margin:0 0 12px}
+.avis-liste{display:grid;gap:10px}
+.avis blockquote{margin:0;background:#fff;border-radius:6px;padding:12px 14px;border-left:3px solid var(--sdo-turquoise)}
+.avis blockquote p{margin:0 0 6px;font-style:italic}
+.avis cite{font-style:normal;font-size:13.5px;color:var(--sdo-gris)}
+
+.cabanes{padding:22px 16px 8px}
+.cabanes h2{font-weight:400;font-size:22px;margin:0 0 6px}
+.cabanes p{margin:0 0 8px}
+
+footer.pied{background:var(--sdo-pied);padding:22px 16px 110px;margin-top:18px;font-size:15px}
+footer .cols{max-width:1200px;margin:0 auto;display:grid;gap:14px}
+footer h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin:0 0 6px}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{margin:0 0 4px}
+footer a{color:inherit}
+footer .copy{max-width:1200px;margin:14px auto 0;font-size:13px;color:var(--sdo-gris)}
+
+/* barre d'achat collante (mobile) */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--sdo-filet);box-shadow:0 -4px 14px rgba(0,0,0,.06);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px}
+.barre .resume{flex:none;font-size:13px;line-height:1.2;min-width:68px}
+.barre .resume .p{display:block;font-size:17px;font-weight:500}
+.barre .btn{min-height:48px;font-size:14px}
+
+/* mini-panier */
+.voile{position:fixed;inset:0;background:rgba(30,34,37,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.voile.on{opacity:1;pointer-events:auto}
+aside.panier{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:50;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column;visibility:hidden}
+aside.panier.on{transform:none;visibility:visible}
+.panier-tete{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--sdo-filet)}
+.panier-tete h2{font-size:20px;font-weight:400;margin:0}
+.panier-corps{flex:1;overflow:auto;padding:12px 16px}
+.ligne{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--sdo-filet)}
+.ligne .photos{display:flex;flex:none}
+.ligne .photos img{width:34px;height:44px;object-fit:cover;border-radius:3px;border:2px solid #fff;margin-left:-8px}
+.ligne .photos img:first-child{margin-left:0}
+.ligne .txt{flex:1;font-size:14.5px;line-height:1.3}
+.ligne .txt b{font-weight:500;display:block;font-size:15px}
+.ligne .txt small{color:var(--sdo-gris);display:block}
+.qte{display:inline-flex;align-items:center;border:1px solid var(--sdo-carte-bord);border-radius:3px;margin-top:6px}
+.qte button{background:none;border:0;width:32px;height:30px;cursor:pointer;font-size:17px}
+.qte span{min-width:26px;text-align:center}
+.ligne .pl{font-weight:500;white-space:nowrap}
+.livr{background:var(--sdo-turquoise-clair);border-radius:6px;padding:8px 10px;font-size:14px;margin:12px 0 0}
+.jauge{height:6px;background:#fff;border-radius:3px;margin-top:6px;overflow:hidden}
+.jauge i{display:block;height:100%;background:var(--sdo-turquoise);width:0;transition:width .3s}
+.panier-pied{border-top:1px solid var(--sdo-filet);padding:12px 16px calc(14px + env(safe-area-inset-bottom))}
+.total{display:flex;justify-content:space-between;font-size:18px;margin:0 0 4px}
+.total b{font-weight:500}
+.panier-pied .note{font-size:13px;color:var(--sdo-gris);margin:0 0 10px}
+.btn-paiement{background:var(--sdo-texte)}
+.btn-paiement:hover{background:#2c3033}
+.continuer{display:block;width:100%;background:none;border:0;text-decoration:underline;padding:10px;cursor:pointer;font-size:15px}
+.vide{color:var(--sdo-gris);padding:20px 0}
+
+@media (min-width:560px) and (max-width:899px){
+  .galerie .principale{aspect-ratio:auto;height:420px}
+}
+@media (min-width:560px){
+  .entete .logo span{display:block}
+  .fil{display:block}
+  .trio .aide{display:block}
+  .formats button small{display:block;margin-left:0}
+  .senteur .nom{font-size:14.5px}
+  .senteur .notes{font-size:12.5px}
+  .reassurance{grid-template-columns:repeat(4,1fr)}
+  .avis-liste{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:900px){
+  .entete .int{padding:10px 24px;min-height:84px}
+  .entete .logo img{width:68px;height:68px}
+  nav.menu{display:flex;gap:22px;margin-right:auto;font-size:16px}
+  nav.menu a{color:inherit;text-decoration:none}
+  .entete .logo{margin-right:28px}
+  .burger{display:none}
+  .produit{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:44px;padding:28px 24px 0;align-items:start}
+  .galerie{position:sticky;top:20px}
+  .galerie .principale{aspect-ratio:3/4;border-radius:4px;object-position:50% 50%}
+  .vignettes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+  .vignettes img{aspect-ratio:1/1;object-fit:cover;border-radius:4px;object-position:50% 62%}
+  .infos{padding:0}
+  h1{font-size:34px}
+  .prix .montant{font-size:24px}
+  .acheter-bureau{display:block;margin:2px 0 0}
+  .barre{left:50%;right:auto;transform:translateX(-50%);width:min(560px,calc(100% - 48px));bottom:16px;border:1px solid var(--sdo-filet);border-radius:6px;transition:opacity .2s}
+  .barre.cachee{opacity:0;pointer-events:none}
+  .reassurance{grid-template-columns:1fr 1fr}
+  .avis,.cabanes{padding-left:24px;padding-right:24px}
+  .avis .int,.cabanes .int{max-width:1152px;margin:0 auto}
+  footer.pied{padding:30px 24px}
+  footer .cols{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:370px){
+  .senteurs{grid-template-columns:repeat(4,1fr);gap:6px}
+  .senteur .nom{font-size:12.5px}
+  .senteur .notes{font-size:11px}
+  .emp{font-size:12px;gap:4px}
+  .emp img{width:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bandeau-maquette">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="annonce">Livraison <strong>offerte dès 55&nbsp;€</strong> en Point Relay (Mondial Relay)</div>
+
+<header class="entete">
+  <div class="int">
+    <button class="ico burger" type="button" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <a class="logo" href="#" aria-label="La Savonnière d’Oléron, accueil"><img src="img/logo.webp" alt="La Savonnière d’Oléron" width="52" height="52"><span>La Savonnière<br>d’Oléron</span></a>
+    <nav class="menu" aria-label="Catégories"><a href="#">Savons</a><a href="#">Shampoings</a><a href="#">Cosmétique</a><a href="#">Bougies</a><a href="#">Coffrets</a></nav>
+    <button class="ico" type="button" aria-label="Rechercher"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
+    <button class="ico" type="button" id="ouvrir-panier" aria-label="Panier, 0 article"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="pastille" id="pastille">0</span></button>
+  </div>
+</header>
+
+<main>
+  <section class="produit" aria-labelledby="titre">
+    <div class="galerie">
+      <img class="principale" id="photo" src="img/coffret.webp" alt="Trois bougies artisanales : Lumière de Coton, Éclat de Rose et Soleil Bohème" width="1086" height="1448">
+      <div class="vignettes" id="vignettes" aria-hidden="true"></div>
+    </div>
+
+    <div class="infos">
+      <p class="fil">Bougies · Coffrets</p>
+      <h1 id="titre">Coffret 3 Bougies Artisanales 195&nbsp;g au Choix</h1>
+      <div class="prix">
+        <span class="montant" id="prix">52,00&nbsp;€</span>
+        <span class="eco" id="eco">5&nbsp;€ d’économie</span>
+      </div>
+      <p class="prix-note" id="prix-note">au lieu de 57&nbsp;€ pour trois bougies achetées séparément</p>
+
+      <div class="formats" role="group" aria-label="Format des bougies">
+        <button type="button" data-format="195" aria-pressed="true">3 × 195&nbsp;g <small>52,00&nbsp;€</small></button>
+        <button type="button" data-format="100" aria-pressed="false">3 × 100&nbsp;g <small>30,00&nbsp;€</small></button>
+      </div>
+
+      <div class="trio" id="trio">
+        <div class="trio-tete">
+          <h2>Composez votre trio</h2>
+          <span class="compte" id="compte" aria-live="polite">0 / 3 choisie</span>
+        </div>
+        <div class="emplacements" id="emplacements"></div>
+
+        <p class="aide" id="aide">Touchez une senteur pour l’ajouter, même plusieurs fois la même.</p>
+      </div>
+
+      <div class="groupe">
+        <h3>Les incontournables</h3>
+        <div class="senteurs" id="g1"></div>
+      </div>
+      <div class="groupe">
+        <h3>La collection automne-hiver</h3>
+        <div class="senteurs" id="g2"></div>
+      </div>
+
+      <div class="acheter-bureau">
+        <button type="button" class="btn attente" id="ajouter-bureau">Choisissez 3 senteurs</button>
+      </div>
+      <p class="message" id="message" role="status"></p>
+
+      <ul class="reassurance">
+        <li><svg viewBox="0 0 24 24"><path d="M12 3c2 3 4 4.5 4 8a4 4 0 0 1-8 0c0-3.5 2-5 4-8z"/><path d="M12 15v6"/></svg>Coulées à la main sur l’île d’Oléron</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 19c8 0 14-6 14-14C11 5 5 11 5 19z"/><path d="M5 19 13 11"/></svg>Cire végétale de soja, mèches en bois</li>
+        <li><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Expédition en 24&nbsp;h, 48&nbsp;h maximum</li>
+        <li><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Livraison offerte dès 55&nbsp;€ en Point Relay</li>
+      </ul>
+
+      <div class="accordeons">
+        <details class="acc" open>
+          <summary>Description</summary>
+          <div class="corps">
+            <p><strong>Composez votre trio de bougies artisanales&nbsp;!</strong></p>
+            <p id="desc-choix">Choisissez 3 bougies de 195&nbsp;g parmi nos 8 senteurs, à associer librement, même plusieurs fois le même parfum.</p>
+            <p id="desc-eco">Le coffret à 52&nbsp;€ au lieu de 57&nbsp;€ pour trois bougies achetées séparément, soit 5&nbsp;€ d’économie&nbsp;!</p>
+            <p>Fabriquées à la main sur l’île d’Oléron, nos bougies associent cire végétale de soja, mèches en bois crépitantes et fragrances sans CMR et sans phtalates.</p>
+          </div>
+        </details>
+        <details class="acc">
+          <summary>Nos 8 senteurs</summary>
+          <div class="corps">
+            <h4>Les incontournables</h4>
+            <ul>
+              <li><strong>Soleil Bohème</strong> – Monoï &amp; Fleur de Frangipanier</li>
+              <li><strong>Éclat de Rose</strong> – Rose de Grasse</li>
+              <li><strong>Lumière d’Écorce</strong> – Cèdre</li>
+              <li><strong>Lumière de Coton</strong> – Fleur de Coton</li>
+            </ul>
+            <h4>La collection automne-hiver</h4>
+            <ul>
+              <li><strong>Douceur d’Antan</strong> – Orange, caramel &amp; épices</li>
+              <li><strong>Forêt d’Hiver</strong> – Pin, sapin &amp; santal</li>
+              <li><strong>Rêve Épicé</strong> – Amande, cannelle &amp; vanille</li>
+              <li><strong>Lueur d’Orange</strong> – Orange &amp; épices</li>
+            </ul>
+          </div>
+        </details>
+        <details class="acc">
+          <summary>Fabrication artisanale</summary>
+          <div class="corps">
+            <ul>
+              <li>Cire végétale de soja</li>
+              <li>Mèches en bois crépitantes</li>
+              <li>Fragrances sans CMR et sans phtalates, selon les informations de nos fournisseurs</li>
+              <li>Bougies coulées à la main dans notre atelier de Saint-Trojan-les-Bains, sur l’île d’Oléron</li>
+            </ul>
+          </div>
+        </details>
+        <details class="acc">
+          <summary>Contenance et combustion</summary>
+          <div class="corps">
+            <p id="contenance">Contenance&nbsp;: 3 × 195&nbsp;g</p>
+            <p id="combustion">Durée de combustion estimée&nbsp;: environ 40 à 55 heures par bougie, selon les conditions d’utilisation.</p>
+          </div>
+        </details>
+        <details class="acc">
+          <summary>Livraison et retours</summary>
+          <div class="corps">
+            <p>Les frais de livraison sont gratuits en Point Relay lorsque le montant de la commande atteint 55&nbsp;€.</p>
+            <p>Nous expédions vos commandes en 24h00, 48h00 maximum.</p>
+            <p>Vous disposez de 14 jours à compter de la date de réception de votre commande pour faire une demande de retour.</p>
+            <p>Le produit devra être en bon état, non utilisé et dans son emballage d’origine. Conditions complètes&nbsp;: page Retour et remboursement.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="avis" aria-labelledby="avis-titre">
+    <div class="int">
+      <h2 id="avis-titre">Vos avis Google</h2>
+      <p class="src">Repris de notre page d’accueil</p>
+      <div class="avis-liste">
+        <blockquote><p>«&nbsp;J’ai déjà commandé également via le site et c’est très rapide, bien emballé avec une petite surprise en prime.&nbsp;»</p><cite>Ingrid P.</cite></blockquote>
+        <blockquote><p>«&nbsp;De très beaux et bons savons que j’utilise tout au long de l’année et qui sont aussi l’occasion de faire de jolis cadeaux.&nbsp;»</p><cite>Sandrine B.</cite></blockquote>
+        <blockquote><p>«&nbsp;La plus belle cabane de la Baudissière&nbsp;!&nbsp;»</p><cite>Oriane P.</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="cabanes" aria-labelledby="cab-titre">
+    <div class="int">
+      <h2 id="cab-titre">Nous, c’est Carole &amp; Louis&nbsp;!</h2>
+      <p>Deux amoureux de l’île d’Oléron, une passion pour l’artisanat et une belle aventure commencée en 2018.</p>
+      <p>Retrouvez nos bougies dans nos deux cabanes artisanales&nbsp;: à La Baudissière, à Dolus-d’Oléron, et sur le port de Saint-Trojan-les-Bains, à la cabane l’Épinette.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="cols">
+    <div><h2>Liens rapides</h2><ul><li><a href="#">Tarifs de livraison</a></li><li><a href="#">Retour et remboursement</a></li><li><a href="#">Nous contacter</a></li></ul></div>
+    <div><h2>Informations</h2><ul><li><a href="#">Mentions légales</a></li><li><a href="#">Conditions générales de ventes</a></li><li><a href="#">Nos points de vente</a></li></ul></div>
+    <div><h2>La Savonnière d’Oléron</h2><ul><li>Artisans savonniers depuis 2018</li></ul></div>
+  </div>
+  <p class="copy">© 2026, La Savonnière d’Oléron</p>
+</footer>
+
+<div class="barre" id="barre">
+  <div class="resume"><span id="barre-compte">0 / 3</span><span class="p" id="barre-prix">52,00&nbsp;€</span></div>
+  <button type="button" class="btn attente" id="ajouter">Choisissez 3 senteurs</button>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="panier" id="panier" role="dialog" aria-modal="true" aria-labelledby="panier-titre" aria-hidden="true">
+  <div class="panier-tete">
+    <h2 id="panier-titre">Votre panier</h2>
+    <button class="ico" type="button" id="fermer" aria-label="Fermer le panier"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="panier-corps" id="panier-corps"></div>
+  <div class="panier-pied">
+    <div class="total"><span>Total</span><b id="total"></b></div>
+    <p class="note">Taxes incluses. Frais d’expédition calculés lors du passage à la caisse.</p>
+    <button type="button" class="btn btn-paiement" id="payer">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+    <button type="button" class="continuer" id="continuer">Continuer mes achats</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const N = ' ';
+  const SENTEURS = [
+    { id: 'soleil-boheme', nom: 'Soleil Bohème', notes: 'Monoï & Fleur de Frangipanier', g: 1 },
+    { id: 'eclat-de-rose', nom: 'Éclat de Rose', notes: 'Rose de Grasse', g: 1 },
+    { id: 'lumiere-ecorce', nom: 'Lumière d’Écorce', notes: 'Cèdre', g: 1 },
+    { id: 'lumiere-de-coton', nom: 'Lumière de Coton', notes: 'Fleur de Coton', g: 1 },
+    { id: 'douceur-antan', nom: 'Douceur d’Antan', notes: 'Orange, caramel & épices', g: 2 },
+    { id: 'foret-hiver', nom: 'Forêt d’Hiver', notes: 'Pin, sapin & santal', g: 2 },
+    { id: 'reve-epice', nom: 'Rêve Épicé', notes: 'Amande, cannelle & vanille', g: 2 },
+    { id: 'lueur-orange', nom: 'Lueur d’Orange', notes: 'Orange & épices', g: 2 }
+  ];
+  const FORMATS = {
+    '195': { titre: 'Coffret 3 Bougies Artisanales 195' + N + 'g au Choix', court: 'Coffret 3 bougies 195' + N + 'g', prix: 52, separe: '57', eco: '5', choix: 'Choisissez 3 bougies de 195' + N + 'g parmi nos 8 senteurs, à associer librement, même plusieurs fois le même parfum.', descEco: 'Le coffret à 52' + N + '€ au lieu de 57' + N + '€ pour trois bougies achetées séparément, soit 5' + N + '€ d’économie' + N + '!', contenance: 'Contenance' + N + ': 3 × 195' + N + 'g', combustion: 'Durée de combustion estimée' + N + ': environ 40 à 55 heures par bougie, selon les conditions d’utilisation.' },
+    '100': { titre: 'Coffret 3 Bougies Artisanales 100' + N + 'g au Choix', court: 'Coffret 3 bougies 100' + N + 'g', prix: 30, separe: '34,50', eco: '4,50', choix: 'Choisissez 3 bougies de 100' + N + 'g parmi nos 8 senteurs, à associer librement, même plusieurs fois le même parfum.', descEco: '30' + N + '€ le coffret au lieu de 34,50' + N + '€ à l’unité, soit 4,50' + N + '€ d’économie.', contenance: 'Contenance' + N + ': 3 × 100' + N + 'g', combustion: 'Durée de combustion estimée' + N + ': environ 20 à 25 heures par bougie, selon les conditions d’utilisation.' }
+  };
+  const SEUIL = 55;
+  const euro = (v) => v.toFixed(2).replace('.', ',') + N + '€';
+  const $ = (id) => document.getElementById(id);
+  let format = '195';
+  let trio = [null, null, null];
+  let panier = [];
+
+  // cartes de senteurs
+  for (const s of SENTEURS) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'senteur'; b.dataset.id = s.id;
+    b.setAttribute('aria-label', 'Ajouter ' + s.nom + ' (' + s.notes + ') au trio');
+    b.innerHTML = '<img src="img/' + s.id + '-mini.webp" alt="" width="240" height="320" loading="lazy"><span class="nom"></span><span class="notes"></span><span class="badge" aria-hidden="true"></span>';
+    b.querySelector('.nom').textContent = s.nom;
+    b.querySelector('.notes').textContent = s.notes;
+    b.addEventListener('click', () => ajouterSenteur(s.id));
+    $(s.g === 1 ? 'g1' : 'g2').appendChild(b);
+  }
+  // emplacements
+  for (let i = 0; i < 3; i++) {
+    const e = document.createElement('button');
+    e.type = 'button'; e.className = 'emp'; e.dataset.i = i;
+    e.addEventListener('click', () => { if (trio[i]) { trio[i] = null; rendre(); annoncer('Emplacement ' + (i + 1) + ' libéré.'); } else { document.querySelector('.senteur').focus(); } });
+    $('emplacements').appendChild(e);
+  }
+
+  function annoncer(t) { $('message').textContent = t; }
+  function ajouterSenteur(id) {
+    const i = trio.indexOf(null);
+    if (i === -1) { annoncer('Votre trio est complet' + N + ': touchez une bougie du trio pour la remplacer.'); return; }
+    trio[i] = id; annoncer('');
+    const s = SENTEURS.find(x => x.id === id);
+    $('photo').src = 'img/' + id + '.webp';
+    $('photo').alt = 'Bougie ' + s.nom;
+    rendre();
+  }
+  function nbChoisies() { return trio.filter(Boolean).length; }
+  function rendre() {
+    const f = FORMATS[format];
+    document.querySelectorAll('.emp').forEach((e, i) => {
+      const id = trio[i];
+      e.classList.toggle('plein', !!id);
+      e.classList.toggle('actif', !id && trio.indexOf(null) === i);
+      if (id) {
+        const s = SENTEURS.find(x => x.id === id);
+        e.innerHTML = '<img src="img/' + id + '-mini.webp" alt=""><span class="n"></span><span class="x" aria-hidden="true">×</span>';
+        e.querySelector('.n').textContent = s.nom;
+        e.setAttribute('aria-label', 'Bougie ' + (i + 1) + N + ': ' + s.nom + '. Toucher pour la retirer');
+      } else {
+        e.innerHTML = '<span class="num">' + (i + 1) + '</span><span class="n">Bougie n°' + (i + 1) + '</span>';
+        e.setAttribute('aria-label', 'Bougie ' + (i + 1) + N + ': à choisir');
+      }
+    });
+    document.querySelectorAll('.senteur').forEach(b => {
+      const n = trio.filter(x => x === b.dataset.id).length;
+      b.classList.toggle('choisie', n > 0);
+      b.querySelector('.badge').textContent = '×' + n;
+    });
+    const n = nbChoisies();
+    $('compte').textContent = n + ' / 3 choisie' + (n > 1 ? 's' : '');
+    $('barre-compte').textContent = n + ' / 3';
+    $('barre-prix').textContent = euro(f.prix);
+    const pret = n === 3;
+    const lib = pret ? 'Ajouter au panier · ' + euro(f.prix) : (n === 0 ? 'Choisissez 3 senteurs' : 'Encore ' + (3 - n) + ' senteur' + (3 - n > 1 ? 's' : ''));
+    for (const id of ['ajouter', 'ajouter-bureau']) { $(id).textContent = lib; $(id).classList.toggle('attente', !pret); }
+    // vignettes (bureau)
+    const v = $('vignettes'); v.innerHTML = '';
+    for (const id of ['coffret', ...trio.map(x => x || null)]) {
+      if (!id) continue;
+      const im = document.createElement('img'); im.src = 'img/' + id + '-mini.webp'; im.alt = ''; v.appendChild(im);
+    }
+  }
+  function choisirFormat(k) {
+    format = k; const f = FORMATS[k];
+    document.querySelectorAll('.formats button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.format === k)));
+    $('titre').textContent = f.titre;
+    document.title = f.titre + ' · La Savonnière d’Oléron (maquette)';
+    $('prix').textContent = euro(f.prix);
+    $('eco').textContent = f.eco + N + '€ d’économie';
+    $('prix-note').textContent = (k === '195' ? 'au lieu de ' + f.separe + N + '€ pour trois bougies achetées séparément' : 'au lieu de ' + f.separe + N + '€ à l’unité');
+    $('desc-choix').textContent = f.choix; $('desc-eco').textContent = f.descEco;
+    $('contenance').textContent = f.contenance; $('combustion').textContent = f.combustion;
+    rendre();
+  }
+  document.querySelectorAll('.formats button').forEach(b => b.addEventListener('click', () => choisirFormat(b.dataset.format)));
+
+  function ajouter() {
+    if (nbChoisies() < 3) {
+      annoncer('Choisissez encore ' + (3 - nbChoisies()) + ' senteur' + (3 - nbChoisies() > 1 ? 's' : '') + ' pour compléter votre trio.');
+      $('trio').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    const cle = format + ':' + trio.join(',');
+    const l = panier.find(x => x.cle === cle);
+    if (l) l.q++; else panier.push({ cle, format, trio: [...trio], q: 1 });
+    trio = [null, null, null]; $('photo').src = 'img/coffret.webp'; annoncer('Trio ajouté au panier.');
+    rendre(); rendrePanier(); ouvrir();
+  }
+  $('ajouter').addEventListener('click', ajouter);
+  $('ajouter-bureau').addEventListener('click', ajouter);
+
+  function totalPanier() { return panier.reduce((t, l) => t + FORMATS[l.format].prix * l.q, 0); }
+  function rendrePanier() {
+    const c = $('panier-corps'); c.innerHTML = '';
+    if (!panier.length) { c.innerHTML = '<p class="vide">Votre panier est vide.</p>'; }
+    panier.forEach((l, idx) => {
+      const f = FORMATS[l.format];
+      const d = document.createElement('div'); d.className = 'ligne';
+      d.innerHTML = '<div class="photos">' + l.trio.map(id => '<img src="img/' + id + '-mini.webp" alt="">').join('') + '</div><div class="txt"><b></b><small></small><div class="qte"><button type="button" aria-label="Retirer un coffret">−</button><span></span><button type="button" aria-label="Ajouter un coffret">+</button></div></div><div class="pl"></div>';
+      d.querySelector('b').textContent = f.court;
+      d.querySelector('small').textContent = l.trio.map(id => SENTEURS.find(s => s.id === id).nom).join(' · ');
+      d.querySelector('.qte span').textContent = l.q;
+      d.querySelector('.pl').textContent = euro(f.prix * l.q);
+      const [moins, plus] = d.querySelectorAll('.qte button');
+      moins.addEventListener('click', () => { l.q--; if (l.q <= 0) panier.splice(idx, 1); rendrePanier(); });
+      plus.addEventListener('click', () => { l.q++; rendrePanier(); });
+      c.appendChild(d);
+    });
+    const t = totalPanier();
+    if (panier.length) {
+      const reste = SEUIL - t;
+      const z = document.createElement('div'); z.className = 'livr';
+      z.innerHTML = '<span></span><div class="jauge"><i></i></div>';
+      z.querySelector('span').textContent = reste > 0 ? 'Plus que ' + euro(reste) + ' pour la livraison offerte en Point Relay.' : 'Livraison offerte en Point Relay (Mondial Relay).';
+      z.querySelector('i').style.width = Math.min(100, t / SEUIL * 100) + '%';
+      c.appendChild(z);
+    }
+    $('total').textContent = euro(t);
+    const n = panier.reduce((a, l) => a + l.q, 0);
+    $('pastille').textContent = n; $('pastille').classList.toggle('on', n > 0);
+    $('ouvrir-panier').setAttribute('aria-label', 'Panier, ' + n + ' article' + (n > 1 ? 's' : ''));
+  }
+
+  let retour = null;
+  function ouvrir() {
+    retour = document.activeElement;
+    $('panier').classList.add('on'); $('voile').classList.add('on'); $('panier').setAttribute('aria-hidden', 'false');
+    setTimeout(() => $('fermer').focus(), 60);
+  }
+  function fermer() {
+    $('panier').classList.remove('on'); $('voile').classList.remove('on'); $('panier').setAttribute('aria-hidden', 'true');
+    if (retour && retour.focus) retour.focus();
+  }
+  $('fermer').addEventListener('click', fermer);
+  $('continuer').addEventListener('click', fermer);
+  $('voile').addEventListener('click', fermer);
+  $('ouvrir-panier').addEventListener('click', () => { rendrePanier(); ouvrir(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && $('panier').classList.contains('on')) fermer(); });
+  $('payer').addEventListener('click', () => { $('payer').blur(); });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((es) => { for (const e of es) $('barre').classList.toggle('cachee', e.isIntersecting); }).observe($('ajouter-bureau'));
+  }
+  rendre(); rendrePanier();
+})();
+</script>
+</body>
+</html>

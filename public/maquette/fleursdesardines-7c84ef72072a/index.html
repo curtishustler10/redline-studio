@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pochette de transport pour savon · Fleurs de Sardines (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur fleursdesardines.fr (variables du thème Shopify, 24/10/2026) */
+:root{
+  --fds-color-primary:#1b2854;          /* --color-primary : bandeau, bouton, pied de page */
+  --fds-color-primary-hover:#ec8328;    /* --color-primary-hover : orange de survol */
+  --fds-color-input-border:#d3cec5;     /* --color-input-border : grège */
+  --fds-color-input-bg:#f7f6f4;         /* --color-input-background (grège à 9 %) sur blanc */
+  --fds-color-foreground:#000;          /* --color-foreground */
+  --fds-color-background:#fff;          /* --color-background */
+  --fds-gris:#5c5f6a;
+  --fds-titre:'Montserrat',sans-serif;  /* titres en capitales sur le site */
+  --fds-texte:'Poppins',sans-serif;     /* texte courant sur le site */
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--fds-texte);font-size:15px;line-height:1.55;color:var(--fds-color-foreground);background:var(--fds-color-background)}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--fds-color-primary-hover);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.maquette{background:#f1efeb;color:#4a4d57;font-size:11.5px;text-align:center;padding:5px 12px;letter-spacing:.02em}
+.annonce{background:var(--fds-color-primary);color:#fff;font-size:12.5px;text-align:center;padding:8px 14px;line-height:1.35}
+header.tete{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 14px;border-bottom:1px solid #ecebe8;background:#fff}
+.tete .g,.tete .d{display:flex;gap:16px;align-items:center}
+.tete .d{justify-content:flex-end}
+.ico{width:24px;height:24px;stroke:var(--fds-color-foreground);fill:none;stroke-width:1.5}
+.logo img{height:40px;width:auto}
+.nav{display:none}
+.btn-panier{position:relative;background:none;border:0;padding:6px;margin:-6px;cursor:pointer;display:flex}
+.compte{position:absolute;top:-1px;right:-3px;min-width:17px;height:17px;border-radius:9px;background:var(--fds-color-primary);color:#fff;font-size:10.5px;line-height:17px;text-align:center;font-weight:500;padding:0 4px}
+.compte[data-v="0"]{display:none}
+
+main{max-width:1240px;margin:0 auto}
+.produit{display:block}
+.galerie{position:relative}
+.defile{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:1/1;background:var(--fds-color-input-bg)}
+.defile::-webkit-scrollbar{display:none}
+.defile figure{margin:0;flex:0 0 100%;scroll-snap-align:start;position:relative}
+.defile img{width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+.points{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px}
+.points button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(0,0,0,.12);cursor:pointer}
+.points button[aria-current="true"]{background:#fff}
+.vignettes{display:none}
+
+.infos{padding:14px 16px 0}
+h1{font-family:var(--fds-titre);font-weight:500;text-transform:uppercase;font-size:20px;line-height:1.25;letter-spacing:.01em;margin:0}
+.prix{display:flex;align-items:baseline;gap:10px;margin-top:6px;flex-wrap:wrap}
+.prix .actuel{font-size:22px;color:var(--fds-color-primary);font-weight:500}
+.prix s{color:#6d7386;font-size:16px}
+.prix .ttc{font-size:12px;color:var(--fds-gris)}
+
+.bienvenue{margin-top:8px}
+.bienvenue>button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:var(--fds-color-input-bg);border:1px dashed var(--fds-color-input-border);border-radius:7px;padding:6px 10px;font-size:13px;cursor:pointer}
+.bienvenue>button b{color:var(--fds-color-primary);font-weight:500;white-space:nowrap}
+.bienvenue>button .fl{margin-left:auto;transition:transform .2s}
+.bienvenue>button[aria-expanded="true"] .fl{transform:rotate(180deg)}
+.bienvenue form{display:none;margin-top:8px;padding:12px;border:1px solid var(--fds-color-input-border);border-radius:7px}
+.bienvenue form.ouvert{display:block}
+.champ{display:flex;gap:8px}
+.champ input{flex:1;min-width:0;border:1px solid var(--fds-color-input-border);border-radius:6px;padding:10px;font:inherit;font-size:14px}
+.champ button{background:var(--fds-color-primary);color:#fff;border:0;border-radius:6px;padding:0 14px;cursor:pointer;font-size:14px}
+.accord{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin-top:8px;color:var(--fds-gris)}
+.accord input{margin:3px 0 0}
+.merci{font-size:13px;color:var(--fds-color-primary);margin:8px 0 0}
+
+.couleurs{border:0;margin:12px 0 0;padding:0}
+.couleurs legend{font-size:14px;padding:0;margin-bottom:6px}
+.couleurs legend span{color:var(--fds-gris);margin-left:4px}
+.pastilles{display:flex;gap:9px;flex-wrap:wrap}
+.pastilles label{position:relative;width:40px;height:40px;border-radius:50%;cursor:pointer;display:block}
+.pastilles label img{width:40px;height:40px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.pastilles input:checked+label{box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--fds-color-primary)}
+.pastilles input:focus-visible+label{outline:2px solid var(--fds-color-primary-hover);outline-offset:4px}
+.pastilles label.epuise::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1.5px;background:#fff;transform:rotate(45deg);box-shadow:0 0 0 .5px rgba(0,0,0,.35)}
+
+.achat{display:flex;gap:10px;margin-top:14px}
+.qte{display:flex;align-items:center;border:1px solid var(--fds-color-primary);border-radius:7px;height:50px}
+.qte button{width:38px;height:100%;background:none;border:0;font-size:19px;cursor:pointer;color:var(--fds-color-primary)}
+.qte output{width:24px;text-align:center;font-size:15px}
+.btn-ajout{flex:1;height:50px;border-radius:7px;border:1px solid var(--fds-color-primary);background:var(--fds-color-primary);color:#fff;font-family:var(--fds-titre);font-size:15.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-ajout:hover{background:#fff;color:var(--fds-color-primary)}
+.btn-ajout:disabled{background:#e9e8e5;border-color:#e9e8e5;color:#5f6170;cursor:not-allowed}
+
+.rassure{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#ecebe8;border:1px solid #ecebe8;border-radius:8px;overflow:hidden}
+.rassure li{background:#fff;padding:10px 10px 10px 40px;position:relative;font-size:13px;line-height:1.35}
+.rassure li svg{position:absolute;left:11px;top:11px;width:21px;height:21px;stroke:var(--fds-color-primary);fill:none;stroke-width:1.5}
+.rassure small{display:block;color:var(--fds-gris);font-size:11.5px;margin-top:2px}
+
+.accroche{margin:18px 0 0;font-size:14.5px}
+.accroche p{margin:0 0 6px}
+.camille{font-size:13.5px;color:var(--fds-gris)}
+
+.plis{margin-top:14px;border-top:1px solid var(--fds-color-primary)}
+.plis details{border-bottom:1px solid var(--fds-color-primary)}
+.plis summary{list-style:none;cursor:pointer;padding:14px 2px;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+.plis summary::-webkit-details-marker{display:none}
+.plis summary::after{content:"+";font-size:20px;line-height:1;font-weight:300}
+.plis details[open] summary::after{content:"–"}
+.plis .corps{padding:0 2px 14px;font-size:14px}
+.plis .corps p{margin:0 0 8px}
+.plis dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.plis dt{color:var(--fds-gris)}
+.plis dd{margin:0}
+.plis h3{font-size:14px;font-weight:500;margin:10px 0 2px}
+
+section.bloc{padding:30px 16px 0}
+.bloc h2{font-family:var(--fds-titre);font-weight:500;text-transform:uppercase;font-size:18px;margin:0 0 14px;letter-spacing:.01em}
+.cartes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.carte{display:flex;flex-direction:column}
+.carte img{aspect-ratio:1/1;object-fit:cover;width:100%;height:auto;background:var(--fds-color-input-bg);border-radius:4px}
+.carte h3{font-size:12.5px;font-weight:400;line-height:1.3;margin:7px 0 2px}
+.carte .p{font-size:13px;color:var(--fds-color-primary);font-weight:500}
+.carte button{margin-top:auto;height:36px;border:1px solid var(--fds-color-primary);background:#fff;color:var(--fds-color-primary);border-radius:7px;font-size:12.5px;cursor:pointer}
+.carte button:hover{background:var(--fds-color-primary);color:#fff}
+.carte .p{margin-bottom:8px}
+
+.atelier{display:grid;gap:14px}
+.atelier img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+.atelier p{margin:0 0 8px;font-size:14px}
+
+footer{margin-top:40px;background:var(--fds-color-primary);color:#fff;padding:28px 16px 100px}
+footer .in{max-width:1240px;margin:0 auto}
+footer p{margin:0 0 12px;font-size:15px}
+footer .copy{font-size:13px;opacity:.85;margin-top:18px}
+
+/* Barre d'achat collante (mobile) */
+.barre{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e4e2dd;padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;gap:10px;align-items:center;transform:translateY(110%);transition:transform .25s;z-index:20;box-shadow:0 -4px 14px rgba(0,0,0,.06)}
+.barre.visible{transform:none}
+.barre img{width:38px;height:38px;border-radius:50%;flex:0 0 auto}
+.barre .txt{flex:1;min-width:0;font-size:13px;line-height:1.3}
+.barre .txt b{display:block;font-weight:500;color:var(--fds-color-primary)}
+.barre .txt span{color:var(--fds-gris);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.barre .btn-ajout{flex:0 0 auto;padding:0 18px;height:44px;font-size:14.5px}
+
+/* Mini-panier */
+.voile{position:fixed;inset:0;background:rgba(10,14,30,.42);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.panier{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:#fff;z-index:31;transform:translateX(102%);transition:transform .25s;display:flex;flex-direction:column}
+.panier.ouvert{transform:none}
+.panier .haut{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #ecebe8}
+.panier h2{font-family:var(--fds-titre);font-weight:500;text-transform:uppercase;font-size:16px;margin:0}
+.fermer{background:none;border:0;width:40px;height:40px;margin:-8px;cursor:pointer;font-size:26px;line-height:1}
+.seuil{padding:12px 16px;font-size:13px;background:var(--fds-color-input-bg)}
+.jauge{height:5px;border-radius:3px;background:#e4e2dd;margin-top:7px;overflow:hidden}
+.jauge i{display:block;height:100%;background:var(--fds-color-primary);width:0;transition:width .3s}
+.lignes{flex:1;overflow:auto;padding:4px 16px;margin:0;list-style:none}
+.ligne{display:grid;grid-template-columns:56px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid #f0efec;align-items:center}
+.ligne img{width:56px;height:56px;object-fit:cover;border-radius:4px}
+.ligne .nom{font-size:13.5px;line-height:1.3}
+.ligne .var{font-size:12.5px;color:var(--fds-gris)}
+.ligne .mini-qte{display:flex;align-items:center;gap:4px;margin-top:5px}
+.ligne .mini-qte button{width:28px;height:28px;border:1px solid var(--fds-color-input-border);background:#fff;border-radius:5px;cursor:pointer}
+.ligne .mini-qte span{min-width:20px;text-align:center;font-size:13px}
+.ligne .droite{text-align:right;font-size:13.5px}
+.ligne .retirer{display:block;margin-top:6px;background:none;border:0;padding:0;font-size:12px;color:var(--fds-gris);text-decoration:underline;cursor:pointer}
+.vide{padding:24px 0;color:var(--fds-gris);font-size:14px}
+.bas{border-top:1px solid #ecebe8;padding:14px 16px calc(16px + env(safe-area-inset-bottom))}
+.total{display:flex;justify-content:space-between;font-size:15px;margin-bottom:4px}
+.total b{font-weight:500}
+.bas .note{font-size:12px;color:var(--fds-gris);margin:0 0 12px}
+.payer{width:100%;min-height:50px;border-radius:7px;border:1px solid var(--fds-color-primary);background:var(--fds-color-primary);color:#fff;font-size:14px;cursor:pointer;padding:8px 12px;line-height:1.3}
+
+@media (max-width:399px){.defile{aspect-ratio:10/9}}
+@media (min-width:768px){
+  .produit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;padding:24px 24px 0;align-items:start}
+  .defile{aspect-ratio:4/5;border-radius:4px}
+  .infos{padding:0;position:sticky;top:16px}
+  .barre{display:none}
+  section.bloc{padding:40px 24px 0}
+  .atelier{grid-template-columns:1fr 1fr;align-items:center;gap:28px}
+  .cartes{gap:18px}
+  .carte h3{font-size:14px}
+}
+@media (min-width:1024px){
+  header.tete{padding:12px 40px;grid-template-columns:auto 1fr auto;gap:40px}
+  .tete .g .ico{display:none}
+  .nav{display:flex;gap:26px;font-size:14px;justify-content:center}
+  .logo img{height:52px}
+  .produit{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;padding:32px 40px 0}
+  .galerie{display:grid;grid-template-columns:76px 1fr;gap:14px}
+  .defile{grid-column:2}
+  .vignettes{display:flex;flex-direction:column;gap:10px;grid-column:1;grid-row:1}
+  .vignettes button{border:0;padding:0;background:none;cursor:pointer;border-radius:4px;overflow:hidden;box-shadow:0 0 0 1px #e4e2dd}
+  .vignettes button[aria-current="true"]{box-shadow:0 0 0 2px var(--fds-color-primary)}
+  .vignettes img{width:76px;height:95px;object-fit:cover}
+  .points{display:none}
+  .infos{padding-top:8px;top:20px}
+  h1{font-size:28px}
+  .prix .actuel{font-size:25px}
+  section.bloc{padding:56px 40px 0}
+  .cartes{grid-template-columns:repeat(3,minmax(0,260px))}
+  footer{padding:36px 40px 40px}
+  .barre{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="maquette">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="annonce">Livraison offerte à partir de 49&nbsp;€ d’achats en France, Belgique et Luxembourg</div>
+
+<header class="tete">
+  <div class="g">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+    <a class="logo" href="#haut" aria-label="Fleurs de Sardines"><img src="img/logo-fleurs-de-sardines.webp" alt="Fleurs de Sardines" width="538" height="259"></a>
+  </div>
+  <nav class="nav" aria-label="Menu de la boutique">
+    <span>Boutique</span><span>Ateliers</span><span>Professionnels</span><span>Savons personnalisés</span><span>À propos</span><span>Blog</span><span>Contact</span>
+  </nav>
+  <div class="d">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+    <button class="btn-panier" id="ouvrir-panier" type="button" aria-label="Ouvrir le panier"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="compte" id="compte-panier" data-v="0">0</span></button>
+  </div>
+</header>
+
+<main id="haut">
+<div class="produit">
+  <div class="galerie">
+    <div class="defile" id="defile" tabindex="0" aria-label="Photos de la pochette">
+      <figure><img id="photo" src="img/pochette-fleurs-roses.webp" alt="Pochette de transport pour savon, tissu fleurs roses" width="850" height="1133"></figure>
+      <figure><img src="img/pochette-savon-ambiance.webp" alt="Savon Fleurs de Sardines glissé dans sa pochette" width="666" height="998" loading="lazy"></figure>
+      <figure><img src="img/pochette-savon-paris.webp" alt="Pochette ouverte avec un savon" width="920" height="613" loading="lazy"></figure>
+    </div>
+    <div class="points" id="points">
+      <button type="button" aria-label="Photo 1" aria-current="true"></button><button type="button" aria-label="Photo 2"></button><button type="button" aria-label="Photo 3"></button>
+    </div>
+    <div class="vignettes" id="vignettes">
+      <button type="button" aria-label="Voir la photo 1" aria-current="true"><img id="vignette-couleur" src="img/pochette-fleurs-roses.webp" alt=""></button>
+      <button type="button" aria-label="Voir la photo 2"><img src="img/pochette-savon-ambiance.webp" alt=""></button>
+      <button type="button" aria-label="Voir la photo 3"><img src="img/pochette-savon-paris.webp" alt=""></button>
+    </div>
+  </div>
+
+  <div class="infos">
+    <h1>Pochette de transport pour savon</h1>
+    <div class="prix"><span class="actuel" id="prix">6,40&nbsp;€</span><s aria-label="Prix régulier 8,00 €">8,00&nbsp;€</s></div>
+
+    <div class="bienvenue">
+      <button type="button" id="btn-bienvenue" aria-expanded="false" aria-controls="form-bienvenue"><b>−10&nbsp;%</b><span>sur votre première commande</span><svg class="fl" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      <form id="form-bienvenue" novalidate>
+        <div class="champ"><label class="sr" for="email">Adresse e-mail</label><input id="email" type="email" placeholder="Adresse e-mail" autocomplete="email"><button type="submit">Recevoir</button></div>
+        <div class="accord"><input type="checkbox" id="rgpd"><label for="rgpd">J’accepte la politique de confidentialité</label></div>
+        <p class="merci" id="merci" hidden>Maquette&nbsp;: l’inscription reste celle de votre boutique.</p>
+      </form>
+    </div>
+
+    <fieldset class="couleurs">
+      <legend>Couleur&nbsp;:<span id="couleur-choisie">fleurs roses</span></legend>
+      <div class="pastilles" id="pastilles"></div>
+    </fieldset>
+
+    <div class="achat">
+      <div class="qte" role="group" aria-label="Quantité"><button type="button" id="moins" aria-label="Retirer une pochette">−</button><output id="qte" aria-live="polite">1</output><button type="button" id="plus" aria-label="Ajouter une pochette">+</button></div>
+      <button class="btn-ajout" id="ajout" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="ajout-txt">Ajouter au panier</span></button>
+    </div>
+
+    <ul class="rassure">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7"/><circle cx="6" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/></svg>Livraison offerte dès 49&nbsp;€<small>France, Belgique et Luxembourg</small></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Expédition sous 2 à 3&nbsp;jours ouvrés</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10 12 4l8 6v10H4z"/><path d="M10 20v-5h4v5"/></svg>Retrait gratuit à l’atelier<small>Paris 18ᵉ, mercredi et samedi</small></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 18 6"/><path d="M15 3l6 6"/><path d="M7 13c-2 1-3 3-3 5"/></svg>Cousue main à Paris<small>tissus de seconde main</small></li>
+    </ul>
+
+    <div class="accroche">
+      <p>Un pochon à savon pour transporter vos soins solides partout&#8239;!</p>
+      <p>Cette pochette de transport vous permettra de garder vos savons au sec lors de vos week-ends, sorties piscine ou vacances.</p>
+      <p class="camille">Fabriquée à Paris par Camille, de Calmos Abricos.</p>
+    </div>
+
+    <div class="plis">
+      <details>
+        <summary>Description</summary>
+        <div class="corps">
+          <p>Entièrement cousue main à Paris par Camille, cette pochette de transport à savon est doublée avec du tissu éponge en nid d’abeille.</p>
+          <p>Elle permet au savon de sécher pendant le transport, tout en protégeant vos affaires.</p>
+          <p>Camille utilise uniquement des tissus de seconde main issus de recycleries ou fin de stock de l’industrie textile.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Matériaux et entretien</summary>
+        <div class="corps">
+          <dl>
+            <dt>Matière</dt><dd>Coton, intérieur nid d’abeille</dd>
+            <dt>Dimensions</dt><dd>h. 12&nbsp;cm × l. 8&nbsp;cm</dd>
+            <dt>Entretien</dt><dd>Se lave en machine à 40&nbsp;degrés</dd>
+          </dl>
+        </div>
+      </details>
+      <details>
+        <summary>Livraison et retours</summary>
+        <div class="corps">
+          <h3>Livraison</h3>
+          <p>Livraison offerte à partir de 49&nbsp;€ d’achats en France, Belgique et Luxembourg.</p>
+          <p>Expédition sous 2 à 3&nbsp;jours ouvrés.</p>
+          <p>Retrait gratuit disponible dans notre atelier du 18ᵉ arrondissement, les mercredis et samedis de 11&nbsp;h à 19&nbsp;h&nbsp;30.</p>
+          <h3>Retours</h3>
+          <p>Vous disposez d’un délai de 14&nbsp;jours après réception pour retourner tout produit non ouvert et non utilisé. Les frais de retour sont à votre charge, sauf erreur de notre part.</p>
+          <p>Contactez-nous à contact@fleursdesardines.fr pour toute demande.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<section class="bloc" aria-labelledby="t-avec">
+  <h2 id="t-avec">À glisser dans la pochette</h2>
+  <div class="cartes">
+    <article class="carte"><img src="img/le-mimosa-peau-sensible.webp" alt="Savon peau sensible, le mimosa" width="600" height="600" loading="lazy"><h3>Savon peau sensible - le mimosa</h3><div class="p">8,00&nbsp;€</div><button type="button" data-ajout-x="mimosa">Ajouter</button></article>
+    <article class="carte"><img src="img/le-romarin-peau-mixte-grasse.webp" alt="Savon peau mixte à grasse, le romarin" width="600" height="600" loading="lazy"><h3>Savon peau mixte à grasse - le romarin</h3><div class="p">8,00&nbsp;€</div><button type="button" data-ajout-x="romarin">Ajouter</button></article>
+    <article class="carte"><img src="img/le-porte-savon-aimant.webp" alt="Le porte savon aimanté" width="600" height="848" loading="lazy"><h3>Le porte savon aimanté</h3><div class="p">7,50&nbsp;€</div><button type="button" data-ajout-x="aimant">Ajouter</button></article>
+  </div>
+</section>
+
+<section class="bloc" aria-labelledby="t-atelier">
+  <div class="atelier">
+    <img src="img/pochette-savon-ambiance.webp" alt="Savon Fleurs de Sardines dans sa pochette" width="666" height="998" loading="lazy">
+    <div>
+      <h2 id="t-atelier">L’atelier-boutique</h2>
+      <p>Fleurs de Sardines est une savonnerie artisanale installée dans le 18ᵉ arrondissement de Paris, où chaque savon est imaginé, formulé et fabriqué à la main dans notre atelier-boutique.</p>
+      <p>Atelier-boutique ouvert mercredi et samedi de 11&nbsp;h à 19&nbsp;h&nbsp;30.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="in">
+    <p>Inscrivez-vous et profitez de 10&nbsp;% de réduction sur votre première commande</p>
+    <div class="copy">© 2026 Fleurs de Sardines</div>
+  </div>
+</footer>
+
+<div class="barre" id="barre" aria-hidden="true">
+  <img id="barre-img" src="img/pastille-fleurs-roses.webp" alt="">
+  <div class="txt"><b id="barre-prix">6,40&nbsp;€</b><span id="barre-couleur">fleurs roses</span></div>
+  <button class="btn-ajout" id="barre-ajout" type="button" tabindex="-1">Ajouter au panier</button>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="panier" id="panier" role="dialog" aria-modal="true" aria-labelledby="t-panier" aria-hidden="true" inert>
+  <div class="haut"><h2 id="t-panier">Votre panier</h2><button class="fermer" id="fermer-panier" type="button" aria-label="Fermer le panier">×</button></div>
+  <div class="seuil" id="seuil-bloc"><span id="seuil"></span><div class="jauge"><i id="jauge"></i></div></div>
+  <ul class="lignes" id="lignes"></ul>
+  <div class="bas">
+    <div class="total"><span>Sous-total</span><b id="total"></b></div>
+    <p class="note">Frais de livraison calculés à la commande.</p>
+    <button class="payer" type="button" id="payer">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  const COULEURS = [
+    { id: 'fleurs-roses', nom: 'fleurs roses', dispo: true },
+    { id: 'vichy-rose', nom: 'vichy rose', dispo: false },
+    { id: 'rouge-a-poids', nom: 'rouge à poids', dispo: true },
+    { id: 'fleurs-mauves', nom: 'fleurs mauves', dispo: true },
+    { id: 'marguerites', nom: 'marguerites', dispo: true },
+    { id: 'pastel', nom: 'Pastel', dispo: true },
+    { id: 'vichy-rouge', nom: 'vichy rouge', dispo: false }
+  ];
+  const PRIX = 6.40, SEUIL = 49;
+  const EXTRAS = {
+    mimosa: { nom: 'Savon peau sensible - le mimosa', prix: 8.00, img: 'img/le-mimosa-peau-sensible.webp' },
+    romarin: { nom: 'Savon peau mixte à grasse - le romarin', prix: 8.00, img: 'img/le-romarin-peau-mixte-grasse.webp' },
+    aimant: { nom: 'Le porte savon aimanté', prix: 7.50, img: 'img/le-porte-savon-aimant.webp' }
+  };
+  const $ = s => document.querySelector(s);
+  const euros = n => n.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+  let choix = COULEURS[0], qte = 1;
+  const panier = []; // { cle, nom, variante, prix, img, qte }
+
+  // Pastilles de couleur
+  const zone = $('#pastilles');
+  COULEURS.forEach((c, i) => {
+    const inp = document.createElement('input');
+    inp.type = 'radio'; inp.name = 'couleur'; inp.id = 'c-' + c.id; inp.value = c.id; inp.className = 'sr';
+    if (i === 0) inp.checked = true;
+    const lab = document.createElement('label');
+    lab.htmlFor = inp.id; lab.title = c.nom + (c.dispo ? '' : ' (épuisé)');
+    if (!c.dispo) lab.className = 'epuise';
+    lab.innerHTML = `<img src="img/pastille-${c.id}.webp" alt=""><span class="sr">${c.nom}${c.dispo ? '' : ', épuisé'}</span>`;
+    inp.addEventListener('change', () => choisir(c));
+    zone.append(inp, lab);
+  });
+
+  function choisir(c) {
+    choix = c;
+    $('#couleur-choisie').textContent = c.nom + (c.dispo ? '' : ' · épuisé');
+    const src = `img/pochette-${c.id}.webp`;
+    $('#photo').src = src; $('#photo').alt = 'Pochette de transport pour savon, tissu ' + c.nom;
+    $('#vignette-couleur').src = src;
+    $('#barre-img').src = `img/pastille-${c.id}.webp`;
+    $('#barre-couleur').textContent = c.nom;
+    aller(0);
+    majBoutons();
+  }
+  function majBoutons() {
+    const ok = choix.dispo;
+    ['#ajout', '#barre-ajout'].forEach(s => { $(s).disabled = !ok; });
+    $('#ajout-txt').textContent = ok ? 'Ajouter au panier' : 'Épuisé';
+    $('#barre-ajout').textContent = ok ? 'Ajouter au panier' : 'Épuisé';
+    $('#prix').textContent = euros(PRIX);
+    $('#barre-prix').textContent = euros(PRIX * qte) + (qte > 1 ? ` (${qte})` : '');
+  }
+
+  // Quantité
+  $('#moins').addEventListener('click', () => { qte = Math.max(1, qte - 1); $('#qte').textContent = qte; majBoutons(); });
+  $('#plus').addEventListener('click', () => { qte = Math.min(20, qte + 1); $('#qte').textContent = qte; majBoutons(); });
+
+  // Galerie
+  const defile = $('#defile');
+  const points = [...document.querySelectorAll('#points button')];
+  const vignettes = [...document.querySelectorAll('#vignettes button')];
+  function aller(i) { defile.scrollTo({ left: defile.clientWidth * i, behavior: 'smooth' }); marquer(i); }
+  function marquer(i) { [points, vignettes].forEach(l => l.forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'))); }
+  points.forEach((b, i) => b.addEventListener('click', () => aller(i)));
+  vignettes.forEach((b, i) => b.addEventListener('click', () => aller(i)));
+  defile.addEventListener('scroll', () => marquer(Math.round(defile.scrollLeft / defile.clientWidth)), { passive: true });
+
+  // Offre de bienvenue
+  const bb = $('#btn-bienvenue'), fb = $('#form-bienvenue');
+  bb.addEventListener('click', () => { const o = bb.getAttribute('aria-expanded') !== 'true'; bb.setAttribute('aria-expanded', o); fb.classList.toggle('ouvert', o); if (o) $('#email').focus(); });
+  fb.addEventListener('submit', e => { e.preventDefault(); $('#merci').hidden = false; });
+
+  // Panier
+  function ajouter(cle, nom, variante, prix, img, n) {
+    const l = panier.find(x => x.cle === cle);
+    if (l) l.qte += n; else panier.push({ cle, nom, variante, prix, img, qte: n });
+    rendre(); ouvrir();
+  }
+  function ajouterPochette() {
+    if (!choix.dispo) return;
+    ajouter('pochette-' + choix.id, 'Pochette de transport pour savon', choix.nom, PRIX, `img/pastille-${choix.id}.webp`, qte);
+    qte = 1; $('#qte').textContent = qte; majBoutons();
+  }
+  $('#ajout').addEventListener('click', ajouterPochette);
+  $('#barre-ajout').addEventListener('click', ajouterPochette);
+  document.querySelectorAll('[data-ajout-x]').forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.ajoutX, x = EXTRAS[k]; ajouter('x-' + k, x.nom, '', x.prix, x.img, 1);
+  }));
+
+  function rendre() {
+    const ul = $('#lignes'); ul.innerHTML = '';
+    if (!panier.length) ul.innerHTML = '<li class="vide">Votre panier est vide.</li>';
+    panier.forEach(l => {
+      const li = document.createElement('li'); li.className = 'ligne'; li.dataset.cle = l.cle;
+      li.innerHTML = `<img src="${l.img}" alt=""><div><div class="nom">${l.nom}</div>${l.variante ? `<div class="var">Couleur&nbsp;: ${l.variante}</div>` : ''}
+        <div class="mini-qte"><button type="button" data-m="-1" aria-label="Retirer un article">−</button><span>${l.qte}</span><button type="button" data-m="1" aria-label="Ajouter un article">+</button></div></div>
+        <div class="droite">${euros(l.prix * l.qte)}<button type="button" class="retirer" data-retirer="${l.cle}">Retirer</button></div>`;
+      li.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => { l.qte += +b.dataset.m; if (l.qte < 1) panier.splice(panier.indexOf(l), 1); rendre(); }));
+      li.querySelector('.retirer').addEventListener('click', () => { panier.splice(panier.indexOf(l), 1); rendre(); });
+      ul.append(li);
+    });
+    const tot = panier.reduce((s, l) => s + l.prix * l.qte, 0);
+    const n = panier.reduce((s, l) => s + l.qte, 0);
+    $('#total').textContent = euros(tot);
+    const c = $('#compte-panier'); c.textContent = n; c.dataset.v = n;
+    const reste = SEUIL - tot;
+    $('#seuil').textContent = tot === 0 ? `Livraison offerte dès ${euros(SEUIL)} d’achats (France, Belgique, Luxembourg)`
+      : reste > 0 ? `Plus que ${euros(reste)} pour la livraison offerte` : 'Livraison offerte (France, Belgique, Luxembourg)';
+    $('#jauge').style.width = Math.min(100, tot / SEUIL * 100) + '%';
+  }
+
+  const pan = $('#panier'), voile = $('#voile');
+  let retour = null;
+  function ouvrir() { retour = document.activeElement; pan.classList.add('ouvert'); voile.classList.add('ouvert'); pan.setAttribute('aria-hidden', 'false'); pan.inert = false; $('#fermer-panier').focus(); }
+  function fermer() { pan.classList.remove('ouvert'); voile.classList.remove('ouvert'); pan.setAttribute('aria-hidden', 'true'); pan.inert = true; if (retour && retour.focus) retour.focus(); }
+  $('#ouvrir-panier').addEventListener('click', () => { rendre(); ouvrir(); });
+  $('#fermer-panier').addEventListener('click', fermer);
+  voile.addEventListener('click', fermer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && pan.classList.contains('ouvert')) fermer(); });
+
+  // Barre collante : visible quand le bouton principal sort de l'écran
+  const barre = $('#barre');
+  new IntersectionObserver(([e]) => {
+    const v = !e.isIntersecting && e.boundingClientRect.top < 0;
+    barre.classList.toggle('visible', v); barre.setAttribute('aria-hidden', !v); $('#barre-ajout').tabIndex = v ? 0 : -1;
+  }).observe($('#ajout'));
+
+  rendre(); majBoutons();
+})();
+</script>
+</body>
+</html>

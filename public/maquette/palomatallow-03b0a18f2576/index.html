@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,">
+<title>Baume Tallow Peaux Sensibles · Paloma Tallow (maquette)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Couleurs relevées sur palomatallow.com (styles calculés, fiche Baume Tallow Peaux Sensibles 30 ml, 24/10/2026) */
+:root{
+  --paloma-vert-annonce:#BED997;   /* bandeau d'annonce et pied de page */
+  --paloma-abricot-bouton:#FFC07A; /* bouton « Ajouter au panier » et bandeau défilant */
+  --paloma-rose-accent:#EA908B;    /* étoiles, badge promo (--color-base-accent-1) */
+  --paloma-vieux-rose:#CDA09B;     /* bouton de la barre d'achat collante */
+  --paloma-noir:#000000;           /* titres, pastille d'option choisie */
+  --paloma-texte:rgba(0,0,0,.9);   /* texte courant */
+  --paloma-fond:#FFFFFF;
+  /* dérivées */
+  --creme:#FBF7F1;
+  --trait:rgba(0,0,0,.12);
+  --f-titre:"Gloock",Georgia,serif;          /* police des titres du site */
+  --f-texte:"Poppins",system-ui,sans-serif;  /* police du texte du site */
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paloma-fond);color:var(--paloma-texte);font:400 15px/1.55 var(--f-texte);overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--paloma-noir);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.bandeau-maquette{background:#F3F3F0;color:#555;font-size:11px;text-align:center;padding:3px 12px;line-height:1.4}
+.annonce{background:var(--paloma-vert-annonce);color:#1F2A12;font-size:12.5px;font-weight:500;text-align:center;padding:6px 12px;line-height:1.35}
+.annonce span+span::before{content:"·";margin:0 .6em;opacity:.6}
+
+.entete{background:#fff;border-bottom:1px solid var(--trait);position:sticky;top:0;z-index:30}
+.entete-int{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:6px 16px;min-height:54px}
+.nav{display:flex;gap:22px;font-size:13px;letter-spacing:.02em}
+.nav a{text-decoration:none}
+.nav a:not(:first-child){display:none}
+.logo img{height:46px;width:auto}
+.icones{justify-self:end;display:flex;gap:6px}
+.panier-btn{position:relative;background:none;border:0;padding:8px;border-radius:6px}
+.panier-btn svg{width:24px;height:24px;display:block}
+.panier-btn .compte{position:absolute;right:1px;top:2px;min-width:17px;height:17px;border-radius:9px;background:var(--paloma-noir);color:#fff;font-size:10.5px;font-weight:600;line-height:17px;text-align:center;padding:0 4px}
+.panier-btn .compte[hidden]{display:none}
+@media (min-width:900px){.nav a:not(:first-child){display:inline}.logo img{height:58px}}
+
+.produit{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr)}
+.galerie,.infos{min-width:0}
+.photo{margin:0;position:relative;background:var(--creme);aspect-ratio:5/4;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.vignettes{display:flex;gap:6px;margin:0;padding:8px 16px 0;list-style:none;overflow-x:auto;scrollbar-width:none}
+.vignettes::-webkit-scrollbar{display:none}
+.vignettes button{flex:0 0 auto;width:46px;height:46px;padding:0;border:1.5px solid transparent;border-radius:6px;overflow:hidden;background:var(--creme)}
+.vignettes button[aria-current="true"]{border-color:var(--paloma-noir)}
+.vignettes img{width:100%;height:100%;object-fit:cover}
+
+.infos{padding:10px 16px 0}
+h1{font:400 24px/1.12 var(--f-titre);color:var(--paloma-noir);margin:0;letter-spacing:.005em}
+h1 small{display:inline-block;font:500 12px/1 var(--f-texte);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--paloma-noir);border-radius:20px;padding:4px 8px;margin-left:6px;vertical-align:4px}
+.ligne-prix{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;flex-wrap:wrap}
+.prix{display:flex;align-items:baseline;gap:8px}
+.prix .actuel{font-size:20px;font-weight:700;color:var(--paloma-noir)}
+.prix s{font-size:14px;color:#666}
+.note{font-size:13px;text-decoration:none;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.etoiles{color:var(--paloma-rose-accent);letter-spacing:1px;font-size:14px}
+.note u{text-underline-offset:2px}
+.accroche{margin:6px 0 0;font-size:13.5px;font-weight:600;color:var(--paloma-noir)}
+
+.option{border:0;margin:10px 0 0;padding:0;min-width:0}
+.option legend{padding:0;font-size:13px;font-weight:600;margin-bottom:6px}
+.option legend b{font-weight:400}
+.pastilles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pastille{position:relative}
+.pastille input{position:absolute;opacity:0;width:1px;height:1px}
+.pastille label{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:1px solid rgba(0,0,0,.55);border-radius:40px;padding:4px 12px;font-size:13.5px;cursor:pointer;background:#fff}
+.pastille label img{width:28px;height:28px;object-fit:contain}
+.pastille input:checked+label{background:var(--paloma-noir);color:#fff;border-color:var(--paloma-noir)}
+.pastille input:checked+label img{background:#fff;border-radius:50%}
+.pastille input:focus-visible+label{outline:2px solid var(--paloma-noir);outline-offset:3px}
+
+.achat{display:grid;grid-template-columns:112px 1fr;gap:8px;margin-top:10px}
+.quantite{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--trait);border-radius:8px;height:50px}
+.quantite button{background:none;border:0;width:36px;height:48px;font-size:18px;border-radius:8px}
+.quantite output{font-weight:500;min-width:20px;text-align:center}
+.btn-ajout{height:50px;border:0;border-radius:8px;background:var(--paloma-abricot-bouton);color:var(--paloma-noir);font-weight:700;font-size:14.5px;letter-spacing:.06em;text-transform:uppercase}
+.btn-ajout:hover{filter:brightness(.96)}
+.btn-ajout span{font-weight:500;letter-spacing:0;text-transform:none}
+
+.reassurance{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;font-size:12px;line-height:1.3}
+.reassurance li{display:flex;align-items:center;gap:7px}
+.reassurance svg{flex:0 0 18px;width:18px;height:18px;stroke:var(--paloma-noir);fill:none;stroke-width:1.6}
+
+.puces{list-style:none;padding:0;margin:16px 0 0;font-size:14px}
+.puces li{padding:4px 0 4px 22px;position:relative}
+.puces li::before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--paloma-rose-accent)}
+
+.accordeons{margin:16px 0 0;border-top:1px solid var(--trait)}
+details{border-bottom:1px solid var(--trait)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 2px;font:400 17px/1.2 var(--f-titre);color:var(--paloma-noir)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";width:9px;height:9px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-4px 6px 0 0;transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.contenu{padding:0 2px 16px;font-size:14px}
+.contenu p{margin:0 0 10px}
+.contenu h3{font:600 13.5px/1.3 var(--f-texte);margin:12px 0 4px;color:var(--paloma-noir)}
+
+.defile{background:var(--paloma-abricot-bouton);color:var(--paloma-noir);font-size:13px;font-weight:500;text-align:center;padding:8px 12px;margin-top:28px}
+.defile span+span::before{content:"·";margin:0 .7em}
+
+.section{max-width:1240px;margin:0 auto;padding:34px 16px 0}
+.section h2{font:400 25px/1.15 var(--f-titre);margin:0 0 14px;color:var(--paloma-noir)}
+.rituel{display:grid;gap:14px}
+.carte{background:var(--creme);border-radius:12px;padding:16px}
+.carte h3{font:600 14.5px/1.3 var(--f-texte);margin:0 0 4px;color:var(--paloma-noir)}
+.carte p{margin:0;font-size:14px}
+
+.avis-tete{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.avis-tete .gros{font:400 30px/1 var(--f-titre);color:var(--paloma-noir)}
+.liste-avis{display:grid;gap:12px;list-style:none;margin:0;padding:0}
+.un-avis{border:1px solid var(--trait);border-radius:12px;padding:14px 16px}
+.un-avis .etoiles{font-size:13px}
+.un-avis h3{font:600 14.5px/1.3 var(--f-texte);margin:4px 0;color:var(--paloma-noir)}
+.un-avis p{margin:0 0 6px;font-size:14px}
+.un-avis .qui{font-size:12.5px;color:#555}
+
+.pied{background:var(--paloma-vert-annonce);color:#1F2A12;margin-top:44px;padding:28px 16px 90px;text-align:center;font-size:13px}
+.pied img{height:56px;width:auto;margin:0 auto 8px;mix-blend-mode:multiply}
+.pied nav{display:flex;justify-content:center;gap:18px;margin-top:6px}
+
+/* Barre d'achat collante : visible dès que le bouton principal sort de l'écran, rien ne la recouvre */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--trait);box-shadow:0 -6px 18px rgba(0,0,0,.06);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;transform:translateY(110%);transition:transform .25s ease}
+.barre.visible{transform:none}
+.barre img{width:44px;height:44px;border-radius:6px;object-fit:cover;flex:0 0 auto}
+.barre .bt{min-width:0;flex:1}
+.barre .bt b{display:block;font:400 14px/1.2 var(--f-titre);color:var(--paloma-noir);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barre .bt span{font-size:12.5px}
+.barre .btn-ajout{height:46px;padding:0 18px;font-size:13px;flex:0 0 auto}
+
+/* Mini-panier */
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.tiroir{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:60;transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column}
+.tiroir.ouvert{transform:none}
+.tiroir-tete{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--trait)}
+.tiroir-tete h2{font:400 21px/1 var(--f-titre);margin:0;color:var(--paloma-noir)}
+.fermer{background:none;border:0;width:44px;height:44px;border-radius:8px;font-size:24px;line-height:1}
+.tiroir-corps{flex:1;overflow:auto;padding:12px 16px}
+.ligne{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--trait)}
+.ligne img{width:64px;height:64px;border-radius:8px;object-fit:cover}
+.ligne b{font-weight:600;font-size:14px;display:block;line-height:1.3}
+.ligne span{font-size:12.5px;color:#555}
+.ligne .pl{font-weight:600}
+.tiroir-pied{padding:14px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--trait)}
+.total{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:var(--paloma-noir)}
+.tiroir-pied p{margin:4px 0 10px;font-size:12.5px;color:#555}
+.payer{width:100%;min-height:50px;border:0;border-radius:8px;background:var(--paloma-noir);color:#fff;font-weight:500;font-size:14px;padding:8px 12px}
+
+@media (min-width:768px){
+  .infos{padding:16px 24px 0}
+  .vignettes{padding:8px 24px 0}
+  .section{padding:44px 24px 0}
+  .rituel{grid-template-columns:repeat(3,1fr)}
+  .liste-avis{grid-template-columns:repeat(3,1fr)}
+  .reassurance{grid-template-columns:repeat(4,1fr)}
+}
+@media (min-width:760px){
+  .produit{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;padding:20px 24px 0}
+  .galerie{position:sticky;top:84px;align-self:start}
+  .photo{aspect-ratio:1;border-radius:14px}
+  .vignettes{padding:10px 0 0}
+  .vignettes button{width:72px;height:72px}
+  .infos{padding:8px 0 0}
+  h1{font-size:27px}
+  .reassurance{grid-template-columns:1fr 1fr}
+  .barre{display:none}
+  .pied{padding-bottom:36px}
+}
+@media (min-width:1000px){
+  .produit{gap:48px;padding-top:28px}
+  h1{font-size:34px}
+  .prix .actuel{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="bandeau-maquette">Maquette proposée par Redline Studio · page non publiée</div>
+<div class="annonce"><span>Fabriqué en France</span><span>Livraison offerte dès 40&nbsp;€ d’achat</span></div>
+
+<header class="entete">
+  <div class="entete-int">
+    <nav class="nav" aria-label="Menu principal"><a href="#produit">Produits</a><a href="#rituel">La marque</a><a href="#avis">Avis clients</a></nav>
+    <a class="logo" href="#produit"><img src="img/logo.webp" width="400" height="244" alt="Paloma Tallow"></a>
+    <div class="icones">
+      <button class="panier-btn" type="button" id="ouvrir-panier" aria-label="Ouvrir le panier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="compte" id="compte" hidden></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="produit">
+<section class="produit" aria-labelledby="titre-produit">
+  <div class="galerie">
+    <figure class="photo"><img id="photo" src="img/baume-1.webp" width="1200" height="1200" alt="Pot ouvert du Baume Tallow Peaux Sensibles, formule sans parfum"></figure>
+    <ul class="vignettes" aria-label="Photos du produit">
+      <li><button type="button" aria-current="true" data-src="img/baume-1.webp" aria-label="Photo 1 : le pot ouvert"><img src="img/baume-1-mini.webp" width="200" height="200" alt=""></button></li>
+      <li><button type="button" data-src="img/baume-2.webp" aria-label="Photo 2 : application sur le coude"><img src="img/baume-2-mini.webp" width="200" height="200" alt=""></button></li>
+      <li><button type="button" data-src="img/baume-3.webp" aria-label="Photo 3 : un pot, mille usages"><img src="img/baume-3-mini.webp" width="200" height="200" alt=""></button></li>
+      <li><button type="button" data-src="img/baume-4.webp" aria-label="Photo 4 : suif de bœuf et vitamine E"><img src="img/baume-4-mini.webp" width="200" height="200" alt=""></button></li>
+      <li><button type="button" data-src="img/baume-5.webp" aria-label="Photo 5 : le pot en main"><img src="img/baume-5-mini.webp" width="200" height="200" alt=""></button></li>
+    </ul>
+  </div>
+
+  <div class="infos">
+    <h1 id="titre-produit">Baume Tallow Peaux Sensibles <small>30 ml</small></h1>
+    <div class="ligne-prix">
+      <p class="prix" style="margin:0"><span class="actuel" id="prix">24,90&nbsp;€</span> <s id="prix-barre" aria-label="Prix habituel">27,90&nbsp;€</s></p>
+      <a class="note" href="#avis"><span class="etoiles" aria-hidden="true">★★★★★</span><u>4,91/5 · 139 avis</u></a>
+    </div>
+    <p class="accroche">Le geste qui nourrit et réveille ta peau.</p>
+
+    <fieldset class="option">
+      <legend>Applicateur&nbsp;: <b id="choix-libelle">Sans</b></legend>
+      <div class="pastilles">
+        <div class="pastille"><input type="radio" name="applicateur" id="opt-sans" value="sans" checked><label for="opt-sans">Sans</label></div>
+        <div class="pastille"><input type="radio" name="applicateur" id="opt-avec" value="avec"><label for="opt-avec"><img src="img/applicateur.webp" width="240" height="240" alt="">Avec</label></div>
+      </div>
+    </fieldset>
+
+    <div class="achat" id="zone-achat">
+      <div class="quantite" role="group" aria-label="Quantité">
+        <button type="button" id="moins" aria-label="Réduire la quantité">−</button>
+        <output id="qte" aria-live="polite">1</output>
+        <button type="button" id="plus" aria-label="Augmenter la quantité">+</button>
+      </div>
+      <button type="button" class="btn-ajout" id="ajouter">Ajouter au panier</button>
+    </div>
+
+    <ul class="reassurance">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>Fabriqué en France</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>Expédiée sous 1 à 2 jours ouvrés</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4zM2 5h20v3H2zM12 5v15"/></svg>Livraison offerte dès 40&nbsp;€ d’achat</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Paiement sécurisé</li>
+    </ul>
+
+    <ul class="puces">
+      <li>Apaise les peaux sèches, réactives et sujettes aux rougeurs</li>
+      <li>Sans parfum ni huiles essentielles, pour une tolérance maximale</li>
+      <li>Un fini doux et confortable, sans tiraillement</li>
+    </ul>
+
+    <div class="accordeons">
+      <details open>
+        <summary>Description</summary>
+        <div class="contenu">
+          <p>Baume au suif de bœuf (pâturage), fabriqué en laboratoire français, pour apaiser rougeurs, sécheresse, eczéma, psoriasis et signes de l’âge. Sans parfum.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Liste INCI</summary>
+        <div class="contenu">
+          <p><strong>Adeps bovis</strong> (suif de bœuf purifié, ingrédient principal, nourrit et protège la peau), <strong>Tocopherol</strong> (vitamine E, antioxydant naturel qui protège le baume du rancissement).</p>
+        </div>
+      </details>
+      <details>
+        <summary>Mode d’emploi</summary>
+        <div class="contenu">
+          <p>Prélever une petite noisette de baume et la réchauffer entre les doigts. Appliquer sur la peau propre en massant délicatement jusqu’à pénétration.</p>
+          <p>La texture du baume peut varier avec la température. Plus il fait froid, plus il sera dur. Il suffit de le chauffer légèrement entre vos mains pour le rendre facile à appliquer.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Livraison et retours</summary>
+        <div class="contenu">
+          <p>Commandes préparées et expédiées sous 1 à 2 jours ouvrés.</p>
+          <p>Livraison offerte dès 40&nbsp;€ d’achat.</p>
+          <p>Retour accepté pour un produit non utilisé, renvoyé dans son emballage d’origine dans les 30 jours suivant la livraison.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Questions fréquentes</summary>
+        <div class="contenu">
+          <h3>Le suif de bœuf dans le baume a-t-il une odeur&nbsp;?</h3>
+          <p>Notre suif de bœuf est désodorisé naturellement à la vapeur à haute pression, ce qui élimine toute odeur.</p>
+          <h3>Le suif de bœuf utilisé est-il halal&nbsp;?</h3>
+          <p>Oui, notre suif de bœuf est certifié halal.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="defile"><span>Ta peau, nourrie naturellement</span></div>
+
+<section class="section" id="rituel" aria-labelledby="titre-rituel">
+  <h2 id="titre-rituel">Le rituel Paloma Tallow</h2>
+  <p style="margin:-6px 0 16px;font-size:14.5px">Nourrir, adoucir, protéger&nbsp;: le soin simple et naturel qui prend soin de ta peau au quotidien.</p>
+  <div class="rituel">
+    <div class="carte"><h3>Le suif, l’ingrédient d’origine</h3><p>Riche en lipides proches de ceux de la peau, le suif de bœuf nourrit en profondeur et aide à préserver la barrière cutanée.</p></div>
+    <div class="carte"><h3>Une formule minimaliste</h3><p>Pour les petits comme pour les grands, pour le visage, les mains, les lèvres ou le corps&nbsp;: un seul soin simple.</p></div>
+    <div class="carte"><h3>Un suif d’exception</h3><p>Notre suif provient d’un élevage de bœufs nourris à l’herbe plus de 200 jours par an, pour une graisse plus riche en vitamines A, D, E et K.</p></div>
+  </div>
+</section>
+
+<section class="section" id="avis" aria-labelledby="titre-avis">
+  <h2 id="titre-avis">Avis clients</h2>
+  <div class="avis-tete"><span class="gros">4,91/5</span><span class="etoiles" aria-hidden="true">★★★★★</span><span>Basé sur 139 avis</span></div>
+  <ul class="liste-avis">
+    <li class="un-avis"><span class="etoiles" aria-hidden="true">★★★★★</span><h3>Idéal pour les peaux sèche en randonnée</h3><p>Je pars souvent en rando du côté des Pyrénées et avec le vent/soleil ma peau s’assèche vite. J’étais sceptique mais ce petit baume fait vraiment la différence, il soulage direct et tient bien.</p><span class="qui">Camille</span></li>
+    <li class="un-avis"><span class="etoiles" aria-hidden="true">★★★★★</span><h3>Un baume à absolument avoir&nbsp;!</h3><p>Je suis choquée par l’effet immédiat du baume Tallow pour peaux sensibles sur ma peau. Le résultat&nbsp;? Une peau de bébé, parfaitement hydratée, et un teint éclatant.</p><span class="qui">Laura</span></li>
+    <li class="un-avis"><span class="etoiles" aria-hidden="true">★★★★★</span><h3>Je recommande</h3><p>Super produit, très satisfaite.</p><span class="qui">Nour</span></li>
+  </ul>
+</section>
+</main>
+
+<footer class="pied">
+  <img src="img/logo.webp" width="400" height="244" alt="Paloma Tallow">
+  <nav aria-label="Réseaux"><a href="#produit">Instagram</a><a href="#produit">TikTok</a></nav>
+</footer>
+
+<div class="barre" id="barre" aria-hidden="true">
+  <img src="img/baume-1-mini.webp" width="200" height="200" alt="">
+  <div class="bt"><b>Baume Tallow Peaux Sensibles</b><span id="barre-prix">24,90&nbsp;€</span></div>
+  <button type="button" class="btn-ajout" id="ajouter-barre" tabindex="-1">Ajouter</button>
+</div>
+
+<div class="voile" id="voile"></div>
+<aside class="tiroir" id="tiroir" role="dialog" aria-modal="true" aria-labelledby="titre-panier" aria-hidden="true">
+  <div class="tiroir-tete"><h2 id="titre-panier">Votre panier</h2><button type="button" class="fermer" id="fermer" aria-label="Fermer le panier">×</button></div>
+  <div class="tiroir-corps" id="lignes"></div>
+  <div class="tiroir-pied">
+    <div class="total"><span>Total</span><span id="total"></span></div>
+    <p>Livraison offerte dès 40&nbsp;€ d’achat.</p>
+    <button type="button" class="payer" id="payer">Maquette&nbsp;: le paiement reste celui de votre boutique</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  // Variantes : /products/baume-tallow-peau-sensible-30-ml.json (24/10/2026)
+  const V = { sans: { nom: 'Sans', prix: 24.90, barre: 27.90 }, avec: { nom: 'Avec', prix: 25.90, barre: 28.90 } };
+  const eur = n => n.toFixed(2).replace('.', ',') + ' €';
+  const $ = id => document.getElementById(id);
+  let choix = 'sans', qte = 1; const panier = {};
+
+  // Galerie
+  document.querySelectorAll('.vignettes button').forEach(b => b.addEventListener('click', () => {
+    $('photo').src = b.dataset.src;
+    document.querySelectorAll('.vignettes button').forEach(x => x.setAttribute('aria-current', x === b ? 'true' : 'false'));
+  }));
+
+  // Option
+  const majPrix = () => { const v = V[choix]; $('prix').textContent = eur(v.prix); $('prix-barre').textContent = eur(v.barre); $('barre-prix').textContent = eur(v.prix); $('choix-libelle').textContent = v.nom; };
+  document.querySelectorAll('input[name=applicateur]').forEach(r => r.addEventListener('change', () => { choix = r.value; majPrix(); }));
+
+  // Quantité
+  $('moins').addEventListener('click', () => { qte = Math.max(1, qte - 1); $('qte').textContent = qte; });
+  $('plus').addEventListener('click', () => { qte = Math.min(20, qte + 1); $('qte').textContent = qte; });
+
+  // Panier
+  const rendre = () => {
+    const cles = Object.keys(panier); let total = 0, n = 0;
+    $('lignes').innerHTML = '';
+    for (const k of cles) {
+      const v = V[k], q = panier[k]; total += v.prix * q; n += q;
+      const li = document.createElement('div'); li.className = 'ligne';
+      li.innerHTML = `<img src="img/baume-1-mini.webp" alt=""><div><b>Baume Tallow Peaux Sensibles 30 ml</b><span>Applicateur\u00a0: ${v.nom} · Quantité\u00a0: ${q}</span></div><span class="pl">${eur(v.prix * q)}</span>`;
+      $('lignes').appendChild(li);
+    }
+    $('total').textContent = eur(total);
+    $('compte').hidden = !n; $('compte').textContent = n;
+  };
+  let dernierFocus = null;
+  const ouvrir = () => { dernierFocus = document.activeElement; $('tiroir').classList.add('ouvert'); $('voile').classList.add('ouvert'); $('tiroir').setAttribute('aria-hidden', 'false'); $('fermer').focus(); };
+  const fermer = () => { $('tiroir').classList.remove('ouvert'); $('voile').classList.remove('ouvert'); $('tiroir').setAttribute('aria-hidden', 'true'); if (dernierFocus) dernierFocus.focus(); };
+  const ajouter = () => { panier[choix] = (panier[choix] || 0) + qte; rendre(); ouvrir(); };
+  $('ajouter').addEventListener('click', ajouter);
+  $('ajouter-barre').addEventListener('click', ajouter);
+  $('ouvrir-panier').addEventListener('click', () => { rendre(); ouvrir(); });
+  $('fermer').addEventListener('click', fermer);
+  $('voile').addEventListener('click', fermer);
+  $('payer').addEventListener('click', () => {});
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('tiroir').classList.contains('ouvert')) fermer(); });
+
+  // Barre collante : apparaît quand le bouton principal sort de l'écran
+  const barre = $('barre');
+  new IntersectionObserver(([e]) => {
+    const vis = !e.isIntersecting && e.boundingClientRect.top < 0;
+    barre.classList.toggle('visible', vis); barre.setAttribute('aria-hidden', vis ? 'false' : 'true'); $('ajouter-barre').tabIndex = vis ? 0 : -1;
+  }).observe($('zone-achat'));
+  rendre();
+})();
+</script>
+</body>
+</html>
