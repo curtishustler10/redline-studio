@@ -7,17 +7,22 @@ export const OWNER_ZONE = "Pacific/Tahiti";
 
 /**
  * Curtis's bookable windows per weekday (0 = Sunday), in Tahiti time. Redline
- * sells to mainland France, so Curtis takes calls in his evening, which is the
- * French morning: 19:00–23:00 Tahiti = 07:00–11:00 Paris in summer (UTC+2),
- * 06:00–10:00 in winter (UTC+1). Sunday→Thursday evenings in Tahiti fall on
- * Monday→Friday in France.
+ * sells to mainland France, so both ends of Curtis's day face the French one:
+ *  - 05:00–08:00 Tahiti = 16:00–19:00 Paris in winter (UTC+1), 17:00–20:00 in
+ *    summer — the same calendar day, so Monday→Friday in Tahiti.
+ *  - 19:00–24:00 Tahiti = 06:00–11:00 Paris in winter, 07:00–12:00 in summer —
+ *    the next calendar day, so Sunday→Thursday in Tahiti = Monday→Friday in France.
+ * LEAD_WINDOW then trims both to the lead's 08:00–20:00.
  */
+const MORNING: [string, string] = ["05:00", "08:00"];
+const EVENING: [string, string] = ["19:00", "24:00"];
 export const OWNER_WINDOWS: Record<number, [string, string][]> = {
-  0: [["19:00", "23:00"]],
-  1: [["19:00", "23:00"]],
-  2: [["19:00", "23:00"]],
-  3: [["19:00", "23:00"]],
-  4: [["19:00", "23:00"]],
+  0: [EVENING],
+  1: [MORNING, EVENING],
+  2: [MORNING, EVENING],
+  3: [MORNING, EVENING],
+  4: [MORNING, EVENING],
+  5: [MORNING],
 };
 
 /** Hours we are willing to ask of the lead, in their own zone. */

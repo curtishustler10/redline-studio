@@ -2,35 +2,35 @@ import { describe, expect, it } from "vitest";
 import { availableSlots, groupByLeadDay } from "./slots";
 import { utcToZoned } from "./rdv-time";
 
-const local = (d: Date, tz: string) => {
-  const z = utcToZoned(d, tz);
-  return `${z.date} ${z.time}`;
-};
 const weekday = (d: Date, tz: string) => new Date(`${utcToZoned(d, tz).date}T12:00:00Z`).getUTCDay();
 
 // Monday 2026-10-05 06:00 Tahiti = 18:00 Paris (summer time).
 const now = new Date("2026-10-05T16:00:00Z");
 
-describe("availableSlots (French market, Curtis's evenings)", () => {
-  it("gives Paris leads weekday mornings 08:00–10:30 in summer", () => {
+describe("availableSlots (French market, both ends of Curtis's day)", () => {
+  const timesOf = (slots: Date[]) => [...new Set(slots.map((s) => utcToZoned(s, "Europe/Paris").time))].sort();
+
+  it("gives Paris leads mornings and late afternoons in summer", () => {
     const paris = availableSlots(now, "Europe/Paris", []);
-    const times = new Set(paris.map((s) => utcToZoned(s, "Europe/Paris").time));
-    expect([...times].sort()).toEqual(["08:00", "08:30", "09:00", "09:30", "10:00", "10:30"]);
+    expect(timesOf(paris)).toEqual([
+      "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+      "17:00", "17:30", "18:00", "18:30", "19:00", "19:30",
+    ]);
     expect(paris.every((s) => weekday(s, "Europe/Paris") >= 1 && weekday(s, "Europe/Paris") <= 5)).toBe(true);
-    expect(local(paris[0], "Europe/Paris")).toBe("2026-10-06 08:00"); // Tuesday = Monday 20:00 in Tahiti
   });
 
-  it("keeps the calls inside 19:00–23:00 in Tahiti", () => {
+  it("gives Paris leads 08:00–10:30 and 16:00–18:30 in winter", () => {
+    const winterNow = new Date("2026-11-09T16:00:00Z");
+    const paris = availableSlots(winterNow, "Europe/Paris", []);
+    expect(timesOf(paris)).toEqual(["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"]);
+    expect(paris.every((s) => weekday(s, "Europe/Paris") >= 1 && weekday(s, "Europe/Paris") <= 5)).toBe(true);
+  });
+
+  it("keeps every call inside Curtis's 05:00–08:00 or 19:00–24:00", () => {
     for (const s of availableSlots(now, "Europe/Paris", [])) {
       const t = utcToZoned(s, "Pacific/Tahiti").time;
-      expect(t >= "19:00" && t <= "22:30").toBe(true);
+      expect((t >= "05:00" && t <= "07:30") || (t >= "19:00" && t <= "23:30")).toBe(true);
     }
-  });
-
-  it("gives Paris leads 08:00–09:30 in winter time (one hour less)", () => {
-    const winterNow = new Date("2026-11-09T16:00:00Z");
-    const times = new Set(availableSlots(winterNow, "Europe/Paris", []).map((s) => utcToZoned(s, "Europe/Paris").time));
-    expect([...times].sort()).toEqual(["08:00", "08:30", "09:00", "09:30"]);
   });
 
   it("removes slots overlapping an existing RDV", () => {
