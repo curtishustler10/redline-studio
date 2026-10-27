@@ -197,7 +197,7 @@ describe("notifyContact", () => {
   it("sends the auto-reply and the internal notice once per lead", async () => {
     const res = await notifyContact(lead, { message: "Bonjour", service: "Site vitrine" });
     expect(res.map((r) => r.status)).toEqual(["sent", "sent"]);
-    expect(sent.find((m) => m.to[0] === "maya@example.com")?.subject).toBe("Bien reçu, Maya : je vous réponds sous 24 h");
+    expect(sent.find((m) => m.to[0] === "maya@example.com")?.subject).toBe("Bien reçu, Maya : nous vous répondons sous 24 h");
     expect((await notifyContact(lead, {})).map((r) => r.status)).toEqual(["skipped", "skipped"]);
   });
 });

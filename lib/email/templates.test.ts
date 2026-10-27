@@ -58,7 +58,7 @@ describe("rdvConfirmation", () => {
 
   it("greets by first name and states the call format", () => {
     expect(mail.html).toContain("C&#39;est noté, Maya !");
-    expect(mail.text).toContain("je vous appelle au +689 87 00 00 00");
+    expect(mail.text).toContain("nous vous appelons au +689 87 00 00 00");
   });
 
   it("attaches a REQUEST invite with a stable UID", () => {
@@ -86,7 +86,7 @@ describe("reminder", () => {
   it("says tomorrow and keeps the reschedule link", () => {
     const mail = rdvReminder(lead, appt, ctx);
     expect(mail.subject).toBe("Demain à 10:00 : notre rendez-vous");
-    expect(mail.text).toContain("Besoin de décaler ? Écrivez-moi : https://wa.me/68987058275");
+    expect(mail.text).toContain("Besoin de décaler ? Écrivez-nous : https://wa.me/68987058275");
   });
 });
 
@@ -127,7 +127,7 @@ describe("contact form", () => {
     const mail = contactAutoReply(lead, ctx, { message: "Mon site <script>alert(1)</script> ne vend pas" });
     expect(mail.html).toContain("&lt;script&gt;");
     expect(mail.html).not.toContain("<script>");
-    expect(mail.subject).toBe("Bien reçu, Maya : je vous réponds sous 24 h");
+    expect(mail.subject).toBe("Bien reçu, Maya : nous vous répondons sous 24 h");
   });
 
   it("auto-reply works without a message", () => {

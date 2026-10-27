@@ -2,7 +2,7 @@
 // Pure functions — no I/O — so they are unit-tested and previewable. Sending,
 // persistence and scheduling live elsewhere and only call these.
 //
-// Lead-facing mails: first person ("je"), vouvoiement, one clear action.
+// Lead-facing mails: first-person plural ("nous", the site's voice), vouvoiement, one clear action.
 // Internal mails: French only, facts first, link straight to the lead file.
 
 import { buildIcs } from "./ics";
@@ -82,11 +82,11 @@ const T = {
     duration: "Durée",
     format: "Format",
     minutes: (n: number) => `${n} minutes`,
-    phone: (p?: string) => (p ? `Appel téléphonique, je vous appelle au ${p}` : "Appel téléphonique, je vous appelle"),
+    phone: (p?: string) => (p ? `Appel téléphonique, nous vous appelons au ${p}` : "Appel téléphonique, nous vous appelons"),
     visio: "Visio",
     inPerson: "Sur place",
     joinVisio: "Rejoindre la visio",
-    rebook: "Besoin de décaler ? Écrivez-moi",
+    rebook: "Besoin de décaler ? Écrivez-nous",
     icsNote: "l'invitation est jointe : un clic et c'est dans votre agenda",
     summary: "Rendez-vous avec Curtis · Redline Studio",
   },
@@ -95,11 +95,11 @@ const T = {
     duration: "Length",
     format: "Format",
     minutes: (n: number) => `${n} minutes`,
-    phone: (p?: string) => (p ? `Phone call, I'll call you on ${p}` : "Phone call, I'll call you"),
+    phone: (p?: string) => (p ? `Phone call, we'll call you on ${p}` : "Phone call, we'll call you"),
     visio: "Video call",
     inPerson: "In person",
     joinVisio: "Join the video call",
-    rebook: "Need to move it? Just tell me",
+    rebook: "Need to move it? Just tell us",
     icsNote: "the invite is attached: one click and it's in your calendar",
     summary: "Meeting with Curtis · Redline Studio",
   },
@@ -209,8 +209,8 @@ export function rdvReminder(lead: LeadInfo, appt: Appointment, ctx: MailContext)
         {
           kind: "p",
           text: fr
-            ? "Si un imprévu arrive, prévenez-moi simplement : on trouvera un autre créneau, sans problème."
-            : "If something comes up, just let me know and we'll find another slot, no problem.",
+            ? "Si un imprévu arrive, prévenez-nous simplement : nous trouverons un autre créneau, sans problème."
+            : "If something comes up, just let us know and we'll find another slot, no problem.",
         },
       ],
       cta: visioCta(appt, lang),
@@ -265,12 +265,12 @@ export function rdvCancelled(lead: LeadInfo, appt: Appointment, ctx: MailContext
       preheader: fr ? "C'est annulé. La porte reste ouverte." : "It's cancelled. The door stays open.",
       title: fr ? "Notre rendez-vous est annulé" : "Our meeting is cancelled",
       blocks: [
-        { kind: "p", text: fr ? `Bonjour ${firstName(lead.name)}, comme convenu, j'ai annulé notre rendez-vous du ${w.full}.` : `Hi ${firstName(lead.name)}, as agreed, I've cancelled our meeting on ${w.full}.` },
+        { kind: "p", text: fr ? `Bonjour ${firstName(lead.name)}, comme convenu, nous avons annulé notre rendez-vous du ${w.full}.` : `Hi ${firstName(lead.name)}, as agreed, we've cancelled our meeting on ${w.full}.` },
         {
           kind: "p",
           text: fr
-            ? "Quand vous voudrez en reparler, répondez simplement à ce mail ou écrivez-moi sur WhatsApp."
-            : "Whenever you want to pick it up again, just reply to this email or message me on WhatsApp.",
+            ? "Quand vous voudrez en reparler, répondez simplement à ce mail ou écrivez-nous sur WhatsApp."
+            : "Whenever you want to pick it up again, just reply to this email or message us on WhatsApp.",
         },
         { kind: "note", text: fr ? "l'invitation jointe retire le créneau de votre agenda" : "the attached invite removes it from your calendar" },
       ],
@@ -326,10 +326,10 @@ export function rdvNoShow(lead: LeadInfo, appt: Appointment, ctx: MailContext): 
         {
           kind: "p",
           text: fr
-            ? `Bonjour ${firstName(lead.name)}, je n'ai pas réussi à vous joindre à ${w.time} comme prévu. Aucun souci, ça arrive à tout le monde.`
-            : `Hi ${firstName(lead.name)}, I couldn't reach you at ${w.time} as planned. No worries, it happens to everyone.`,
+            ? `Bonjour ${firstName(lead.name)}, nous n'avons pas réussi à vous joindre à ${w.time} comme prévu. Aucun souci, ça arrive à tout le monde.`
+            : `Hi ${firstName(lead.name)}, we couldn't reach you at ${w.time} as planned. No worries, it happens to everyone.`,
         },
-        { kind: "p", text: fr ? "Si vous voulez toujours en parler, dites-moi quel moment vous arrange :" : "If you'd still like to talk, tell me what time suits you:" },
+        { kind: "p", text: fr ? "Si vous voulez toujours en parler, dites-nous quel moment vous arrange :" : "If you'd still like to talk, tell us what time suits you:" },
       ],
       cta: rebookLink(ctx, fr ? "Choisir un nouveau créneau" : "Pick a new time"),
     },
@@ -350,12 +350,12 @@ export function contactAutoReply(lead: LeadInfo, ctx: MailContext, sub: ContactS
     {
       kind: "p",
       text: fr
-        ? "Merci pour votre message. Je le lis personnellement et je vous réponds sous 24 h (jours ouvrés)."
-        : "Thanks for your message. I read every one myself and will reply within 24 hours (business days).",
+        ? "Merci pour votre message. Nous le lisons avec attention et vous répondons sous 24 h (jours ouvrés)."
+        : "Thanks for your message. We read every one carefully and will reply within 24 hours (business days).",
     },
   ];
   if (sub.message?.trim()) {
-    blocks.push({ kind: "p", text: fr ? "Pour rappel, vous m'avez écrit :" : "For reference, you wrote:" }, { kind: "quote", text: truncate(sub.message, 500) });
+    blocks.push({ kind: "p", text: fr ? "Pour rappel, vous nous avez écrit :" : "For reference, you wrote:" }, { kind: "quote", text: truncate(sub.message, 500) });
   }
   blocks.push(
     { kind: "p", text: fr ? "Si c'est urgent, ou si vous préférez en parler de vive voix :" : "If it's urgent, or you'd rather talk it through:" },
@@ -366,9 +366,9 @@ export function contactAutoReply(lead: LeadInfo, ctx: MailContext, sub: ContactS
       preheader: fr ? "Votre message est bien arrivé. Réponse sous 24 h." : "Your message arrived safely. Reply within 24 hours.",
       title: fr ? `Bien reçu, ${firstName(lead.name)} !` : `Got it, ${firstName(lead.name)}!`,
       blocks,
-      cta: { label: fr ? "M'écrire sur WhatsApp" : "Message me on WhatsApp", href: ctx.whatsappHref },
+      cta: { label: fr ? "Nous écrire sur WhatsApp" : "Message us on WhatsApp", href: ctx.whatsappHref },
     },
-    fr ? `Bien reçu, ${firstName(lead.name)} : je vous réponds sous 24 h` : `Got it, ${firstName(lead.name)}: I'll reply within 24 hours`,
+    fr ? `Bien reçu, ${firstName(lead.name)} : nous vous répondons sous 24 h` : `Got it, ${firstName(lead.name)}: we'll reply within 24 hours`,
     ctx,
   );
 }
