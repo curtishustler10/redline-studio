@@ -36,11 +36,23 @@ const ERRORS: Record<Exclude<SaveResponse, { ok: true }>["error"], string> = {
 
 function AutoTextarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement> & { value: string }) {
   const ref = useRef<HTMLTextAreaElement>(null);
+  // Grows with its text, and re-measures when its width changes (rotation, resize).
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${el.scrollHeight + 2}px`;
+    const fit = () => {
+      el.style.height = "auto";
+      el.style.height = `${el.scrollHeight + 2}px`;
+    };
+    fit();
+    let width = el.clientWidth;
+    const ro = new ResizeObserver(() => {
+      if (el.clientWidth === width) return;
+      width = el.clientWidth;
+      fit();
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, [props.value]);
   return <textarea ref={ref} rows={1} {...props} className={`${field} resize-none overflow-hidden ${props.className ?? ""}`} />;
 }
