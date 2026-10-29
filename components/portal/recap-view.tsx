@@ -82,12 +82,26 @@ export function RecapView({ sections }: { sections: DocSection[] }) {
           <div className="mt-4">
             {s.kind === "list" ? (
               <LinesView lines={s.lines} />
-            ) : (
+            ) : s.kind === "questions" ? (
               <div className="space-y-5">
                 {s.questions.map((q, j) => (
                   <QuestionView key={q.id} q={q} n={j + 1} />
                 ))}
               </div>
+            ) : (
+              // Admin side: the images are only served to the client's session, so titles and notes only.
+              <ul className="space-y-3">
+                {s.previews.map((p) => (
+                  <li key={p.id}>
+                    <p className="font-medium">{p.title}</p>
+                    {p.note ? (
+                      <p className="mt-1 whitespace-pre-line rounded-xl bg-[var(--rl-surface-2)] px-3.5 py-2.5 text-sm">{p.note}</p>
+                    ) : (
+                      <p className="text-sm italic text-[var(--rl-muted)]">Pas de note.</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
         </section>

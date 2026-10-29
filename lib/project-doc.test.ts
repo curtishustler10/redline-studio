@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { diffContent, groupLines, instantMicros, newLineId, sameInstant, type DocContent } from "./project-doc";
+import { PREVIEW_IMAGE, diffContent, groupLines, instantMicros, isPreviewsDocument, newLineId, sameInstant, type DocContent } from "./project-doc";
 import { applyClientEdit, parseStoredContent } from "./project-edit";
 import { AHUKINI } from "./project-seeds";
 
@@ -187,6 +187,111 @@ describe("Ahukini seed", () => {
     const proposals = collab.kind === "list" ? collab.lines.filter((l) => l.badge === "proposition") : [];
     expect(proposals).toHaveLength(1);
     expect(proposals[0].text).toMatch(/^Variante proposée, à paliers de ventes mensuelles/);
+  });
+
+  it("survives a no-op client save unchanged", () => {
+    const r = applyClientEdit(doc, clone(doc));
+    if (!r.ok) throw new Error("expected ok");
+    expect(r.content).toEqual(doc);
+  });
+});
+
+describe("previews document", () => {
+  const previews: DocContent = {
+    version: 1,
+    sections: [
+      {
+        id: "commandes",
+        kind: "previews",
+        title: "Notifications de commande",
+        previews: [
+          { id: "commande-confirmee", title: "Commande confirmée", image: "commande-confirmee.webp", width: 600, height: 2334, note: "" },
+          { id: "expediee", title: "Commande expédiée", image: "expediee.webp", width: 600, height: 2038, note: "Ancienne note" },
+        ],
+      },
+    ],
+  };
+
+  it("is recognised as a previews document, a recap is not", () => {
+    expect(isPreviewsDocument(previews)).toBe(true);
+    expect(isPreviewsDocument(base)).toBe(false);
+  });
+
+  it("accepts note edits and keeps everything else from the stored version", () => {
+    const next = clone(previews) as DocContent;
+    if (next.sections[0].kind !== "previews") throw new Error();
+    next.sections[0].title = "Autre titre";
+    next.sections[0].previews[0].note = "  Mettre le logo plus petit.\nEt le bouton en rouge.  ";
+    next.sections[0].previews[0].title = "Titre forgé";
+    next.sections[0].previews[0].image = "autre-image.webp";
+    next.sections[0].previews[0].height = 10;
+    const r = applyClientEdit(previews, next);
+    if (!r.ok || r.content.sections[0].kind !== "previews") throw new Error("expected ok");
+    const s = r.content.sections[0];
+    expect(s.title).toBe("Notifications de commande");
+    expect(s.previews[0]).toEqual({
+      id: "commande-confirmee",
+      title: "Commande confirmée",
+      image: "commande-confirmee.webp",
+      width: 600,
+      height: 2334,
+      note: "Mettre le logo plus petit.\nEt le bouton en rouge.",
+    });
+    expect(s.previews[1].note).toBe("Ancienne note");
+  });
+
+  it("refuses added, dropped or reordered previews", () => {
+    const fewer = clone(previews) as DocContent;
+    if (fewer.sections[0].kind !== "previews") throw new Error();
+    fewer.sections[0].previews.pop();
+    expect(applyClientEdit(previews, fewer)).toEqual({ ok: false, error: "structure" });
+
+    const swapped = clone(previews) as DocContent;
+    if (swapped.sections[0].kind !== "previews") throw new Error();
+    swapped.sections[0].previews.reverse();
+    expect(applyClientEdit(previews, swapped)).toEqual({ ok: false, error: "structure" });
+  });
+
+  it("refuses an unsafe image name or an oversized note", () => {
+    const traversal = clone(previews) as DocContent;
+    if (traversal.sections[0].kind !== "previews") throw new Error();
+    traversal.sections[0].previews[0].image = "../ahukini/x.webp";
+    expect(applyClientEdit(previews, traversal)).toEqual({ ok: false, error: "invalid" });
+
+    const long = clone(previews) as DocContent;
+    if (long.sections[0].kind !== "previews") throw new Error();
+    long.sections[0].previews[0].note = "x".repeat(4001);
+    expect(applyClientEdit(previews, long)).toEqual({ ok: false, error: "invalid" });
+  });
+
+  it("diffs notes as email title + before → after", () => {
+    const next = clone(previews) as DocContent;
+    if (next.sections[0].kind !== "previews") throw new Error();
+    next.sections[0].previews[0].note = "Logo plus petit";
+    next.sections[0].previews[1].note = "";
+    expect(diffContent(previews, next)).toEqual([
+      { kind: "note", section: "Notifications de commande", label: "Commande confirmée (note)", before: "", after: "Logo plus petit" },
+      { kind: "note", section: "Notifications de commande", label: "Commande expédiée (note)", before: "Ancienne note", after: "" },
+    ]);
+  });
+
+  it("only accepts flat webp file names for images", () => {
+    expect(PREVIEW_IMAGE.test("commande-confirmee.webp")).toBe(true);
+    for (const bad of ["../x.webp", "a/b.webp", "x.jpg", "X.webp", ".webp", "x.webp.png"]) expect(PREVIEW_IMAGE.test(bad)).toBe(false);
+  });
+});
+
+describe("Ahukini previews seed", () => {
+  const doc = AHUKINI.documents.find((d) => d.slug === "apercus-emails")!.content;
+
+  it("has the four groups with 9, 5, 6 and 6 previews, all with empty notes", () => {
+    expect(parseStoredContent(doc)).toEqual(doc);
+    expect(isPreviewsDocument(doc)).toBe(true);
+    expect(doc.sections.map((s) => s.title)).toEqual(["Notifications de commande", "Flow de bienvenue", "Relances et après-achat", "Campagnes de fin d'année"]);
+    expect(doc.sections.map((s) => (s.kind === "previews" ? s.previews.length : 0))).toEqual([9, 5, 6, 6]);
+    const all = doc.sections.flatMap((s) => (s.kind === "previews" ? s.previews : []));
+    expect(all.every((p) => p.note === "" && p.image === `${p.id}.webp` && p.width === 600)).toBe(true);
+    expect(new Set(all.map((p) => p.id)).size).toBe(all.length);
   });
 
   it("survives a no-op client save unchanged", () => {

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { Logo } from "@/components/logo";
-import { RecapEditor } from "@/components/portal/recap-editor";
+import { ProjectDocuments } from "@/components/portal/project-documents";
 import { formatStamp } from "@/lib/project-doc";
 import { listDocuments } from "@/lib/projects";
 import { currentProject } from "../_lib/session";
@@ -28,18 +28,18 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         <p className="text-sm font-medium">
           Mon projet · <span className="text-[var(--rl-muted)]">{project.title}</span>
         </p>
-        <div className="mt-6 space-y-16">
-          {documents.length === 0 && <p className="text-[var(--rl-muted)]">Rien à afficher pour l&apos;instant.</p>}
-          {documents.map((d) => (
-            <RecapEditor
-              key={d.id}
-              projectSlug={project.slug}
-              timeZone={project.time_zone}
-              document={{ slug: d.slug, title: d.title, content: d.content, updatedAt: d.updated_at, updatedBy: d.updated_by }}
-              initialStamp={formatStamp(d.updated_at, project.time_zone)}
-            />
-          ))}
-        </div>
+        <ProjectDocuments
+          projectSlug={project.slug}
+          timeZone={project.time_zone}
+          documents={documents.map((d) => ({
+            slug: d.slug,
+            title: d.title,
+            content: d.content,
+            updatedAt: d.updated_at,
+            updatedBy: d.updated_by,
+            stamp: formatStamp(d.updated_at, project.time_zone),
+          }))}
+        />
       </main>
     </>
   );

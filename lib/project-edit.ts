@@ -2,7 +2,7 @@
 // and the rules a client edit must follow. Server side (and tests) only, so zod
 // stays out of the browser bundle.
 import { z } from "zod";
-import { LIMITS, type DocContent, type DocLine, type DocSection } from "./project-doc";
+import { LIMITS, PREVIEW_IMAGE, type DocContent, type DocLine, type DocSection } from "./project-doc";
 
 const id = z.string().regex(/^[a-z0-9-]{1,40}$/);
 
@@ -21,6 +21,23 @@ const sectionSchema = z.discriminatedUnion("kind", [
     title: z.string().max(LIMITS.title),
     questions: z.array(z.object({ id, text: z.string().max(LIMITS.line), answer: z.string().max(LIMITS.answer) })).max(LIMITS.questions),
   }),
+  z.object({
+    id,
+    kind: z.literal("previews"),
+    title: z.string().max(LIMITS.title),
+    previews: z
+      .array(
+        z.object({
+          id,
+          title: z.string().min(1).max(LIMITS.title),
+          image: z.string().regex(PREVIEW_IMAGE),
+          width: z.number().int().positive().max(4000),
+          height: z.number().int().positive().max(20000),
+          note: z.string().max(LIMITS.answer),
+        }),
+      )
+      .max(LIMITS.previews),
+  }),
 ]);
 
 export const contentSchema = z.object({ version: z.literal(1), sections: z.array(sectionSchema).max(LIMITS.sections) });
@@ -37,7 +54,9 @@ export type EditError = "invalid" | "structure";
  * cleaned document to save. The client may edit titles, line texts, question
  * texts and answers, and add or remove lines. It may not add, drop or reorder
  * sections or questions, and it cannot set a badge: badges are copied from the
- * stored lines by id. Lines emptied by the client are removed.
+ * stored lines by id. Lines emptied by the client are removed. In a previews
+ * section only the notes are the client's: titles and images come from the
+ * stored version.
  */
 export function applyClientEdit(current: DocContent, input: unknown): { ok: true; content: DocContent } | { ok: false; error: EditError } {
   const parsed = contentSchema.safeParse(input);
@@ -81,6 +100,11 @@ export function applyClientEdit(current: DocContent, input: unknown): { ok: true
         title,
         questions: now.questions.map((q, j) => ({ id: q.id, text: clean(q.text) || was.questions[j].text, answer: q.answer.trim() })),
       });
+    } else if (was.kind === "previews" && now.kind === "previews") {
+      if (now.previews.length !== was.previews.length || now.previews.some((p, j) => p.id !== was.previews[j].id)) {
+        return { ok: false, error: "structure" };
+      }
+      sections.push({ ...was, previews: was.previews.map((p, j) => ({ ...p, note: now.previews[j].note.trim() })) });
     }
   }
   return { ok: true, content: { version: 1, sections } };

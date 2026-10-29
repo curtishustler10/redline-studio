@@ -1,12 +1,15 @@
 // Starting content of client project documents, written by scripts/projects.ts.
 // Text is verbatim from the source document; do not reword here, edit it in the
 // client's space (every save is kept) or update the source and reseed.
-import type { DocContent, DocLine } from "./project-doc";
+import type { DocContent, DocLine, DocPreview } from "./project-doc";
 
 const lines = (prefix: string, texts: (string | Omit<DocLine, "id">)[]): DocLine[] =>
   texts.map((t, i) => ({ id: `${prefix}-${i + 1}`, ...(typeof t === "string" ? { text: t } : t) }));
 
 const row = (text: string): Omit<DocLine, "id"> => ({ text, row: true });
+
+/** Image file = `<id>.webp` in the private "portal" bucket, under the project slug. */
+const preview = (id: string, title: string, width: number, height: number): DocPreview => ({ id, title, image: `${id}.webp`, width, height, note: "" });
 
 export type ProjectSeed = {
   slug: string;
@@ -19,7 +22,9 @@ export type ProjectSeed = {
 
 /**
  * Ahukini Swimwear, meeting of 2026-10-28.
- * Source: ahukini-swimwear/docs/rdv/2026-10-28-compte-rendu.md (size table from the .html next to it).
+ * Recap source: ahukini-swimwear/docs/rdv/2026-10-28-compte-rendu.md (size table from the .html next to it).
+ * Email previews: ahukini-swimwear/docs/emails/{shopify-liquid,flows}/verif/*-600.jpg and
+ * flow-bienvenue/export/0[1-5]-*.jpg, as 600 px WebP (upload with scripts/projects.ts images).
  */
 export const AHUKINI: ProjectSeed = {
   slug: "ahukini",
@@ -118,6 +123,69 @@ export const AHUKINI: ProjectSeed = {
               "Répartition des tailles de la nouvelle collection, à confirmer. Ce qu'on a pour l'instant, par coloris : 15 S · 15 M · 10 L · 5 XL · 5 XXL = 50. Demande des ventes en ligne : S 26 · M 30 · L 12 · XL 22 · 2XL 11 %.",
               "Barème de commission : hebdomadaire ou mensuel ; montant HT ou TTC.",
             ].map((text, i) => ({ id: `point-${i + 1}`, text, answer: "" })),
+          },
+        ],
+      },
+    },
+    {
+      slug: "apercus-emails",
+      title: "Aperçus des e-mails",
+      content: {
+        version: 1,
+        sections: [
+          {
+            id: "commandes",
+            kind: "previews",
+            title: "Notifications de commande",
+            previews: [
+              preview("commande-confirmee", "Commande confirmée", 600, 2334),
+              preview("precommande-france", "Précommande (France, €)", 600, 2444),
+              preview("expediee", "Commande expédiée", 600, 2038),
+              preview("livree", "Commande livrée", 600, 1855),
+              preview("paiement-abandonne", "Paiement abandonné", 600, 1727),
+              preview("annulee", "Commande annulée", 600, 1141),
+              preview("paiement-refuse", "Paiement refusé", 600, 1116),
+              preview("remboursement", "Remboursement", 600, 1191),
+              preview("bienvenue-compte", "Bienvenue sur le compte client", 600, 2436),
+            ],
+          },
+          {
+            id: "bienvenue",
+            kind: "previews",
+            title: "Flow de bienvenue",
+            previews: [
+              preview("bienvenue-e1", "E1 · J0 · Ia ora na", 600, 2334),
+              preview("bienvenue-e2", "E2 · J+2 · Le concept", 600, 2383),
+              preview("bienvenue-e3", "E3 · J+4 · Les avis", 600, 2148),
+              preview("bienvenue-e4", "E4 · J+7 · Les 3 styles", 600, 2524),
+              preview("bienvenue-e5", "E5 · J+9 · Dernier jour", 600, 2339),
+            ],
+          },
+          {
+            id: "relances",
+            kind: "previews",
+            title: "Relances et après-achat",
+            previews: [
+              preview("panier-taille", "Panier abandonné 2 · Ta taille", 600, 1689),
+              preview("panier-dernier-rappel", "Panier abandonné 3 · Dernier rappel", 600, 1564),
+              preview("apres-achat-porter", "Après-achat · Comment le porter", 600, 1632),
+              preview("apres-achat-completer", "Après-achat · Compléter l'ensemble", 600, 2542),
+              preview("retour-stock", "Retour en stock", 600, 1373),
+              preview("reconquete", "Reconquête", 600, 1436),
+            ],
+          },
+          {
+            id: "campagnes",
+            kind: "previews",
+            title: "Campagnes de fin d'année",
+            previews: [
+              preview("black-friday", "Black Friday", 600, 2652),
+              preview("cyber-monday", "Cyber Monday", 600, 1303),
+              preview("liquidation", "Liquidation de fin d'année", 600, 1456),
+              preview("precommande-liste", "Précommande 1 · Liste d'attente", 600, 1264),
+              preview("precommande-lancement", "Précommande 2 · Lancement", 600, 1288),
+              preview("precommande-dernier-appel", "Précommande 3 · Dernier appel", 600, 1111),
+            ],
           },
         ],
       },

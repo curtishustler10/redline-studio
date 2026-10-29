@@ -9,16 +9,31 @@ export type DocQuestion = { id: string; text: string; answer: string };
 
 export type DocListSection = { id: string; kind: "list"; title: string; lines: DocLine[] };
 export type DocQuestionSection = { id: string; kind: "questions"; title: string; questions: DocQuestion[] };
-export type DocSection = DocListSection | DocQuestionSection;
+/**
+ * A proposed email shown as an image, with the client's note under it. The
+ * image is a file name in the private "portal" bucket, under the project slug,
+ * served only to a valid project session (app/portal/[slug]/apercus).
+ */
+export type DocPreview = { id: string; title: string; image: string; width: number; height: number; note: string };
+export type DocPreviewSection = { id: string; kind: "previews"; title: string; previews: DocPreview[] };
+export type DocSection = DocListSection | DocQuestionSection | DocPreviewSection;
 
 export type DocContent = { version: 1; sections: DocSection[] };
 
-export const LIMITS = { title: 200, line: 1000, answer: 4000, lines: 60, sections: 20, questions: 30 } as const;
+export const LIMITS = { title: 200, line: 1000, answer: 4000, lines: 60, sections: 20, questions: 30, previews: 40 } as const;
+
+/** File names a preview image may have. Also guards the image route against path tricks. */
+export const PREVIEW_IMAGE = /^[a-z0-9-]{1,60}\.webp$/;
+
+/** A document made of previews (the "Aperçus des e-mails") rather than a recap. */
+export function isPreviewsDocument(content: DocContent): boolean {
+  return content.sections.length > 0 && content.sections.every((s) => s.kind === "previews");
+}
 
 
 // ─── Diff ────────────────────────────────────────────────────────────────────
 
-export type ChangeKind = "title" | "line" | "added" | "removed" | "question" | "answer";
+export type ChangeKind = "title" | "line" | "added" | "removed" | "question" | "answer" | "note";
 export type Change = { kind: ChangeKind; section: string; label: string; before: string; after: string };
 
 /**
@@ -59,6 +74,12 @@ export function diffContent(before: DocContent, after: DocContent): Change[] {
         if (old.text !== q.text) out.push({ kind: "question", section, label: `Point ${i + 1} (question)`, before: old.text, after: q.text });
         if (old.answer !== q.answer) out.push({ kind: "answer", section, label: `Point ${i + 1} (réponse)`, before: old.answer, after: q.answer });
       });
+    } else if (was.kind === "previews" && s.kind === "previews") {
+      const oldP = new Map(was.previews.map((p) => [p.id, p]));
+      for (const p of s.previews) {
+        const old = oldP.get(p.id);
+        if (old && old.note !== p.note) out.push({ kind: "note", section, label: `${old.title} (note)`, before: old.note, after: p.note });
+      }
     }
   }
   return out;

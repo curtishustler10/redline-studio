@@ -1,18 +1,23 @@
 // Client projects ("Mon projet") from the command line. Reads SUPABASE_URL and
 // SUPABASE_SERVICE_ROLE_KEY from the environment, or from .env.local.
 //
-//   npx jiti scripts/projects.ts seed <slug>    create the project from lib/project-seeds.ts, print its code
+//   npx jiti scripts/projects.ts seed <slug>    create the project from lib/project-seeds.ts and print its code;
+//                                               on an existing project, only add the seed documents it lacks
 //   npx jiti scripts/projects.ts code <slug> [password]
 //                                               new access code (old one stops working, sessions close), print it;
 //                                               with a password, that exact password becomes the code
 //   npx jiti scripts/projects.ts reset <slug>   put the seed content back, as a new revision (history kept)
+//   npx jiti scripts/projects.ts images <slug> <dir>
+//                                               upload every <id>.webp of <dir> to the private "portal" bucket,
+//                                               as <slug>/<id>.webp (replaces files of the same name)
 //
 // A code is printed once and never stored: copy it, then give it to the client.
 import fs from "node:fs";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 import { generateCode, hashCode, MIN_PASSWORD_LENGTH, normalizePassword } from "../lib/portal-auth";
-import { SEEDS } from "../lib/project-seeds";
+import { PREVIEW_IMAGE } from "../lib/project-doc";
+import { SEEDS, type ProjectSeed } from "../lib/project-seeds";
 
 function loadEnv(): void {
   const file = path.join(__dirname, "..", ".env.local");
@@ -39,8 +44,12 @@ async function seed(slug: string): Promise<void> {
   const s = SEEDS[slug];
   if (!s) throw new Error(`No seed for "${slug}". Known: ${Object.keys(SEEDS).join(", ")}`);
   const client = db();
-  const existing = check("lookup", await client.from("client_projects").select("id").eq("slug", slug).maybeSingle());
-  if (existing) throw new Error(`Project "${slug}" already exists. Use "code" for a new code or "reset" for the seed content.`);
+  const existing = check("lookup", await client.from("client_projects").select("id").eq("slug", slug).maybeSingle()) as { id: number } | null;
+  if (existing) {
+    // The code is left alone: use "code" for a new one, "reset" for the seed content.
+    await addDocuments(client, existing.id, s, true);
+    return;
+  }
 
   const code = generateCode(s.codePrefix);
   const project = check(
@@ -52,14 +61,37 @@ async function seed(slug: string): Promise<void> {
       .single(),
   ) as { id: number };
 
+  await addDocuments(client, project.id, s, false);
+  printCode(slug, code);
+}
+
+/** Inserts the seed documents the project does not have yet, each with its first revision. */
+async function addDocuments(client: ReturnType<typeof db>, projectId: number, s: ProjectSeed, report: boolean): Promise<void> {
+  const have = new Set(
+    ((check("list documents", await client.from("project_documents").select("slug").eq("project_id", projectId)) ?? []) as { slug: string }[]).map((d) => d.slug),
+  );
   for (const d of s.documents) {
+    if (have.has(d.slug)) {
+      if (report) console.log(`${d.slug}: already there, left unchanged`);
+      continue;
+    }
     const doc = check(
       "insert document",
-      await client.from("project_documents").insert({ project_id: project.id, slug: d.slug, title: d.title, content: d.content, updated_by: "seed" }).select("id").single(),
+      await client.from("project_documents").insert({ project_id: projectId, slug: d.slug, title: d.title, content: d.content, updated_by: "seed" }).select("id").single(),
     ) as { id: number };
     check("insert revision", await client.from("project_document_revisions").insert({ document_id: doc.id, content: d.content, updated_by: "seed" }));
+    if (report) console.log(`${d.slug}: added`);
   }
-  printCode(slug, code);
+}
+
+async function images(slug: string, dir: string): Promise<void> {
+  const files = fs.readdirSync(dir).filter((f) => PREVIEW_IMAGE.test(f));
+  if (files.length === 0) throw new Error(`No <id>.webp file in ${dir}.`);
+  const bucket = db().storage.from("portal");
+  for (const f of files) {
+    check(`upload ${f}`, await bucket.upload(`${slug}/${f}`, fs.readFileSync(path.join(dir, f)), { contentType: "image/webp", upsert: true }));
+  }
+  console.log(`${files.length} image(s) uploaded to portal/${slug}/`);
 }
 
 async function newCode(slug: string, chosen?: string): Promise<void> {
@@ -97,14 +129,15 @@ async function reset(slug: string): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  const [cmd, slug, chosen] = process.argv.slice(2);
-  if (!slug || !["seed", "code", "reset"].includes(cmd)) {
-    console.error("Usage: npx jiti scripts/projects.ts <seed|code|reset> <slug>");
+  const [cmd, slug, extra] = process.argv.slice(2);
+  if (!slug || !["seed", "code", "reset", "images"].includes(cmd) || (cmd === "images" && !extra)) {
+    console.error("Usage: npx jiti scripts/projects.ts <seed|code|reset> <slug> | code <slug> [password] | images <slug> <dir>");
     process.exit(1);
   }
   loadEnv();
   if (cmd === "seed") await seed(slug);
-  else if (cmd === "code") await newCode(slug, chosen);
+  else if (cmd === "code") await newCode(slug, extra);
+  else if (cmd === "images") await images(slug, extra);
   else await reset(slug);
 }
 
