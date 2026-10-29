@@ -95,3 +95,19 @@ body::before {
     @apply bg-background text-foreground;
   }
 }
+
+/* Case studies: featured browser + phone composition (components/funnel/cases.tsx).
+   Drawn at 1240×700 and scaled by <Stage>; both screens scroll their tall capture on a slow loop. */
+.rl-browser{position:absolute;left:0;top:0;width:1000px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 50px 100px -40px rgba(30,26,23,.45),0 0 0 1px rgba(0,0,0,.06)}
+.rl-chrome{height:38px;background:#ECE8E1;display:flex;align-items:center;gap:7px;padding:0 14px}
+.rl-chrome i{width:10px;height:10px;border-radius:50%;background:#CFC9BF}
+.rl-chrome span{margin:0 auto;font-size:12px;color:#6F655C;background:#fff;padding:3px 40px;border-radius:6px}
+.rl-browser-view{position:relative;height:625px;overflow:hidden}
+.rl-browser-view img{position:absolute;left:0;top:0;width:100%;height:auto;animation:rl-scroll-desk 34s cubic-bezier(.45,0,.55,1) infinite alternate}
+.rl-phone{position:absolute;right:0;top:70px;width:290px;border-radius:40px;padding:11px;background:#1E1A17;box-shadow:0 60px 120px -30px rgba(30,26,23,.6)}
+.rl-phone-screen{border-radius:30px;overflow:hidden;height:590px;position:relative;background:#fff}
+.rl-notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:90px;height:24px;border-radius:14px;background:#1E1A17;z-index:3}
+.rl-phone-screen img{width:100%;height:auto;display:block;animation:rl-scroll-phone 12s cubic-bezier(.45,0,.55,1) infinite alternate}
+@keyframes rl-scroll-desk{0%,10%{transform:translateY(0)}100%{transform:translateY(calc(-100% + 625px))}}
+@keyframes rl-scroll-phone{0%,12%{transform:translateY(0)}70%,100%{transform:translateY(calc(-100% + 590px))}}
+@media (prefers-reduced-motion: reduce){.rl-browser-view img,.rl-phone-screen img{animation:none}}
