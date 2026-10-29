@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
@@ -56,7 +57,7 @@ export function FunnelCases() {
         <p className="mt-4 text-[var(--rl-muted)] max-w-2xl md:text-lg">{t.cases.sub}</p>
 
         {/* Featured: Ahukini, the store built around one gesture. */}
-        <a href={f.url} target="_blank" rel="noopener noreferrer"
+        <Link href={`/realisations/${f.slug}`}
           className="group mt-14 block rounded-3xl bg-[var(--rl-surface)] border border-[var(--rl-line)] p-6 md:p-10 transition-colors hover:border-[var(--rl-red)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--rl-red)]">
           <div className="grid gap-6 md:grid-cols-2 md:items-end md:gap-12">
             <div>
@@ -94,12 +95,15 @@ export function FunnelCases() {
               </div>
             ))}
           </div>
-          <div className="mt-8"><Visit label={t.cases.visit} /></div>
-        </a>
+          <div className="mt-8"><Visit label={t.cases.read} /></div>
+        </Link>
 
         <div className="mt-6 grid md:grid-cols-2 gap-6">
-          {t.cases.items.map((c, i) => (
-            <motion.a key={c.name} href={c.url} target="_blank" rel="noopener noreferrer"
+          {t.cases.items.map((c, i) => {
+            // A card with a case page opens it; the others open the live site.
+            const page = "slug" in c ? `/realisations/${c.slug}` : null;
+            return (
+            <motion.a key={c.name} href={page ?? c.url} {...(page ? {} : { target: "_blank", rel: "noopener noreferrer" })}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: (i % 2) * 0.1 }}
               className="group rounded-2xl overflow-hidden bg-[var(--rl-surface)] border border-[var(--rl-line)] flex flex-col transition-colors hover:border-[var(--rl-red)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--rl-red)]">
@@ -121,10 +125,11 @@ export function FunnelCases() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto pt-6"><Visit label={t.cases.visit} /></div>
+                <div className="mt-auto pt-6"><Visit label={page ? t.cases.read : t.cases.visit} /></div>
               </div>
             </motion.a>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
