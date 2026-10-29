@@ -6,6 +6,7 @@ import {
   generateCode,
   hashCode,
   normalizeCode,
+  normalizePassword,
   readPortalSession,
   signPortalSession,
   verifyCode,
@@ -44,6 +45,19 @@ describe("access codes", () => {
     expect(normalizeCode("AHK-7QF4-M9X0")).toBeNull(); // 0 is not in the alphabet
     expect(normalizeCode("A1K-7QF4-M9XC")).toBeNull();
     expect(normalizeCode("AHKAHKAHK-7QF4-M9XC")).toBeNull();
+  });
+
+  it("keeps a chosen password exactly as typed", () => {
+    expect(normalizePassword("  Ahukini88@ ")).toBe("Ahukini88@");
+    expect(normalizePassword("short")).toBeNull();
+    expect(normalizePassword("x".repeat(65))).toBeNull();
+  });
+
+  it("verifies a chosen password case-sensitively", async () => {
+    const stored = await hashCode("Ahukini88@");
+    expect(await verifyCode("Ahukini88@", stored)).toBe(true);
+    expect(await verifyCode("ahukini88@", stored)).toBe(false);
+    expect(await verifyCode("Ahukini88", stored)).toBe(false);
   });
 
   it("hashes with a salt and verifies only the right code", async () => {

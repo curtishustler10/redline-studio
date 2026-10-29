@@ -2,14 +2,16 @@
 // SUPABASE_SERVICE_ROLE_KEY from the environment, or from .env.local.
 //
 //   npx jiti scripts/projects.ts seed <slug>    create the project from lib/project-seeds.ts, print its code
-//   npx jiti scripts/projects.ts code <slug>    new access code (old one stops working, sessions close), print it
+//   npx jiti scripts/projects.ts code <slug> [password]
+//                                               new access code (old one stops working, sessions close), print it;
+//                                               with a password, that exact password becomes the code
 //   npx jiti scripts/projects.ts reset <slug>   put the seed content back, as a new revision (history kept)
 //
 // A code is printed once and never stored: copy it, then give it to the client.
 import fs from "node:fs";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
-import { generateCode, hashCode } from "../lib/portal-auth";
+import { generateCode, hashCode, MIN_PASSWORD_LENGTH, normalizePassword } from "../lib/portal-auth";
 import { SEEDS } from "../lib/project-seeds";
 
 function loadEnv(): void {
@@ -60,11 +62,16 @@ async function seed(slug: string): Promise<void> {
   printCode(slug, code);
 }
 
-async function newCode(slug: string): Promise<void> {
+async function newCode(slug: string, chosen?: string): Promise<void> {
   const client = db();
   const project = check("lookup", await client.from("client_projects").select("id, code_prefix").eq("slug", slug).maybeSingle()) as { id: number; code_prefix: string } | null;
   if (!project) throw new Error(`No project "${slug}".`);
-  const code = generateCode(project.code_prefix);
+  let code = generateCode(project.code_prefix);
+  if (chosen !== undefined) {
+    const pw = normalizePassword(chosen);
+    if (!pw) throw new Error(`A chosen password needs ${MIN_PASSWORD_LENGTH} to 64 characters.`);
+    code = pw;
+  }
   check("update", await client.from("client_projects").update({ access_code_hash: await hashCode(code), code_set_at: new Date().toISOString() }).eq("id", project.id));
   printCode(slug, code);
 }
@@ -90,14 +97,14 @@ async function reset(slug: string): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  const [cmd, slug] = process.argv.slice(2);
+  const [cmd, slug, chosen] = process.argv.slice(2);
   if (!slug || !["seed", "code", "reset"].includes(cmd)) {
     console.error("Usage: npx jiti scripts/projects.ts <seed|code|reset> <slug>");
     process.exit(1);
   }
   loadEnv();
   if (cmd === "seed") await seed(slug);
-  else if (cmd === "code") await newCode(slug);
+  else if (cmd === "code") await newCode(slug, chosen);
   else await reset(slug);
 }
 

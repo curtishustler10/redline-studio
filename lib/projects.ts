@@ -8,7 +8,7 @@
 import "server-only";
 import { getDb } from "./db";
 import { LOCKOUT_WINDOW_MS } from "./admin-auth";
-import { codeStamp, normalizeCode, verifyCode, verifyNothing, type PortalSession } from "./portal-auth";
+import { codeStamp, normalizeCode, normalizePassword, verifyCode, verifyNothing, type PortalSession } from "./portal-auth";
 import { diffContent, sameInstant, type Change, type DocContent, type UpdatedBy } from "./project-doc";
 import { applyClientEdit, parseStoredContent, type EditError } from "./project-edit";
 import { notifyProjectEdit, type Delivery } from "./notifications";
@@ -105,15 +105,23 @@ export async function listProjectEmails(projectId: number, limit = 30): Promise<
 
 // ─── Access ──────────────────────────────────────────────────────────────────
 
-/** The project a typed code opens, or null. Same cost whether the prefix exists or not. */
+/**
+ * The project a typed code opens, or null. A generated code (AHK-XXXX-XXXX, forgiving on case
+ * and dashes) is looked up by its prefix; anything else is tried as a chosen password, exact,
+ * against every project (a handful of rows, behind the per-IP lockout).
+ */
 export async function findProjectByCode(input: string): Promise<ProjectRow | null> {
   const parsed = normalizeCode(input);
-  if (!parsed) return null;
-  const { data, error } = await getDb().from("client_projects").select().eq("code_prefix", parsed.prefix);
+  if (parsed) {
+    const { data, error } = await getDb().from("client_projects").select().eq("code_prefix", parsed.prefix);
+    if (error) fail("findProjectByCode", error);
+    for (const p of (data ?? []) as ProjectRow[]) if (await verifyCode(parsed.code, p.access_code_hash)) return p;
+  }
+  const password = normalizePassword(input);
+  if (!password) return parsed ? null : verifyNothing("").then(() => null);
+  const { data, error } = await getDb().from("client_projects").select();
   if (error) fail("findProjectByCode", error);
-  const candidates = (data ?? []) as ProjectRow[];
-  if (candidates.length === 0) return verifyNothing(parsed.code).then(() => null);
-  for (const p of candidates) if (await verifyCode(parsed.code, p.access_code_hash)) return p;
+  for (const p of (data ?? []) as ProjectRow[]) if (await verifyCode(password, p.access_code_hash)) return p;
   return null;
 }
 

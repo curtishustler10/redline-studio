@@ -40,6 +40,16 @@ export function normalizeCode(input: string): { code: string; prefix: string } |
   return { code: `${prefix}-${body.slice(0, 4)}-${body.slice(4)}`, prefix };
 }
 
+/**
+ * A password Curtis picks for a client (e.g. "Ahukini88@") instead of a generated code.
+ * Kept exactly as typed, case and symbols included; only surrounding spaces are dropped.
+ */
+export const MIN_PASSWORD_LENGTH = 8;
+export function normalizePassword(input: string): string | null {
+  const pw = String(input ?? "").trim();
+  return pw.length >= MIN_PASSWORD_LENGTH && pw.length <= 64 ? pw : null;
+}
+
 const SCRYPT = { N: 16384, r: 8, p: 1, keylen: 32 } as const;
 
 /** Salted scrypt, self-describing so the parameters can change later: scrypt$N$r$p$salt$hash. */

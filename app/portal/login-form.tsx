@@ -47,15 +47,14 @@ export function PortalLogin({ err }: { err: LoginError | null }) {
                 type="text"
                 required
                 autoFocus
-                autoComplete="one-time-code"
-                autoCapitalize="characters"
+                autoComplete="current-password"
+                autoCapitalize="none"
                 autoCorrect="off"
                 spellCheck={false}
-                maxLength={24}
-                placeholder="AHK-XXXX-XXXX"
+                maxLength={64}
                 aria-invalid={err === "code" || undefined}
                 aria-describedby={err ? "code-msg" : undefined}
-                className="w-full rounded-lg bg-white border border-[var(--rl-line)] px-3.5 py-2.5 text-base tracking-[0.12em] uppercase font-medium outline-none focus:border-[var(--rl-red)] transition-colors placeholder:normal-case placeholder:tracking-[0.12em] placeholder:text-[#6F655C]/60"
+                className="w-full rounded-lg bg-white border border-[var(--rl-line)] px-3.5 py-2.5 text-base font-medium outline-none focus:border-[var(--rl-red)] transition-colors"
               />
             </div>
             {err && (
