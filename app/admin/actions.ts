@@ -27,6 +27,7 @@ import {
   type LeadStatus,
 } from "@/lib/crm";
 import { notifyNoShow, notifyRdvCancelled, notifyRdvRescheduled, notifyRdvSet, sendFollowUp, type Delivery } from "@/lib/notifications";
+import { getProjectBySlug, getRevision, listDocuments, saveDocumentVersion } from "@/lib/projects";
 import { isValidZone, zonedTimeToUtc } from "@/lib/rdv-time";
 import type { RdvMode } from "@/lib/email/templates";
 
@@ -259,4 +260,36 @@ export async function followUpAction(formData: FormData): Promise<void> {
     back(leadId, { err: crmErr(e) });
   }
   back(leadId, { ok: "followup", mail: summary });
+}
+
+// ─── Client projects ("Mon projet") ──────────────────────────────────────────
+
+/**
+ * Puts an old revision back as the current version. It is itself a new revision
+ * (by "admin"), so a restore can be undone too. No email: Curtis did it.
+ */
+export async function restoreRevisionAction(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const slug = str(formData, "projectSlug");
+  const revisionId = Number(formData.get("revisionId"));
+  const expected = str(formData, "updatedAt");
+  const target = `/admin/projets/${encodeURIComponent(slug)}`;
+  if (!Number.isInteger(revisionId) || revisionId <= 0 || !expected) redirect(`${target}?err=invalid`);
+  let outcome = "restored";
+  try {
+    const [project, revision] = await Promise.all([getProjectBySlug(slug), getRevision(revisionId)]);
+    const docs = project ? await listDocuments(project.id) : [];
+    const doc = docs.find((d) => d.id === revision?.document_id);
+    if (!project || !revision || !doc) outcome = "not_found";
+    else {
+      const r = await saveDocumentVersion(doc.id, expected, revision.content, "admin");
+      if (r.status !== "ok") outcome = r.status === "conflict" ? "doc_conflict" : "not_found";
+    }
+  } catch (e) {
+    console.error("[admin] restoreRevision", e);
+    outcome = "server";
+  }
+  revalidatePath(target);
+  revalidatePath(`/portal/${slug}`);
+  redirect(outcome === "restored" ? `${target}?ok=restored` : `${target}?err=${outcome}`);
 }

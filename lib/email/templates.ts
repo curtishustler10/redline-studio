@@ -433,3 +433,55 @@ export function internalContact(lead: LeadInfo, ctx: MailContext, sub: ContactSu
     ctx,
   );
 }
+
+// ─── Internal: client project edited ("Mon projet") ─────────────────────────
+
+export type ProjectEdit = {
+  clientName: string;
+  documentTitle: string;
+  savedAt: Date;
+  changes: { section: string; label: string; before: string; after: string }[];
+  /** Admin view with the full history (revisions can be restored from there). */
+  adminHref: string;
+  /** The client's own page (needs her code). */
+  clientHref: string;
+};
+
+/** Beyond this many changes the mail lists the first ones and sends Curtis to the history. */
+export const PROJECT_EDIT_MAX_CHANGES = 40;
+
+export function internalProjectEdit(edit: ProjectEdit, ctx: BrandContext & { ownerTimeZone: string }): RenderedMail {
+  const when = formatWhen(edit.savedAt, ctx.ownerTimeZone, "fr");
+  const n = edit.changes.length;
+  const count = n === 1 ? "1 modification" : `${n} modifications`;
+  const sections = [...new Set(edit.changes.map((c) => c.section))];
+  const shown = edit.changes.slice(0, PROJECT_EDIT_MAX_CHANGES);
+  const blocks: Block[] = [
+    {
+      kind: "details",
+      rows: [
+        { label: "Client", value: edit.clientName },
+        { label: "Document", value: edit.documentTitle },
+        { label: "Enregistré", value: when.full },
+        { label: "Parties touchées", value: sections.join(", ") },
+      ],
+    },
+    ...shown.map((c): Block => ({ kind: "change", label: `${c.section} · ${c.label}`, before: c.before, after: c.after })),
+  ];
+  if (n > shown.length) blocks.push({ kind: "note", text: `et ${n - shown.length} autres : voir l'historique` });
+  return {
+    subject: `[Projet] ${edit.clientName} · ${count} · ${edit.documentTitle}`,
+    ...renderEmail(
+      {
+        lang: "fr",
+        internal: true,
+        preheader: truncate(`${count} : ${sections.join(", ")}`, 90),
+        title: `${edit.clientName} a modifié « ${edit.documentTitle} »`,
+        blocks,
+        cta: { label: "Voir l'historique", href: edit.adminHref },
+        secondary: { label: "Ouvrir son espace projet", href: edit.clientHref },
+      },
+      ctx,
+    ),
+  };
+}

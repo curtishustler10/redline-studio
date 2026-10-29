@@ -34,6 +34,7 @@ export const MAIL_LABEL: Record<EmailKind, string> = {
   contact_auto_reply: "Réponse auto formulaire",
   internal_rdv: "Notif interne RDV",
   internal_contact: "Notif interne contact",
+  internal_project_edit: "Notif interne projet",
 };
 
 export const OK_MESSAGES: Record<string, string> = {
@@ -46,6 +47,7 @@ export const OK_MESSAGES: Record<string, string> = {
   rdv_done: "RDV marqué comme fait. Tu peux envoyer le suivi.",
   rdv_no_show: "Absence enregistrée.",
   followup: "Suivi envoyé. Statut passé en « Proposition ».",
+  restored: "Version restaurée. Elle apparaît comme une nouvelle version dans l'historique.",
 };
 
 export const ERR_MESSAGES: Record<string, string> = {
@@ -60,6 +62,7 @@ export const ERR_MESSAGES: Record<string, string> = {
   already_scheduled: "Ce lead a déjà un RDV à venir : décale-le ou annule-le d'abord.",
   not_scheduled: "Ce RDV n'est plus à venir.",
   conflict: "Le RDV vient d'être modifié ailleurs : recharge la page.",
+  doc_conflict: "Le document vient d'être enregistré ailleurs : recharge la page avant de restaurer.",
   slot_taken: "Ce créneau chevauche un autre RDV : choisis une autre heure.",
   not_found: "Introuvable.",
   server: "Erreur serveur : regarde les logs Vercel.",

@@ -5,6 +5,8 @@ import {
   contactAutoReply,
   formatWhen,
   internalContact,
+  internalProjectEdit,
+  PROJECT_EDIT_MAX_CHANGES,
   internalRdv,
   rdvCancelled,
   rdvConfirmation,
@@ -197,5 +199,39 @@ describe("buildIcs", () => {
     });
     expect(ics).toContain("SUMMARY:A\\, B\\; C");
     expect(ics).toContain(`ATTENDEE;CN="Jean 'JJ'"`);
+  });
+});
+
+describe("internalProjectEdit", () => {
+  const edit = {
+    clientName: "Ahukini Swimwear",
+    documentTitle: "Compte rendu",
+    savedAt: new Date("2026-10-29T20:00:00Z"),
+    changes: [
+      { section: "Production et coûts", label: "Ligne 1", before: "45 jours.", after: "50 jours <b>!</b>" },
+      { section: "Points à confirmer", label: "Point 2 (réponse)", before: "", after: "Le 20 novembre." },
+    ],
+    adminHref: "https://redlinestudio.agency/admin/projets/ahukini",
+    clientHref: "https://redlinestudio.agency/portal/ahukini",
+  };
+  const brand = { siteUrl: "https://redlinestudio.agency", whatsappHref: "https://wa.me/1", ownerTimeZone: "Pacific/Tahiti" };
+
+  it("lists every change as before → after, escaped, with both links", () => {
+    const m = internalProjectEdit(edit, brand);
+    expect(m.subject).toBe("[Projet] Ahukini Swimwear · 2 modifications · Compte rendu");
+    expect(m.html).toContain("50 jours &lt;b&gt;!&lt;/b&gt;");
+    expect(m.html).not.toContain("<b>!</b>");
+    expect(m.html).toContain(edit.adminHref);
+    expect(m.html).toContain(edit.clientHref);
+    expect(m.text).toContain("Production et coûts · Ligne 1\n  Avant : 45 jours.\n  Après : 50 jours <b>!</b>");
+    expect(m.text).toContain("Avant : (vide)\n  Après : Le 20 novembre.");
+    expect(m.text).toContain("Parties touchées : Production et coûts, Points à confirmer");
+  });
+
+  it("caps a very long list and points to the history", () => {
+    const many = { ...edit, changes: Array.from({ length: PROJECT_EDIT_MAX_CHANGES + 3 }, (_, i) => ({ section: "Site", label: `Ligne ${i + 1}`, before: "a", after: "b" })) };
+    const m = internalProjectEdit(many, brand);
+    expect(m.text).toContain("et 3 autres : voir l'historique");
+    expect(m.text).not.toContain(`Ligne ${PROJECT_EDIT_MAX_CHANGES + 1}\n`);
   });
 });

@@ -17,12 +17,14 @@ import {
   toLeadInfo,
   type AppointmentRow,
   type EmailKind,
+  type EmailSubject,
   type LeadRow,
 } from "./crm";
 import { internalInbox, mailReplyTo, sendEmail } from "./email/send";
 import {
   contactAutoReply,
   internalContact,
+  internalProjectEdit,
   internalRdv,
   rdvCancelled,
   rdvConfirmation,
@@ -33,6 +35,7 @@ import {
   type ContactSubmission,
   type FollowUp,
   type MailContext,
+  type ProjectEdit,
   type RdvEvent,
   type RenderedMail,
 } from "./email/templates";
@@ -67,19 +70,19 @@ function mailContext(lead: LeadRow): MailContext {
 
 /** Claim → send → record. The one path every mail takes. */
 async function deliver(
-  args: { lead: LeadRow; appointmentId?: number; kind: EmailKind; dedupeKey: string; to: string | null; audience: "lead" | "internal" },
+  args: { about: EmailSubject; appointmentId?: number; kind: EmailKind; dedupeKey: string; to: string | null; audience: "lead" | "internal" },
   mail: RenderedMail,
 ): Promise<Delivery> {
-  const { lead, kind } = args;
+  const { about, kind } = args;
   if (!args.to) {
     // Recorded as a failure so the gap shows up on the lead file instead of vanishing.
-    const id = await claimEmail({ leadId: lead.id, appointmentId: args.appointmentId, kind, dedupeKey: args.dedupeKey, recipient: "(aucun)", subject: mail.subject });
+    const id = await claimEmail({ ...about, appointmentId: args.appointmentId, kind, dedupeKey: args.dedupeKey, recipient: "(aucun)", subject: mail.subject });
     const error = args.audience === "internal" ? "MAIL_INTERNAL_TO absente : notification interne non envoyée." : "Le lead n'a pas d'email.";
     if (id !== null) await markEmailFailed(id, error);
     return { kind, status: id === null ? "skipped" : "failed", error };
   }
 
-  const id = await claimEmail({ leadId: lead.id, appointmentId: args.appointmentId, kind, dedupeKey: args.dedupeKey, recipient: args.to, subject: mail.subject });
+  const id = await claimEmail({ ...about, appointmentId: args.appointmentId, kind, dedupeKey: args.dedupeKey, recipient: args.to, subject: mail.subject });
   if (id === null) return { kind, status: "skipped" };
 
   const result = await sendEmail({ to: args.to, subject: mail.subject, html: mail.html, text: mail.text, ics: mail.ics, audience: args.audience });
@@ -105,8 +108,8 @@ async function toLeadAndInternal(
   const ctx = mailContext(lead);
   const internal = internalRdv(toLeadInfo(lead), toAppointment(apt), ctx, event, adminHref(lead.id));
   return Promise.all([
-    deliver({ lead, appointmentId: apt.id, kind: leadMail.kind, dedupeKey: aptKey(leadMail.kind, apt), to: lead.email, audience: "lead" }, leadMail.mail),
-    deliver({ lead, appointmentId: apt.id, kind: "internal_rdv", dedupeKey: aptKey("internal_rdv", apt, `:${event}`), to: internalInbox(), audience: "internal" }, internal),
+    deliver({ about: { leadId: lead.id }, appointmentId: apt.id, kind: leadMail.kind, dedupeKey: aptKey(leadMail.kind, apt), to: lead.email, audience: "lead" }, leadMail.mail),
+    deliver({ about: { leadId: lead.id }, appointmentId: apt.id, kind: "internal_rdv", dedupeKey: aptKey("internal_rdv", apt, `:${event}`), to: internalInbox(), audience: "internal" }, internal),
   ]);
 }
 
@@ -129,13 +132,13 @@ export async function notifyRdvCancelled(lead: LeadRow, apt: AppointmentRow): Pr
 
 export async function notifyNoShow(lead: LeadRow, apt: AppointmentRow): Promise<Delivery> {
   const mail = rdvNoShow(toLeadInfo(lead), toAppointment(apt), mailContext(lead));
-  return deliver({ lead, appointmentId: apt.id, kind: "rdv_no_show", dedupeKey: aptKey("rdv_no_show", apt), to: lead.email, audience: "lead" }, mail);
+  return deliver({ about: { leadId: lead.id }, appointmentId: apt.id, kind: "rdv_no_show", dedupeKey: aptKey("rdv_no_show", apt), to: lead.email, audience: "lead" }, mail);
 }
 
 /** One follow-up per appointment: the recap belongs to that meeting. */
 export async function sendFollowUp(lead: LeadRow, apt: AppointmentRow, followUp: FollowUp): Promise<Delivery> {
   const mail = rdvFollowUp(toLeadInfo(lead), mailContext(lead), followUp);
-  return deliver({ lead, appointmentId: apt.id, kind: "rdv_follow_up", dedupeKey: `rdv_follow_up:apt:${apt.id}`, to: lead.email, audience: "lead" }, mail);
+  return deliver({ about: { leadId: lead.id }, appointmentId: apt.id, kind: "rdv_follow_up", dedupeKey: `rdv_follow_up:apt:${apt.id}`, to: lead.email, audience: "lead" }, mail);
 }
 
 /** Cron entry point: sends every day-before reminder that is due. Safe to run any number of times. */
@@ -146,7 +149,7 @@ export async function sendDueReminders(now: Date = new Date()): Promise<Delivery
     const lead = await getLead(apt.lead_id);
     if (!lead) continue;
     const mail = rdvReminder(toLeadInfo(lead), toAppointment(apt), mailContext(lead));
-    out.push(await deliver({ lead, appointmentId: apt.id, kind: "rdv_reminder", dedupeKey: aptKey("rdv_reminder", apt), to: lead.email, audience: "lead" }, mail));
+    out.push(await deliver({ about: { leadId: lead.id }, appointmentId: apt.id, kind: "rdv_reminder", dedupeKey: aptKey("rdv_reminder", apt), to: lead.email, audience: "lead" }, mail));
   }
   return out;
 }
@@ -160,10 +163,43 @@ export async function notifyContact(lead: LeadRow, submission: ContactSubmission
   // typed: the auto-reply only quotes genuine messages; the internal notice gets everything.
   const forLead = lead.source === "diagnostic" ? { ...submission, message: undefined } : submission;
   return Promise.all([
-    deliver({ lead, kind: "contact_auto_reply", dedupeKey: `contact_auto_reply:lead:${lead.id}`, to: lead.email, audience: "lead" }, contactAutoReply(info, ctx, forLead)),
+    deliver({ about: { leadId: lead.id }, kind: "contact_auto_reply", dedupeKey: `contact_auto_reply:lead:${lead.id}`, to: lead.email, audience: "lead" }, contactAutoReply(info, ctx, forLead)),
     deliver(
-      { lead, kind: "internal_contact", dedupeKey: `internal_contact:lead:${lead.id}`, to: internalInbox(), audience: "internal" },
+      { about: { leadId: lead.id }, kind: "internal_contact", dedupeKey: `internal_contact:lead:${lead.id}`, to: internalInbox(), audience: "internal" },
       internalContact(info, ctx, submission, adminHref(lead.id)),
     ),
   ]);
+}
+
+// ─── Client projects ("Mon projet") ─────────────────────────────────────────
+
+export function projectAdminHref(slug: string): string {
+  return `${siteUrl()}/admin/projets/${slug}`;
+}
+
+export function projectClientHref(slug: string): string {
+  return `${siteUrl()}/portal/${slug}`;
+}
+
+/** One internal mail per saved revision: a retried call for the same revision is a no-op. */
+export async function notifyProjectEdit(args: {
+  projectId: number;
+  projectSlug: string;
+  revisionId: number;
+  edit: Omit<ProjectEdit, "adminHref" | "clientHref">;
+}): Promise<Delivery> {
+  const mail = internalProjectEdit(
+    { ...args.edit, adminHref: projectAdminHref(args.projectSlug), clientHref: projectClientHref(args.projectSlug) },
+    { siteUrl: siteUrl(), whatsappHref: WHATSAPP_HREF, ownerTimeZone: OWNER_TIME_ZONE },
+  );
+  return deliver(
+    {
+      about: { projectId: args.projectId },
+      kind: "internal_project_edit",
+      dedupeKey: `internal_project_edit:rev:${args.revisionId}`,
+      to: internalInbox(),
+      audience: "internal",
+    },
+    mail,
+  );
 }

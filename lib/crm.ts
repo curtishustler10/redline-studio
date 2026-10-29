@@ -22,7 +22,8 @@ export type EmailKind =
   | "rdv_follow_up"
   | "contact_auto_reply"
   | "internal_rdv"
-  | "internal_contact";
+  | "internal_contact"
+  | "internal_project_edit";
 
 export type LeadRow = {
   id: number;
@@ -62,7 +63,9 @@ export type AppointmentRow = {
 
 export type EmailLogRow = {
   id: number;
-  lead_id: number;
+  /** Exactly one of lead_id / project_id is set (migration 0006). */
+  lead_id: number | null;
+  project_id: number | null;
   appointment_id: number | null;
   kind: EmailKind;
   dedupe_key: string;
@@ -331,8 +334,10 @@ export async function appointmentsDueForReminder(now: Date = new Date()): Promis
 
 // ─── Email log (idempotency) ─────────────────────────────────────────────────
 
-export type EmailClaim = {
-  leadId: number;
+/** What a mail is about: a CRM lead, or a client project ("Mon projet"). */
+export type EmailSubject = { leadId: number; projectId?: never } | { projectId: number; leadId?: never };
+
+export type EmailClaim = EmailSubject & {
   appointmentId?: number;
   kind: EmailKind;
   dedupeKey: string;
@@ -348,7 +353,8 @@ export type EmailClaim = {
  */
 export async function claimEmail(claim: EmailClaim): Promise<number | null> {
   const row = {
-    lead_id: claim.leadId,
+    lead_id: claim.leadId ?? null,
+    project_id: claim.projectId ?? null,
     appointment_id: claim.appointmentId ?? null,
     kind: claim.kind,
     dedupe_key: claim.dedupeKey,

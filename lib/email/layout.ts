@@ -14,7 +14,9 @@ export type Block =
   /** Short red annotation — the brand's handwritten note, max ~8 words. */
   | { kind: "note"; text: string }
   /** Echo of what the lead wrote, so they see we actually read it. */
-  | { kind: "quote"; text: string };
+  | { kind: "quote"; text: string }
+  /** One edit, shown as before → after. An empty side reads as "(vide)". */
+  | { kind: "change"; label: string; before: string; after: string };
 
 export type EmailContent = {
   lang: Lang;
@@ -77,6 +79,15 @@ function renderBlockHtml(b: Block): string {
 <td style="width:3px;background:${C.thread};border-radius:2px"></td>
 <td style="padding:4px 0 4px 14px;font-family:${SANS};font-size:15px;line-height:1.6;color:${C.muted}">${nl2br(b.text)}</td>
 </tr></table>`;
+    case "change": {
+      const side = (label: string, value: string, color: string, strike: boolean) =>
+        `<tr><td valign="top" style="padding:2px 10px 2px 0;width:48px;font-family:${SANS};font-size:12px;color:${C.muted}">${label}</td>
+<td style="padding:2px 0;font-family:${SANS};font-size:15px;line-height:1.5;color:${color}${strike && value ? ";text-decoration:line-through" : ""}">${value ? nl2br(value) : "<i>(vide)</i>"}</td></tr>`;
+      return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 14px;border-left:3px solid ${C.thread};background:${C.paper}"><tr><td style="padding:10px 14px">
+<p style="margin:0 0 6px;font-family:${SANS};font-size:13px;font-weight:600;color:${C.ink}">${esc(b.label)}</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0">${side("Avant", b.before, C.muted, true)}${side("Après", b.after, C.ink, false)}</table>
+</td></tr></table>`;
+    }
     case "details": {
       const rows = b.rows
         .map((r, i) => {
@@ -107,6 +118,8 @@ function renderBlockText(b: Block): string {
         .split(/\r?\n/)
         .map((l) => `> ${l}`)
         .join("\n");
+    case "change":
+      return `${b.label}\n  Avant : ${b.before || "(vide)"}\n  Après : ${b.after || "(vide)"}`;
     case "details":
       return b.rows.map((r) => `${r.label} : ${r.value}${r.href && r.href !== r.value ? ` (${r.href})` : ""}`).join("\n");
   }

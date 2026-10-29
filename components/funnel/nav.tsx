@@ -5,7 +5,7 @@ import { Logo } from "@/components/logo";
 import { useLang } from "@/components/lang-provider";
 import { WHATSAPP_HREF } from "@/lib/constants";
 
-// Login portal is not built yet — stub target, wired up later.
+// Client space: access-code entry, then the project page (app/portal).
 const PORTAL_HREF = "/portal";
 
 export function FunnelNav() {

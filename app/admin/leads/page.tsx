@@ -23,7 +23,8 @@ export default async function LeadsPage({ searchParams }: { searchParams: { stat
         <div>
           <p className="text-sm text-[#6F655C]">
             redline studio · admin ·{" "}
-            <Link href="/admin/veille" className="underline decoration-[#E03C2D] underline-offset-4 hover:text-[#1E1A17]">Veille e-commerce</Link>
+            <Link href="/admin/veille" className="underline decoration-[#E03C2D] underline-offset-4 hover:text-[#1E1A17]">Veille e-commerce</Link>{" "}·{" "}
+            <Link href="/admin/projets" className="underline decoration-[#E03C2D] underline-offset-4 hover:text-[#1E1A17]">Projets clients</Link>
           </p>
           <h1 className="text-3xl font-semibold">Leads</h1>
         </div>
