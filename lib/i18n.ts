@@ -2,7 +2,7 @@ export type Lang = "fr" | "en";
 
 const fr = {
   nav: {
-    items: ["Bienvenue", "Diagnostic", "Les 5 axes", "Simulateur", "Cas clients", "Ce que vous recevez", "La méthode", "Offres"],
+    items: ["Bienvenue", "Diagnostic", "Les 5 axes", "Simulateur", "Réalisations", "Ce que vous recevez", "La méthode", "Offres"],
     cta: "Réserver un appel",
     portal: "Mon projet",
   },
@@ -169,12 +169,14 @@ const fr = {
     note: "Estimation indicative basée sur vos réglages. Les résultats réels dépendent de votre marché et de votre budget marketing.",
   },
   cases: {
-    title: "Cas clients",
-    sub: "Des entreprises réelles, des axes manquants comblés, des résultats.",
+    title: "Nos réalisations",
+    sub: "Des marques réelles, en ligne aujourd'hui. Cliquez pour voir le travail en vrai.",
+    visit: "Voir le site",
     items: [
-      { sector: "Institut de beauté · Paris", quote: "Réservation en ligne, suivi fidélité, paiement sur place.", problem: "Tout passait par téléphone et Instagram : créneaux perdus, no-shows, aucune base client.", missing: "Capture & réservation + suivi", fix: "Plateforme de réservation multi-prestations, comptes clients, rappels automatiques.", metric: "+40%", metricLabel: "de réservations en ligne" },
-      { sector: "Resort · Bali", quote: "Site de réservation bilingue, calendrier en temps réel.", problem: "Aucun moyen de réserver en ligne, demandes éparpillées sur WhatsApp.", missing: "Site qui convertit + réservation", fix: "Site bilingue EN/RU, calendrier, formulaire qualifié, automatisations.", metric: "8+", metricLabel: "demandes qualifiées dès le lancement" },
-      { sector: "Marque cheveux · DTC", quote: "Diagnostic ROAS et tunnel d'achat optimisé.", problem: "Budget publicitaire brûlé, panier abandonné, ROAS sous l'objectif.", missing: "Acquisition + suivi", fix: "Tableau de bord ROAS, relances panier, merchandising salon.", metric: "3,48x", metricLabel: "ROAS au pic" },
+      { name: "Movaé Flow", sector: "Institut de beauté · Calvados", image: "/projets/movae-flow.webp", url: "https://movaeflow.com/", summary: "Une appli de réservation sur-mesure : les clientes choisissent et cumulent leurs soins, réservent en quelques gestes et retrouvent leur compte.", tags: ["Réservation en ligne", "Comptes clients", "Cartes cadeaux", "Diagnostic de peau"] },
+      { name: "Ahukini Swimwear", sector: "Maillots de bain transformables · e-commerce", image: "/projets/ahukini.webp", url: "https://ahukini-swimwear.com/", summary: "Une boutique Shopify sur-mesure qui explique le produit en un coup d'œil, du maillot à la robe, et guide le choix de l'ensemble jusqu'au panier.", tags: ["Thème Shopify sur-mesure", "Parcours d'achat", "Guide des tailles", "Avis clients"] },
+      { name: "Mystic Essence", sector: "Soins, parfums & bijoux bien-être · e-commerce", image: "/projets/mystic-essence.webp", url: "https://mysticessence.com.au/", summary: "Audit de conversion de la boutique, page par page, puis optimisation du thème Shopify pour transformer davantage de visiteurs en acheteurs.", tags: ["Audit de conversion", "Shopify", "Pages produit"] },
+      { name: "Baroude et Recettes", sector: "Savonnerie artisanale · Île-de-France", image: "/projets/baroude-et-recettes.webp", url: "https://baroudeetrecettes.fr/", summary: "La boutique en ligne et la vitrine d'une savonnerie à froid : produits, ateliers de fabrication et histoire de la marque, réunis au même endroit.", tags: ["Boutique en ligne", "Ateliers", "Contenu de marque"] },
     ],
   },
   deliverables: {
@@ -254,7 +256,7 @@ const fr = {
 
 const en = {
   nav: {
-    items: ["Welcome", "Diagnostic", "The 5 pillars", "Simulator", "Case studies", "What you get", "The method", "Offers"],
+    items: ["Welcome", "Diagnostic", "The 5 pillars", "Simulator", "Our work", "What you get", "The method", "Offers"],
     cta: "Book a call",
     portal: "My project",
   },
@@ -421,12 +423,14 @@ const en = {
     note: "Indicative estimate based on your settings. Real results depend on your market and marketing budget.",
   },
   cases: {
-    title: "Case studies",
-    sub: "Real businesses, missing pillars filled, results.",
+    title: "Our work",
+    sub: "Real brands, live today. Click through to see the work for real.",
+    visit: "Visit the site",
     items: [
-      { sector: "Beauty salon · Paris", quote: "Online booking, loyalty tracking, pay on site.", problem: "Everything ran through phone and Instagram: lost slots, no-shows, no customer base.", missing: "Capture & booking + follow-up", fix: "Multi-service booking platform, customer accounts, automated reminders.", metric: "+40%", metricLabel: "online bookings" },
-      { sector: "Resort · Bali", quote: "Bilingual booking site, real-time calendar.", problem: "No way to book online, requests scattered across WhatsApp.", missing: "Converting site + booking", fix: "EN/RU bilingual site, calendar, qualified form, automations.", metric: "8+", metricLabel: "qualified requests at launch" },
-      { sector: "Hair brand · DTC", quote: "ROAS diagnostic and optimised purchase funnel.", problem: "Ad budget burned, carts abandoned, ROAS below target.", missing: "Acquisition + follow-up", fix: "ROAS dashboard, cart win-backs, salon merchandising.", metric: "3.48x", metricLabel: "peak ROAS" },
+      { name: "Movaé Flow", sector: "Beauty salon · Normandy, France", image: "/projets/movae-flow.webp", url: "https://movaeflow.com/", summary: "A custom booking app: clients pick and combine treatments, book in a few taps and find everything in their account.", tags: ["Online booking", "Client accounts", "Gift cards", "Skin diagnostic"] },
+      { name: "Ahukini Swimwear", sector: "Convertible swimwear · e-commerce", image: "/projets/ahukini.webp", url: "https://ahukini-swimwear.com/", summary: "A custom Shopify store that explains the product at a glance, from swimsuit to dress, and guides the choice of set all the way to the cart.", tags: ["Custom Shopify theme", "Purchase flow", "Size guide", "Customer reviews"] },
+      { name: "Mystic Essence", sector: "Wellness skincare, perfume & jewellery · e-commerce", image: "/projets/mystic-essence.webp", url: "https://mysticessence.com.au/", summary: "A page-by-page conversion audit of the store, then Shopify theme optimisation to turn more visitors into buyers.", tags: ["Conversion audit", "Shopify", "Product pages"] },
+      { name: "Baroude et Recettes", sector: "Artisan soap maker · Paris region", image: "/projets/baroude-et-recettes.webp", url: "https://baroudeetrecettes.fr/", summary: "The online shop and showcase of a cold-process soap maker: products, soap-making workshops and the brand story, all in one place.", tags: ["Online shop", "Workshops", "Brand content"] },
     ],
   },
   deliverables: {
