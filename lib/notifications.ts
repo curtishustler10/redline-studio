@@ -177,19 +177,22 @@ export function projectAdminHref(slug: string): string {
   return `${siteUrl()}/admin/projets/${slug}`;
 }
 
-export function projectClientHref(slug: string): string {
-  return `${siteUrl()}/portal/${slug}`;
+/** `anchor` opens a given tab of the client's page, e.g. "apercus". */
+export function projectClientHref(slug: string, anchor?: string): string {
+  return `${siteUrl()}/portal/${slug}${anchor ? `#${anchor}` : ""}`;
 }
 
 /** One internal mail per saved revision: a retried call for the same revision is a no-op. */
 export async function notifyProjectEdit(args: {
   projectId: number;
   projectSlug: string;
+  /** Tab of the client's page the link should open. */
+  clientAnchor?: string;
   revisionId: number;
   edit: Omit<ProjectEdit, "adminHref" | "clientHref">;
 }): Promise<Delivery> {
   const mail = internalProjectEdit(
-    { ...args.edit, adminHref: projectAdminHref(args.projectSlug), clientHref: projectClientHref(args.projectSlug) },
+    { ...args.edit, adminHref: projectAdminHref(args.projectSlug), clientHref: projectClientHref(args.projectSlug, args.clientAnchor) },
     { siteUrl: siteUrl(), whatsappHref: WHATSAPP_HREF, ownerTimeZone: OWNER_TIME_ZONE },
   );
   return deliver(

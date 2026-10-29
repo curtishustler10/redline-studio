@@ -9,7 +9,7 @@ import "server-only";
 import { getDb } from "./db";
 import { LOCKOUT_WINDOW_MS } from "./admin-auth";
 import { codeStamp, normalizeCode, normalizePassword, verifyCode, verifyNothing, type PortalSession } from "./portal-auth";
-import { diffContent, sameInstant, type Change, type DocContent, type UpdatedBy } from "./project-doc";
+import { diffContent, isPreviewsDocument, sameInstant, type Change, type DocContent, type UpdatedBy } from "./project-doc";
 import { applyClientEdit, parseStoredContent, type EditError } from "./project-edit";
 import { notifyProjectEdit, type Delivery } from "./notifications";
 import type { EmailLogRow } from "./crm";
@@ -222,6 +222,7 @@ export async function saveClientDocument(args: {
     const delivery = await notifyProjectEdit({
       projectId: args.project.id,
       projectSlug: args.project.slug,
+      clientAnchor: isPreviewsDocument(edit.content) ? "apercus" : undefined,
       revisionId: saved.revision_id,
       edit: { clientName: args.project.client_name, documentTitle: doc.title, savedAt: (args.now ?? (() => new Date()))(), changes },
     });

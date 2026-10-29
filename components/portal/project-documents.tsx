@@ -59,7 +59,7 @@ export function ProjectDocuments({ projectSlug, timeZone, documents }: { project
                 aria-selected={on}
                 aria-controls={`panel-${d.slug}`}
                 onClick={() => select(d.slug)}
-                className={`flex-1 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${on ? "bg-[#1E1A17] text-[#FBF6EE]" : "text-[var(--rl-muted)] hover:text-[var(--rl-ink)]"}`}
+                className={`flex-1 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium ${on ? "bg-[#1E1A17] text-[#FBF6EE]" : "text-[var(--rl-muted)] hover:text-[var(--rl-ink)]"}`}
               >
                 {tabLabel(d)}
                 {dirty[d.slug] && (
