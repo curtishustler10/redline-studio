@@ -71,7 +71,16 @@ export async function listProjects(): Promise<ProjectRow[]> {
 export async function listDocuments(projectId: number): Promise<DocumentRow[]> {
   const { data, error } = await getDb().from("project_documents").select().eq("project_id", projectId).order("created_at");
   if (error) fail("listDocuments", error);
-  return (data ?? []).map(toDocument);
+  // A document this version cannot read (e.g. a newer kind written before this
+  // deploy) is skipped and logged, so it never takes the whole page down.
+  return (data ?? []).flatMap((row) => {
+    try {
+      return [toDocument(row)];
+    } catch (e) {
+      console.error(`listDocuments: skipping unreadable document ${String((row as { slug?: unknown }).slug)}`, e);
+      return [];
+    }
+  });
 }
 
 export async function getDocument(projectId: number, slug: string): Promise<DocumentRow | null> {
