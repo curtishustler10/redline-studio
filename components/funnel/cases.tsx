@@ -70,14 +70,14 @@ export function FunnelCases() {
                 <div className="rl-chrome"><i /><i /><i /><span>{f.domain}</span></div>
                 <div className="rl-browser-view">
                   {/* eslint-disable-next-line @next/next/no-img-element -- tall capture scrolled with a CSS transform */}
-                  <img src="/projets/ahukini-accueil-bureau.webp" alt="" loading="lazy" />
+                  <img src="/projets/ahukini-accueil-bureau.webp" alt="" decoding="async" />
                 </div>
               </div>
               <div className="rl-phone">
                 <div className="rl-phone-screen">
                   <div className="rl-notch" />
                   {/* eslint-disable-next-line @next/next/no-img-element -- tall capture scrolled with a CSS transform */}
-                  <img src="/projets/ahukini-ensemble-mobile.webp" alt="" loading="lazy" />
+                  <img src="/projets/ahukini-ensemble-mobile.webp" alt="" decoding="async" />
                 </div>
               </div>
             </Stage>
