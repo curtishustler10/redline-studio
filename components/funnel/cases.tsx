@@ -13,10 +13,12 @@ const STAGE_H = 700;
 /**
  * Draws the browser + phone composition at its design size and scales it down to the
  * available width, so the two screens keep their exact layout on a phone. Never scales up.
+ * The box reserves its height in CSS (aspect ratio) and the composition stays hidden until
+ * it is measured: before hydration, on a slow connection, it would overflow at full size.
  */
 function Stage({ children }: { children: React.ReactNode }) {
   const box = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState<number | null>(null);
   useEffect(() => {
     const el = box.current;
     if (!el) return;
@@ -25,8 +27,9 @@ function Stage({ children }: { children: React.ReactNode }) {
     return () => ro.disconnect();
   }, []);
   return (
-    <div ref={box} className="relative w-full" style={{ height: STAGE_H * scale }}>
-      <div className="absolute left-0 top-0 origin-top-left" style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})` }}>
+    <div ref={box} className="relative w-full" style={{ aspectRatio: `${STAGE_W} / ${STAGE_H}`, maxHeight: STAGE_H }}>
+      <div className="absolute left-0 top-0 origin-top-left"
+        style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale ?? 0})`, visibility: scale === null ? "hidden" : undefined }}>
         {children}
       </div>
     </div>
