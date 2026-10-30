@@ -5,12 +5,10 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { caseStudies, getCaseStudy, type Shot } from "@/lib/cases";
-import { WHATSAPP_HREF } from "@/lib/constants";
+import { BOOKING_HREF } from "@/lib/constants";
 
 // Same layout idea as the Fenua case pages: a header card, then a sticky table of
 // contents on the left and the article on the right. French only (lib/cases.ts).
-
-const AUDIT_HREF = `mailto:hello@redlinestudio.agency?subject=${encodeURIComponent("Audit offert")}`;
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -76,7 +74,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           <Link href="/" aria-label="Redline Studio, accueil"><Logo className="text-sm" /></Link>
           <div className="flex items-center gap-3">
             <Link href="/#cas" className="hidden sm:inline text-[12px] text-[var(--rl-muted)] hover:text-[var(--rl-ink)]">Toutes les réalisations</Link>
-            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[var(--rl-bg)] font-medium hover:bg-[var(--rl-red)] transition-colors">
+            <a href={BOOKING_HREF} className="text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[var(--rl-bg)] font-medium hover:bg-[var(--rl-red)] transition-colors">
               Réserver un appel
             </a>
           </div>
@@ -183,15 +181,14 @@ export default function CasePage({ params }: { params: { slug: string } }) {
             <aside id="votre-projet" className="mt-16 scroll-mt-24 rounded-3xl bg-[var(--rl-ink)] p-7 text-[var(--rl-bg)] md:p-10">
               <h2 className="font-syne text-2xl font-bold">Le même problème chez vous ?</h2>
               <p className="mt-3 max-w-xl leading-relaxed opacity-80">
-                Nous partons toujours de l&apos;endroit précis où vous perdez des clients. L&apos;audit est offert : vous le recevez sous 48 h, que vous travailliez avec nous ou non.
+                Nous partons toujours de l&apos;endroit précis où vous perdez des clients. En 30 minutes, nous regardons votre boutique ensemble, et l&apos;audit complet est offert, sous 48 h, que vous travailliez avec nous ou non.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href={AUDIT_HREF} className="rounded-full bg-[var(--rl-red)] px-6 py-3 font-medium text-white transition-colors hover:bg-[var(--rl-red-hover)]">
-                  Demander l&apos;audit offert
+                <a href={BOOKING_HREF} className="rounded-full bg-[var(--rl-red)] px-6 py-3 font-medium text-white transition-colors hover:bg-[var(--rl-red-hover)]">
+                  Réserver un appel de 30 min
                 </a>
-                <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer"
-                  className="rounded-full border border-white/25 px-6 py-3 transition-colors hover:border-white">
-                  Réserver un appel
+                <a href="/#offres" className="rounded-full border border-white/25 px-6 py-3 transition-colors hover:border-white">
+                  Voir nos offres
                 </a>
               </div>
             </aside>

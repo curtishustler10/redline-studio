@@ -10,7 +10,7 @@ const fr = {
     kicker: "Agence digitale · e-commerce & marques",
     titleA: "Des visiteurs, des paniers,",
     titleB: "et pas assez de\u00A0ventes\u00A0?",
-    sub: "Pages produit, emails automatiques, site, publicité : nous trouvons l'endroit précis où vos clientes décrochent, et nous le réparons. Audit offert sous 48 h.",
+    sub: "Pages produit, emails automatiques, site, publicité : nous trouvons l'endroit précis où vos clientes décrochent, et nous le réparons. Audit offert sous 48\u00A0h.",
     cta: "Commencer le diagnostic",
     chips: ["2 minutes", "Gratuit", "Résultat immédiat"],
     note: "tirez le fil",
@@ -196,20 +196,6 @@ const fr = {
       { name: "Baroude et Recettes", sector: "Savonnerie artisanale · Île-de-France", image: "/projets/baroude-et-recettes.webp", url: "https://baroudeetrecettes.fr/", result: "Boutique, ateliers et histoire de marque réunis", summary: "Une savonnerie à froid qui vend en ligne et anime des ateliers de fabrication. Nous avons réuni la boutique et la vitrine de la marque au même endroit.", changes: ["Boutique en ligne", "Ateliers de fabrication mis en avant", "Contenu de marque : valeurs, fabrication, conseils"] },
     ],
   },
-  deliverables: {
-    title: "Ce que vous recevez",
-    sub: "Du concret, livré clé en main.",
-    items: [
-      { icon: "🖥️", label: "Site sur-mesure" },
-      { icon: "📅", label: "Moteur de réservation" },
-      { icon: "📍", label: "Configuration SEO local" },
-      { icon: "📊", label: "Tableau de bord analytics" },
-      { icon: "✉️", label: "Suivi email / WhatsApp" },
-      { icon: "🛡️", label: "Plan de maintenance" },
-      { icon: "🎨", label: "Identité & visuels" },
-      { icon: "🚀", label: "Mise en ligne & formation" },
-    ],
-  },
   method: {
     title: "La méthode",
     sub: "Huit étapes, de l'audit à la croissance.",
@@ -261,7 +247,7 @@ const fr = {
   audit: {
     title: "Commencez par l'audit offert",
     body: "Nous faisons le parcours d'une cliente sur votre boutique : inscription, panier abandonné, page produit. Vous recevez ce qu'elle a reçu (ou pas), ce qui la fait décrocher, et la maquette de votre page produit corrigée.",
-    chips: ["Sous 48 h", "Gratuit", "Sans engagement"],
+    chips: ["Sous 48\u00A0h", "Gratuit", "Sans engagement"],
   },
   closing: {
     title: "Vos visiteurs ajoutent au panier. Combien paient ?",
@@ -301,7 +287,7 @@ const en = {
     kicker: "Digital agency · e-commerce & brands",
     titleA: "Visitors, carts,",
     titleB: "and not enough sales?",
-    sub: "Product pages, automated emails, website, ads: we find the exact point where your customers drop off, and we fix it. Free audit within 48 h.",
+    sub: "Product pages, automated emails, website, ads: we find the exact point where your customers drop off, and we fix it. Free audit within 48\u00A0h.",
     cta: "Start the diagnostic",
     chips: ["2 minutes", "Free", "Instant result"],
     note: "pull the thread",
@@ -487,20 +473,6 @@ const en = {
       { name: "Baroude et Recettes", sector: "Artisan soap maker · Paris region", image: "/projets/baroude-et-recettes.webp", url: "https://baroudeetrecettes.fr/", result: "Shop, workshops and brand story in one place", summary: "A cold-process soap maker that sells online and runs soap-making workshops. We brought the shop and the brand's showcase together.", changes: ["Online shop", "Soap-making workshops up front", "Brand content: values, craft, advice"] },
     ],
   },
-  deliverables: {
-    title: "What you get",
-    sub: "Concrete work, delivered turnkey.",
-    items: [
-      { icon: "🖥️", label: "Custom website" },
-      { icon: "📅", label: "Booking engine" },
-      { icon: "📍", label: "Local SEO setup" },
-      { icon: "📊", label: "Analytics dashboard" },
-      { icon: "✉️", label: "Email / WhatsApp follow-up" },
-      { icon: "🛡️", label: "Maintenance plan" },
-      { icon: "🎨", label: "Branding & visuals" },
-      { icon: "🚀", label: "Launch & training" },
-    ],
-  },
   method: {
     title: "The method",
     sub: "Eight steps, from audit to growth.",
@@ -552,7 +524,7 @@ const en = {
   audit: {
     title: "Start with the free audit",
     body: "We go through your store like a customer: sign-up, abandoned cart, product page. You get what she received (or didn't), what makes her drop off, and a mockup of your product page, fixed.",
-    chips: ["Within 48 h", "Free", "No commitment"],
+    chips: ["Within 48\u00A0h", "Free", "No commitment"],
   },
   closing: {
     title: "Your visitors add to cart. How many pay?",

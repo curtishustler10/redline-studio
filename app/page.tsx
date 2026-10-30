@@ -4,7 +4,6 @@ import { FunnelDiagnostic } from "@/components/funnel/diagnostic";
 import { FunnelBriques } from "@/components/funnel/briques";
 import { FunnelSimulator } from "@/components/funnel/simulator";
 import { FunnelCases } from "@/components/funnel/cases";
-import { FunnelDeliverables } from "@/components/funnel/deliverables";
 import { FunnelMethod } from "@/components/funnel/method";
 import { FunnelOffers } from "@/components/funnel/offers";
 import { FunnelFooter } from "@/components/funnel/footer";
@@ -18,14 +17,15 @@ export default function Home() {
       {/* isolate: the scroll thread sits at z -10, above the page background, under the content. */}
       <main className="relative isolate">
         <ScrollThread />
+        {/* Proof and offers right after the promise: visitors from a prospection email
+            decide on these two; the diagnostic and simulator follow for the curious. */}
         <FunnelHero />
+        <FunnelCases />
+        <FunnelOffers />
         <FunnelDiagnostic />
         <FunnelBriques />
         <FunnelSimulator />
-        <FunnelCases />
-        <FunnelDeliverables />
         <FunnelMethod />
-        <FunnelOffers />
       </main>
       <FunnelFooter />
       <StickyDiagnostic />
