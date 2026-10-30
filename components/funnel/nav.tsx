@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
 import { useLang } from "@/components/lang-provider";
-import { WHATSAPP_HREF } from "@/lib/constants";
+import { BOOKING_HREF } from "@/lib/constants";
 
 // Client space: access-code entry, then the project page (app/portal).
 const PORTAL_HREF = "/portal";
@@ -51,7 +51,7 @@ export function FunnelNav() {
                 </button>
               ))}
             </div>
-            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[var(--rl-bg)] font-medium hover:bg-[var(--rl-red)] transition-colors">
+            <a href={BOOKING_HREF} className="hidden sm:inline-flex text-[12px] px-3.5 py-1.5 rounded-full bg-[var(--rl-ink)] text-[var(--rl-bg)] font-medium hover:bg-[var(--rl-red)] transition-colors">
               {t.nav.cta}
             </a>
           </div>
