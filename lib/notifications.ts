@@ -21,9 +21,11 @@ import {
   type LeadRow,
 } from "./crm";
 import { internalInbox, mailReplyTo, sendEmail } from "./email/send";
+import { ACTION_LABEL, type CommentAction } from "./document-comments";
 import {
   contactAutoReply,
   internalContact,
+  internalDocumentComment,
   internalProjectEdit,
   internalRdv,
   rdvCancelled,
@@ -33,6 +35,7 @@ import {
   rdvReminder,
   rdvRescheduled,
   type ContactSubmission,
+  type DocumentCommentNotice,
   type FollowUp,
   type MailContext,
   type ProjectEdit,
@@ -200,6 +203,40 @@ export async function notifyProjectEdit(args: {
       about: { projectId: args.projectId },
       kind: "internal_project_edit",
       dedupeKey: `internal_project_edit:rev:${args.revisionId}`,
+      to: internalInbox(),
+      audience: "internal",
+    },
+    mail,
+  );
+}
+
+/**
+ * One internal mail per comment event (add, edit, resolve, reopen, delete): a
+ * retried call for the same event is a no-op. Same kind as a document save, so it
+ * shows in the project's notifications and in email_log like every project mail.
+ */
+export async function notifyDocumentComment(args: {
+  projectId: number;
+  projectSlug: string;
+  documentSlug: string;
+  eventId: number;
+  comment: Omit<DocumentCommentNotice, "adminHref" | "clientHref" | "actionLabel" | "at"> & { action: CommentAction; page: number; at: Date };
+}): Promise<Delivery> {
+  const { action, page, ...rest } = args.comment;
+  const mail = internalDocumentComment(
+    {
+      ...rest,
+      actionLabel: ACTION_LABEL[action],
+      adminHref: `${projectAdminHref(args.projectSlug)}#${args.documentSlug}-p${page}`,
+      clientHref: `${siteUrl()}/portal/${args.projectSlug}?p=${page}`,
+    },
+    { siteUrl: siteUrl(), whatsappHref: WHATSAPP_HREF, ownerTimeZone: OWNER_TIME_ZONE },
+  );
+  return deliver(
+    {
+      about: { projectId: args.projectId },
+      kind: "internal_project_edit",
+      dedupeKey: `internal_project_edit:comment-event:${args.eventId}`,
       to: internalInbox(),
       audience: "internal",
     },

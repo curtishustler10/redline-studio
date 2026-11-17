@@ -198,6 +198,8 @@ export function RecapEditor({ projectSlug, timeZone, document: doc, initialStamp
 
       <div className="mt-8 space-y-5">
         {draft.sections.map((s, i) => {
+          // A page-image document has its own reader (pages-reader.tsx), never this editor.
+          if (s.kind === "pages") return null;
           const open = editing.has(s.id);
           return (
             <section key={s.id} aria-labelledby={`h-${s.id}`} className="rounded-2xl border border-[var(--rl-line)] bg-[var(--rl-surface)] p-5 sm:p-7">

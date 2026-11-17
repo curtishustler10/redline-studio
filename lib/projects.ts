@@ -13,6 +13,7 @@ import { diffContent, isPreviewsDocument, sameInstant, type Change, type DocCont
 import { applyClientEdit, parseStoredContent, type EditError } from "./project-edit";
 import { notifyProjectEdit, type Delivery } from "./notifications";
 import type { EmailLogRow } from "./crm";
+import type { Brand } from "./portal-brand";
 
 export type ProjectRow = {
   id: number;
@@ -23,6 +24,8 @@ export type ProjectRow = {
   access_code_hash: string;
   code_set_at: string;
   time_zone: string;
+  brand: Brand;
+  contact_name: string | null;
   created_at: string;
 };
 

@@ -38,6 +38,25 @@ const sectionSchema = z.discriminatedUnion("kind", [
       )
       .max(LIMITS.previews),
   }),
+  z.object({
+    id,
+    kind: z.literal("pages"),
+    title: z.string().min(1).max(LIMITS.title),
+    summary: z.string().max(LIMITS.line),
+    width: z.number().int().positive().max(4000),
+    height: z.number().int().positive().max(6000),
+    pages: z
+      .array(
+        z.object({
+          n: z.number().int().min(1).max(LIMITS.pages),
+          title: z.string().max(LIMITS.title),
+          image: z.string().regex(PREVIEW_IMAGE),
+          thumb: z.string().regex(PREVIEW_IMAGE),
+        }),
+      )
+      .min(1)
+      .max(LIMITS.pages),
+  }),
 ]);
 
 export const contentSchema = z.object({ version: z.literal(1), sections: z.array(sectionSchema).max(LIMITS.sections) });
@@ -56,7 +75,8 @@ export type EditError = "invalid" | "structure";
  * sections or questions, and it cannot set a badge: badges are copied from the
  * stored lines by id. Lines emptied by the client are removed. In a previews
  * section only the notes are the client's: titles and images come from the
- * stored version.
+ * stored version. A pages section is never the client's: her comments go to
+ * their own table, the section is kept exactly as stored.
  */
 export function applyClientEdit(current: DocContent, input: unknown): { ok: true; content: DocContent } | { ok: false; error: EditError } {
   const parsed = contentSchema.safeParse(input);
@@ -105,6 +125,8 @@ export function applyClientEdit(current: DocContent, input: unknown): { ok: true
         return { ok: false, error: "structure" };
       }
       sections.push({ ...was, previews: was.previews.map((p, j) => ({ ...p, note: now.previews[j].note.trim() })) });
+    } else if (was.kind === "pages") {
+      sections.push(was);
     }
   }
   return { ok: true, content: { version: 1, sections } };

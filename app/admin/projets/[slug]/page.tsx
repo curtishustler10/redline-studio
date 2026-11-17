@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PagesAdmin } from "@/components/portal/pages-admin";
 import { RecapView } from "@/components/portal/recap-view";
-import { diffContent, formatStamp } from "@/lib/project-doc";
+import { listComments } from "@/lib/project-comments";
+import { diffContent, formatStamp, pagesSection } from "@/lib/project-doc";
 import { getProjectBySlug, listDocuments, listProjectEmails, listRevisions } from "@/lib/projects";
 import { requireAdmin, restoreRevisionAction } from "../../actions";
 import { ERR_MESSAGES, OK_MESSAGES, OWNER_ZONE } from "../../_lib/ui";
@@ -17,6 +19,8 @@ export default async function ProjectAdminPage({ params, searchParams }: { param
   if (!project) notFound();
   const [documents, emails] = await Promise.all([listDocuments(project.id), listProjectEmails(project.id)]);
   const histories = await Promise.all(documents.map((d) => listRevisions(d.id)));
+  // Page-image documents: their comments (deleted ones included), grouped by page below.
+  const comments = await Promise.all(documents.map((d) => (pagesSection(d.content) ? listComments(d.id, { includeDeleted: true }) : Promise.resolve([]))));
   const ok = searchParams.ok ? OK_MESSAGES[searchParams.ok] : null;
   const err = searchParams.err ? ERR_MESSAGES[searchParams.err] : null;
   const when = (iso: string) => formatStamp(iso, OWNER_ZONE);
@@ -29,6 +33,8 @@ export default async function ProjectAdminPage({ params, searchParams }: { param
       <h1 className="mt-2 text-3xl font-semibold">{project.client_name}</h1>
       <p className="mt-1 text-sm text-[#6F655C]">
         Espace : /portal/{project.slug} · code {project.code_prefix}-•••• posé le {when(project.code_set_at)} · heures de Tahiti
+        {project.brand === "fenua" && " · présenté aux couleurs de Fenua Studio"}
+        {project.contact_name && ` · contact : ${project.contact_name}`}
       </p>
 
       {ok && <p role="status" className="mt-6 rounded-xl bg-[#1F8A84]/10 px-4 py-3 text-sm text-[#1F6F6A]">{ok}</p>}
@@ -36,12 +42,19 @@ export default async function ProjectAdminPage({ params, searchParams }: { param
 
       {documents.map((doc, di) => {
         const revisions = histories[di];
+        const pages = pagesSection(doc.content);
         return (
-          <section key={doc.id} className="mt-10 grid gap-8 lg:grid-cols-[1fr_minmax(0,26rem)]">
+          <section key={doc.id} id={doc.slug} className="mt-10 grid gap-8 lg:grid-cols-[1fr_minmax(0,26rem)]">
             <div>
               <h2 className="text-xl font-semibold">{doc.title}</h2>
-              <p className="mb-4 text-sm text-[#6F655C]">Version actuelle · {when(doc.updated_at)} · {WHO[doc.updated_by]}</p>
-              <RecapView sections={doc.content.sections} />
+              {pages ? (
+                <PagesAdmin projectSlug={project.slug} documentSlug={doc.slug} section={pages} comments={comments[di]} timeZone={OWNER_ZONE} />
+              ) : (
+                <>
+                  <p className="mb-4 text-sm text-[#6F655C]">Version actuelle · {when(doc.updated_at)} · {WHO[doc.updated_by]}</p>
+                  <RecapView sections={doc.content.sections} />
+                </>
+              )}
             </div>
 
             <aside>
@@ -100,6 +113,7 @@ export default async function ProjectAdminPage({ params, searchParams }: { param
                   {emails.map((m) => (
                     <li key={m.id}>
                       {when(m.created_at)} · {MAIL_STATUS[m.status]} → {m.recipient}
+                      <span className="block text-[#6F655C]">{m.subject}</span>
                       {m.error && <span className="block text-[#C8321F]">{m.error}</span>}
                     </li>
                   ))}

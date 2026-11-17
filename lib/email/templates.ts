@@ -485,3 +485,55 @@ export function internalProjectEdit(edit: ProjectEdit, ctx: BrandContext & { own
     ),
   };
 }
+
+// ─── Comment on a page-image document ────────────────────────────────────────
+
+export type DocumentCommentNotice = {
+  /** "Ergoligne (Fenua Studio)" for a partner studio's client. */
+  clientName: string;
+  documentTitle: string;
+  /** What happened: "Commentaire ajouté", "Commentaire supprimé"… */
+  actionLabel: string;
+  /** « p. 6, scène 2 » */
+  label: string;
+  /** Text before the action (edit: the old text, delete: the deleted text), "" otherwise. */
+  before: string;
+  /** Text after the action ("" for a deletion). */
+  after: string;
+  at: Date;
+  adminHref: string;
+  clientHref: string;
+};
+
+export function internalDocumentComment(n: DocumentCommentNotice, ctx: BrandContext & { ownerTimeZone: string }): RenderedMail {
+  const when = formatWhen(n.at, ctx.ownerTimeZone, "fr");
+  const blocks: Block[] = [
+    {
+      kind: "details",
+      rows: [
+        { label: "Client", value: n.clientName },
+        { label: "Document", value: n.documentTitle },
+        { label: "Page", value: n.label },
+        { label: "Action", value: n.actionLabel },
+        { label: "Quand", value: when.full },
+      ],
+    },
+    // An edit reads as before → after; anything else quotes the comment (the deleted text for a deletion).
+    n.before && n.after ? { kind: "change", label: n.label, before: n.before, after: n.after } : { kind: "quote", text: n.after || n.before },
+  ];
+  return {
+    subject: `[Projet] ${n.clientName} · ${n.actionLabel} · ${n.label}`,
+    ...renderEmail(
+      {
+        lang: "fr",
+        internal: true,
+        preheader: truncate(`${n.label} : ${n.after || n.before}`, 90),
+        title: `${n.clientName} · ${n.actionLabel.toLowerCase()}`,
+        blocks,
+        cta: { label: "Voir les commentaires", href: n.adminHref },
+        secondary: { label: "Ouvrir la page dans son espace", href: n.clientHref },
+      },
+      ctx,
+    ),
+  };
+}

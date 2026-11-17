@@ -16,11 +16,19 @@ export type DocQuestionSection = { id: string; kind: "questions"; title: string;
  */
 export type DocPreview = { id: string; title: string; image: string; width: number; height: number; note: string };
 export type DocPreviewSection = { id: string; kind: "previews"; title: string; previews: DocPreview[] };
-export type DocSection = DocListSection | DocQuestionSection | DocPreviewSection;
+/**
+ * A document read page by page, each page an image in the private "portal" bucket
+ * (same route as the previews). The client pins comments on it; they live in
+ * project_document_comments, not in the content, so this section never changes
+ * after the seed. `width` × `height` is the pixel size of every page image.
+ */
+export type DocPage = { n: number; title: string; image: string; thumb: string };
+export type DocPagesSection = { id: string; kind: "pages"; title: string; summary: string; width: number; height: number; pages: DocPage[] };
+export type DocSection = DocListSection | DocQuestionSection | DocPreviewSection | DocPagesSection;
 
 export type DocContent = { version: 1; sections: DocSection[] };
 
-export const LIMITS = { title: 200, line: 1000, answer: 4000, lines: 60, sections: 20, questions: 30, previews: 40 } as const;
+export const LIMITS = { title: 200, line: 1000, answer: 4000, lines: 60, sections: 20, questions: 30, previews: 40, pages: 200 } as const;
 
 /** File names a preview image may have. Also guards the image route against path tricks. */
 export const PREVIEW_IMAGE = /^[a-z0-9-]{1,60}\.webp$/;
@@ -29,7 +37,24 @@ export const PREVIEW_IMAGE = /^[a-z0-9-]{1,60}\.webp$/;
 export function isPreviewsDocument(content: DocContent): boolean {
   return content.sections.length > 0 && content.sections.every((s) => s.kind === "previews");
 }
+/** The page-image section of an annotated document ("annotated pages"), if that is what it is. */
+export function pagesSection(content: DocContent): DocPagesSection | null {
+  const s = content.sections.length === 1 ? content.sections[0] : null;
+  return s?.kind === "pages" ? s : null;
+}
 
+/** « p. 6, scène 2 » : the place a comment is pinned, stored with it. */
+export function pageLabel(section: DocPagesSection, n: number): string {
+  const page = section.pages.find((p) => p.n === n);
+  // No-break space: « p. » and its number never split across lines.
+  return page ? `p.\u00a0${n}, ${page.title}` : `p.\u00a0${n}`;
+}
+
+/** « Scène 2, correction » : a page title as shown above the page. */
+export function pageTitle(section: DocPagesSection, n: number): string {
+  const t = section.pages.find((p) => p.n === n)?.title ?? "";
+  return t ? t[0].toUpperCase() + t.slice(1) : `Page ${n}`;
+}
 
 // ─── Diff ────────────────────────────────────────────────────────────────────
 

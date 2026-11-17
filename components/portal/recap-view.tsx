@@ -76,7 +76,8 @@ export function SectionHeading({ n, title }: { n: number; title: string }) {
 export function RecapView({ sections }: { sections: DocSection[] }) {
   return (
     <div className="space-y-5">
-      {sections.map((s, i) => (
+      {/* A page-image document has its own admin view (pages-admin.tsx). */}
+      {sections.flatMap((s, i) => (s.kind === "pages" ? [] : [
         <section key={s.id} className="rounded-2xl border border-[var(--rl-line)] bg-[var(--rl-surface)] p-5">
           <SectionHeading n={i + 1} title={s.title} />
           <div className="mt-4">
@@ -104,8 +105,8 @@ export function RecapView({ sections }: { sections: DocSection[] }) {
               </ul>
             )}
           </div>
-        </section>
-      ))}
+        </section>,
+      ]))}
     </div>
   );
 }
