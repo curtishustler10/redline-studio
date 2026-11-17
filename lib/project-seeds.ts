@@ -2,6 +2,8 @@
 // Text is verbatim from the source document; do not reword here, edit it in the
 // client's space (every save is kept) or update the source and reseed.
 import type { DocContent, DocLine, DocPreview } from "./project-doc";
+import type { Brand } from "./portal-brand";
+import { ERGOLIGNE } from "./project-seeds-ergoligne";
 
 const lines = (prefix: string, texts: (string | Omit<DocLine, "id">)[]): DocLine[] =>
   texts.map((t, i) => ({ id: `${prefix}-${i + 1}`, ...(typeof t === "string" ? { text: t } : t) }));
@@ -17,6 +19,10 @@ export type ProjectSeed = {
   title: string;
   codePrefix: string;
   timeZone: string;
+  /** Whose brand the client sees ("redline" when absent). */
+  brand?: Brand;
+  /** The person the space greets. */
+  contactName?: string;
   documents: { slug: string; title: string; content: DocContent }[];
 };
 
@@ -193,4 +199,4 @@ export const AHUKINI: ProjectSeed = {
   ],
 };
 
-export const SEEDS: Record<string, ProjectSeed> = { ahukini: AHUKINI };
+export const SEEDS: Record<string, ProjectSeed> = { ahukini: AHUKINI, ergoligne: ERGOLIGNE };

@@ -37,7 +37,7 @@ function check<T>(op: string, r: { data: T; error: { message: string } | null })
 }
 
 function printCode(slug: string, code: string): void {
-  console.log(`\n  Projet : ${slug}\n  Code   : ${code}\n  Lien   : https://redlinestudio.agency/portal\n\n  Ce code n'est affiché qu'une fois et n'est pas enregistré.\n`);
+  console.log(`\n  Projet : ${slug}\n  Code   : ${code}\n  Lien   : https://redlinestudio.agency/portal/${slug}\n\n  Ce code n'est affiché qu'une fois et n'est pas enregistré.\n`);
 }
 
 async function seed(slug: string): Promise<void> {
@@ -56,7 +56,16 @@ async function seed(slug: string): Promise<void> {
     "insert project",
     await client
       .from("client_projects")
-      .insert({ slug: s.slug, client_name: s.clientName, title: s.title, code_prefix: s.codePrefix, access_code_hash: await hashCode(code), time_zone: s.timeZone })
+      .insert({
+        slug: s.slug,
+        client_name: s.clientName,
+        contact_name: s.contactName ?? null,
+        brand: s.brand ?? "redline",
+        title: s.title,
+        code_prefix: s.codePrefix,
+        access_code_hash: await hashCode(code),
+        time_zone: s.timeZone,
+      })
       .select("id")
       .single(),
   ) as { id: number };
