@@ -138,6 +138,7 @@ function FenuaProject({ project, docs, initialPage }: { project: ProjectRow; doc
             doc={{ slug: d.slug, section: d.section }}
             comments={d.comments}
             initialPage={initialPage(d.section.pages.length)}
+            guide
           />
         </section>
       ))}

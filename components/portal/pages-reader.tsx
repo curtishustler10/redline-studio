@@ -16,6 +16,7 @@ import { removeComment, saveComment, setCommentStatus, type CommentResult } from
 import { COMMENT_MAX, numberOnPage, plural, sortComments, type DocumentComment } from "@/lib/document-comments";
 import { pageTitle, type DocPagesSection } from "@/lib/project-doc";
 import { EC as FENUA, FENUA_DISPLAY } from "./fenua/theme";
+import { ReaderGuide } from "./reader-guide";
 
 /**
  * Colours and fonts of the reader. The Fenua theme is the default (Ergoligne,
@@ -457,6 +458,8 @@ export function PagesReader(props: {
   doc: ReaderDocument;
   comments: DocumentComment[];
   initialPage: number;
+  /** Play the first-visit guide (and offer « Revoir le guide »). */
+  guide?: boolean;
 }) {
   return (
     <Ctx.Provider value={{ theme: props.theme, timeZone: props.timeZone }}>
@@ -465,20 +468,67 @@ export function PagesReader(props: {
   );
 }
 
+/**
+ * The guide is marked as seen in this browser, per project. No cookie or column:
+ * a project's space has one reader, and seeing it again on a new device does no harm.
+ */
+const guideKey = (projectSlug: string) => `portal-guide:${projectSlug}:v1`;
+
 function Reader({
   projectSlug,
   studio,
   doc,
   comments,
   initialPage,
+  guide = false,
 }: {
   projectSlug: string;
   studio: string;
   doc: ReaderDocument;
   comments: DocumentComment[];
   initialPage: number;
+  guide?: boolean;
 }) {
   const EC = useTheme();
+  const [guideOpen, setGuideOpen] = useState(false);
+  const replayRef = useRef<HTMLButtonElement>(null);
+
+  // First visit (or ?guide=1): the guide starts by itself once the page is drawn.
+  useEffect(() => {
+    if (!guide) return;
+    const forced = new URLSearchParams(window.location.search).get("guide") === "1";
+    let seen = false;
+    try {
+      seen = window.localStorage.getItem(guideKey(projectSlug)) === "1";
+    } catch {
+      // Storage blocked (private mode): show it, it costs one tap to skip.
+    }
+    if (!forced && seen) return;
+    const t = window.setTimeout(() => setGuideOpen(true), 700);
+    return () => window.clearTimeout(t);
+  }, [guide, projectSlug]);
+
+  function openGuide() {
+    setDraft(null);
+    setSelected(null);
+    draftDirty.current = false;
+    setGuideOpen(true);
+  }
+
+  function closeGuide() {
+    setGuideOpen(false);
+    try {
+      window.localStorage.setItem(guideKey(projectSlug), "1");
+    } catch {
+      // Not stored: it will play again next time, nothing else.
+    }
+    const url = new URL(window.location.href);
+    if (url.searchParams.has("guide")) {
+      url.searchParams.delete("guide");
+      window.history.replaceState(null, "", url);
+    }
+    replayRef.current?.focus({ preventScroll: true });
+  }
   const section = doc.section;
   const total = section.pages.length;
   // Page images live in the private bucket, served only to this project's session.
@@ -729,12 +779,23 @@ function Reader({
         <p style={{ fontSize: 13.5, color: EC.muted, margin: "6px 0 0" }}>
           Touchez ou cliquez sur la page, à l’endroit exact, pour y laisser un commentaire. {studio} les reçoit au fur et à mesure.
         </p>
+        {guide ? (
+          <button
+            ref={replayRef}
+            type="button"
+            onClick={openGuide}
+            style={{ marginTop: 8, padding: "6px 0", background: "none", border: "none", color: EC.link, fontSize: 13, fontWeight: 600, fontFamily: "inherit", cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 4 }}
+          >
+            Revoir le guide
+          </button>
+        ) : null}
       </header>
+      {guideOpen ? <ReaderGuide theme={EC} onClose={closeGuide} /> : null}
 
       <div className="lv-main">
         <div style={{ minWidth: 0 }}>
           {/* Navigation */}
-          <nav aria-label="Pages du livret" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 12 }}>
+          <nav aria-label="Pages du livret" data-guide="nav" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 12 }}>
             <button type="button" onClick={() => goTo(page - 1)} disabled={page <= 1} aria-label="Page précédente" style={{ ...navButton(EC), opacity: page <= 1 ? 0.4 : 1, cursor: page <= 1 ? "default" : "pointer" }}>
               ← <span className="lv-hide-sm">Précédente</span>
             </button>
@@ -744,7 +805,7 @@ function Reader({
               </div>
               <div style={{ fontSize: 12.5, color: EC.muted, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{pageTitle(section, page)}</div>
             </div>
-            <button type="button" onClick={() => goTo(page + 1)} disabled={page >= total} aria-label="Page suivante" style={{ ...navButton(EC), opacity: page >= total ? 0.4 : 1, cursor: page >= total ? "default" : "pointer" }}>
+            <button type="button" onClick={() => goTo(page + 1)} disabled={page >= total} aria-label="Page suivante" data-guide="next" style={{ ...navButton(EC), opacity: page >= total ? 0.4 : 1, cursor: page >= total ? "default" : "pointer" }}>
               <span className="lv-hide-sm">Suivante</span> →
             </button>
           </nav>
@@ -762,6 +823,7 @@ function Reader({
               className="lv-page"
               onClick={onPageClick}
               data-testid="livret-page"
+              data-guide="page"
               style={{
                 position: "relative",
                 aspectRatio: `${section.width} / ${section.height}`,
@@ -837,6 +899,7 @@ function Reader({
           <div
             ref={stripRef}
             className="lv-thumbs"
+            data-guide="thumbs"
             style={{ display: "flex", gap: 8, overflowX: "auto", padding: "14px 2px 8px", marginTop: 6, scrollbarWidth: "thin" }}
           >
             {section.pages.map((p) => {
@@ -909,7 +972,7 @@ function Reader({
         </div>
 
         {/* Liste des commentaires : colonne à droite sur ordinateur, sous la page sur téléphone */}
-        <aside className="lv-side" aria-label="Vos commentaires">
+        <aside className="lv-side" aria-label="Vos commentaires" data-guide="list">
           <div style={{ padding: "14px 14px 10px" }}>
             <div style={{ fontFamily: EC.display, fontSize: 16, fontWeight: 700, color: EC.ink }}>Vos commentaires</div>
             <div style={{ fontSize: 12.5, color: EC.muted, marginTop: 2 }}>
@@ -918,7 +981,7 @@ function Reader({
                 : `${plural(comments.length, "commentaire")} sur le livret, ${openCount === 0 ? "tous résolus" : `${openCount} à traiter`}.`}
             </div>
           </div>
-          <div style={{ display: "flex", borderTop: `1px solid ${EC.line}` }}>
+          <div data-guide="tabs" style={{ display: "flex", borderTop: `1px solid ${EC.line}` }}>
             {tabButton("page", `Page ${page} (${onPage.length})`)}
             {tabButton("all", `Tout le livret (${comments.length})`)}
           </div>
