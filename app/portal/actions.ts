@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { isLockedOut } from "@/lib/admin-auth";
 import { PORTAL_COOKIE, PORTAL_PATH, PORTAL_SESSION_MS, codeStamp, signPortalSession } from "@/lib/portal-auth";
-import { clearPortalFailures, findProjectByCode, recentPortalFailures, recordPortalFailure, saveClientDocument } from "@/lib/projects";
+import { clearPortalFailures, findProjectByCode, getProjectBySlug, recentPortalFailures, recordPortalFailure, saveClientDocument } from "@/lib/projects";
 import { currentProject } from "./_lib/session";
 
 function clientIp(): string {
@@ -44,12 +44,26 @@ export async function portalLogin(formData: FormData): Promise<void> {
     console.error("[portal] login", e);
     outcome = { err: "server" };
   }
-  redirect("slug" in outcome ? `/portal/${outcome.slug}` : `/portal?err=${outcome.err}`);
+  redirect("slug" in outcome ? `/portal/${outcome.slug}` : `${await entryPage(formData.get("entry"))}?err=${outcome.err}`);
+}
+
+/**
+ * Where a failed login goes back to. A partner studio's client (brand "fenua")
+ * logs in on her own page, /portal/<slug>, and must never land on the Redline
+ * form: her page is the way back. Anything else goes to the shared /portal.
+ */
+async function entryPage(entry: FormDataEntryValue | null): Promise<string> {
+  const slug = typeof entry === "string" && /^[a-z0-9-]{1,60}$/.test(entry) ? entry : null;
+  if (!slug) return "/portal";
+  const project = await getProjectBySlug(slug).catch(() => null);
+  return project && project.brand !== "redline" ? `/portal/${slug}` : "/portal";
 }
 
 export async function portalLogout(): Promise<void> {
+  // Read before the cookie goes: a partner studio's client is sent back to her own login page.
+  const project = await currentProject().catch(() => null);
   cookies().delete({ name: PORTAL_COOKIE, path: PORTAL_PATH });
-  redirect("/portal?err=logout");
+  redirect(project && project.brand !== "redline" ? `/portal/${project.slug}?err=logout` : "/portal?err=logout");
 }
 
 export type SaveResponse =
